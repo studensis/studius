@@ -1,0 +1,64 @@
+@startuml
+
+actor "Korisnik" as A
+participant "Web Aplikacija" as B
+participant "Baza" as C
+participant "Google" as D
+
+activate A #005DFF
+
+A -> B: 1. Zahtjev za prijavom
+activate B #005DFF
+B --> A: Prikaz opcija za prijavu
+deactivate B
+
+|||
+alt Opcija prijave preko forme
+|||
+
+A -> B: Odabir prijave preko forme
+activate B #005DFF
+B --> A: Prikaz forme za prijavu
+deactivate B
+
+|||
+loop dok podaci nisu tocni
+|||
+
+A -> B: 3. Unos i predaja forme
+activate B #005DFF
+B -> C: 4. Provjera podataka u bazi
+activate C #005DFF
+C --> B: A postoji u bazi
+deactivate C
+B --> A: Session Token
+deactivate B
+
+|||
+end
+|||
+else Opcija prijave preko Da
+|||
+
+    A -> B: 4. Odabir prijave preko Da
+    	activate B #005DFF
+    B -> D
+    	activate D #005DFF
+    D -> A: Prikaz dostupnih gmail adresa
+    A -> D: 5. Odabir gmail adrese
+    D -> D: Provjera s D autentikacijom
+    D -> B: Success
+    	deactivate D
+    B -> A: Session Token
+    	deactivate B
+
+|||
+end
+
+deactivate A
+
+@enduml
+
+<!-- destroy B -->
+
+<!-- https://plantuml.com/ -->

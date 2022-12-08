@@ -1,0 +1,36 @@
+@startuml
+
+class User {
+#Name : String
+-Thing : String
+-test() : Integer
++test2() : Integer
+}
+
+package TestService <<Node>> {
+
+class Enrollment {
+drop()
+cancel()
+}
+
+interface Collection {
+lol
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+}
+
+User "n.." --> "1.." Subject
+(User, Subject) . Enrollment
+
+Enrollment }--o Collection
+Collection <|- TimeUnit
+
+@enduml
+
+<!-- https://plantuml.com/ -->

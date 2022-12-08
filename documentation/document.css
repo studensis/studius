@@ -24,3 +24,16 @@ h1, h2, h3 {
 	font-weight: 900;
 	border: none;
 }
+
+.cover {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 80vh;
+}
+.cover h1 {
+	page-break-before: auto;
+	font-size: 72px;
+	padding-bottom: 0px;
+}
