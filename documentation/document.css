@@ -1,0 +1,26 @@
+@import "../frontend/public/fonts/Roobert/*";
+
+@font-face {
+  font-family: 'Roobert';
+  src:
+		url('../frontend/public/fonts/Roobert/Roobert-Regular.otf') format('woff2'),
+		url('../frontend/public/fonts/Roobert/Roobert-Medium.otf') format('woff2'),
+		url('../frontend/public/fonts/Roobert/Roobert-SemiBold.otf') format('woff2'),
+		url('../frontend/public/fonts/Roobert/Roobert-Bold.otf') format('woff2'),
+		url('../frontend/public/fonts/Roobert/Roobert-Heavy.otf') format('woff2'),
+		url('../frontend/public/fonts/Roobert/Roobert-MediumItalic.otf') format('woff2'),
+		url('../frontend/public/fonts/Roobert/Roobert-Light.otf') format('woff2');
+}
+
+* {
+	font-family: 'Roobert';
+}
+
+h1 {
+	page-break-before: always;
+}
+
+h1, h2, h3 {
+	font-weight: 900;
+	border: none;
+}
