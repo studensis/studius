@@ -1,4 +1,7 @@
-@startuml
+' instaliraj 'PlantUML' extension u VScodeu
+' pokreni preview s ALT + D (ili desni klik pa 'Preview current diagram')
+
+@startuml loginSequence
 
 actor "Korisnik" as A
 participant "Web Aplikacija" as B
@@ -58,7 +61,3 @@ end
 deactivate A
 
 @enduml
-
-<!-- destroy B -->
-
-<!-- https://plantuml.com/ -->

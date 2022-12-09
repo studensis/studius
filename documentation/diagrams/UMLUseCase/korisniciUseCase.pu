@@ -1,4 +1,12 @@
-@startuml
+' instaliraj 'PlantUML' extension u VScodeu
+' pokreni preview s ALT + D (ili desni klik pa 'Preview current diagram')
+
+' -> sto kraca linija
+' --> dulja linija
+' ---> jos dulja linija
+' primjeti kako duljina linije utjece di je sta (stvari su jedna ispod druge u stupcima)
+
+@startuml korisniciUseCase
 
 left to right direction
 
@@ -10,11 +18,10 @@ actor "Administrator Sustava" as Admin #lightblue;line:blue;line.bold
 actor "Baza Podataka" as Baza #lightblue;line:blue;line.bold
 
 Klijent <|- Reg
-Reg <|- Prof
+Reg <|-- Prof
 Reg <|- Stuslu
 Stuslu <|- Admin
 
-rectangle test {
 usecase "Autentikacija" as UC1
 usecase "Prijava u sustav" as UC2
 usecase "Registracija putem linka" as UC3
@@ -34,10 +41,8 @@ rectangle {
 
 }
 
-}
-
-UC3 ---> Baza
-UC5 ---> Baza
+UC3 --> Baza
+UC5 --> Baza
 
 UC7 <|-- UC8
 UC7 <|-- UC9
@@ -47,16 +52,12 @@ UC7 <|-- UC11
 UC1 <|-- UC2
 UC1 <|-- UC3
 
-Klijent ---> UC1
+Klijent --> UC1
 Reg ---> UC4
 Reg ---> UC5
-Prof ---> UC6
-Stuslu ---> UC7
-Stuslu ---> UC12
-Admin ---> UC13
+Prof --> UC6
+Stuslu --> UC7
+Stuslu --> UC12
+Admin --> UC13
 
 @enduml
-
-<!-- destroy B -->
-
-<!-- https://plantuml.com/ -->

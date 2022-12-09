@@ -4,13 +4,15 @@ _here be dragons_
 
 # test
 
+:[Opis](./diagrams/UMLClass/class.pu)
+
 ![test](images/asd.jpeg)
 
 asd
 
 # test2
 
-@startuml
+@startuml asd
 Bob -[#red]> Alice : hello
 Bob -[#red]> Alice : hello2()
 Tester -[#red]> Bob : hello2()
