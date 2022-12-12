@@ -1,13 +1,10 @@
 /* eslint-disable @next/next/no-sync-scripts */
-import React, { useState, useEffect, FormEventHandler } from 'react';
-import Home from '../index';
-import { useRouter } from 'next/router';
-import supabase from '../../utils/supabase';
+import { signIn } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
-import { signIn } from 'next-auth/react';
-import Icon from '../../components/Icon';
 
 function Login() {
 	const [username, setUsername] = useState<string>('');
