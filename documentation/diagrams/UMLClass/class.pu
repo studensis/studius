@@ -1,36 +1,199 @@
 @startuml classExample
 
-class User {
-#Name : String
--Thing : String
--test() : Integer
-+test2() : Integer
+left to right direction 
+
+class EventUserPresence {
+    RoomTimeEvent: RoomTimeEvent
+    User: User 
+    presenceStatus: presenceStatus
 }
 
-package TestService <<Node>> {
-
-class Enrollment {
-drop()
-cancel()
+class Content{
+    -id:String 
+    -Markdown_text:String
+    -plain_text:String
+    -date:Date
 }
 
-interface Collection {
-lol
+class Post{
+    -id:String
+    -title:String 
+    -date:Date
+    -owner: User 
+    -LinkedEntity:String
+    -LinkedEntityID:String
+
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
+abstract User {
+    -id:int 
+    -firstname:String
+    -lastname:String
+    -email:String 
+    -status: status
+    -content : Content
 }
 
-User "n.." --> "1.." Subject
-(User, Subject) . Enrollment
+class Student { 
+    -jmbag: String 
+    +courseList()
+    +enroll()
+}
 
-Enrollment }--o Collection
-Collection <|- TimeUnit
+class Doktorand {
+    -mentor: Profesor
+    +submitSeminar(Seminar seminar)
+}
+
+
+class Profesor { 
+    +setOpis()
+    +getKolegiji()
+    +approveSeminar(Seminar seminar)
+}
+
+class Nositelj { 
+    +setContent(Content content)
+    +setDescription()
+}
+
+class StudentskaSluzba { 
+    +getData()
+    +setData(Content content)
+    +createCourse(Subject subject)
+    +getStatistics()
+}
+
+class Admin {
+    +setUserType(UserType userType)
+}
+
+
+
+class SeminarSuggestion { 
+    -id:String
+    -seminar: Seminar 
+    -subject: Subject 
+}
+
+class Event { 
+    -id:String 
+    -title:String 
+    -description:String 
+    -LinkedEntity:LinkedEntity
+    -LinkedEntityID: String 
+}
+
+class Room { 
+    -id:String 
+    -capacity:int 
+}
+
+class RoomTimeEvent {
+    -id:String 
+    -dateStart: Date
+    -dateEnd: Date
+    -room: Room
+    -event: Event 
+}
+
+class Enrollment { 
+    -subject: Subject
+    -user: User
+    -Enrollment_date: Date
+    -status: status
+}
+
+class Seminar { 
+    -id:String
+    -title:String 
+    -description:String 
+    -mentor_ID:String 
+    -type: String 
+    -content: Content
+    -subject: Subject
+    -user: User 
+}
+
+class Subject { 
+    -id: String 
+    -title: String 
+    -description: String 
+    -semester: semester
+    -status: status
+    -content: Content 
+}
+
+
+enum LinkedEntity { 
+    SUBJECT
+    SEMINAR
+}
+
+enum semester { 
+    SUMMER  
+    WINTER 
+}
+enum status { 
+    ACTIVE
+    ARCHIVED
+}
+
+enum userType {
+    STUDENT
+    PROFESOR
+    NOSITELJ
+    ASISTENT
+    ADMIN
+}
+
+enum presenceStatus {
+    PRESENT 
+    ABSENT 
+}
+User <|-- Student 
+StudentskaSluzba <|-- Admin
+User <|-- StudentskaSluzba
+Student <|-- Doktorand
+User <|-- Profesor
+Profesor <|-- Nositelj
+
+Post "1" *-up- "1" Content
+Subject "1" *-up- "1..*" Content
+User "1" *-up- "1" Content
+Seminar "1" *-up- "1" Content
+
+Subject "1" -down-> "*" Enrollment
+User "1" -down-> "*" Enrollment
+
+Seminar "1" *-- "1..*" SeminarSuggestion
+Seminar "1" -right-> "1" Event
+Event "1" -right-> "*" RoomTimeEvent
+Room "1" -left-> "*" RoomTimeEvent
+
+
+User "1" *-- "*" Post  
+Doktorand "1..*" <|-- "*" Seminar
+Subject "1" <|-- "*" Seminar
+
+
+
+
+
+User "1" -left-> "*" EventUserPresence
+EventUserPresence "*" -right-> "1" RoomTimeEvent
+
+Subject -left-> semester
+Subject -right-> status 
+
+Post -left-> LinkedEntity
+Event -right-> LinkedEntity
+
+User -right-> userType
+EventUserPresence -down-> presenceStatus
+
+
+
+
 
 @enduml
-
-<!-- https://plantuml.com/ -->
