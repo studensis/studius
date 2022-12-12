@@ -45,15 +45,15 @@ export default (server: Express) => {
 
 		try {
 			let newUser: User = {
-				id: 9,
+				id: undefined,
 				email: _req.query.email as string,
 				password: _req.query.password as string,
 				name: _req.query.name as string,
 				surname: _req.query.surname as string,
 				username: _req.query.username as string,
 				JMBAG: _req.query.JMBAG as string,
-				avatar_url: _req.query.avatar_url as string,
-				role: _req.query.role as Role
+				avatar_url: undefined,
+				role: undefined
 			};
 			let user = await UserService.createUser(newUser as User);
 			return res.send(user);
