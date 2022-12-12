@@ -28,20 +28,20 @@
 
 Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi svojim usmjerenjem tako da pokrivamo cjeloukupan stack potreban za razvoj platforme.
 
-# 1. Dnevnik promjena dokumentacije {#a1}
+# 1. Dnevnik promjena dokumentacije
 
-# 2. Opis projektnog zadatka {#a2}
+# 2. Opis projektnog zadatka
 
-:[Opis](./chapters/opis/opis.md)
+:[Opis](./chapters/2_opis.md)
 
-# 3. Specifikacija programske potpore {#a3}
+# 3. Specifikacija programske potpore
 
-:[Specifikacija](./chapters/specifikacija/specifikacija.md)
+:[Specifikacija](./chapters/3_specifikacija.md)
 
-# 4. Arhitektura i dizajn sustava {#a4}
+# 4. Arhitektura i dizajn sustava
 
-:[Arhitektura](./chapters/arhitektura/arhitektura.md)
+:[Arhitektura](./chapters/4_arhitektura.md)
 
-# 5. Implementacija i korisničko sučelje {#a5}
+# 5. Implementacija i korisničko sučelje
 
-:[Implementacija](./chapters/implementacija/implementacija.md)
+:[Implementacija](./chapters/5_implementacija.md)

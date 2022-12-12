@@ -1,6 +1,3 @@
-' instaliraj 'PlantUML' extension u VScodeu
-' pokreni preview s ALT + D (ili desni klik pa 'Preview current diagram')
-
 @startuml loginSequence
 
 actor "Korisnik" as A

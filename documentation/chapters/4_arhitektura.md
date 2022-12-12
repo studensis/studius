@@ -12,12 +12,13 @@ Backend podsustavi su najkompleksnija podcjelina same arhitekture. Backend je po
 
 ## 4.1 Baza podataka
 
-![baza_podataka](../../images/skica_bp.png)
-:[html_baza](../../images/Baza-raspisano.html)
+![baza_podataka](./images/skica_bp.png)
+
+:[html_baza](../images/Baza-raspisano.html)
 
 ## 4.2 Dijagram razreda
 
-:[class](../../diagrams/UMLClass/class.pu)
+:[class](../diagrams/UMLClass/class.pu)
 
 ## 4.3 Dijagram stanja
 

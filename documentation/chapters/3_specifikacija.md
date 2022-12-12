@@ -20,19 +20,33 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
 
 ## Funkcionalni zahtjevi
 
+## Ostali zahtjevi
+
+- Sustav treba omoguciti rad više korisnika u stvarnom vremenu
+- Korisnicko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i
+- prikazu tekstualnog sadrzaja
+- Izvršavanje dijela programa u kojem se pristupa bazi podataka ne smije trajati duže od nekoliko sekundi
+- Sustav treba biti implementiran kao web aplikacija koristeci objektno-orijentirane jezike
+- Neispravno korištenje korisničkog sučelja ne smije narušiti funkcionalnost i rad sustava
+- Sustav treba biti jednostavan za korištenje
+- Nadogradnja sustava ne smije narušavati postojeće funkcionalnosti sustava
+- Veza s bazom podataka mora biti otporna na vanjske greške
+- Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS.
+
 ## Obrasci uporabe
 
-:[usecases](../../images/usecase.html)
-![usecases](./diagrams/UMLUseCase/Kolegiji.svg)
-![usecases](./diagrams/UMLUseCase/Korisnici.svg)
-![usecases](./diagrams/UMLUseCase/Obavijesti.svg)
-![usecases](./diagrams/UMLUseCase/Seminari.svg)
+:[usecases](../diagrams/UMLUseCase/useCaseList.md)
+
+![usecases](./diagrams/UMLUseCase/Kolegiji.png)
+![usecases](./diagrams/UMLUseCase/Korisnici.png)
+![usecases](./diagrams/UMLUseCase/Obavijesti.png)
+![usecases](./diagrams/UMLUseCase/Seminari.png)
 
 ## Sekvencijski dijagrami
 
-:[sekvencijski](../../diagrams/UMLSequence/loginSequence.pu)
-![sek2](../../diagrams/UMLSequence/Registracija.png)
-![sek3](../../diagrams/UMLSequence/Seminar_i_predlaganje.png)
+:[sekvencijski](../diagrams/UMLSequence/loginSequence.pu)
+![sek2](./diagrams/UMLSequence/Registracija.png)
+![sek3](./diagrams/UMLSequence/Seminar_i_predlaganje.png)
 
 ### Dionici
 
@@ -62,16 +76,13 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
    - Detalji o kolegiju
    - Pregledati obavijesti vezanih uz kolegije na koje je povezan
 4. Pofesor
-
    - Pregledati popis korisnika na predmetima koje predaje
    - Postavljanje obavijesti vezanih uz kolegije na koje je povezan
    - Evidencija dolaska
    - Odobravanje prijavljenog seminara
    - Pregled statistike
    - Najava i prethodno izlaganje radova za konferencije (generalna proba)
-
 5. Nositelj
-
    - Postavljanje rola korisnika na kolegiju
    - Postavljanje uvjeta na kolegiju
    - Postavljanje materijala na kolegiju
@@ -79,14 +90,10 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
    - Uredivati opis kolegija na kojima ima nositeljska prava
    - Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
    - Predlaganje seminara na svojem predmetu
-
 6. Doktorand
-
    - Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
    - Najava i prethodno izlaganje radova za konferencije (generalna proba)
-
 7. Studentska služba
-
    - Čitanje iz baze
    - Pisanje u bazu
    - Izmjena u bazi
@@ -97,6 +104,5 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
    - Postavljanje globalnih obavijesti
    - Kvalifikacijski ispiti za studente
    - Razgovor o temi i doprinosu znanstvenog rada
-
 8. Administrator sustava
    - Promjena prava pristupa
