@@ -41,7 +41,7 @@ export default function Home(props: any) {
 		if (queryParams.has('email')) {
 			queryParams.delete('email');
 			router.replace({
-				search: queryParams.toString()
+				search: queryParams.toString(),
 			});
 		}
 	}, [props]);
@@ -58,7 +58,8 @@ export default function Home(props: any) {
 		return (
 			<div>
 				<div className="flex justify-center items-center flex-col h-screen ">
-					<h1 className="display2">Nisi ulogiran</h1>
+					<h1 className="display2">Home page</h1>
+					<br />
 					<Button>
 						<Link href="/auth/login">
 							<p className="title1">Login</p>
@@ -82,12 +83,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { email } = context.query;
 
 	var user: Student = await prisma.user.findFirst({
-		where: { email: String(email) }
+		where: { email: String(email) },
 	});
 
 	return {
 		props: {
-			user
-		}
+			user,
+		},
 	};
 };
