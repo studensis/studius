@@ -23,6 +23,10 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
 ## Obrasci uporabe
 
 :[usecases](../../images/usecase.html)
+![usecases](./diagrams/UMLUseCase/Kolegiji.svg)
+![usecases](./diagrams/UMLUseCase/Korisnici.svg)
+![usecases](./diagrams/UMLUseCase/Obavijesti.svg)
+![usecases](./diagrams/UMLUseCase/Seminari.svg)
 
 ## Sekvencijski dijagrami
 
@@ -57,63 +61,42 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
    - Pregledati popis kolegija na koje je upisan
    - Detalji o kolegiju
    - Pregledati obavijesti vezanih uz kolegije na koje je povezan
-4. Profesor
-   Pregledati popis korisnika na predmetima koje predaje
+4. Pofesor
 
-   Postavljanje obavijesti vezanih uz kolegije na koje je povezan
-
-   Evidencija dolaska
-
-   Odobravanje prijavljenog seminara
-
-   Pregled statistike
-
-   Najava i prethodno izlaganje radova za konferencije (generalna proba)
+   - Pregledati popis korisnika na predmetima koje predaje
+   - Postavljanje obavijesti vezanih uz kolegije na koje je povezan
+   - Evidencija dolaska
+   - Odobravanje prijavljenog seminara
+   - Pregled statistike
+   - Najava i prethodno izlaganje radova za konferencije (generalna proba)
 
 5. Nositelj
 
-   Postavljanje rola korisnika na kolegiju
-
-   Postavljanje uvjeta na kolegiju
-
-   Postavljanje materijala na kolegiju
-
-   Postaviti kolegij je li dostupan za upisivanje
-
-   Uredivati opis kolegija na kojima ima nositeljska prava
-
-   Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
-
-   Predlaganje seminara na svojem predmetu
+   - Postavljanje rola korisnika na kolegiju
+   - Postavljanje uvjeta na kolegiju
+   - Postavljanje materijala na kolegiju
+   - Postaviti kolegij je li dostupan za upisivanje
+   - Uredivati opis kolegija na kojima ima nositeljska prava
+   - Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
+   - Predlaganje seminara na svojem predmetu
 
 6. Doktorand
 
-   Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
-
-   Najava i prethodno izlaganje radova za konferencije (generalna proba)
+   - Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
+   - Najava i prethodno izlaganje radova za konferencije (generalna proba)
 
 7. Studentska služba
 
-   Čitanje iz baze
-
-   Pisanje u bazu
-
-   Izmjena u bazi
-
-   Brisanje u bazi
-
-   Kreiranje linkova za upis
-
-   Kreirati kolegij
-
-   Odobravanje kolegija
-
-   Postavljanje globalnih obavijesti
-
-   Kvalifikacijski ispiti za studente
-
-   Razgovor o temi i doprinosu znanstvenog rada
+   - Čitanje iz baze
+   - Pisanje u bazu
+   - Izmjena u bazi
+   - Brisanje u bazi
+   - Kreiranje linkova za upis
+   - Kreirati kolegij
+   - Odobravanje kolegija
+   - Postavljanje globalnih obavijesti
+   - Kvalifikacijski ispiti za studente
+   - Razgovor o temi i doprinosu znanstvenog rada
 
 8. Administrator sustava
-
-   Promjena prava pristupa
+   - Promjena prava pristupa

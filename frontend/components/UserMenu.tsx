@@ -57,7 +57,7 @@ const UserMenu: FC<MenuProps> = ({ active, setMenuActive, menuActive }) => {
 							<div className="px-10">
 								<h1 className="title1 ">
 									{user
-										? user.name
+										? user.surname
 										: data
 										? data.user.name
 										: ''}
