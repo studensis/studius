@@ -41,7 +41,7 @@ export default function Home(props: any) {
 		if (queryParams.has('email')) {
 			queryParams.delete('email');
 			router.replace({
-				search: queryParams.toString()
+				search: queryParams.toString(),
 			});
 		}
 	}, [props]);
@@ -82,12 +82,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { email } = context.query;
 
 	var user: Student = await prisma.user.findFirst({
-		where: { email: String(email) }
+		where: { email: String(email) },
 	});
 
 	return {
 		props: {
-			user
-		}
+			user,
+		},
 	};
 };

@@ -1,5 +1,6 @@
 import NextAuth, {NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { useState } from "react";
 import { isErrored } from "stream";
 import {prisma} from '../../../lib/prisma'
@@ -8,12 +9,17 @@ import { Student } from "../../../typings";
 import { Role } from "@prisma/client";
 import userpage from "../../userpage";
 import { useRouter } from "next/router";
+import { env } from "process";
 
 const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt",
     },
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        }),
         CredentialsProvider({
             type: 'credentials',
             credentials: {
@@ -33,6 +39,9 @@ const authOptions: NextAuthOptions = {
                         }
                     })
                     user = userP
+
+
+                    //bez prisme u frontendu ???
                     
                 } catch (error) {
                     throw error
@@ -63,7 +72,7 @@ const authOptions: NextAuthOptions = {
             
         })
     ],
-
+    secret: process.env.JWT_SECRET,
     pages: {
         signIn: "/auth/login"
     },
