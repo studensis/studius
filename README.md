@@ -10,8 +10,10 @@
 
 To open the `settings.json` file, hit `CTRL + SHIFT + P`, then write `Open user Settings JSON` and add the following lines to the file:
 
-`	"markdown-pdf.styles": ["document.css"],
-	"markdown-pdf.stylesRelativePathFile": true,`
+```
+"markdown-pdf.styles": ["document.css"],
+"markdown-pdf.stylesRelativePathFile": true,
+```
 
 ### Required extensions
 
