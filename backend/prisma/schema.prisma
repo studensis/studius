@@ -23,6 +23,8 @@ model User {
   role       Role   @default(STUDENT)
 }
 
+// treba stavit @unique na neke
+
 enum Role {
   STUDENT
   PROFESSOR
