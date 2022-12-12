@@ -15,7 +15,8 @@ const SidebarItem: FC<{
 			<Link passHref href={href}>
 				<li
 					className=" flex justify-center items-center bg-white p-3 rounded-xl my-1 hover:bg-light-accent active:bg-light-accent transition-all ease-in duration-200 cursor-pointer group"
-					onClick={onClick}>
+					onClick={onClick}
+				>
 					<a href="">
 						<Icon
 							icon={icon}
@@ -31,10 +32,10 @@ const SidebarItem: FC<{
 export const Sidebar = () => {
 	const [iconColor, setIconColor] = useState(true);
 
-	const iconColorHandler = (num: number) => {
-		setIconColor(!iconColor);
-		setIconNum(num);
-	};
+	// const iconColorHandler = (num: number) => {
+	// 	setIconColor(!iconColor);
+	// 	setIconNum(num);
+	// };
 
 	return (
 		<div className=" ">
@@ -52,12 +53,19 @@ export const Sidebar = () => {
 						<ul className="flex flex-col justify-center">
 							<SidebarItem icon={'home'} href={'/'} />
 							<SidebarItem icon={'calendar'} href={'/calendar'} />
-							<SidebarItem icon={'adminTools'} href={'/workspaceTools'} />
+							<SidebarItem
+								icon={'adminTools'}
+								href={'/workspaceTools'}
+							/>
 						</ul>
 					</div>
 					<div className="gap-6">
 						<SidebarItem icon={'settings'} href={'/settings'} />
-						<SidebarItem icon={'logOut'} href={'/'} onClick={signIn} />
+						<SidebarItem
+							icon={'logOut'}
+							href={'/'}
+							onClick={signIn}
+						/>
 						{/* <div
 							className="flex justify-center items-center bg-white p-3 rounded-xl my-3 hover:bg-light-accent active:bg-light-accent transition-all ease-in "
 							onMouseEnter={() => {
