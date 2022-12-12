@@ -193,7 +193,4 @@ User -right-> userType
 EventUserPresence -down-> presenceStatus
 
 
-
-
-
 @enduml

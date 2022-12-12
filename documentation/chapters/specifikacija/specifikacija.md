@@ -20,6 +20,16 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
 
 ## Funkcionalni zahtjevi
 
+## Obrasci uporabe
+
+:[usecases](../../images/usecase.html)
+
+## Sekvencijski dijagrami
+
+:[sekvencijski](../../diagrams/UMLSequence/loginSequence.pu)
+![sek2](../../diagrams/UMLSequence/Registracija.png)
+![sek3](../../diagrams/UMLSequence/Seminar_i_predlaganje.png)
+
 ### Dionici
 
 1. Klijent
@@ -27,45 +37,83 @@ Studenti i osoblje imaju pristup funkcionalnosti chata, putem kojeg mogu komunic
 3. Student
 4. Profesor
 5. Nositelj
-6. Studentska služba
-7. Administrator sustava
+6. Doktorand
+7. Studentska služba
+8. Administrator sustava
 
 ### Aktori i njihovi funkcionalni zahtjevi
 
 1. Klijent
-   1. Prijaviti se u sustav
-   2. Registrirati se putem linka
-   3. Pregledati javne detalje o kolegiju
-   4. Provjeriti javne detalje o svakom korisniku
+   - Prijava u sustav
+   - Registriracija putem linka
+   - Pregledati globalne obavijesti
+   - Pregledati popis oglasa svih nadolazecih predlozenih Seminara
 2. Registrirani korisnik
-   1. Urediti svoj opis
-   2. Pregledati globalnih obavijesti ili obavijesti vezanih uz kolegije na koje je povezan
-3. Student može
-   1. Upisati dostupni kolegij
-   2. Pregledati popis kolegija na koje je upisan
-4. Nositelj kolegija može
-   1. Postavljanje obaveza na kolegiju
-   2. Postavljanje materijala na kolegiju
-   3. Pregledati popis kolegija na koje ima nositeljska prava
-   4. Uredivati opis kolegija na kojima ima nositeljska prava
-   5. Postaviti kolegij na koji ima nositeljska prava je li dostupan za upisivanje
-5. Administrator sustava
-   1. Kreirati linkove za registraciju u sustav
-   2. Čitanje iz svih tablica iz baze podataka
-   3. Pisanje u sve tablica iz baze podataka
-   4. Uređivanje svih tablica iz baze podataka
-   5. Brisanje u svim tablica iz baze podataka
-   6. Kreiranje kolegija
-   7. Promjena prava pristupa
-   8. Pregled statistike
+   - Uređivanje opisa
+   - Provjeriti javne detalje o korisnicima
+   - Najava dolaska na seminar
+3. Student
+   - Upisati dostupni kolegij
+   - Pregledati popis kolegija na koje je upisan
+   - Detalji o kolegiju
+   - Pregledati obavijesti vezanih uz kolegije na koje je povezan
+4. Profesor
+   Pregledati popis korisnika na predmetima koje predaje
 
-@startuml
-Nositelj -[#000000]> Aplikacija : 1.Odabir opcije pregleda predmeta
-Nositelj -[#000000]> Aplikacija : 2.Zahtjev o podacima
-Nositelj -[#000000]> Aplikacija : 3.Odabir predmeta
-Nositelj -[#000000]> Aplikacija : 5.Odabir opcije prikaza statistike na ispitima
+   Postavljanje obavijesti vezanih uz kolegije na koje je povezan
 
-Bob -[#red]> Alice : hello2()
-Tester -[#red]> Bob : hello2()
-Alice -[#0000FF]->Bob : ok
-@enduml
+   Evidencija dolaska
+
+   Odobravanje prijavljenog seminara
+
+   Pregled statistike
+
+   Najava i prethodno izlaganje radova za konferencije (generalna proba)
+
+5. Nositelj
+
+   Postavljanje rola korisnika na kolegiju
+
+   Postavljanje uvjeta na kolegiju
+
+   Postavljanje materijala na kolegiju
+
+   Postaviti kolegij je li dostupan za upisivanje
+
+   Uredivati opis kolegija na kojima ima nositeljska prava
+
+   Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
+
+   Predlaganje seminara na svojem predmetu
+
+6. Doktorand
+
+   Prikaz i rasprava istraživačkih postignuća (novoobjavljeni radovi vlastiti i tuđi)
+
+   Najava i prethodno izlaganje radova za konferencije (generalna proba)
+
+7. Studentska služba
+
+   Čitanje iz baze
+
+   Pisanje u bazu
+
+   Izmjena u bazi
+
+   Brisanje u bazi
+
+   Kreiranje linkova za upis
+
+   Kreirati kolegij
+
+   Odobravanje kolegija
+
+   Postavljanje globalnih obavijesti
+
+   Kvalifikacijski ispiti za studente
+
+   Razgovor o temi i doprinosu znanstvenog rada
+
+8. Administrator sustava
+
+   Promjena prava pristupa
