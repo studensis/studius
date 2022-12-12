@@ -30,6 +30,24 @@ Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi
 
 # 1. Dnevnik promjena dokumentacije {#a1}
 
+<h3>
+	<u>
+		UC1: nesto drtugo
+	</u>
+</h3>
+
+- Glavni sudionik: Administrator, vlasnik
+- Cilj: Dodati restoran
+- Sudionici: Baza podataka
+- Preduvjet: Korisnik je registriran i dodijeljena su mu prava administratora
+  ili vlasnika
+- Opis osnovnog tijeka:
+  1.  Unosi se minimalni skup podataka o restoranu
+  2.  Administrator ili vlasnik odabiru opciju ”Spremi”
+  3.  Restoran postaje vidljiv unutar aplikacije
+
+### UC2: nesto
+
 | Test       | dva | tri! cetiri? |
 | :--------- | :-: | -----------: |
 | 1          |  2  |            3 |

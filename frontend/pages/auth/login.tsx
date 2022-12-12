@@ -18,6 +18,8 @@ function Login() {
 		'Dogodila se greška, pokušajte kasnije.'
 	);
 
+	useEffect(() => {}, []);
+
 	//NEXT AUTH BACKEND
 	const [userInfo, setUserInfo] = useState({ email: '', password: '' });
 
@@ -60,21 +62,13 @@ function Login() {
 				<div className="bg-white h-full w-[47%] absolute left-[53%] ">
 					<div className="flex items-center h-full">
 						<div className="flex flex-col justify-start items-center">
-							<Button
-								outline={true}
-								small={true}
-								style={{ padding: '16px', width: '200px' }}
-							>
-								<Icon icon="chevronLeft" />
-								<Link href="/">Back to Home Page</Link>
-							</Button>
 							<form
 								onSubmit={handleSubmit2}
 								className="flex flex-col justify-start items-center"
 							>
 								{errorOccured ? (
 									<p className="w-[480px] flex justify-center border-light-danger title2 border-2 rounded-2xl mb-4 mt-4 p-3 bg-light-danger-weak transition-all ease-in ">
-										Error
+										Bruh nekaj je krivo
 									</p>
 								) : (
 									<p className="w-[480px] flex justify-center border-light-danger title2 border-2 rounded-2xl mb-4 mt-4 p-3 bg-light-danger-weak transition-all ease-in opacity-0">
@@ -141,8 +135,8 @@ function Login() {
 										Log in with email
 									</button>
 								</Button>
+								<br />
 							</form>
-							<br />
 							<Button
 								outline={false}
 								style={{ padding: '16px', width: '480px' }}
@@ -150,7 +144,6 @@ function Login() {
 							>
 								Log in with Google
 							</Button>
-
 							{/* <Link passHref href="/register">
                 <a href="">
                   <Button

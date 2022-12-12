@@ -1,0 +1,14 @@
+MARKO!
+
+latex (.tex) fajlovi su ko pdf-ovi kojima programiras frontend
+
+odi na www.overleaf.com, registriraj se i uploadaj Documentation.zip koji je u ovom folderu
+
+sa lijeve strane bi trebao moc editat kod, a s desne (nakon sta se dovrsi kompajliranje) vidjet kak to izgleda ko pdf
+skroz na lijevo imas vise fajlova za birat jer je ovo sranje ocito modularno iz nekog razloga
+
+nebi trebo editat NISTA OSIM TEKSTA, osim ako te pogodi dizajnerska inspiracija i znas sta radis
+
+kao primjer imas https://www.fer.unizg.hr/_download/repository/Primjer_projektne_dokumentacije.pdf
+
+resi
