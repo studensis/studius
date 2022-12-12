@@ -1,5 +1,6 @@
 import NextAuth, {NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { useState } from "react";
 import { isErrored } from "stream";
 import {prisma} from '../../../lib/prisma'
@@ -14,6 +15,11 @@ const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        }),
+
         CredentialsProvider({
             type: 'credentials',
             credentials: {

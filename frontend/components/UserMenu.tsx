@@ -34,7 +34,7 @@ const UserMenu: FC<MenuProps> = ({ active, setMenuActive, menuActive }) => {
 		e.preventDefault();
 		sessionStorage.clear();
 		const res = await signOut({
-			callbackUrl: '/'
+			callbackUrl: '/',
 		});
 	};
 
@@ -45,20 +45,31 @@ const UserMenu: FC<MenuProps> = ({ active, setMenuActive, menuActive }) => {
 					<div className="pt-6 gap-4 w-[360px] flex justify-center items-center flex-col ">
 						<div className="justify-between flex ">
 							<Image
-								src={user?.avatar_url ? user.avatar_url : '/assets/franko.png'}
+								src={
+									user?.avatar_url
+										? user.avatar_url
+										: '/assets/franko.png'
+								}
 								width={48}
 								height={48}
 								className="rounded-2xl "
 							/>
 							<div className="px-10">
-								<h1 className="title1 ">{user?.name + ' ' + user?.surname}</h1>
+								<h1 className="title1 ">
+									{user
+										? user.name
+										: data
+										? data.user.name
+										: ''}
+								</h1>
 								<Status color="blue">Student</Status>
 							</div>
 							<p
 								onClick={() => {
 									setMenuActive(!menuActive);
 								}}
-								className="title1 cursor-pointer">
+								className="title1 cursor-pointer"
+							>
 								x
 							</p>
 						</div>
@@ -67,22 +78,39 @@ const UserMenu: FC<MenuProps> = ({ active, setMenuActive, menuActive }) => {
 								<div className="flex flex-col justify-start items-start">
 									<Link
 										href={{
-											pathname: '/userpage'
-										}}>
+											pathname: '/userpage',
+										}}
+									>
 										<div className="flex justify-center items-center p-2 cursor-pointer ">
-											<Icon icon="user" className="bg-light-accent" />
-											<p className="text-light-accent title3 ">View Profile</p>
+											<Icon
+												icon="user"
+												className="bg-light-accent"
+											/>
+											<p className="text-light-accent title3 ">
+												View Profile
+											</p>
 										</div>
 									</Link>
 									<div className="flex justify-center items-center p-2">
-										<Icon icon="settings" className="bg-light-accent" />
-										<p className="text-light-accent title3 ">Settings</p>
+										<Icon
+											icon="settings"
+											className="bg-light-accent"
+										/>
+										<p className="text-light-accent title3 ">
+											Settings
+										</p>
 									</div>
 									<div
 										onClick={logOutHandler}
-										className="cursor-pointer flex justify-center items-center p-2">
-										<Icon icon="logOut" className="bg-yellow-500" />
-										<p className="text-yellow-400 title3 ">Log out</p>
+										className="cursor-pointer flex justify-center items-center p-2"
+									>
+										<Icon
+											icon="logOut"
+											className="bg-yellow-500"
+										/>
+										<p className="text-yellow-400 title3 ">
+											Log out
+										</p>
 									</div>
 								</div>
 							</div>
