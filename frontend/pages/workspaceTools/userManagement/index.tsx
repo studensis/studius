@@ -1,12 +1,11 @@
-import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
-import { Student } from '../../../typings';
-import { Button } from '../../../components/Button';
-import Link from 'next/link';
-import Table from '../../../components/Table';
-import Icon from '../../../components/Icon';
-import Status from '../../../components/Status';
 import { GetServerSideProps } from 'next';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Button } from '../../../components/Button';
+import Icon from '../../../components/Icon/Icon';
+import Status from '../../../components/Status';
+import { Student } from '../../../typings';
 
 const UserManagementPage = ({ students }) => {
 	const { status, data } = useSession();

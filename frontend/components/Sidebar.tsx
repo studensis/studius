@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useState } from 'react';
-import Icon, { IconName } from './Icon';
+import Icon, { IconName } from './Icon/Icon';
 
 const SidebarItem: FC<{
 	icon: IconName;

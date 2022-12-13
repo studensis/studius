@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { FC, useEffect, useState } from 'react';
-import Icon from './Icon';
+import Icon from './Icon/Icon';
 import Status from './Status';
 
 const pageSize = 10;

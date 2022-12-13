@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { Student } from '../typings';
-import Icon from './Icon';
+import Icon from './Icon/Icon';
 
 type TopBarProps = {
 	children?: ReactNode | ReactNode[];
@@ -39,9 +39,14 @@ const Topbar: FC<TopBarProps> = ({ setMenuActive, menuActive }) => {
 							<li
 								onClick={() => {
 									setMenuActive(!menuActive);
-								}}>
+								}}
+							>
 								<Image
-									src={user ? user.avatar_url : '/assets/franko.png'}
+									src={
+										user
+											? user.avatar_url
+											: '/assets/franko.png'
+									}
 									height={48}
 									width={48}
 									className="bg-black rounded-2xl object-cover scale hover:scale-110 "

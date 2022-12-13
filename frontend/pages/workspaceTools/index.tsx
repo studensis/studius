@@ -1,10 +1,5 @@
-import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
-import { Student } from '../../typings';
-import { Button } from '../../components/Button';
 import Link from 'next/link';
-import Icon from '../../components/Icon';
-import Status from '../../components/Status';
+import Icon from '../../components/Icon/Icon';
 
 const workspaceTools = () => {
 	return (

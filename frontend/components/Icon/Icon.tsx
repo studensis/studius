@@ -38,7 +38,7 @@ const icons = {
 	winter: '/assets/icons/winter.svg',
 	user: '/assets/icons/user.svg',
 	userRole: '/assets/icons/userRole.svg',
-	users: '/assets/icons/users.svg'
+	users: '/assets/icons/users.svg',
 };
 
 export type IconName = keyof typeof icons;
@@ -60,11 +60,9 @@ export const Icon: React.FC<{
 				WebkitMaskImage: `url('${icons[icon]}')`,
 				maskImage: `url('${icons[icon]}')`,
 				WebkitMaskRepeat: 'no-repeat',
-				maskRepeat: 'no-repeat'
-			}}>
-			{/* <IconSvg name={icons[icon]} color={color} /> */}
-			{/* <Image src={'/assets/icons/users.svg'} layout="fill" /> */}
-		</div>
+				maskRepeat: 'no-repeat',
+			}}
+		></div>
 	);
 };
 

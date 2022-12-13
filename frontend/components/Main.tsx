@@ -1,10 +1,6 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { Student } from '../typings';
-
-type MainPageProps = {
-	children?: ReactNode | ReactNode[];
-};
 
 const Main = () => {
 	const { status, data } = useSession();

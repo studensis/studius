@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { Student } from '../typings';
-import Icon from './Icon';
+import Icon from './Icon/Icon';
 import Status from './Status';
 
 type MenuProps = {
