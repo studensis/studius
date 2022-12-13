@@ -1,11 +1,15 @@
+console.log('hello world');
+
 import express from 'express';
-import routes from './routes';
+import router from './controllers/router';
 
 const app = express();
 const port = 4000;
+
+// // const client = await new PrismaClient();
 
 app.listen(port, () => {
 	console.log(`Timezones by location application is running on port ${port}.`);
 });
 
-routes(app);
+router(app);
