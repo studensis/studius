@@ -8,7 +8,7 @@
   "scripts": {
     "start": "NODE_ENV=prod node dist/index.js",
     "build": "tsc -p .",
-    "dev": "NODE_ENV=dev tsc && concurrently \"tsc -w\" \"nodemon dist/index.js\""
+    "dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/index.js\""
   },
   "dependencies": {
     "@prisma/client": "4.5.0",

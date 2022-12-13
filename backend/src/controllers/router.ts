@@ -1,5 +1,7 @@
 import { Express } from 'express';
+import createSubjectRouteHandler from '../domain/User/routeHandlers/createSubjectRouteHandler';
 import createUserRouteHandler from '../domain/User/routeHandlers/createUserRouteHandler';
+import getSubjectRouteHandler from '../domain/User/routeHandlers/getSubjectRouteHandler';
 import getUserRouteHandler from '../domain/User/routeHandlers/getUserRouteHandler';
 import listSubjectsRouteHandler from '../domain/User/routeHandlers/listSubjectsRouteHandler';
 import listUsersRouteHandler from '../domain/User/routeHandlers/listUsersRouteHandler';
