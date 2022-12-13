@@ -1,6 +1,7 @@
 import { Express } from 'express';
 import createUserRouteHandler from '../domain/User/routeHandlers/createUserRouteHandler';
 import getUserRouteHandler from '../domain/User/routeHandlers/getUserRouteHandler';
+import listSubjectsRouteHandler from '../domain/User/routeHandlers/listSubjectsRouteHandler';
 import listUsersRouteHandler from '../domain/User/routeHandlers/listUsersRouteHandler';
 
 // Kakti API gateway
@@ -20,4 +21,8 @@ export default (server: Express) => {
 	server.route('/users').get(listUsersRouteHandler);
 	server.route('/users/:userId').get(getUserRouteHandler);
 	server.route('/users').post(createUserRouteHandler);
+
+	server.route('/subjects').get(listSubjectsRouteHandler);
+	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
+	server.route('/subjects').post(createSubjectRouteHandler);
 };
