@@ -7,7 +7,7 @@ participant "Google" as D
 
 activate A #005DFF
 
-A -> B: 1. Odabir opcije za prijavu
+A -> B: 1. Zahtjev za prijavom
 activate B #005DFF
 B --> A: Prikaz opcija za prijavu
 deactivate B
@@ -21,52 +21,32 @@ activate B #005DFF
 B --> A: Prikaz forme za prijavu
 deactivate B
 
-
-|||
-alt Podaci nisu točni
-|||
 |||
 loop dok podaci nisu tocni
 |||
-A -> B: 3. Unos i predaja forme
-activate B #005DFF
-B -> C: 4. Provjera podataka u bazi
-activate C #005DFF
-C --> B: Podaci su netočni
-deactivate C
-B --> A: Error
-deactivate B
-
-|||
-end
-|||
-|||
-else Podaci su točni
-|||
 
 A -> B: 3. Unos i predaja forme
 activate B #005DFF
 B -> C: 4. Provjera podataka u bazi
 activate C #005DFF
-C --> B: Podaci su točni
+C --> B: A postoji u bazi
 deactivate C
 B --> A: Session Token
 deactivate B
 
-
 |||
 end
 |||
-else Opcija prijave preko Google računa
+else Opcija prijave preko Da
 |||
 
-    A -> B: 4. Odabir prijave preko Google računa
+    A -> B: 4. Odabir prijave preko Da
     	activate B #005DFF
     B -> D
     	activate D #005DFF
     D -> A: Prikaz dostupnih gmail adresa
     A -> D: 5. Odabir gmail adrese
-    D -> D: Provjera
+    D -> D: Provjera s D autentikacijom
     D -> B: Success
     	deactivate D
     B -> A: Session Token
