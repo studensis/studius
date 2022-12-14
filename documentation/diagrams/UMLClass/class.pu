@@ -1,6 +1,6 @@
-@startuml classExample
+@startuml sda {
 
-left to right direction 
+top to bottom direction
 
 class EventUserPresence {
     RoomTimeEvent: RoomTimeEvent
@@ -25,50 +25,14 @@ class Post{
 
 }
 
-abstract User {
-    -id:int 
+class User {
+    -id:String 
     -firstname:String
     -lastname:String
     -email:String 
     -status: status
     -content : Content
 }
-
-class Student { 
-    -jmbag: String 
-    +courseList()
-    +enroll()
-}
-
-class Doktorand {
-    -mentor: Profesor
-    +submitSeminar(Seminar seminar)
-}
-
-
-class Profesor { 
-    +setOpis()
-    +getKolegiji()
-    +approveSeminar(Seminar seminar)
-}
-
-class Nositelj { 
-    +setContent(Content content)
-    +setDescription()
-}
-
-class StudentskaSluzba { 
-    +getData()
-    +setData(Content content)
-    +createCourse(Subject subject)
-    +getStatistics()
-}
-
-class Admin {
-    +setUserType(UserType userType)
-}
-
-
 
 class SeminarSuggestion { 
     -id:String
@@ -100,8 +64,9 @@ class RoomTimeEvent {
 class Enrollment { 
     -subject: Subject
     -user: User
-    -Enrollment_date: Date
+    -acYear: Date
     -status: status
+    -subjectRole: subjectRole
 }
 
 class Seminar { 
@@ -120,6 +85,7 @@ class Subject {
     -title: String 
     -description: String 
     -semester: semester
+    -ects: Int 
     -status: status
     -content: Content 
 }
@@ -140,57 +106,47 @@ enum status {
 }
 
 enum userType {
-    STUDENT
-    PROFESOR
-    NOSITELJ
-    ASISTENT
+    DEFAULT
     ADMIN
+    SUPERADMIN
 }
 
 enum presenceStatus {
     PRESENT 
     ABSENT 
 }
-User <|-- Student 
-StudentskaSluzba <|-- Admin
-User <|-- StudentskaSluzba
-Student <|-- Doktorand
-User <|-- Profesor
-Profesor <|-- Nositelj
 
-Post "1" *-up- "1" Content
-Subject "1" *-up- "1..*" Content
-User "1" *-up- "1" Content
-Seminar "1" *-up- "1" Content
-
-Subject "1" -down-> "*" Enrollment
-User "1" -down-> "*" Enrollment
-
-Seminar "1" *-- "1..*" SeminarSuggestion
-Seminar "1" -right-> "1" Event
-Event "1" -right-> "*" RoomTimeEvent
-Room "1" -left-> "*" RoomTimeEvent
+enum subjectRole { 
+    PROFESSOR
+    STUDENT
+    OWNER
+    DEMONSTRATOR
+    ASISTENT
+}
 
 
-User "1" *-- "*" Post  
-Doktorand "1..*" <|-- "*" Seminar
-Subject "1" <|-- "*" Seminar
+Content "1" ---* "1" Post
+Content "1.." --- "1" Subject
+Content "1" ---* "1" User
+Content "1" ---* "1" Seminar
 
+User "0.." - "1.." Subject
+(User, Subject) .. Enrollment  
 
+Seminar "1" -right- "1.." SeminarSuggestion
+Seminar "1" --> "1" Event
+Event "1" --> "*" RoomTimeEvent
+Room "1" --> "*" RoomTimeEvent
 
-
-
-User "1" -left-> "*" EventUserPresence
+User "1" ----> "*" EventUserPresence
 EventUserPresence "*" -right-> "1" RoomTimeEvent
 
-Subject -left-> semester
-Subject -right-> status 
+User -left> userType 
+Subject --> subjectRole
+Subject -right> status
+Subject --> semester
+presenceStatus <- EventUserPresence
+Post ---> LinkedEntity
+Event -> LinkedEntity
 
-Post -left-> LinkedEntity
-Event -right-> LinkedEntity
-
-User -right-> userType
-EventUserPresence -down-> presenceStatus
-
-
-@enduml
+}
