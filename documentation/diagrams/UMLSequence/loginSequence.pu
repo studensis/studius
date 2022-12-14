@@ -7,7 +7,7 @@ participant "Google" as D
 
 activate A #005DFF
 
-A -> B: 1. Zahtjev za prijavom
+A -> B: 1. Odabir opcije za prijavu
 activate B #005DFF
 B --> A: Prikaz opcija za prijavu
 deactivate B
