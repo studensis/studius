@@ -3,10 +3,10 @@ import { Post, User } from '@prisma/client';
 export default class PostEntity {
 	id: number;
 	title: string;
-	date: Date;
-    owner: User;
-    LinkedEntity: string;
-    LinketEntityId: string;
+	date: string;			// Date
+    owner: string;			// User
+    LinkedEntity: string;			// LinkedEntity
+    LinketEntityId: string;			// Number ???
 
 
 	constructor(props: Post) {

@@ -4,9 +4,9 @@ export default class SubjectEntity {
 	id: number;
 	title: string;
 	description: string;
-	semester: string;       // treba enum semester
-	status: string;         // treba enum status
-	contentId: number;        // treba class Content
+	semester: string;       	// enum semester
+	status: string;         	// enum status
+	content: string;        	// Content
 
 	constructor(props: Subject) {
 		this.id = props.id;
@@ -14,6 +14,6 @@ export default class SubjectEntity {
 		this.description = props.description;
 		this.semester = props.semester;
 		this.status = props.status;
-		this.contentId = props.contentId;
+		this.content = props.content;
 	}
 }

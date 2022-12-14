@@ -4,7 +4,7 @@ export default class ContentEntity {
 	id: number;
 	Markdown_Text: string;
     plain_text: string;
-    date: Date;
+    date: string;           // Date
 
 	constructor(props: Content) {
 		this.id = props.id;
@@ -13,5 +13,4 @@ export default class ContentEntity {
         this.date = props.date;
 	}
 
-	
 }

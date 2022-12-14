@@ -4,11 +4,11 @@ import createSeminarInteractor from '../interactors/createSeminarInteractor';
 import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
 import SeminarEntity from '../SeminarEntity';
 
-export default async function createUserRouteHandler(
+export default async function createSeminarRouteHandler(
 	req: Request,
 	res: Response
 ) {
-	console.log('/users POST');
+	console.log('/seminars POST');
 
 	try {
 		let newSeminar = new SeminarEntity({
@@ -17,15 +17,15 @@ export default async function createUserRouteHandler(
 			description: req.query.description as string,
 			mentorId: req.query.mentorId as string,
 			type: req.query.type as string,
-			contentId: req.query.contentId as string,
-			subject: req.query.subject as string,
-			user: req.query.user as string,
+			contentId: req.query.contentId as string,		//Content
+			subject: req.query.subject as string,			//Subject
+			user: req.query.user as string,					//User
 
 		});
-		//newUser.validate();
+		//newSeminar.validate();
 		let repo = new SeminarRepositoryPrisma();
-		let user = await createSeminarInteractor(repo, newSeminar);
-		return res.send(user);
+		let seminar = await createSeminarInteractor(repo, newSeminar);
+		return res.send(seminar);
 	} catch (err) {
 		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}

@@ -3,14 +3,14 @@ import { StatusCodes } from 'http-status-codes';
 import getSeminarInteractor from '../interactors/getSeminarInteractor';
 import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
 
-export default async function getUserRouteHandler(req: Request, res: Response) {
-	console.log('/users/:userId GET');
+export default async function getSeminarRouteHandler(req: Request, res: Response) {
+	console.log('/Seminars/:seminarId GET');
 
 	try {
-		let id = Number(req.params.userId);
+		let id = Number(req.params.seminarId);
 		let repo = new SeminarRepositoryPrisma();
-		let user = await getSeminarInteractor(repo, id);
-		return res.send(user);
+		let seminar = await getSeminarInteractor(repo, id);
+		return res.send(seminar);
 	} catch {
 		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
 	}

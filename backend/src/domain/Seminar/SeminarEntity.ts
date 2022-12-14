@@ -5,11 +5,11 @@ export default class SeminarEntity {
 	id: number;
 	title: string;
 	description: string;
-	mentorId: number;       
-	type: string;        
-	contentId: number;    // treba class Content
-    subject: number;
-    user: User;
+	mentorId: string;       	// Number ????
+	type: string;
+	content: string;    		// Content
+	subject: string;			// Subject
+	user: string;				// User
 
 
 	constructor(props: Seminar) {
@@ -17,9 +17,9 @@ export default class SeminarEntity {
 		this.title = props.title;
 		this.description = props.description;
 		this.mentorId = props.mentorId;
-        this.type = props.type;
-        this.contentId = props.contentId;
-        this.subjectId = props.subjectId;
-        this.user = props.user;
+		this.type = props.type;
+		this.content = props.contentId;
+		this.subject = props.subjectId;
+		this.user = props.user;
 	}
 }
