@@ -1,15 +1,14 @@
 import { Seminar, User } from '@prisma/client';
 import { Subject } from '@prisma/client';
-import { User } from '@prisma/client';
 
 export default class SeminarEntity {
 	id: number;
 	title: string;
 	description: string;
-	mentorId: string;       
+	mentorId: number;       
 	type: string;        
-	content: string;    // treba class Content
-    subject: Subject;
+	contentId: number;    // treba class Content
+    subject: number;
     user: User;
 
 
@@ -19,8 +18,8 @@ export default class SeminarEntity {
 		this.description = props.description;
 		this.mentorId = props.mentorId;
         this.type = props.type;
-        this.content = props.content;
-        this.subject = props.subject;
+        this.contentId = props.contentId;
+        this.subjectId = props.subjectId;
         this.user = props.user;
 	}
 }

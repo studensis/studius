@@ -1,4 +1,4 @@
-import { Event } from '@prisma/client';
+import { Event, Subject } from '@prisma/client';
 
 export default class EventEntity {
 	id: number;

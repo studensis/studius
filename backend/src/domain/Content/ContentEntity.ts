@@ -1,6 +1,6 @@
 import { Content } from '@prisma/client';
 
-export default class UserEntity {
+export default class ContentEntity {
 	id: number;
 	Markdown_Text: string;
     plain_text: string;
