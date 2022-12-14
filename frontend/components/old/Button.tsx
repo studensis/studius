@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import Icon, { IconName } from './Icon/Icon';
+import Icon, { IconName } from '../Icon/Icon';
 
 type ButtonType = 'primary' | 'secondary';
 
