@@ -20,4 +20,5 @@ export default (server: Express) => {
 	server.route('/users').get(listUsersRouteHandler);
 	server.route('/users/:userId').get(getUserRouteHandler);
 	server.route('/users').post(createUserRouteHandler);
+	//server.route('/users/:userId/update').post(updateUserRouteHandler);
 };

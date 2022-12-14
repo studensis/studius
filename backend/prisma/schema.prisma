@@ -12,17 +12,18 @@ datasource db {
 }
 
 model User {
-  id                Int                 @id @default(autoincrement())
-  firstname         String
-  lastname          String
-  jmbag             String              @unique
-  email             String              @unique
-  status            Role
-  mentorID          Int                 @unique
-  mentor            User                @relation("Mentorstvo", fields: [mentorID], references: [id])
-  mentee            User[]              @relation("Mentorstvo")
-  Enrollment        Enrollment[]
-  EventUserPresence EventUserPresence[]
+  id            Int                 @id @default(autoincrement())
+  password      String
+  firstname     String
+  lastname      String
+  jmbag         String              @unique
+  email         String              @unique
+  status        Role
+  mentorID      Int?                @unique
+  mentor        User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
+  menteeId      User[]              @relation("Mentorstvo")
+  Enrolled      Enrollment[]
+  EventPresence EventUserPresence[]
 }
 
 // treba stavit @unique na neke

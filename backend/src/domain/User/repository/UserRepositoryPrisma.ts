@@ -32,12 +32,11 @@ export default class UserRepositoryPrisma extends UserRepository {
 			data: {
 				email: 'test@a.com',
 				password: '123',
-				name: 'nejm',
-				surname: 'srnejm',
-				username: 'nick',
-				JMBAG: '123456',
-				avatar_url: 'string',
-				role: UserRole.STUDENT
+				firstname: 'nejm',
+				lastname: 'srnejm',
+				jmbag: '1234567890',
+				status: UserRole.STUDENT, 
+				mentorID: '12346547345'
 			}
 		});
 
