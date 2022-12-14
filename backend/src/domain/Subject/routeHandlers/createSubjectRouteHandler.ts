@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import createSubjectInteractor from '../interactors/createSubjectInteractor';
+import createSubjectInteractor from '../../Subject/interactors/createSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 import SubjectEntity from '../SubjectEntity';
 

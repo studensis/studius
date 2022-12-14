@@ -1,9 +1,9 @@
 import { Express } from 'express';
-import createSubjectRouteHandler from '../domain/User/routeHandlers/createSubjectRouteHandler';
+import createSubjectRouteHandler from '../domain/Subject/routeHandlers/createSubjectRouteHandler';
 import createUserRouteHandler from '../domain/User/routeHandlers/createUserRouteHandler';
-import getSubjectRouteHandler from '../domain/User/routeHandlers/getSubjectRouteHandler';
+import getSubjectRouteHandler from '../domain/Subject/routeHandlers/getSubjectRouteHandler';
 import getUserRouteHandler from '../domain/User/routeHandlers/getUserRouteHandler';
-import listSubjectsRouteHandler from '../domain/User/routeHandlers/listSubjectsRouteHandler';
+import listSubjectsRouteHandler from '../domain/Subject/routeHandlers/listSubjectsRouteHandler';
 import listUsersRouteHandler from '../domain/User/routeHandlers/listUsersRouteHandler';
 
 // Kakti API gateway
