@@ -1,4 +1,4 @@
-@startuml sda {
+@startuml UMLclass
 
 top to bottom direction
 
@@ -149,4 +149,4 @@ presenceStatus <- EventUserPresence
 Post ---> LinkedEntity
 Event -> LinkedEntity
 
-}
+@enduml
