@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { userInfo } from 'os';
 import UserEntity from '../UserEntity';
 import { UserRole } from '../UserRole';
 import { UserRepository } from './UserRepository';
