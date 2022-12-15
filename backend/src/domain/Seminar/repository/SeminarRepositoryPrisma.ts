@@ -19,7 +19,7 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 		return seminars;
 	}
 
-	async getById(id: number) {
+	async getById(id: string) {
 		let data = await prisma.seminar.findUnique({ where: { id: id } });
 		let seminar = new SeminarEntity(data);
 		return seminar;
@@ -35,7 +35,6 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
                 contentId: "3",
                 subjectId: "2",
                 userId: '4',
-
 			}
 		});
 

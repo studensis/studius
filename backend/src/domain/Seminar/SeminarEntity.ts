@@ -2,14 +2,14 @@ import { Seminar, User } from '@prisma/client';
 import { Subject } from '@prisma/client';
 
 export default class SeminarEntity {
-	id: number;
+	id: string;
 	title: string;
 	description: string;
 	mentorId: string;       	// Number ????
 	type: string;
 	content: string;    		// Content
 	subject: string;			// Subject
-	user: string;				// User
+	userId: string;				// User
 
 
 	constructor(props: Seminar) {
@@ -20,6 +20,6 @@ export default class SeminarEntity {
 		this.type = props.type;
 		this.content = props.contentId;
 		this.subject = props.subjectId;
-		this.user = props.user;
+		this.userId = props.userId;
 	}
 }

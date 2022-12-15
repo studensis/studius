@@ -1,20 +1,21 @@
 import { Post, User } from '@prisma/client';
 
 export default class PostEntity {
-	id: number;
+	id: string;
 	title: string;
-	date: string;			// Date
-    owner: string;			// User
-    LinkedEntity: string;			// LinkedEntity
-    LinketEntityId: string;			// Number ???
+	date: Date;			// Date
+    ownerId: string;			// User
+    linkedEntity: string;			// LinkedEntity
+    linkedEntityId: string;			// Number ???
 
 
 	constructor(props: Post) {
 		this.id = props.id;
 		this.title = props.title;
 		this.date = props.date;
-        this.owner = props.owner;
-        this.LinkedEntity = props.LinkedEntity;
-        this.LinketEntityId = props.LinketEntityId;
+        this.ownerId = props.ownerId;
+        this.linkedEntity = props.linkedEntity;
+        this.linkedEntityId = props.linkedEntityId;
+
 	}
 }

@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { LinkedEntity, PrismaClient } from '@prisma/client';
+import UserEntity from '../../User/UserEntity';
 import PostEntity from '../PostEntity';
 import { PostRepository } from './PostRepository';
 
@@ -19,7 +20,7 @@ export default class PostRepositoryPrisma extends PostRepository {
 		return posts;
 	}
 
-	async getById(id: number) {
+	async getById(id: string) {
 		let data = await prisma.post.findUnique({ where: { id: id } });
 		let post = new PostEntity(data);
 		return post;
@@ -31,9 +32,10 @@ export default class PostRepositoryPrisma extends PostRepository {
 				id: undefined,
 			    title: "tajtl",
 			    date: "osmi osmi",         //Date
-			    owner: "ja",               //User
-			    LinkedEntity: "linkt entiti",
-			    LinkedEntityId: "linkt entiti ajdi",
+			    ownerId: "ja",             //User
+			    linkedEntity: LinkedEntity.POST,
+			    linkedEntityId: "linkt entiti ajdi",
+				contentId: "kontent ajdi",
 			}
 		});
 

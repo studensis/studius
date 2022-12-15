@@ -19,7 +19,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 		return events;
 	}
 
-	async getById(id: number) {
+	async getById(id: string) {
 		let data = await prisma.event.findUnique({ where: { id: id } });
 		let event = new EventEntity(data);
 		return event;
@@ -28,11 +28,11 @@ export default class EventRepositoryPrisma extends EventRepository {
 	async create(event: EventEntity) {
 		let response = await prisma.event.create({
 			data: {
-				id: undefined,
-			    title: "ivent",
-			    description: "deskriptsn",
-			    LinkedEntity: "linkt entiti",
-			    LinkedEntityID: "linkt entiti ajdi",
+				id: event.id,
+			    title: event.title,
+			    description: event.description,
+			    linkedEntity: event.linkedEntity,
+			    linkedEntityId: event.linkedEntityId,
 			}
 		});
 

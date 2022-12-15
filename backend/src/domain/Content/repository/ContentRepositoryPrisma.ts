@@ -19,7 +19,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 		return contents;
 	}
 
-	async getById(id: number) {
+	async getById(id: string) {
 		let data = await prisma.content.findUnique({ where: { id: id } });
 		let content = new ContentEntity(data);
 		return content;
@@ -29,9 +29,11 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 		let response = await prisma.content.create({
 			data: {
 				id: undefined,
-			    Markdown_Text: "Markdaun Tekst",
-			    plain_text: "plejn tekst",
-			    date: "osmi osmi",                  // Date   
+			    markdownText: content.markdownText,
+			    plainText: content.plainText,
+			    date: content.date,                  // Date   
+				linkedEntity: content.linkedEntity,
+    			linkedEntityId: content.linkedEntityId,
 			}
 		});
 

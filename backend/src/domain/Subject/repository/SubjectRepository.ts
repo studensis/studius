@@ -4,7 +4,7 @@ export abstract class SubjectRepository {
 	async getAll(): Promise<SubjectEntity[]> {
 		throw new Error('Method not implemented.');
 	}
-	async getById(id: number): Promise<SubjectEntity> {
+	async getById(id: string): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
 	async create(subject: SubjectEntity): Promise<SubjectEntity> {
