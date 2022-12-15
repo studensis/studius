@@ -1,14 +1,14 @@
 import { User } from '@prisma/client';
 
 export default class UserEntity {
-	id: number;
+	//id: number;
 	password: String;
 	firstname: String;
 	lastname: String;
 	jmbag: String;
 	email: String;
 	status: String;
-	mentorID:  number;
+	mentorID:  String;
 	menteeID: String[];
 	enrollment: String[];
 	eventPresence: String[];
@@ -16,7 +16,7 @@ export default class UserEntity {
 
 	constructor(props: User) {
 		// mozda je ID problem, kako zaobitci definiciju IDja?
-		this.id = props.id;
+		//this.id = props.id;
 		this.password = props.password;
 		this.firstname = props.firstname;
 		this.lastname = props.lastname;

@@ -38,7 +38,7 @@ export default (server: Express) => {
 	server.route('/users').post(createUserRouteHandler);
 
 	// subject routes
-	server.route('/subjects').get(listSubjectsRouteHandler);
+/* 	server.route('/subjects').get(listSubjectsRouteHandler);
 	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
 	server.route('/subjects').post(createSubjectRouteHandler);
 
@@ -60,5 +60,5 @@ export default (server: Express) => {
 	// content routes
 	server.route('/contents').get(listContentsRouteHandler);
 	server.route('/contents/:contentId').get(getContentRouteHandler);
-	server.route('/contents').post(createContentRouteHandler);
+	server.route('/contents').post(createContentRouteHandler); */
 };
