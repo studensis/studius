@@ -19,20 +19,20 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		return subjects;
 	}
 
-	async getById(id: number) {
-		let data = await prisma.subject.findUnique({ where: { id: id } });
-		let subject = new SubjectEntity(data);
-		return subject;
-	}
+	// async getById(id: string) {
+	// 	let data = await prisma.subject.findUnique({ where: { id: id } });
+	// 	let subject = new SubjectEntity(data);
+	// 	return subject;
+	// }
 
 	async create(subject: SubjectEntity) {
 		let response = await prisma.subject.create({
 			data: {
-				title: 'tit',
-				description: 'hehe',
-				semester: '1',
-				status: 'srk',
-				content: 'NGHH'
+				title: subject.title,
+				description: subject.description,
+				ectsBod: subject.ectsBod,
+				semester: subject.semester,
+				status: subject.status,
 			}
 		});
 

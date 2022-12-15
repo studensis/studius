@@ -21,22 +21,22 @@ export default class UserRepositoryPrisma extends UserRepository {
 		return users;
 	}
 
-	async getById(id: number) {
-		let data = await prisma.user.findUnique({ where: { id: id } });
-		let user = new UserEntity(data);
-		return user;
-	}
+	// async getById(id: number) {
+	// 	let data = await prisma.user.findUnique({ where: { id: id } });
+	// 	let user = new UserEntity(data);
+	// 	return user;
+	// }
 
 	async create(user: UserEntity) {
 		let response = await prisma.user.create({
 			data: {
-				email: 'test@a.com',
-				password: '123',
-				firstname: 'nejm',
-				lastname: 'srnejm',
-				jmbag: '1234567890',
+				email: user.email,
+				password: user.password,
+				firstname: user.firstname,
+				lastname: user.lastname,
+				jmbag: user.jmbag,
 				status: UserRole.STUDENT, 
-				mentorID: '12346547345'
+				mentorID: user.mentorID
 			}
 		});
 

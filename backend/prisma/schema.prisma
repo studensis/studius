@@ -32,10 +32,10 @@ model Subject {
   id          String       @id @default(uuid())
   title       String
   description String
-  ects_bod    Int
+  ectsBod     String
   semester    Semester
   status      Status
-  contentId   Int          @unique
+  contentId   String[]     @unique
   Enrollment  Enrollment[]
 }
 
@@ -45,7 +45,7 @@ model Content {
   plainText      String
   date           DateTime     @default(now())
   linkedEntity   LinkedEntity
-  linkedEntityId Int
+  linkedEntityId String
 }
 
 model Post {
@@ -53,9 +53,9 @@ model Post {
   title          String
   Date           DateTime     @default(now())
   linkedEntity   LinkedEntity
-  linkedEntityId Int
-  contentId      Int
-  ownerId        Int
+  linkedEntityId String
+  contentId      String
+  ownerId        String
 }
 
 model Enrollment {
@@ -74,7 +74,7 @@ model Seminar {
   id          String @id @default(uuid())
   title       String
   description String
-  mentorId    Int
+  mentorId    String
   type        String
   contentId   String
   subjectId   String

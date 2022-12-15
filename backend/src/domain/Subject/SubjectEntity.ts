@@ -1,19 +1,21 @@
-import { Subject } from '@prisma/client';
+import { Semester, Subject, Status } from '@prisma/client';
 
 export default class SubjectEntity {
-	id: number;
+	id: string;
 	title: string;
 	description: string;
-	semester: string;       	// enum semester
-	status: string;         	// enum status
-	content: string;        	// Content
+	ectsBod: string;
+	semester: Semester;       	// enum semester
+	status: Status;         	// enum status
+	contentId: string[];        	//bice rijeseno u odvojenom use case-u
 
 	constructor(props: Subject) {
 		this.id = props.id;
 		this.title = props.title;
 		this.description = props.description;
+		this.ectsBod = props.ectsBod;
 		this.semester = props.semester;
 		this.status = props.status;
-		this.content = props.content;
+		this.contentId = props.contentId;
 	}
 }

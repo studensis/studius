@@ -13,15 +13,15 @@ export default async function createUserRouteHandler(
 
 	try {
 		let newUser = new UserEntity({
-			id: undefined,
-			email: req.query.email as string,
+			id : undefined,
+			firstname : req.query.firstname as string,
+			lastname : req.query.lastname as string,
 			password: req.query.password as string,
-			name: req.query.name as string,
-			surname: req.query.surname as string,
-			username: req.query.username as string,
-			JMBAG: req.query.JMBAG as string,
-			avatar_url: req.query.avatar_url as string,
-			role: UserRole.STUDENT
+			jmbag: req.query.jmbag as string,
+			email: req.query.email as string, 
+			status: req.query.status as UserRole,
+			mentorID: undefined,
+
 		});
 		newUser.validate();
 		let repo = new UserRepositoryPrisma();

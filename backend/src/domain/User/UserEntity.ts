@@ -1,22 +1,23 @@
 import { User } from '@prisma/client';
+import { UserRole } from './UserRole';
 
 export default class UserEntity {
-	//id: number;
-	password: String;
-	firstname: String;
-	lastname: String;
-	jmbag: String;
-	email: String;
-	status: String;
-	mentorID:  String;
-	menteeID: String[];
-	enrollment: String[];
-	eventPresence: String[];
+	id: string;
+	firstname: string;
+	lastname: string;
+	password: string;
+	jmbag: string;
+	email: string;
+	status: UserRole;
+	mentorID:  string;
+	menteeID: string[];
+	enrollment: string[];
+	eventPresence: string[];
 
 
 	constructor(props: User) {
 		// mozda je ID problem, kako zaobitci definiciju IDja?
-		//this.id = props.id;
+		this.id = props.id;
 		this.password = props.password;
 		this.firstname = props.firstname;
 		this.lastname = props.lastname;

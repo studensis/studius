@@ -37,11 +37,11 @@ export default (server: Express) => {
 	server.route('/users/:userId').get(getUserRouteHandler);
 	server.route('/users').post(createUserRouteHandler);
 
-	// subject routes
-/* 	server.route('/subjects').get(listSubjectsRouteHandler);
+	//subject routes
+	server.route('/subjects').get(listSubjectsRouteHandler);
 	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
 	server.route('/subjects').post(createSubjectRouteHandler);
-
+/* 
 	// seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);
 	server.route('/seminars/:seminarId').get(getSeminarRouteHandler);

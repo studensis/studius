@@ -1,3 +1,4 @@
+import { Semester, Status } from '@prisma/client';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSubjectInteractor from '../../Subject/interactors/createSubjectInteractor';
@@ -15,9 +16,10 @@ export default async function createSubjectRouteHandler(
 			id: undefined,
 			title: req.query.title as string,
 			description: req.query.description as string,
-			semester: req.query.semester as string,     // treba enum semester
-			status: req.query.status as string,         // treba enum status
-            content: req.query.content as string,       // treba klasa Content
+			ectsBod: req.query.ectsBod as string,
+			semester: req.query.semester as Semester,   
+			status: req.query.status as Status, 
+			contentId: undefined        
 		});
 		//newSubject.validate();
 		let repo = new SubjectRepositoryPrisma();
