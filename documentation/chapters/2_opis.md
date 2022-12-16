@@ -25,13 +25,13 @@ Administrator sustava
 Studentska služba ima skoro sve, ali zbog potreba sigurnosti treba rola jača od nje a to je administrator sustava. Samo jedan korisnik može imati ulogu administratora.
 Ta uloga ima sve mogućnosti kao i studentska služba uz dodatnu mogućnost promjene role korisnicima.
 
-## Komponente sustava
+## 2.1 Komponente sustava <a name="2.1"> </a>
 
-### Alat za upravljanje korisnicima
+### 2.1.1 Alat za upravljanje korisnicima <a name="2.1.1"> </a>
 
 Poseban alat koji bi pretežno djelovao automatski, ali i uz mogućnost ručnih izmjena je alat za upravljanje korisnicima na razini samog sustava.
 
-### Alat za upravljanje kolegijima
+### 2.1.2 Alat za upravljanje kolegijima <a name="2.1.2"> </a>
 
 Neregistrirani korisnici bi imali uvid u javne informacije za svaki kolegij kao sto su opis predmeta, način bodovanja, popis profesora, asistenata i ostalih službenih sudionika.
 
@@ -39,8 +39,8 @@ Registrirani korisnici, kojima su dodijeljena prava dubljeg pregleda u kolegij, 
 
 Posebno za svaki kolegij određuju se registrirani korisnici koji bi dobili ulogu Editora. Svaki editor bi mogao mijenjati javno dostupne stranice, te sam sadržaj lekcija unutar kolegija. Pored sadržaja, editori (ili potencijalno još neka visa rola) bi mogli mijenjati i samu listu registriranih korisnika kojima je dano pravo dubljeg pregleda.
 
-### Sustav za sadržaj
+### 2.1.3 Sustav za sadržaj <a name="2.1.3"> </a>
 
 Od profila korisnika do sadržaja lekcija unutar kolegija, sustav za sadržaj pobrinuo bi se da se diljem stranice sadržaj organizira na što pregledniji način, te bi olakšavao i pregled i uređivanje, naravno sa širokim mogućnostima proširenja kroz ekstenzije.
 
-### Sustav za seminare
+### 2.1.4 Sustav za seminare <a name="2.1.4"> </a>

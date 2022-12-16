@@ -16,9 +16,9 @@ Ulogu posjetitelja dobivaju studenti upisani na fakultet, ali oni koji nisu upis
 
 Administrator ima najviša prava, te ih dodjeljuje drugim ulogama.
 
-## Funkcionalni zahtjevi
+## 3.1 Funkcionalni zahtjevi <a name="3.1"> </a>
 
-## Ostali zahtjevi
+## 3.2 Ostali zahtjevi <a name="3.2"> </a>
 
 - Sustav treba omoguciti rad više korisnika u stvarnom vremenu
 - Korisnicko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i
@@ -31,36 +31,36 @@ Administrator ima najviša prava, te ih dodjeljuje drugim ulogama.
 - Veza s bazom podataka mora biti otporna na vanjske greške
 - Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS.
 
-## Obrasci uporabe
+## 3.3 Obrasci uporabe <a name="3.3"> </a>
 
 ![usecases](./diagrams/UMLUseCase/Kolegiji.svg)
 ![usecases](./diagrams/UMLUseCase/Korisnici.svg)
 ![usecases](./diagrams/UMLUseCase/Obavijesti.svg)
 ![usecases](./diagrams/UMLUseCase/Seminari.svg)
 
-## Sekvencijski dijagrami
+## 3.4 Sekvencijski dijagrami <a name="3.4"> </a>
 
 :[sekvencijski](../diagrams/UMLSequence/loginSequence.pu)
 ![sek2](./diagrams/UMLSequence/Registracija.png)
 ![sek3](./diagrams/UMLSequence/Seminar_i_predlaganje.png)
 
-### Prijava korisničkim podacima
+### 3.4.1 Prijava korisničkim podacima <a name="3.4.1"> </a>
 
 Korisnik na početnoj stranici odabire opciju “Prijava”. Web aplikacija mu otvara stranicu prijave, koja ima dvije opcije, prijavu korisničkim podacima te prijavu Google računom. Odabirom opcije “Prijava korisničkim podacima”, otvara mu se forma u koju unosi svoje korisničke podatke. Predajom forme, aplikacija u bazi provjerava ispravnost podataka. U slučaju netočnih podataka, korisnik dobiva error. U slučaju ispravnih podataka, korisnik dobiva token I redirektiran je na početnu stranicu. Odabirom opcije “Prijava putem Google računa”, korisniku Google prikazuje dostupne gmail adrese. Korisnik odabire jednu, odvija se provjera s Google-om te korisnik dobiva token I redirektiran je na početnu stranicu.
 
-### Kreiranje računa
+### 3.4.2 Kreiranje računa <a name="3.4.2"> </a>
 
 Studentski službenik otvara formu za registraciju studenta u koju upisuje sve potrebne podatke. Forma traži ponovni upis ukoliko je jedan ili više podataka neispravno te ispisuje razlog neispravnosti pojedinog podatka. Prilikom pravilno ispunjene forme, web aplikacija šalje podatke u bazu podataka te ih veže uz novoizrađenog studenta. Uspjeh o izradi studenta se šalje natrag studentskom službeniku, a mail s podatcima za prijavu se šalje korisniku kojemu pripadaju.
 
-### Prijava putem Google računa
+### 3.4.3 Prijava putem Google računa <a name="3.4.3"> </a>
 
 Unaprijed prijavljeni student, pritiskom na, za to predodređen, gumb, zahtjeva web aplikaciju da mu dohvati Google-ovu formu kojom se prijavljuje u svoj postojeći Google račun. Nakon što se uspješno prijavi u svoj Google račun, uspjeh u prijavi se dojavljuje web aplikaciji i studentu. Web aplikacija potom sprema podatke o Google poveznici i dojavljuje studentu uspjeh u povezivanju Google računa nakon čega se web aplikacija vraća na prijašnju stranicu.
 
-### Prijava seminara
+### 3.4.4 Prijava seminara <a name="3.4.4"> </a>
 
 Doktorand, pritiskom na, za to predodređen, gumb, zahtjeva web aplikaciju da mu dohvati formu za prijavu seminara. Dok ideja nije prihvaćena sa strane doktorandovog mentora, doktorand, preko web aplikacije, šalje mentoru nacrt seminara na koju mentor može odgovoriti odobrenjem. Nakon što mentor prihvati nacrt seminara, preko web aplikacije najavljuje predaju istog seminara nakon čega web aplikacija pohranjuje nacrt i datum predaje u bazu podataka. Predaja seminara mora biti najavljena najmanje 7 dana prije same predaje. Prilikom najave predaje seminara, web aplikacija izrađuje oglas seminara na stranici predmeta povezanog s mentorom koji se potom arhivira u bazu podataka. Oglas je vidljiv sve do same predaje seminara. Nositelj predmeta, koji ne mora nužno biti povezan sa seminarom, odluči predložiti seminar na stranici svojeg predmeta te web aplikaciji šalje zahtjev kojom ona hvata oglas. Predlaganje seminara također se pohranjuje u bazu podataka. Prilikom predavanja seminara, mentor predavača boduje seminar preko web aplikacije. Podatci o predaji i bodovanju seminara se pohranjuju u bazu podataka i oglas za isti seminar se briše.
 
-### Dionici
+## 3.5 Dionici <a name="3.5"> </a>
 
 1. Klijent
 2. Registrirani korisnik
@@ -71,7 +71,7 @@ Doktorand, pritiskom na, za to predodređen, gumb, zahtjeva web aplikaciju da mu
 7. Studentska služba
 8. Administrator sustava
 
-### Aktori i njihovi funkcionalni zahtjevi
+## 3.6 Aktori i njihovi funkcionalni zahtjevi <a name="3.6"> </a>
 
 1. Klijent
    - Prijava korisničkim podacima

@@ -22,91 +22,126 @@
 
 # Sadržaj
 
+<!-- <table style="">
+	<tr><td> 1
+	</td><td style="text-align: right"> 2
+	</td></tr>
+</table> -->
+
+## [1. Dnevnik promjena dokumentacije](#1)
+
+## [2. Opis projektnog zadatka](#2)
+
+### [2.1. Komponente sustava](#2.1)
+
+#### [2.1.1. Alat za upravljanje korisnicima](#2.1.1)
+
+#### [2.1.2. Alat za upravljanje kolegijima](#2.1.2)
+
+#### [2.1.3. Sustav za sadržaj](#2.1.3)
+
+#### [2.1.4. Sustav za seminare](#2.1.4)
+
+## [3. Specifikacija programske potpore](#3)
+
+### [3.1. Funkcionalni zahtjevi](#3.1)
+
+### [3.2. Ostali zahtjevi](#3.2)
+
+### [3.3. Obrasci uporabe](#3.3)
+
+### [3.4. Sekvencijski dijagrami](#3.4)
+
+#### [3.4.1. Prijava korisničkim podacima](#3.4.1)
+
+#### [3.4.2. Kreiranje računa](#3.4.2)
+
+#### [3.4.3. Prijava putem Google računa](#3.4.3)
+
+#### [3.4.4. Prijava seminara](#3.4.4)
+
+### [3.5. Dionici](#3.5)
+
+### [3.6. Aktori i njihovi funkcionalni zahtjevi](#3.6)
+
+## [4. Arhitektura i dizajn sustava](#4)
+
+### [4.1. Baza podataka](#4.1)
+
+### [4.2. Dijagram razreda](#4.2)
+
+### [4.3. Dijagram stanja](#4.3)
+
+### [4.4. Dijagram aktivnosti](#4.4)
+
+### [4.5. Dijagram komponenti](#4.5)
+
+## [5. Implementacija i korisničko sučelje](#5)
+
+#### [5.1.1. Reference](#5.1.1)
+
+### [5.2. Ispitivanje programskog rješenja](#5.2)
+
+### [5.3. Dijagram razmještaja](#5.3)
+
+### [5.4. Upute za puštanje u pogon](#5.4)
+
+### [5.5. Izvođenje razvoja](#5.5)
+
+#### [5.5.1. Sprintovi](#5.5.1)
+
+#### [5.5.2. Dnevnik sastanaka](#5.5.2)
+
+#### [5.5.3. Tjedni / dvotjedni sastanci](#5.5.3)
+
+#### [5.5.6. Dnevni sastanci](#5.5.6)
+
+#### [5.5.7. Mjesečni sastanci](#5.5.7)
+
+### [5.6. Proces izvedbe razvoja](#5.6)
+
+#### [5.6.1. Frontend tijek](#5.6.1)
+
+## [6. Indeks slika i dijagrama](#6)
+
+## [7. Tablica aktivnosti](#7)
+
+## [8. Zaključak i budući rad](#8)
+
+#### [1. hello](#1)
+
 # O timu Studensis
 
 Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi svojim usmjerenjem tako da pokrivamo cjeloukupan stack potreban za razvoj platforme.
 
-# 1. Dnevnik promjena dokumentacije
+# 1. Dnevnik promjena dokumentacije <a name="1"> </a>
 
-| Revizija | Opis promjene/dodatak                               | Autori                      | Datum       |
-| -------- | --------------------------------------------------- | --------------------------- | ----------- |
-| 0.1      | Napravljen predložak                                | Matija Fućek                | 1.10.2022.  |
-| 0.1.1    | Dodan opis projektnog zadatka                       | Matija Fućek                | 22.10.2022. |
-| 0.1.2    | Dodani funkcionalni zahtjevi                        | Marko Supičić               | 24.10.2022. |
-| 0.2      | Napravljen predložak za bazu podataka               | Marko Supičić               | 28.10.2022. |
-| 0.2.1    | Početna arhitektura i dizajn sustava                | Marko Supičić, Matija Fuček | 29.10.2022. |
-| 0.3      | Izmjena predloška baze                              | Cijeli tim                  | 4.11.2022   |
-| 0.3.1    | Izrada obrazaca uporabe                             | Marko Supičić               | 5.11.2022.  |
-| 0.3.2    | Dodani ostali zahtjevi                              | Hary Samardžić              | 5.11.2022.  |
-| 0.3.3    | Izrada baze podataka                                | Matija Fuček                | 7.11.2022.  |
-| 0.4      | Izrada 1 sekvencijskog dijagrama                    | Marko Supičić               | 11.11.2022. |
-| 0.4.1    | Dodani opisi obrazaca uporabe                       | Marko Supičić               | 11.11.2022. |
-| 0.5      | Odbačen stari sekvencijski dijagram i dodana 2 nova | Adrian Aničić               | 6.12.2022.  |
-| 0.5.1    | Dodana 2 nova sekvencijska dijagrama                | Franko Budimir              | 6.12.2022.  |
-| 0.5.2    | Izrada dijagrama razreda                            | Luka Čulav, Hary Samardžić  | 6.12.2022.  |
-| 0.5.3    | Prepravljena arhitektura i dizajn sustava           | Matija Fuček                | 6.12.2022.  |
-| 0.5.4    | Izmjena dijagrama obrazaca uporabe                  | Adrian Aničić               | 6.12.2022.  |
-| 0.5.5    | Prepravljena baza podataka                          | Hary Samardžić              | 6.12.2022.  |
-| 0.5.6    | Prepravljen opis obrazaca uporabe                   | Marko Supičić               | 7.12.2022.  |
-| 0.6      | Prepravljena 2 sekvencijska dijagrama               | Adrian Aničić               | 9.12.2022.  |
-| 0.6.1    | Prepravljena 2 sekvencijska dijagrama               | Franko Budimir              | 9.12.2022.  |
-| 0.7      | Prepravljen dijagram razreda                        | Luka Čulav, Hary Samardžić  | 12.12.2022. |
-| 0.7      | Opis dijagrama razreda                              | Luka Čulav, Hary Samardžić  | 12.12.2022. |
-| 0.7.1    | Odbačen 1 stari i dodan 1 novi dijagram razreda     | Franko Budimir              | 14.12.2022  |
-| 0.7.2    | dodan opis 1 sekvencijskog dijagrama                | Adrian Aničić               | 14.12.2022. |
-| 0.7.3    | dodan opis 3 sekvencijska dijagrama                 | Franko Budimir              | 14.12.2022. |
-| 0.7.4    | Dnevnik izmjena projekta                            | Marko Supičić               | 14.12.2022. |
-| 0.7.5    | opis projektnog zadatka                             | Marko Supičić               | 14.12.2022. |
-| 0.7.6    | Zaključak i ostale sitnice                          | Marko Supičić               | 14.12.2022. |
-| 0.7.7    | Korištene tehnologije i alati                       | Matija Fuček                | 14.12.2022. |
-| 0.7.8    | Upute za puštanje u pogon                           | Matija Fuček                | 14.12.2022. |
-| 0.7.9    | Prikaz aktivnosti grupe                             | Cijeli tim                  | 15.12.2022. |
-| 0.7.10   | Korigiranje teksta i provjera dokumentacije         | Cijeli tim                  | 15.12.2022. |
+:[Dn/chapters/1_dnevnik.md. evnik izmjena](./chapters/1_dnevnik.md)
 
-# 2. Opis projektnog zadatka
+# 2. Opis projektnog zadatka <a name="2"> </a>
 
-:[Opis](./chapters/2_opis.md)
+:[Op/chapters/2_opis.md. is](./chapters/2_opis.md)
 
-# 3. Specifikacija programske potpore
+# 3. Specifikacija programske potpore <a name="3"> </a>
 
-:[Specifikacija](./chapters/3_specifikacija.md)
+:[Sp/chapters/3_specifikacija.md. ecifikacija](./chapters/3_specifikacija.md)
 
-# 4. Arhitektura i dizajn sustava
+# 4. Arhitektura i dizajn sustava <a name="4"> </a>
 
-:[Arhitektura](./chapters/4_arhitektura.md)
+:[Ar/chapters/4_arhitektura.md. hitektura](./chapters/4_arhitektura.md)
 
-# 5. Implementacija i korisničko sučelje
+# 5. Implementacija i korisničko sučelje <a name="5"> </a>
 
-:[Implementacija](./chapters/5_implementacija.md)
+:[Im/chapters/5_implementacija.md. plementacija](./chapters/5_implementacija.md)
 
-# Indeks slika i dijagrama
+# 6. Indeks slika i dijagrama <a name="6"> </a>
 
-# Tablica aktivnosti
+:[Im/chapters/6_indeks.md. plementacija](./chapters/6_indeks.md)
 
-| Segment                                | Supe | Fuček | Adrian | Franko | Hary | Luka |
-| -------------------------------------- | ---- | ----- | ------ | ------ | ---- | ---- |
-| Upravljanje projektom                  | 10   | 10    | 3      | 3      | 4    | 1    |
-| Opis projektnog zadatka                | 3    | 6     | 2      | 2      | 2    | 2    |
-| Opis funkcionalnih zahtjeva            | 10   | 1     | 1      | 1      | 1    | 1    |
-| Dijagram obrazaca                      | 8    | 1     | 1      | 1      | 1    | 1    |
-| Opis pojedinih obrazaca                | 8    | 2     | 1      | 1      | 1    | 1    |
-| Sekvencijski dijagrami                 | 2    |       | 5      | 6      |      |      |
-| Opis ostalih zahtjeva                  | 3    |       |        |        |      |      |
-| Svrha, opci prioriteti i skica sustava | 15   | 15    | 8      | 6      | 8    | 4    |
-| Baza podataka                          | 6    | 11    | 2      | 2      | 5    | 6    |
-| Dijagram razreda                       | 2    | 2     | 2      | 2      | 20   | 20   |
-| Dijagram stanja                        |      |       |        |        |      |      |
-| Dijagram aktivnosti                    |      |       |        |        |      |      |
-| Dijagram komponenti                    |      |       |        |        |      |      |
-| Koristene tehnologije i alati ˇ        | 2    | 3     | 2      | 2      | 2    | 2    |
-| Ispitivanje programskog rjesenja ˇ     |      |       |        |        |      |      |
-| Upute za instalaciju                   |      | 3     |        |        |      |      |
-| Plan rada                              | 5    | 8     | 8      | 2      | 3    | 2    |
-| Dnevnik sastajanja                     | 1    | 1     |        |        |      |      |
-| Zakljucak i budući rad                 | 2    |       |        |        | 2    |      |
-| Popis literature                       | 1    |       |        |        |      |      |
-| Izrada pocetne stranice                | 3    | 17    | 40     | 10     | 3    | 5    |
-| Izrada baze podataka                   |      | 6     |        | 11     | 19   | 2    |
-| Spajanje s bazom podataka              |      | 4     | 10     | 32     | 2    | 3    |
-| Backend                                |      | 10    | 15     | 19     | 12   | 3    |
-| Suma                                   | 78   | 100   | 100    | 100    | 85   | 56   |
+# 7. Tablica aktivnosti <a name="7"> </a>
+
+:[Im/chapters/7_tablica.md. plementacija](./chapters/7_tablica.md)
+
+# 8. Zaključak i budući rad <a name="8"> </a>
+
+Zadatak naše grupe bio je stvaranje edukativne platforme, nešto slično ferwebu. Nakon 10 tjedana nastave odradili smo dio projekta. Zbog manjka iskustva rad je bio jako nespretan. U početku je bilo puno proučavanja različitih programskih potpora a s vremenom je bilo i promjena programska potpore. S druge strane u dokumentaciji je bio problem odrediti koliki dio projekta napraviti, s obzirom da nismo znali koliko ćemo stići za vrijeme programskog inženjerstva pa smo bili primorani smanjiti količinu zahtjeva projektnog zadatka. Unatoč mnoštvu problema ipak smo se snašli. Dobra komunikacija je bila ključna. Odvijala se putem Slacka i Whatsappa što nam je pomoglo u informiranju ostatka ekipe o napretku projekta ili postojećim problemima. Sudjelovanje na Studensis projektu je jako korisno iskustvo svim clanovima tima jer smo kroz intenzivnih nekoliko tjedana rada iskusili zajednički rad na projektu. Takoder, osjetili smo važnost dobre organiziranosti i dobre komunikacije među članovima tima. Osim toga naučili smo puno toga o samom kodiranju. Zadovoljni smo postignutim rezultatima, a u budućnosti i nakon programskog inženjerstva planiramo nastaviti raditi na ovom projektu.

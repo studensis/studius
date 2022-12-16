@@ -10,13 +10,13 @@ Frontend servis, zahvaljujući na korištenju NextJS-a kao radnog okvira, sama w
 
 Backend podsustavi su najkompleksnija podcjelina same arhitekture. Backend je po uzoru na moderne mikroservisne arhitekture
 
-## 4.1 Baza podataka
+## 4.1 Baza podataka <a name="4.1"> </a>
 
 ![baza_podataka](./images/skica_bp.png)
 
 :[html_baza](../images/Baza-raspisano.html)
 
-## 4.2 Dijagram razreda
+## 4.2 Dijagram razreda <a name="4.2"> </a>
 
 :[class](../diagrams/UMLClass/class.pu)
 
@@ -36,8 +36,8 @@ Dvorane su opisane razredom Room. Seminar mora imati doktoranda koji ga izvodi (
 
 Razred Post predstavlja objavu, sadrži svoj Content. Koji može među ostalim tematski pripadati predmetu ili seminaru, što se vidi u enumeraciji "LinkedEntity".
 
-## 4.3 Dijagram stanja
+## 4.3 Dijagram stanja <a name="4.3"> </a>
 
-## 4.4 Dijagram aktivnosti
+## 4.4 Dijagram aktivnosti <a name="4.4"> </a>
 
-## 4.5 Dijagram komponenti
+## 4.5 Dijagram komponenti <a name="4.5"> </a>

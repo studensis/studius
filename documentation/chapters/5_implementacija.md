@@ -10,7 +10,7 @@ Većina funkcionalnosti na frontu bi bila zamotana kroz **Serverless** APIje, ko
 
 Komunikacija u time je realizirana korištenjem aplikacija WhatsApp i Slack. Za izradu UML dijagrama korišteni su alati Figma, Visual Paradigm u početku, a kasnije smo se prebacili na PlantUML radi efikasnosti. Kao sustav za upravljanje izvornim kodom Git. Repozitorij projekta je dostupan na web platformi GitLab. Kao razvojno okruzenje korišten je Microsoft Visual Studio - integrirano je razvojno okruzenje (IDE) tvrtke Microsoft. Prvenstveno se koristi za razvoj računalnih programa za operacijski sustav Windows, kao i za web-stranice, web-aplikacije, web-usluge i mobilne aplikacije. Visual Studio za razvoj softvera koristi Microsoftove platforme kao sto su Windows API, Windows Forms, Windows Presentation Foundation, Windows Store i Microsoft Silverlight. Aplikacija je napisana koristeci radni okvir Express, Node.js framework za izradu backenda te Nextjs, Javascript framework za izradu frontenda. Nextjs, je biblioteka u JavaScriptu za izgradnju korisnickih sucelja. Ima sve identično kao React uz još neke nadodane funkcionalnosti. React se najčešćce koristi kao osnova u razvoju web ili mobilnih aplikacija. Složene aplikacije u Reactu obično zahtijevaju korištenje dodatnih biblioteka za interakciju s API-jem. Baza podataka se nalazi na posluzitelju u oblaku Microsoft Azure ˇ
 
-### Reference
+### 5.1.1 Reference <a name="5.1.1"> </a>
 
 1. https://www.whatsapp.com/
 2. https://www.visual-paradigm.com/
@@ -25,13 +25,13 @@ Komunikacija u time je realizirana korištenjem aplikacija WhatsApp i Slack. Za 
 11. https://www.prisma.io/docs
 12. https://www.postgresql.org/docs/
 
-## 5.2 Ispitivanje programskog rješenja
+## 5.2 Ispitivanje programskog rješenja <a name="5.2"> </a>
 
-## 5.3 Dijagram razmještaja
+## 5.3 Dijagram razmještaja <a name="5.3"> </a>
 
-## 5.4 Upute za puštanje u pogon
+## 5.4 Upute za puštanje u pogon <a name="5.4"> </a>
 
-## Izvođenje razvoja
+## 5.5 Izvođenje razvoja <a name="5.5"> </a>
 
 U dogovoru s cijelom ekipom koja je radila na projektu (i pripadnim mentorima), radili bismo prateći tjedne sprintove uz prilagođen oblik SCRUM-a u alatu Notion
 
@@ -40,11 +40,11 @@ U dogovoru s cijelom ekipom koja je radila na projektu (i pripadnim mentorima), 
 
 Način organizacije koji smo odlučili koristiti kao razvojni tim je SCRUM.
 
-### Sprintovi
+### 5.5.1 Sprintovi <a name="5.5.1"> </a>
 
 Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz zadataka i tema na koje se fokusira većina razvojnog procesa.
 
-## Dnevnik sastanaka
+### 5.5.2 Dnevnik sastanaka <a name="5.5.2"> </a>
 
 **1. Sastanak**
 
@@ -134,7 +134,7 @@ Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz 
 - Teme sastanka:
   - Još nije održan
 
-### Tjedni / dvotjedni sastanci
+### 5.5.3 Tjedni / dvotjedni sastanci <a name="5.5.3"> </a>
 
 Obično traju oko sat vremena. Cilj je imati viši pregled nad onime što je dovršeno u prethodnom sprintu te koji će zadaci ući u sljedeći sprint.
 
@@ -142,20 +142,16 @@ Kraj svakog sprinta obilježen je ovakvim sastankom, gdje gledamo koliko su uspj
 
 Bilješke ovakvih sastanaka vodimo kroz alat **Notion** te na temelju tih zapisnika na mjesečnoj bazi stvaramo dokument koji proslijeđujemo svim mentorima vezanim uz projekt.
 
-### Dnevni sastanci
+### 5.5.6 Dnevni sastanci <a name="5.5.6"> </a>
 
 Dnevni bi sastanci trebali trajati manje od 10 minuta svaki dan i nisu obavezni. Cilj je uskladiti zadatke koje svaki član rješava.
 
-### Mjesečni sastanci
+### 5.5.7 Mjesečni sastanci <a name="5.5.7"> </a>
 
 Cilj ovih sastanaka je usklađivanje s mentorima iz raznih zavoda, te iznošenje i skupno razmišljanje o napretku te idućim koracima.
 
-## Proces izvedbe razvoja
+## 5.6 Proces izvedbe razvoja <a name="5.6"> </a>
 
 Dijelovi projekta su već započeti, naime Korisničko Putovanje (User Journey), model baze podataka za osnovni set funkcionalnosti, te istraživanje tehnologija koje bismo primjenjivali.
 
-### Frontend tijek
-
-# Zaključak i buduči rad
-
-Zadatak naše grupe bio je stvaranje edukativne platforme, nešto slično ferwebu. Nakon 10 tjedana nastave odradili smo dio projekta. Zbog manjka iskustva rad je bio jako nespretan. U početku je bilo puno proučavanja različitih programskih potpora a s vremenom je bilo i promjena programska potpore. S druge strane u dokumentaciji je bio problem odrediti koliki dio projekta napraviti, s obzirom da nismo znali koliko ćemo stići za vrijeme programskog inženjerstva pa smo bili primorani smanjiti količinu zahtjeva projektnog zadatka. Unatoč mnoštvu problema ipak smo se snašli. Dobra komunikacija je bila ključna. Odvijala se putem Slacka i Whatsappa što nam je pomoglo u informiranju ostatka ekipe o napretku projekta ili postojećim problemima. Sudjelovanje na Studensis projektu je jako korisno iskustvo svim clanovima tima jer smo kroz intenzivnih nekoliko tjedana rada iskusili zajednički rad na projektu. Takoder, osjetili smo važnost dobre organiziranosti i dobre komunikacije među članovima tima. Osim toga naučili smo puno toga o samom kodiranju. Zadovoljni smo postignutim rezultatima, a u budućnosti i nakon programskog inženjerstva planiramo nastaviti raditi na ovom projektu.
+### 5.6.1 Frontend tijek <a name="5.6.1"> </a>
