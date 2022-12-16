@@ -7,7 +7,7 @@ export default async function getContentRouteHandler(req: Request, res: Response
 	console.log('/contents/:contentId GET');
 
 	try {
-		let id = Number(req.params.contentId);
+		let id = String(req.params.contentId);
 		let repo = new ContentRepositoryPrisma();
 		let content = await getContentInteractor(repo, id);
 		return res.send(content);

@@ -7,8 +7,8 @@ export default class SeminarEntity {
 	description: string;
 	mentorId: string;       	// Number ????
 	type: string;
-	content: string;    		// Content
-	subject: string;			// Subject
+	contentId: string;    		// Content
+	subjectId: string;			// Subject
 	userId: string;				// User
 
 
@@ -18,8 +18,8 @@ export default class SeminarEntity {
 		this.description = props.description;
 		this.mentorId = props.mentorId;
 		this.type = props.type;
-		this.content = props.contentId;
-		this.subject = props.subjectId;
+		this.contentId = props.contentId;
+		this.subjectId = props.subjectId;
 		this.userId = props.userId;
 	}
 }

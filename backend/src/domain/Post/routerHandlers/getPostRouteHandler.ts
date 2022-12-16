@@ -7,7 +7,7 @@ export default async function getPostRouteHandler(req: Request, res: Response) {
 	console.log('/posts/:postId GET');
 
 	try {
-		let id = Number(req.params.postId);
+		let id = String(req.params.postId);
 		let repo = new PostRepositoryPrisma();
 		let post = await getPostInteractor(repo, id);
 		return res.send(post);

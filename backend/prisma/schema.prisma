@@ -51,7 +51,7 @@ model Content {
 model Post {
   id             String       @id @default(uuid())
   title          String
-  date           DateTime     @default(now())
+  date           DateTime?    @default(now())
   linkedEntity   LinkedEntity
   linkedEntityId String
   contentId      String

@@ -7,7 +7,7 @@ export default async function getEventRouteHandler(req: Request, res: Response) 
 	console.log('/events/:eventId GET');
 
 	try {
-		let id = Number(req.params.eventId);
+		let id = String(req.params.eventId);
 		let repo = new EventRepositoryPrisma();
 		let event = await getEventInteractor(repo, id);
 		return res.send(event);

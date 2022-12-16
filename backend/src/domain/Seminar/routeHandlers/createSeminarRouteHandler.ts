@@ -18,12 +18,12 @@ export default async function createSeminarRouteHandler(
 			mentorId: req.query.mentorId as string,
 			type: req.query.type as string,
 			contentId: req.query.contentId as string,		//Content
-			subject: req.query.subject as string,			//Subject
-			user: req.query.user as string,					//User
-
+			subjectId: req.query.subject as string,			//Subject
+			userId: req.query.user as string,					//User
 		});
 		//newSeminar.validate();
 		let repo = new SeminarRepositoryPrisma();
+		console.log('Vamo sam')
 		let seminar = await createSeminarInteractor(repo, newSeminar);
 		return res.send(seminar);
 	} catch (err) {

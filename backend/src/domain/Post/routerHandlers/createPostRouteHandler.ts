@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import createPostInteractor from '../interactors/createPostInteractor';
 import PostRepositoryPrisma from '../repository/PostRepositoryPrisma';
 import PostEntity from '../PostEntity';
+import { LinkedEntity } from '../LinkedEntity'
 
 export default async function createPostRouteHandler(
 	req: Request,
@@ -13,11 +14,12 @@ export default async function createPostRouteHandler(
 	try {
 		let newPost = new PostEntity({
 			id: undefined,
-			title: req.query.title as string,
-			date: req.query.date as string,         //Date
-			owner: req.query.owner as string,       //User
-			LinkedEntity: req.query.LinkedEntity as string,
-			LinkedEntityId: req.query.LinkedEntityId as string,
+			title: req.query.title as string,       //Date
+			ownerId: req.query.owner as string,       //User
+			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntityId: req.query.linkedEntityId as string,
+			contentId: req.query.contentId as string,
+			Date: undefined
 		});
 		// newPost.validate();
 		let repo = new PostRepositoryPrisma();

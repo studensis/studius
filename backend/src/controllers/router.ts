@@ -41,7 +41,7 @@ export default (server: Express) => {
 	server.route('/subjects').get(listSubjectsRouteHandler);
 	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
 	server.route('/subjects').post(createSubjectRouteHandler);
-/* 
+
 	// seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);
 	server.route('/seminars/:seminarId').get(getSeminarRouteHandler);
@@ -51,7 +51,8 @@ export default (server: Express) => {
 	server.route('/posts').get(listPostsRouteHandler);
 	server.route('/posts/:postId').get(getPostRouteHandler);
 	server.route('/posts').post(createPostRouteHandler);
-
+	
+	/* 
 	// event routes
 	server.route('/events').get(listEventsRouteHandler);
 	server.route('/events/:eventId').get(getEventRouteHandler);

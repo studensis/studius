@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import createContentInteractor from '../interactors/createContentInteractor';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
 import ContentEntity from '../ContentEntity';
+import { LinkedEntity } from '@prisma/client';
 
 export default async function createContentRouteHandler(
 	req: Request,
@@ -13,9 +14,11 @@ export default async function createContentRouteHandler(
 	try {
 		let newContent = new ContentEntity({
 			id: undefined,
-			Markdown_Text: req.query.Markdown_Text as string,
-			plain_text: req.query.plain_text as string,
-			date: req.query.date as string,                 // Date
+			markdownText: req.query.Markdown_Text as string,
+			plainText: req.query.plain_text as string,
+			date: undefined,                 // Date
+			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntityId: req.query.linkedEntityId as string
 		});
 		// newContent.validate();
 		let repo = new ContentRepositoryPrisma();

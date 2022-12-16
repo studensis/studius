@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import createEventInteractor from '../interactors/createEventInteractor';
 import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 import EventEntity from '../EventEntity';
+import { LinkedEntity } from '@prisma/client';
 
 export default async function createEventRouteHandler(
 	req: Request,
@@ -15,8 +16,8 @@ export default async function createEventRouteHandler(
 			id: undefined,
 			title: req.query.title as string,
 			description: req.query.description as string,
-			LinkedEntity: req.query.LinkedEntity as string,
-			LinkedEntityID: req.query.LinkedEntityID as string,
+			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntityId: req.query.linkedEntityId as string,
 		});
 		// newEvent.validate();
 		let repo = new EventRepositoryPrisma();

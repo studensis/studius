@@ -7,7 +7,7 @@ export default async function getSeminarRouteHandler(req: Request, res: Response
 	console.log('/Seminars/:seminarId GET');
 
 	try {
-		let id = Number(req.params.seminarId);
+		let id = String(req.params.seminarId);
 		let repo = new SeminarRepositoryPrisma();
 		let seminar = await getSeminarInteractor(repo, id);
 		return res.send(seminar);

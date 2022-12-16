@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { userInfo } from 'os';
 import SeminarEntity from '../SeminarEntity';
 import { SeminarRepository } from './SeminarRepository';
 
@@ -26,17 +27,19 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 	}
 
 	async create(seminar: SeminarEntity) {
+		console.log('Hary je tu')
 		let response = await prisma.seminar.create({
 			data: {
-				title: "Progi",
-                description: "opis",
-                mentorId: "1",
-                type: "Pismeni",
-                contentId: "3",
-                subjectId: "2",
-                userId: '4',
+				title: seminar.title,
+                description: seminar.description,
+                mentorId: seminar.mentorId,
+                type: seminar.type,
+                contentId: seminar.contentId,
+                subjectId: seminar.subjectId,
+                userId: seminar.userId,
 			}
 		});
+		console.log('Hary proso')
 
 		console.log(response);
 
