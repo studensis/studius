@@ -116,31 +116,31 @@ Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi
 
 # 1. Dnevnik promjena dokumentacije <a name="1"> </a>
 
-:[Dn/chapters/1_dnevnik.md. evnik izmjena](./chapters/1_dnevnik.md)
+:[Dnevnik izmjena.md](./chapters/1_dnevnik.md)
 
 # 2. Opis projektnog zadatka <a name="2"> </a>
 
-:[Op/chapters/2_opis.md. is](./chapters/2_opis.md)
+:[Opis.md](./chapters/2_opis.md)
 
 # 3. Specifikacija programske potpore <a name="3"> </a>
 
-:[Sp/chapters/3_specifikacija.md. ecifikacija](./chapters/3_specifikacija.md)
+:[Specifikacija.md](./chapters/3_specifikacija.md)
 
 # 4. Arhitektura i dizajn sustava <a name="4"> </a>
 
-:[Ar/chapters/4_arhitektura.md. hitektura](./chapters/4_arhitektura.md)
+:[Arhitektura.md](./chapters/4_arhitektura.md)
 
 # 5. Implementacija i korisničko sučelje <a name="5"> </a>
 
-:[Im/chapters/5_implementacija.md. plementacija](./chapters/5_implementacija.md)
+:[Implementacija.md](./chapters/5_implementacija.md)
 
 # 6. Indeks slika i dijagrama <a name="6"> </a>
 
-:[Im/chapters/6_indeks.md. plementacija](./chapters/6_indeks.md)
+:[Implementacija.md](./chapters/6_indeks.md)
 
 # 7. Tablica aktivnosti <a name="7"> </a>
 
-:[Im/chapters/7_tablica.md. plementacija](./chapters/7_tablica.md)
+:[Implementacija.md](./chapters/7_tablica.md)
 
 # 8. Zaključak i budući rad <a name="8"> </a>
 
