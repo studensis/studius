@@ -37,3 +37,7 @@ h1, h2, h3 {
 	font-size: 72px;
 	padding-bottom: 0px;
 }
+
+table {
+	width: 100%;
+}
