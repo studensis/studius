@@ -49,7 +49,6 @@ deploy-job: # This job runs in the deploy stage.
     - echo "Application successfully deployed."
 
 deploy-railway:
-  description: Deploying Backend to Railway
   stage: deploy
   image: ubuntu
   only:
