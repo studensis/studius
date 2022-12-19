@@ -31,7 +31,13 @@ const Button: FC<ButtonProps> = ({
 	formType,
 }) => {
 	return (
-		<button onClick={onClick} type={formType}>
+		<button
+			onClick={(e) => {
+				e.preventDefault();
+				onClick();
+			}}
+			type={formType}
+		>
 			<div className="select-none">
 				<div
 					style={style ?? style}
