@@ -1,19 +1,23 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import useLogin from '../components/hooks/LoginContext';
+import useLogin from '../../components/hooks/LoginContext';
 
-export default function Home() {
+export default function Intranet() {
 	const { loggedIn } = useLogin();
 	const router = useRouter();
 	useEffect(() => {
 		if (!loggedIn) {
 			router.push('/login');
-		} else {
-			router.push('/intranet');
 		}
-	});
-
-	return <div>Checking login status...</div>;
+	}, []);
+	return (
+		<>
+			<div>
+				<Link href="/subject">Subjects</Link>
+			</div>
+		</>
+	);
 }

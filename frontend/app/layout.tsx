@@ -1,4 +1,5 @@
 import Header from '../components/@studius/UI/Header/Header';
+import { LoginProvider } from '../components/hooks/LoginContext';
 import '../styles/globals.css';
 
 export default function RootLayout({
@@ -9,8 +10,10 @@ export default function RootLayout({
 	return (
 		<html>
 			<body>
-				<Header />
-				{children}
+				<LoginProvider>
+					<Header />
+					{children}
+				</LoginProvider>
 			</body>
 		</html>
 	);

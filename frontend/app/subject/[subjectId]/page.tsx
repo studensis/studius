@@ -16,6 +16,7 @@ type PageProps = {
 
 async function SubjectPage(props: PageProps) {
 	const todo = await fetchSubject(props.params.subjectId);
+
 	return (
 		<div>
 			<p>This is a subject page</p>

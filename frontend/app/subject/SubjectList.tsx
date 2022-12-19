@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Todo } from '../../typings';
+import { Todo } from '../../../typings';
 
 const fetchTodos = async () => {
 	const res = await fetch('https://jsonplaceholder.typicode.com/todos/', {
@@ -16,7 +16,9 @@ async function SubjectList() {
 		<div>
 			{subjects.map((subject) => (
 				<Link href={'/subject/' + subject.id} key={subject.id}>
-					<p>{subject.title}</p>
+					<p>
+						[{subject.id}] {subject.title}
+					</p>
 				</Link>
 			))}
 		</div>
