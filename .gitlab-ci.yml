@@ -49,6 +49,7 @@ deploy-job: # This job runs in the deploy stage.
     - echo "Application successfully deployed."
 
 deploy-railway:
+  description: Deploying Backend to Railway
   stage: deploy
   image: ubuntu
   only:
@@ -59,4 +60,3 @@ deploy-railway:
     - curl -fsSL https://railway.app/install.sh | sh
     - cd ./backend/
     - railway up --service=$RAILWAY_SERVICE_NAME -d
-    - yarn dev
