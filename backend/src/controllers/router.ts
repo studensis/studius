@@ -56,14 +56,14 @@ export default (server: Express) => {
 	server.route('/posts/:postId').get(getPostRouteHandler);
 	server.route('/posts').post(createPostRouteHandler);
 	
-	/* 
 	// event routes
 	server.route('/events').get(listEventsRouteHandler);
 	server.route('/events/:eventId').get(getEventRouteHandler);
 	server.route('/events').post(createEventRouteHandler);
-
+	
+	
 	// content routes
 	server.route('/contents').get(listContentsRouteHandler);
 	server.route('/contents/:contentId').get(getContentRouteHandler);
-	server.route('/contents').post(createContentRouteHandler); */
+	server.route('/contents').post(createContentRouteHandler); 
 };

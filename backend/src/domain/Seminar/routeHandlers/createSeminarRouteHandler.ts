@@ -18,8 +18,8 @@ export default async function createSeminarRouteHandler(
 			mentorId: req.query.mentorId as string,
 			type: req.query.type as string,
 			contentId: req.query.contentId as string,		//Content
-			subjectId: req.query.subject as string,			//Subject
-			userId: req.query.user as string,					//User
+			subjectId: req.query.subjectId as string,			//Subject
+			userId: req.query.userId as string,					//User
 		});
 		//newSeminar.validate();
 		let repo = new SeminarRepositoryPrisma();
@@ -27,6 +27,7 @@ export default async function createSeminarRouteHandler(
 		let seminar = await createSeminarInteractor(repo, newSeminar);
 		return res.send(seminar);
 	} catch (err) {
+		console.log(err)
 		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }
