@@ -10,7 +10,7 @@ export default async function updateSubjectRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('/subjects/subjectId/update');
+    console.log('/subjects/subjectTitle PUT');
 
     try{
         let  subjectData = new SubjectEntity({

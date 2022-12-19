@@ -69,4 +69,14 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		let out = new SubjectEntity(response);
 		return out;
 	}
+	
+	async delete(subjectTitle: string) {
+		let response = await prisma.subject.delete({
+			where: {
+				title: subjectTitle
+			}
+		});
+
+		return response;
+	}
 }

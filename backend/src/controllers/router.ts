@@ -20,6 +20,7 @@ import createContentRouteHandler from '../domain/Content/routeHandlers/createCon
 import updateUserRouteHandler from '../domain/User/routeHandlers/updateUserRouteHandler';
 import deleteUserRouteHandler from '../domain/User/routeHandlers/deleteUserRouteHandler';
 import updateSubjectRouteHandler from '../domain/Subject/routeHandlers/updateSubjectRouteHandler';
+import deleteSubjectRouteHandler from '../domain/Subject/routeHandlers/deleteSubjectRouteHandler';
 
 // Kakti API gateway
 
@@ -47,6 +48,7 @@ export default (server: Express) => {
 	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
 	server.route('/subjects').post(createSubjectRouteHandler);
 	server.route('/subjects/:subjectTitle').put(updateSubjectRouteHandler);
+	server.route('/subjects/:subjectTitle').delete(deleteSubjectRouteHandler);
 
 	// seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);
