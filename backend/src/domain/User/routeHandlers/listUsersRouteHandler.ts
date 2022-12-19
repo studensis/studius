@@ -12,6 +12,7 @@ export default async function listUsersRouteHandler(
 	try {
 		let repo = new UserRepositoryPrisma();
 		let users = await listUsersInteractor(repo);
+		console.log(users); //testiranje
 		res.send(users);
 	} catch {
 		res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);

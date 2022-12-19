@@ -12,20 +12,131 @@ datasource db {
 }
 
 model User {
-  id         Int    @id @default(autoincrement())
-  email      String
-  password   String
-  name       String
-  surname    String
-  username   String
-  JMBAG      String
-  avatar_url String @default("/assets/franko.png")
-  role       Role   @default(STUDENT)
+  id            String              @id @default(uuid())
+  password      String
+  firstname     String
+  lastname      String
+  jmbag         String              @unique
+  email         String              @unique
+  userRole      Role
+  mentorID      String?             @unique
+  mentor        User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
+  mentee        User[]              @relation("Mentorstvo")
+  enrollment    Enrollment[]
+  eventPresence EventUserPresence[]
 }
 
 // treba stavit @unique na neke
 
+model Subject {
+  id          String       @id @default(uuid())
+  title       String       @unique
+  description String
+  ectsBod     String
+  semester    Semester
+  status      Status
+  contentId   String[]     @unique
+  Enrollment  Enrollment[]
+}
+
+model Content {
+  id             String       @id @default(uuid())
+  markdownText   String
+  plainText      String
+  date           DateTime     @default(now())
+  linkedEntity   LinkedEntity
+  linkedEntityId String
+}
+
+model Post {
+  id             String       @id @default(uuid())
+  title          String
+  date           DateTime?    @default(now())
+  linkedEntity   LinkedEntity
+  linkedEntityId String
+  contentId      String
+  ownerId        String
+}
+
+model Enrollment {
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+  subject        Subject  @relation(fields: [subjectId], references: [id])
+  subjectId      String
+  enrollmentDate DateTime @default(now())
+  roleTitle      Role
+  status         Status
+
+  @@id([userId, subjectId])
+}
+
+model Seminar {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  mentorId    String
+  type        String
+  contentId   String
+  subjectId   String
+  userId      String
+}
+
+model Event {
+  id             String @id @default(uuid())
+  title          String
+  description    String
+  linkedEntity   String
+  linkedEntityId String
+}
+
+model SeminarSuggestion {
+  id        String @id @default(uuid())
+  seminarId String
+  subjectId String
+}
+
+model Room {
+  id       String @id
+  capacity Int
+}
+
+model RoomTimeEvent {
+  id                String              @id @default(uuid())
+  dateStart         DateTime
+  dateEnd           DateTime
+  eventId           String
+  roomId            String
+  EventUserPresence EventUserPresence[]
+}
+
+model EventUserPresence {
+  id              String        @id @default(uuid())
+  presenceStatus  Boolean
+  roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
+  roomTimeEventId String
+  user            User          @relation(fields: [userId], references: [id])
+  userId          String
+}
+
 enum Role {
-  STUDENT
-  PROFESSOR
+  DEFAULT
+  ADMIN
+  SUPERADMIN
+}
+
+enum Semester {
+  WINTER
+  SUMMER
+}
+
+enum Status {
+  ACTIVE
+  ARCHIVED
+}
+
+enum LinkedEntity {
+  USER
+  SUBJECT
+  SEMINAR
+  POST
 }

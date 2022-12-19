@@ -12,22 +12,23 @@ export default async function createUserRouteHandler(
 	console.log('/users POST');
 
 	try {
+
 		let newUser = new UserEntity({
-			id: undefined,
-			email: req.query.email as string,
+			id : undefined,
+			firstname : req.query.firstname as string,
+			lastname : req.query.lastname as string,
 			password: req.query.password as string,
-			name: req.query.name as string,
-			surname: req.query.surname as string,
-			username: req.query.username as string,
-			JMBAG: req.query.JMBAG as string,
-			avatar_url: req.query.avatar_url as string,
-			role: UserRole.STUDENT
+			jmbag: req.query.jmbag as string,
+			email: req.query.email as string,
+			mentorID: undefined, 
+			userRole: req.query.userRole as UserRole,
 		});
 		newUser.validate();
 		let repo = new UserRepositoryPrisma();
 		let user = await createUserInteractor(repo, newUser);
 		return res.send(user);
 	} catch (err) {
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('err');
 	}
 }

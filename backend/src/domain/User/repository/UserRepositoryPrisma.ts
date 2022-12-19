@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { userInfo } from 'os';
 import UserEntity from '../UserEntity';
 import { UserRole } from '../UserRole';
 import { UserRepository } from './UserRepository';
@@ -20,23 +21,46 @@ export default class UserRepositoryPrisma extends UserRepository {
 		return users;
 	}
 
-	async getById(id: number) {
-		let data = await prisma.user.findUnique({ where: { id: id } });
-		let user = new UserEntity(data);
-		return user;
+	async update(userData: UserEntity) {
+		
+		let updatedData = await prisma.user.update({
+			
+			where: {
+				email: userData.email
+			},
+			data: {
+				firstname: userData.firstname, 
+				lastname: userData.lastname, 
+				password: userData.password, 
+				jmbag: userData.jmbag, 
+				email: userData.email, 
+				userRole: userData.userRole, 
+				mentorID: userData.mentorID,
+			},
+		});		
+		let rez = new UserEntity(updatedData);
+
+		return rez;
+		
 	}
+
+	// async getById(id: number) {
+	// 	let data = await prisma.user.findUnique({ where: { id: id } });
+	// 	let user = new UserEntity(data);
+	// 	return user;
+	// }
 
 	async create(user: UserEntity) {
 		let response = await prisma.user.create({
 			data: {
-				email: 'test@a.com',
-				password: '123',
-				name: 'nejm',
-				surname: 'srnejm',
-				username: 'nick',
-				JMBAG: '123456',
-				avatar_url: 'string',
-				role: UserRole.STUDENT
+				id: undefined,
+				email: user.email,
+				password: user.password,
+				firstname: user.firstname,
+				lastname: user.lastname,
+				jmbag: user.jmbag,
+				userRole: user.userRole, 
+				mentorID: user.mentorID 
 			}
 		});
 
@@ -44,5 +68,15 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		let out = new UserEntity(response);
 		return out;
+	}
+
+	async delete(userEmail: string) {
+		let response = await prisma.user.delete({
+			where: {
+				email: userEmail
+			}
+		});
+
+		return response;
 	}
 }
