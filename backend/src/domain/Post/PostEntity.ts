@@ -17,6 +17,6 @@ export default class PostEntity {
         this.linkedEntity = props.linkedEntity;
         this.linkedEntityId = props.linkedEntityId;
 		this.contentId = props.contentId;
-		this.date = props.Date;
+		this.date = props.date;
 	}
 }

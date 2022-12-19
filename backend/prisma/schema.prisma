@@ -18,12 +18,12 @@ model User {
   lastname      String
   jmbag         String              @unique
   email         String              @unique
-  status        Role
+  userRole      Role
   mentorID      String?             @unique
   mentor        User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
-  menteeId      User[]              @relation("Mentorstvo")
-  Enrolled      Enrollment[]
-  EventPresence EventUserPresence[]
+  mentee        User[]              @relation("Mentorstvo")
+  enrollment    Enrollment[]
+  eventPresence EventUserPresence[]
 }
 
 // treba stavit @unique na neke
@@ -91,8 +91,8 @@ model Event {
 
 model SeminarSuggestion {
   id        String @id @default(uuid())
-  seminarId Int
-  subjectId Int
+  seminarId String
+  subjectId String
 }
 
 model Room {
@@ -104,7 +104,7 @@ model RoomTimeEvent {
   id                String              @id @default(uuid())
   dateStart         DateTime
   dateEnd           DateTime
-  eventId           Int
+  eventId           String
   roomId            String
   EventUserPresence EventUserPresence[]
 }
@@ -119,11 +119,9 @@ model EventUserPresence {
 }
 
 enum Role {
-  STUDENT
-  PROFESSOR
-  NOSITELJ
-  ASISTENT
+  DEFAULT
   ADMIN
+  SUPERADMIN
 }
 
 enum Semester {

@@ -15,17 +15,18 @@ export default async function createPostRouteHandler(
 		let newPost = new PostEntity({
 			id: undefined,
 			title: req.query.title as string,       //Date
-			ownerId: req.query.owner as string,       //User
+			ownerId: req.query.ownerId as string,       //User
 			linkedEntity: req.query.linkedEntity as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,
-			Date: undefined
+			date: undefined
 		});
 		// newPost.validate();
 		let repo = new PostRepositoryPrisma();
 		let post = await createPostInteractor(repo, newPost);
 		return res.send(post);
 	} catch (err) {
+		console.log(err);
 		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

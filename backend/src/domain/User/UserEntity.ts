@@ -8,11 +8,8 @@ export default class UserEntity {
 	password: string;
 	jmbag: string;
 	email: string;
-	status: UserRole;
+	userRole: UserRole;
 	mentorID:  string;
-	menteeID: string[];
-	enrollment: string[];
-	eventPresence: string[];
 
 
 	constructor(props: User) {
@@ -23,17 +20,13 @@ export default class UserEntity {
 		this.lastname = props.lastname;
 		this.jmbag = props.jmbag;
 		this.email = props.email;
-		this.status = props.status;
+		this.userRole = props.userRole;
 		this.mentorID = props.mentorID;
 		// izbacuje error za zadnja tri atributa
-		// this.menteeID = props.menteeID;
-		// this.enrollment = props.enrollment;
-		// this.eventPresence = props.eventPresence;
 	}
 
 	validate() {
-		console.log('test');
-
+		
 		if (this.password.length < 6) {
 			console.log('ERROR password');
 			throw new Error('invalid password');
@@ -54,7 +47,7 @@ export default class UserEntity {
 			console.log('ERROR surname');
 			throw new Error('invalid surname');
 		}
-		if (!this.status) {
+		if (!this.userRole) {
 			console.log('ERROR status');
 			throw new Error('invalid status');
 		}

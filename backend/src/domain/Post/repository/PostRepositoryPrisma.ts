@@ -29,9 +29,7 @@ export default class PostRepositoryPrisma extends PostRepository {
 	async create(post: PostEntity) {
 		let response = await prisma.post.create({
 			data: {
-				id: post.id,
 			    title: post.title,
-			    Date: post.date,         //Date
 			    ownerId: post.ownerId,             //User
 			    linkedEntity: post.linkedEntity,
 			    linkedEntityId: post.linkedEntityId,

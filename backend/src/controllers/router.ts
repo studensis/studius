@@ -17,6 +17,8 @@ import createEventRouteHandler from '../domain/Event/routeHandler/createEventRou
 import listContentsRouteHandler from '../domain/Content/routeHandlers/listContentsRouteHandler';
 import getContentRouteHandler from '../domain/Content/routeHandlers/getContentRouteHandler';
 import createContentRouteHandler from '../domain/Content/routeHandlers/createContentRouteHandler';
+import updateUserRouteHandler from '../domain/User/routeHandlers/updateUserRouteHandler';
+import deleteUserRouteHandler from '../domain/User/routeHandlers/deleteUserRouteHandler';
 
 // Kakti API gateway
 
@@ -36,6 +38,8 @@ export default (server: Express) => {
 	server.route('/users').get(listUsersRouteHandler);
 	server.route('/users/:userId').get(getUserRouteHandler);
 	server.route('/users').post(createUserRouteHandler);
+	server.route('/users/update').post(updateUserRouteHandler);
+	server.route('/users/:userEmail/delete').post(deleteUserRouteHandler);
 
 	//subject routes
 	server.route('/subjects').get(listSubjectsRouteHandler);
