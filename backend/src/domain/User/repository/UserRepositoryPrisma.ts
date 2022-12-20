@@ -1,7 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { userInfo } from 'os';
 import UserEntity from '../UserEntity';
-import { UserRole } from '../UserRole';
 import { UserRepository } from './UserRepository';
 
 const prisma = new PrismaClient();
@@ -22,33 +20,32 @@ export default class UserRepositoryPrisma extends UserRepository {
 	}
 
 	async update(userData: UserEntity) {
-		
 		let updatedData = await prisma.user.update({
-			
 			where: {
 				email: userData.email
 			},
 			data: {
-				firstname: userData.firstname, 
-				lastname: userData.lastname, 
-				password: userData.password, 
-				jmbag: userData.jmbag, 
-				email: userData.email, 
-				userRole: userData.userRole, 
-				mentorID: userData.mentorID,
-			},
-		});		
+				firstname: userData.firstname,
+				lastname: userData.lastname,
+				password: userData.password,
+				jmbag: userData.jmbag,
+				email: userData.email,
+				userRole: userData.userRole,
+				mentorID: userData.mentorID
+			}
+		});
 		let rez = new UserEntity(updatedData);
 
 		return rez;
-		
 	}
 
-	// async getById(id: number) {
-	// 	let data = await prisma.user.findUnique({ where: { id: id } });
-	// 	let user = new UserEntity(data);
-	// 	return user;
-	// }
+	async getById(id: string) {
+		console.log(id);
+
+		let data = await prisma.user.findUnique({ where: { id: id } });
+		let user = new UserEntity(data);
+		return user;
+	}
 
 	async create(user: UserEntity) {
 		let response = await prisma.user.create({
@@ -59,8 +56,8 @@ export default class UserRepositoryPrisma extends UserRepository {
 				firstname: user.firstname,
 				lastname: user.lastname,
 				jmbag: user.jmbag,
-				userRole: user.userRole, 
-				mentorID: user.mentorID 
+				userRole: user.userRole,
+				mentorID: user.mentorID
 			}
 		});
 
