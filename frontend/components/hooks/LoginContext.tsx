@@ -5,7 +5,8 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 interface ILoginContext {
 	loggedIn: boolean;
-	logIn: () => void;
+	loginRole: string;
+	logIn: (role?: string) => void;
 	logOut: () => void;
 }
 
@@ -13,6 +14,7 @@ const LoginContext = createContext<ILoginContext | null>(null);
 
 function LoginProvider({ children }: { children: React.ReactNode }) {
 	const [loginState, setLoginState] = useState<boolean>(false);
+	const [loginRole, setLoginRole] = useState<string>('default');
 	const router = useRouter();
 
 	useEffect(() => {
@@ -21,20 +23,23 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 			setLoginState(true);
 		} else {
 			setLoginState(false);
-			localStorage.setItem('loginState', JSON.stringify(false));
 		}
-	});
+	}, [loginState]);
 
 	return (
 		<>
 			<LoginContext.Provider
 				value={{
 					loggedIn: loginState,
-					logIn: () => {
+					loginRole: loginRole,
+					logIn: (role?: string) => {
 						localStorage.setItem(
 							'loginState',
 							JSON.stringify(true)
 						);
+						if (role) {
+							setLoginRole(role);
+						}
 						setLoginState(true);
 						router.push('/');
 					},
@@ -43,6 +48,7 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 							'loginState',
 							JSON.stringify(false)
 						);
+						setLoginRole('default');
 						setLoginState(false);
 						router.push('/login');
 					},

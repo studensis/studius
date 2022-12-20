@@ -24,7 +24,7 @@ export default function LoginForm() {
 				</Button>
 				<Button
 					onClick={() => {
-						logIn();
+						logIn('admin');
 					}}
 				>
 					Admin

@@ -5,7 +5,7 @@ import useLogin from '../../hooks/LoginContext';
 import { Button } from '../Button/Button';
 
 function Header(props) {
-	let { loggedIn, logIn, logOut } = useLogin();
+	let { loggedIn, logIn, logOut, loginRole } = useLogin();
 	return (
 		<>
 			{loggedIn ? (
@@ -18,16 +18,13 @@ function Header(props) {
 							<div className="w-[480px] h-12 rounded-[16px] bg-light-section"></div>
 						</div>
 						<div className="flex gap-2">
+							<div>Role: {loginRole}</div>
 							<Button
 								onClick={() => {
-									if (loggedIn) {
-										logOut();
-									} else {
-										logIn();
-									}
+									logOut();
 								}}
 							>
-								{loggedIn ? 'Log Out' : 'Log In'}
+								Log Out
 							</Button>
 							<div className="w-12 h-12 rounded-[16px] bg-black"></div>
 						</div>
