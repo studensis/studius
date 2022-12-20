@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { Button } from '../../components/@studius/Button/Button';
 import useLogin from '../../components/hooks/LoginContext';
 
 export default function Intranet() {
@@ -19,8 +20,13 @@ export default function Intranet() {
 	return (
 		<>
 			<div>
-				<Link href="/user">Users</Link>
-				<Link href="/subject">Subjects</Link>
+				<Link href="/user">
+					<Button>Users</Button>
+				</Link>
+				<Link href="/subject">
+					<Button>Subjects</Button>
+				</Link>
+				<h1>Test</h1>
 			</div>
 		</>
 	);

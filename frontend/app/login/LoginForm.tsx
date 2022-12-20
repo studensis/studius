@@ -14,12 +14,20 @@ export default function LoginForm() {
 					placeholder="password"
 					name="password"
 				></input>
+				Log in as:
 				<Button
 					onClick={() => {
 						logIn();
 					}}
 				>
-					Log in
+					Default User
+				</Button>
+				<Button
+					onClick={() => {
+						logIn();
+					}}
+				>
+					Admin
 				</Button>
 			</form>
 		</>

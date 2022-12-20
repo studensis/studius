@@ -1,3 +1,4 @@
+import PageContainer from '../components/@studius/Container/Container';
 import Header from '../components/@studius/Header/Header';
 import { LoginProvider } from '../components/hooks/LoginContext';
 import '../styles/globals.css';
@@ -15,7 +16,7 @@ export default function RootLayout({
 						className={'bg-light-background min-h-screen w-screen'}
 					>
 						<Header />
-						{children}
+						<PageContainer>{children}</PageContainer>
 					</div>
 				</LoginProvider>
 			</body>
