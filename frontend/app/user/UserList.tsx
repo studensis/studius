@@ -5,13 +5,15 @@ async function SubjectList() {
 	const users = await getUsers();
 
 	return (
-		<div>
+		<div className="grid grid-cols-3 gap-4">
 			{users.map((user) => {
 				return (
 					<>
 						<Link href={'/user/' + user.id} key={user.id}>
-							<p>{user.id}</p>
-							<p>{user.firstname}</p>
+							<div className="p-6 border-light-accent-weak border">
+								<p className="title1">{user.firstname}</p>
+								<p>{user.id}</p>
+							</div>
 						</Link>
 					</>
 				);

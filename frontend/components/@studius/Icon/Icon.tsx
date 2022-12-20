@@ -60,6 +60,8 @@ export const Icon: React.FC<{
 				WebkitMaskImage: `url('${icons[icon]}')`,
 				maskImage: `url('${icons[icon]}')`,
 				WebkitMaskRepeat: 'no-repeat',
+				WebkitMaskSize: 'contain',
+				WebkitMaskPosition: 'center center',
 				maskRepeat: 'no-repeat',
 			}}
 		></div>

@@ -12,7 +12,7 @@ export default function Login() {
 		if (loggedIn) {
 			router.push('/intranet');
 		}
-	}, []);
+	}, [loggedIn]);
 	return (
 		<div>
 			<h1 className="display3"> login page </h1>

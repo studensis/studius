@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getUser } from '../../../resources/backend';
 
 type PageProps = {
@@ -11,9 +12,13 @@ async function SubjectPage(props: PageProps) {
 
 	return (
 		<div>
-			<p>This is a user page</p>
-			<h1>{todo.firstname}</h1>
-			<p>{todo.id}</p>
+			<Link href="/user">
+				<p className="title2 mb-12">{'<-'} back to Users</p>
+			</Link>
+			<h1 className="display1">{todo.firstname}</h1>
+			<pre className=" bg-light-neutral-weak p-8">
+				{JSON.stringify(props, null, 2)}
+			</pre>
 		</div>
 	);
 }
