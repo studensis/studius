@@ -13,9 +13,13 @@ export default function Intranet() {
 			router.push('/login');
 		}
 	}, []);
+
+	// let a = await testBackend();
+
 	return (
 		<>
 			<div>
+				<Link href="/user">Users</Link>
 				<Link href="/subject">Subjects</Link>
 			</div>
 		</>

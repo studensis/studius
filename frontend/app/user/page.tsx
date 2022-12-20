@@ -1,7 +1,12 @@
-export default function Page() {
+import UserList from './UserList';
+
+async function Page() {
 	return (
 		<>
-			<h1>User Page</h1>
+			{/* @ts-ignore */}
+			<UserList />
 		</>
 	);
 }
+
+export default Page;
