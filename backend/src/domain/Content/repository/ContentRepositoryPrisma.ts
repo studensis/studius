@@ -28,10 +28,8 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 	async create(content: ContentEntity) {
 		let response = await prisma.content.create({
 			data: {
-				id: undefined,
 			    markdownText: content.markdownText,
 			    plainText: content.plainText,
-			    date: content.date,                  // Date   
 				linkedEntity: content.linkedEntity,
     			linkedEntityId: content.linkedEntityId,
 			}

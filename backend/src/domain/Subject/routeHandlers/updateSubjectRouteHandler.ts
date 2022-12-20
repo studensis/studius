@@ -10,7 +10,7 @@ export default async function updateSubjectRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('/subjects/subjectTitle PUT');
+    console.log(`subjects/${req.params.subjectTitle} PUT`);
 
     try{
         let  subjectData = new SubjectEntity({
@@ -20,7 +20,7 @@ export default async function updateSubjectRouteHandler(
 			ectsBod: req.query.ectsBod as string,
 			semester: req.query.semester as Semester,
 			status: req.query.status as Status,
-			contentId: undefined
+			contentId: req.query.contentId as string,
         });
         let repo = new SubjectRepositoryPrisma();
         let updatedSubject = await updateSubjectInteractor(repo,subjectData);

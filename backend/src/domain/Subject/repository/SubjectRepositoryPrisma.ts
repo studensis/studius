@@ -27,6 +27,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 			if(subjectData.ectsBod) updatedSubject["ectsBod"] = subjectData.ectsBod;
 			if(subjectData.semester) updatedSubject["semester"] = subjectData.semester;
 			if(subjectData.status) updatedSubject["status"] = subjectData.status;
+			if(subjectData.contentId) updatedSubject["contentId"] = subjectData.contentId;
 
 		
 		let updatedData = await prisma.subject.update({
@@ -39,6 +40,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 				ectsBod: updatedSubject.ectsBod,
 				semester: updatedSubject.semester,
 				status: updatedSubject.status,
+				contentId: updatedSubject.contentId,
 			},
 		});		
 		let rez = new SubjectEntity(updatedData);

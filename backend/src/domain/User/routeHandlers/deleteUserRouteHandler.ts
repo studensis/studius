@@ -7,7 +7,7 @@ export default async function deleteUserRouteHandler(
   req: Request,
   res: Response
 ) {
-  console.log("/users/:userId POST");
+  console.log("/users/:userId DELETE");
 
   try {
     let id = req.params.userId;

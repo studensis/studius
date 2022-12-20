@@ -43,7 +43,7 @@ model Content {
   id             String       @id @default(uuid())
   markdownText   String
   plainText      String
-  date           DateTime     @default(now())
+  date           DateTime?    @default(now())
   linkedEntity   LinkedEntity
   linkedEntityId String
 }
