@@ -35,12 +35,6 @@ export default function Calendar() {
 							className="p-4"
 							type={'text'}
 							placeholder={'id'}
-							onChange={(e) => {
-								setFormData({
-									...formData,
-									id: e.currentTarget.value,
-								});
-							}}
 							disabled
 							value={undefined}
 						/>

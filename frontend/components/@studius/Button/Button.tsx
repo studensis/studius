@@ -67,18 +67,18 @@ const Button: FC<ButtonProps> = ({
 					>
 						{leftIcon && (
 							<Icon
-								className="flex"
 								icon={leftIcon}
 								size={small == true ? 12 : 16}
+								className={'bg-special-white'}
 								// color={darkMode ? "white" : "#005DFF"}
 							/>
 						)}
 						{children}
 						{rightIcon && (
 							<Icon
-								className="flex"
 								icon={rightIcon}
 								size={small == true ? 12 : 16}
+								className={'bg-special-white'}
 								// color={darkMode ? "white" : "#005DFF"}
 							/>
 						)}
