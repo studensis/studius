@@ -10,11 +10,11 @@ export default async function updateSeminarRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log(`seminars/${req.params.seminarTitle} PUT`);
+    console.log(`seminars/${req.params.seminarId} PUT`);
 
     try{
         let  seminarData = new SeminarEntity({
-            id: undefined,
+            id: req.params.seminarId as string,
 			title: req.query.title as string,
 			description: req.query.description as string,
 			mentorId: req.query.mentorId as string,

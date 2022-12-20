@@ -13,7 +13,7 @@ export default async function createContentRouteHandler(
 
 	try {
 		let newContent = new ContentEntity({
-			id: undefined,
+			id: req.query.id as string,
 			markdownText: req.query.markdownText as string,
 			plainText: req.query.plainText as string,
 			date: undefined,                 // Date

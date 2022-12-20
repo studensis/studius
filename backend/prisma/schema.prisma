@@ -72,7 +72,7 @@ model Enrollment {
 
 model Seminar {
   id          String @id @default(uuid())
-  title       String
+  title       String @unique
   description String
   mentorId    String
   type        String

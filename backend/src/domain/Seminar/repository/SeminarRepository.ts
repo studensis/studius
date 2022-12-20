@@ -13,7 +13,7 @@ export abstract class SeminarRepository {
 	async update(seminar: SeminarEntity): Promise<SeminarEntity>{
 		throw new Error('Method not implemented.');
 	}
-	async delete(seminarTitle: string): Promise<SeminarEntity>{
+	async delete(seminarId: string): Promise<SeminarEntity>{
 		throw new Error('Method not implemented.');
 	}
 }

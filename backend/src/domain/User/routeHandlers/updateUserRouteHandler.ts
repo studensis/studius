@@ -10,7 +10,7 @@ export default async function updateUserRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('/users/:userId PUT');
+    console.log(`users/${req.params.userId} PUT`);
 
     try{
         let  userData = new UserEntity({

@@ -4,7 +4,7 @@ import getContentInteractor from '../interactors/getContentInteractor';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
 
 export default async function getContentRouteHandler(req: Request, res: Response) {
-	console.log('/contents/:contentId GET');
+	console.log(`contents/${req.params.contentId} GET`);
 
 	try {
 		let id = String(req.params.contentId);

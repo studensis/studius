@@ -7,12 +7,12 @@ export default async function deleteSubjectRouteHandler(
   req: Request,
   res: Response
 ) {
-  console.log("/subjects/:subjectTitle DELETE");
+  console.log(`subjects/${req.params.subjectId} DELETE`);
 
   try {
-    let title = req.params.subjectTitle;
+    let id = req.params.subjectId;
     let repo = new SubjectRepositoryPrisma();
-    let response = await deleteSubjectInteractor(title, repo);
+    let response = await deleteSubjectInteractor(id, repo);
     return res.send(response);
   } catch (err) {
     console.log(err);

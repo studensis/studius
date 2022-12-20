@@ -12,7 +12,7 @@ export default async function createSeminarRouteHandler(
 
 	try {
 		let newSeminar = new SeminarEntity({
-			id: undefined,
+			id: req.query.id as string,
 			title: req.query.title as string,
 			description: req.query.description as string,
 			mentorId: req.query.mentorId as string,

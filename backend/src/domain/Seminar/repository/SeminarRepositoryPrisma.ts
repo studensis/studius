@@ -30,7 +30,7 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 
 		let updatedSeminar: any = {};
 
-
+			if(seminarData.title) updatedSeminar["title"] = seminarData.title;
 			if(seminarData.description) updatedSeminar["description"] = seminarData.description;
 			if(seminarData.mentorId) updatedSeminar["mentorId"] = seminarData.mentorId;
 			if(seminarData.type) updatedSeminar["type"] = seminarData.type;
@@ -41,9 +41,10 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 		let updatedData = await prisma.seminar.update({
 			
 			where: {
-				title: seminarData.title,
+				id: seminarData.id,
 			},
 			data: {
+				title: updatedSeminar.title,
 				description: updatedSeminar.description,
 				mentorId: updatedSeminar.mentorId,
 				type: updatedSeminar.type,
@@ -59,22 +60,32 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 	}
 
 	async create(seminar: SeminarEntity) {
-		console.log('Hary je tu')
 		let response = await prisma.seminar.create({
 			data: {
+				id: seminar.id,
 				title: seminar.title,
                 description: seminar.description,
                 mentorId: seminar.mentorId,
                 type: seminar.type,
                 contentId: seminar.contentId,
-                subjectId: seminar.subjectId
+                subjectId: seminar.subjectId,
+				userId: seminar.userId
 			}
 		});
-		console.log('Hary proso')
 
 		console.log(response);
 
 		let out = new SeminarEntity(response);
 		return out;
+	}
+
+	async delete(seminarId: string) {
+		let response = await prisma.seminar.delete({
+			where: {
+				id: seminarId
+			}
+		});
+
+		return response;
 	}
 }

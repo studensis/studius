@@ -4,7 +4,7 @@ import getEventInteractor from '../interactors/getEventInteractor';
 import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 
 export default async function getEventRouteHandler(req: Request, res: Response) {
-	console.log('/events/:eventId GET');
+	console.log(`events/${req.params.eventId} GET`);
 
 	try {
 		let id = String(req.params.eventId);

@@ -13,13 +13,13 @@ export default async function createSubjectRouteHandler(
 
 	try {
 		let newSubject = new SubjectEntity({
-			id: undefined,
+			id: req.query.id as string,
 			title: req.query.title as string,
 			description: req.query.description as string,
 			ectsBod: req.query.ectsBod as string,
 			semester: req.query.semester as Semester,   
 			status: req.query.status as Status, 
-			contentId: undefined        
+			contentId: [],        
 		});
 		//newSubject.validate();
 		let repo = new SubjectRepositoryPrisma();
