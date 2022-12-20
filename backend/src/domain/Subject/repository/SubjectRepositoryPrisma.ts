@@ -41,4 +41,34 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		let out = new SubjectEntity(response);
 		return out;
 	}
+
+	async update(subjectData: SubjectEntity) {
+
+		let updatedSubject: any = {};
+
+			if(subjectData.description) updatedSubject["description"] = subjectData.description;
+			if(subjectData.ectsBod) updatedSubject["ectsBod"] = subjectData.ectsBod;
+			if(subjectData.semester) updatedSubject["semester"] = subjectData.semester;
+			if(subjectData.status) updatedSubject["status"] = subjectData.status;
+
+		
+		let updatedData = await prisma.subject.update({
+			
+			where: {
+				title: subjectData.title,
+			},
+			data: {
+				description: updatedSubject.description,
+				ectsBod: updatedSubject.ectsBod,
+				semester: updatedSubject.semester,
+				status: updatedSubject.status,
+			},
+		});		
+		let rez = new SubjectEntity(updatedData);
+
+		return rez;
+		
+	}
+
+
 }

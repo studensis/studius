@@ -2,7 +2,7 @@ import { UserRepository } from '../repository/UserRepository';
 
 export default async function getUserInteractor(
 	userRepository: UserRepository,
-	id: number
+	id: string
 ) {
 	let user = await userRepository.getById(id);
 	return user;

@@ -10,4 +10,8 @@ export abstract class SubjectRepository {
 	async create(subject: SubjectEntity): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async update(subject: SubjectEntity): Promise<SubjectEntity>{
+		throw new Error('Method not implemented.');
+	}
+
 }

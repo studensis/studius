@@ -51,13 +51,13 @@ export default class UserEntity {
 			console.log('ERROR status');
 			throw new Error('invalid status');
 		}
-		if (!this.jmbag) {
-			console.log('ERROR JMBAG');
-			throw new Error('invalid JMBAG');
-		}
-		if(this.jmbag.length < 10){
-			console.log('ERROR jmbag length');
-			throw new Error('invalid JMBAG length')
-		}
+		// if (!this.jmbag) {
+		// 	console.log('ERROR JMBAG');
+		// 	throw new Error('invalid JMBAG');
+		// }
+		// if(this.jmbag.length < 10){
+		// 	console.log('ERROR jmbag length');
+		// 	throw new Error('invalid JMBAG length')
+		// }
 	}
 }

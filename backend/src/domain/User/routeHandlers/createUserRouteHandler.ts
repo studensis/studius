@@ -14,13 +14,13 @@ export default async function createUserRouteHandler(
 	try {
 
 		let newUser = new UserEntity({
-			id : undefined,
+			id : req.query.id as string,
 			firstname : req.query.firstname as string,
 			lastname : req.query.lastname as string,
 			password: req.query.password as string,
 			jmbag: req.query.jmbag as string,
 			email: req.query.email as string,
-			mentorID: undefined, 
+			mentorID: req.query.mentorID as string, 
 			userRole: req.query.userRole as UserRole,
 		});
 		newUser.validate();

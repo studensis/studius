@@ -1,9 +1,9 @@
 import { UserRepository } from '../repository/UserRepository';
 
 export default async function deleteUserInteractor(
-    email: string, 
+    id: string, 
     userRepository: UserRepository
 ) {
-    let response = await userRepository.delete(email);
+    let response = await userRepository.delete(id);
     return response;
 }
