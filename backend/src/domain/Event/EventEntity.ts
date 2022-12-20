@@ -1,11 +1,11 @@
-import { Event } from '@prisma/client';
+import { Event, LinkedEntity } from '@prisma/client';
 
 export default class EventEntity {
 	id: string;
 	title: string;
 	description: string;
-	linkedEntity: string;		// LinkedEntity
-    linkedEntityId: string;		// Number ????
+	linkedEntity: LinkedEntity;
+    linkedEntityId: string;
 
 	constructor(props: Event) {
 		this.id = props.id;

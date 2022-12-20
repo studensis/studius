@@ -10,4 +10,10 @@ export abstract class PostRepository {
 	async create(post: PostEntity): Promise<PostEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async update(post: PostEntity): Promise<PostEntity>{
+		throw new Error('Method not implemented.');
+	}
+	async delete(postId: string): Promise<PostEntity>{
+		throw new Error('Method not implemented.');
+	}
 }

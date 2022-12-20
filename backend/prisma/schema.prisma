@@ -82,10 +82,10 @@ model Seminar {
 }
 
 model Event {
-  id             String @id @default(uuid())
+  id             String       @id @default(uuid())
   title          String
   description    String
-  linkedEntity   String
+  linkedEntity   LinkedEntity
   linkedEntityId String
 }
 

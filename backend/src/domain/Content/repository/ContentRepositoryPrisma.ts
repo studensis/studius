@@ -25,6 +25,33 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 		return content;
 	}
 
+	async update(contentData: ContentEntity) {
+
+		let updatedContent: any = {};
+
+			if(contentData.markdownText) updatedContent["markdownText"] = contentData.markdownText;
+			if(contentData.plainText) updatedContent["plainText"] = contentData.plainText;
+			if(contentData.linkedEntity) updatedContent["linkedEntity"] = contentData.linkedEntity;
+			if(contentData.linkedEntityId) updatedContent["linkedEntityId"] = contentData.linkedEntityId;
+		
+		let updatedData = await prisma.content.update({
+			
+			where: {
+				id: contentData.id,
+			},
+			data: {
+			    markdownText: updatedContent.markdownText,
+			    plainText: updatedContent.plainText,
+				linkedEntity: updatedContent.linkedEntity,
+    			linkedEntityId: updatedContent.linkedEntityId,
+			},
+		});		
+		let rez = new ContentEntity(updatedData);
+
+		return rez;
+		
+	}
+
 	async create(content: ContentEntity) {
 		let response = await prisma.content.create({
 			data: {
@@ -40,5 +67,15 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 
 		let out = new ContentEntity(response);
 		return out;
+	}
+
+	async delete(contentId: string) {
+		let response = await prisma.content.delete({
+			where: {
+				id: contentId
+			}
+		});
+
+		return response;
 	}
 }
