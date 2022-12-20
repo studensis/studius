@@ -1,7 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { userInfo } from 'os';
 import UserEntity from '../UserEntity';
-import { UserRole } from '../UserRole';
 import { UserRepository } from './UserRepository';
 
 const prisma = new PrismaClient();
@@ -35,7 +33,6 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		
 		let updatedData = await prisma.user.update({
-			
 			where: {
 				id: userData.id
 			},
@@ -52,8 +49,9 @@ export default class UserRepositoryPrisma extends UserRepository {
 		let rez = new UserEntity(updatedData);
 
 		return rez;
-		
 	}
+
+
 
 	async getById(id: string) {
 		let data = await prisma.user.findUnique({ where: { id: id } });
@@ -71,8 +69,8 @@ export default class UserRepositoryPrisma extends UserRepository {
 				firstname: user.firstname,
 				lastname: user.lastname,
 				jmbag: user.jmbag,
-				userRole: user.userRole, 
-				mentorID: user.mentorID 
+				userRole: user.userRole,
+				mentorID: user.mentorID
 			}
 		});
 

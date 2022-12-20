@@ -19,29 +19,6 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		return subjects;
 	}
 
-	async getById(id: string) {
-		let data = await prisma.subject.findUnique({ where: { id: id } });
-		let subject = new SubjectEntity(data);
-		return subject;
-	}
-
-	async create(subject: SubjectEntity) {
-		let response = await prisma.subject.create({
-			data: {
-				title: subject.title,
-				description: subject.description,
-				ectsBod: subject.ectsBod,
-				semester: subject.semester,
-				status: subject.status,
-			}
-		});
-
-		console.log(response);
-
-		let out = new SubjectEntity(response);
-		return out;
-	}
-
 	async update(subjectData: SubjectEntity) {
 
 		let updatedSubject: any = {};
@@ -70,5 +47,36 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		
 	}
 
+	async getById(id: string) {
+		let data = await prisma.subject.findUnique({ where: { id: id } });
+		let subject = new SubjectEntity(data);
+		return subject;
+	}
 
+	async create(subject: SubjectEntity) {
+		let response = await prisma.subject.create({
+			data: {
+				title: subject.title,
+				description: subject.description,
+				ectsBod: subject.ectsBod,
+				semester: subject.semester,
+				status: subject.status,
+			}
+		});
+
+		console.log(response);
+
+		let out = new SubjectEntity(response);
+		return out;
+	}
+	
+	async delete(subjectTitle: string) {
+		let response = await prisma.subject.delete({
+			where: {
+				title: subjectTitle
+			}
+		});
+
+		return response;
+	}
 }
