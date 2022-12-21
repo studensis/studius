@@ -34,6 +34,11 @@ import getSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeH
 import createSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/createSeminarSuggestionRouteHandler';
 import updateSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/updateSeminarSuggestionRouteHandler';
 import deleteSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/deleteSeminarSuggestionRouteHandler';
+import listRoomsRouteHandler from '../domain/Room/routeHandlers/listRoomRouterHandler';
+import getRoomRouteHandler from '../domain/Room/routeHandlers/getRoomRouteHandler';
+import createRoomRouteHandler from '../domain/Room/routeHandlers/createRoomRouteHandler';
+import updateRoomRouteHandler from '../domain/Room/routeHandlers/updateRoomRouteHandler';
+import deleteRoomRouteHandler from '../domain/Room/routeHandlers/deleteRoomRouteHandler';
 
 // Kakti API gateway
 
@@ -97,4 +102,11 @@ export default (server: Express) => {
 	server.route('/contents').post(createContentRouteHandler); 
 	server.route('/contents/:contentId').put(updateContentRouteHandler);
 	server.route('/contents/:contentId').delete(deleteContentRouteHandler);
+
+	// room routes
+	server.route('/rooms').get(listRoomsRouteHandler);
+	server.route('/rooms/:roomId').get(getRoomRouteHandler);
+	server.route('/rooms').post(createRoomRouteHandler); 
+	server.route('/rooms/:roomId').put(updateRoomRouteHandler);
+	server.route('/rooms/:roomId').delete(deleteRoomRouteHandler);
 };
