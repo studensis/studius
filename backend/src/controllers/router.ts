@@ -29,6 +29,11 @@ import updatePostRouteHandler from '../domain/Post/routerHandlers/updatePostRout
 import deletePostRouteHandler from '../domain/Post/routerHandlers/deletePostRouteHandler';
 import updateEventRouteHandler from '../domain/Event/routeHandler/updateEventRouteHandler';
 import deleteEventRouteHandler from '../domain/Event/routeHandler/deleteEventRouteHandler';
+import listSeminarSuggestionsRouteHandler from '../domain/SeminarSuggestion/routeHandlers/listSeminarSuggestionsRouterHandler';
+import getSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/getSeminarSuggestionRouteHandler';
+import createSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/createSeminarSuggestionRouteHandler';
+import updateSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/updateSeminarSuggestionRouteHandler';
+import deleteSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/deleteSeminarSuggestionRouteHandler';
 
 // Kakti API gateway
 
@@ -64,6 +69,13 @@ export default (server: Express) => {
 	server.route('/seminars').post(createSeminarRouteHandler);
 	server.route('/seminars/:seminarId').put(updateSeminarRouteHandler);
 	server.route('/seminars/:seminarId').delete(deleteSeminarRouteHandler);
+
+	// seminar suggestion routes
+	server.route('/seminarSuggestions').get(listSeminarSuggestionsRouteHandler);
+	server.route('/seminarSuggestions/:seminarSuggestionId').get(getSeminarSuggestionRouteHandler);
+	server.route('/seminarSuggestions').post(createSeminarSuggestionRouteHandler);
+	server.route('/seminarSuggestions/:seminarSuggestionId').put(updateSeminarSuggestionRouteHandler);
+	server.route('/seminarSuggestions/:seminarSuggestionId').delete(deleteSeminarSuggestionRouteHandler);
 
 	// post routes
 	server.route('/posts').get(listPostsRouteHandler);
