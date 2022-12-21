@@ -19,7 +19,7 @@ export default async function createSubjectRouteHandler(
 			ectsBod: req.query.ectsBod as string,
 			semester: req.query.semester as Semester,   
 			status: req.query.status as Status, 
-			contentId: [],        
+			contentId: String(req.query.contentId).split(",") as string[],        
 		});
 		//newSubject.validate();
 		let repo = new SubjectRepositoryPrisma();

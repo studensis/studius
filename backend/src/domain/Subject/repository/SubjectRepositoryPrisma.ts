@@ -65,6 +65,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 				ectsBod: subject.ectsBod,
 				semester: subject.semester,
 				status: subject.status,
+				contentId: subject.contentId,
 			}
 		});
 

@@ -35,7 +35,7 @@ model Subject {
   ectsBod     String
   semester    Semester
   status      Status
-  contentId   String[]     @unique
+  contentId   String[]
   Enrollment  Enrollment[]
 }
 
