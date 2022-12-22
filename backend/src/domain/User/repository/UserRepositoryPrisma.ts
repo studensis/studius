@@ -20,37 +20,50 @@ export default class UserRepositoryPrisma extends UserRepository {
 	}
 
 	async update(userData: UserEntity) {
+
+		let newData : any = {}
+
+		if(userData.firstname)newData["firstname"] = userData.firstname;
+		if(userData.lastname)newData["lastname"] = userData.lastname;
+		if(userData.password)newData["password"] = userData.password;
+		if(userData.jmbag)newData["jmbag"] = userData.jmbag;
+		if(userData.email)newData["email"] = userData.email;
+		if(userData.userRole)newData["userRole"] = userData.userRole;
+		if(userData.mentorID)newData["mentorID"] = userData.mentorID;
+
+		
 		let updatedData = await prisma.user.update({
 			where: {
-				email: userData.email
+				id: userData.id
 			},
 			data: {
-				firstname: userData.firstname,
-				lastname: userData.lastname,
-				password: userData.password,
-				jmbag: userData.jmbag,
-				email: userData.email,
-				userRole: userData.userRole,
-				mentorID: userData.mentorID
-			}
-		});
+				firstname: newData.firstname, 
+				lastname: newData.lastname, 
+				password: newData.password, 
+				jmbag: newData.jmbag, 
+				email: newData.email, 
+				userRole: newData.userRole, 
+				mentorID: newData.mentorID,
+			},
+		});		
 		let rez = new UserEntity(updatedData);
 
 		return rez;
 	}
 
-	async getById(id: string) {
-		console.log(id);
 
+
+	async getById(id: string) {
 		let data = await prisma.user.findUnique({ where: { id: id } });
 		let user = new UserEntity(data);
 		return user;
 	}
 
 	async create(user: UserEntity) {
+
 		let response = await prisma.user.create({
 			data: {
-				id: undefined,
+				id: user.id,
 				email: user.email,
 				password: user.password,
 				firstname: user.firstname,
@@ -67,13 +80,15 @@ export default class UserRepositoryPrisma extends UserRepository {
 		return out;
 	}
 
-	async delete(userEmail: string) {
+	async delete(userId: string) {
 		let response = await prisma.user.delete({
 			where: {
-				email: userEmail
+				id: userId
 			}
 		});
 
-		return response;
+		let rez = new UserEntity(response)
+
+		return rez;
 	}
 }

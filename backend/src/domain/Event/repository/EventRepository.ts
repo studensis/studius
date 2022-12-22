@@ -10,4 +10,10 @@ export abstract class EventRepository {
 	async create(event: EventEntity): Promise<EventEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async update(event: EventEntity): Promise<EventEntity>{
+		throw new Error('Method not implemented.');
+	}
+	async delete(eventId: string): Promise<EventEntity>{
+		throw new Error('Method not implemented.');
+	}
 }

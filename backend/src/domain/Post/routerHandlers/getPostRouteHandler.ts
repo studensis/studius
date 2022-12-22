@@ -4,7 +4,7 @@ import getPostInteractor from '../interactors/getPostInteractor';
 import PostRepositoryPrisma from '../repository/PostRepositoryPrisma';
 
 export default async function getPostRouteHandler(req: Request, res: Response) {
-	console.log('/posts/:postId GET');
+	console.log(`posts/${req.params.postId} GET`);
 
 	try {
 		let id = String(req.params.postId);

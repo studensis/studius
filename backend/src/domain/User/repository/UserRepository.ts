@@ -14,7 +14,7 @@ export abstract class UserRepository {
 	async update(userData: UserEntity): Promise<UserEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(userEmail: string): Promise<User> {
+	async delete(userId: string): Promise<UserEntity>{
 		throw new Error('Method not implemented.');
 	}
 }

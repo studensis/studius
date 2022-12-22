@@ -13,9 +13,9 @@ export default async function createPostRouteHandler(
 
 	try {
 		let newPost = new PostEntity({
-			id: undefined,
-			title: req.query.title as string,       //Date
-			ownerId: req.query.ownerId as string,       //User
+			id: req.query.id as string,
+			title: req.query.title as string,
+			ownerId: req.query.ownerId as string,
 			linkedEntity: req.query.linkedEntity as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,

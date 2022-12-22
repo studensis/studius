@@ -25,6 +25,34 @@ export default class EventRepositoryPrisma extends EventRepository {
 		return event;
 	}
 
+	async update(eventData: EventEntity) {
+
+		let updatedEvent: any = {};
+
+			if(eventData.title) updatedEvent["title"] = eventData.title;
+			if(eventData.description) updatedEvent["description"] = eventData.description;
+			if(eventData.linkedEntity) updatedEvent["linkedEntity"] = eventData.linkedEntity;
+			if(eventData.linkedEntityId) updatedEvent["linkedEntityId"] = eventData.linkedEntityId;
+			
+		let updatedData = await prisma.event.update({
+			
+			where: {
+				id: eventData.id,
+			},
+			data: {
+				title: updatedEvent.title,
+			    description: updatedEvent.description,
+			    linkedEntity: updatedEvent.linkedEntity,
+			    linkedEntityId: updatedEvent.linkedEntityId,
+			    
+			},
+		});		
+		let rez = new EventEntity(updatedData);
+
+		return rez;
+		
+	}
+
 	async create(event: EventEntity) {
 		let response = await prisma.event.create({
 			data: {
@@ -40,5 +68,15 @@ export default class EventRepositoryPrisma extends EventRepository {
 
 		let out = new EventEntity(response);
 		return out;
+	}
+
+	async delete(eventId: string) {
+		let response = await prisma.event.delete({
+			where: {
+				id: eventId
+			}
+		});
+
+		return response;
 	}
 }

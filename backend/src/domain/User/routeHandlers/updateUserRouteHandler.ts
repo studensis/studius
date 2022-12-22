@@ -10,18 +10,18 @@ export default async function updateUserRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('/users/userId/update');
+    console.log(`users/${req.params.userId} PUT`);
 
     try{
         let  userData = new UserEntity({
-            id : undefined,
+            id : req.params.userId as string,
 			firstname : req.query.firstname as string,
 			lastname : req.query.lastname as string,
 			password: req.query.password as string,
 			jmbag: req.query.jmbag as string,
 			email: req.query.email as string, 
 			userRole: req.query.userRole as UserRole,
-            mentorID: undefined, 
+            mentorID: req.query.mentorID as string, 
         });
         //potrebno staviti validaciju novih podataka 
         let repo = new UserRepositoryPrisma();

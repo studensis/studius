@@ -4,7 +4,7 @@ import getUserInteractor from '../interactors/getUserInteractor';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 export default async function getUserRouteHandler(req: Request, res: Response) {
-	console.log('/users/:userId GET');
+	console.log(`users/${req.params.userId} GET`);
 
 	try {
 		let id = req.params.userId;

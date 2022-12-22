@@ -22,23 +22,26 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 	async update(subjectData: SubjectEntity) {
 
 		let updatedSubject: any = {};
-
+			if(subjectData.title) updatedSubject["title"] = subjectData.title;
 			if(subjectData.description) updatedSubject["description"] = subjectData.description;
 			if(subjectData.ectsBod) updatedSubject["ectsBod"] = subjectData.ectsBod;
 			if(subjectData.semester) updatedSubject["semester"] = subjectData.semester;
 			if(subjectData.status) updatedSubject["status"] = subjectData.status;
+			if(subjectData.contentId) updatedSubject["contentId"] = subjectData.contentId;
 
 		
 		let updatedData = await prisma.subject.update({
 			
 			where: {
-				title: subjectData.title,
+				id: subjectData.id,
 			},
 			data: {
+				title: updatedSubject.title,
 				description: updatedSubject.description,
 				ectsBod: updatedSubject.ectsBod,
 				semester: updatedSubject.semester,
 				status: updatedSubject.status,
+				contentId: updatedSubject.contentId,
 			},
 		});		
 		let rez = new SubjectEntity(updatedData);
@@ -56,11 +59,13 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 	async create(subject: SubjectEntity) {
 		let response = await prisma.subject.create({
 			data: {
+				id: subject.id,
 				title: subject.title,
 				description: subject.description,
 				ectsBod: subject.ectsBod,
 				semester: subject.semester,
 				status: subject.status,
+				contentId: subject.contentId,
 			}
 		});
 
@@ -70,10 +75,10 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		return out;
 	}
 	
-	async delete(subjectTitle: string) {
+	async delete(subjectId: string) {
 		let response = await prisma.subject.delete({
 			where: {
-				title: subjectTitle
+				id: subjectId
 			}
 		});
 

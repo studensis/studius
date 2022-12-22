@@ -1,9 +1,9 @@
 import { SubjectRepository } from '../repository/SubjectRepository';
 
 export default async function deleteSubjectInteractor(
-    email: string, 
+    id: string, 
     subjectRepository: SubjectRepository
 ) {
-    let response = await subjectRepository.delete(email);
+    let response = await subjectRepository.delete(id);
     return response;
 }

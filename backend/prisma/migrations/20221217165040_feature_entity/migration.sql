@@ -16,7 +16,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
-    "jmbag" TEXT NOT NULL,
+    "jmbag" TEXT,
     "email" TEXT NOT NULL,
     "userRole" "Role" NOT NULL,
     "mentorID" TEXT,

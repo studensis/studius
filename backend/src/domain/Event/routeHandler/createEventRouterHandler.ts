@@ -13,7 +13,7 @@ export default async function createEventRouteHandler(
 
 	try {
 		let newEvent = new EventEntity({
-			id: undefined,
+			id: req.query.id as string,
 			title: req.query.title as string,
 			description: req.query.description as string,
 			linkedEntity: req.query.linkedEntity as LinkedEntity,

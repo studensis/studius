@@ -7,12 +7,12 @@ export default async function deleteUserRouteHandler(
   req: Request,
   res: Response
 ) {
-  console.log("/users/:userEmail/delete POST");
+  console.log(`users/${req.params.userId} DELETE`);
 
   try {
-    let email = req.params.userEmail;
+    let id = req.params.userId;
     let repo = new UserRepositoryPrisma();
-    let response = await deleteUserInteractor(email, repo);
+    let response = await deleteUserInteractor(id, repo);
     return res.send(response);
   } catch (err) {
     console.log(err);

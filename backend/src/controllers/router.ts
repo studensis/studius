@@ -21,6 +21,24 @@ import updateUserRouteHandler from '../domain/User/routeHandlers/updateUserRoute
 import deleteUserRouteHandler from '../domain/User/routeHandlers/deleteUserRouteHandler';
 import updateSubjectRouteHandler from '../domain/Subject/routeHandlers/updateSubjectRouteHandler';
 import deleteSubjectRouteHandler from '../domain/Subject/routeHandlers/deleteSubjectRouteHandler';
+import updateSeminarRouteHandler from '../domain/Seminar/routeHandlers/updateSeminarRouteHandler';
+import deleteSeminarRouteHandler from '../domain/Seminar/routeHandlers/deleteSeminarRouteHandler';
+import updateContentRouteHandler from '../domain/Content/routeHandlers/updateContentRouteHandler';
+import deleteContentRouteHandler from '../domain/Content/routeHandlers/deleteContentRouteHandler';
+import updatePostRouteHandler from '../domain/Post/routerHandlers/updatePostRouteHandler';
+import deletePostRouteHandler from '../domain/Post/routerHandlers/deletePostRouteHandler';
+import updateEventRouteHandler from '../domain/Event/routeHandler/updateEventRouteHandler';
+import deleteEventRouteHandler from '../domain/Event/routeHandler/deleteEventRouteHandler';
+import listSeminarSuggestionsRouteHandler from '../domain/SeminarSuggestion/routeHandlers/listSeminarSuggestionsRouterHandler';
+import getSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/getSeminarSuggestionRouteHandler';
+import createSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/createSeminarSuggestionRouteHandler';
+import updateSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/updateSeminarSuggestionRouteHandler';
+import deleteSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/deleteSeminarSuggestionRouteHandler';
+import listRoomsRouteHandler from '../domain/Room/routeHandlers/listRoomRouterHandler';
+import getRoomRouteHandler from '../domain/Room/routeHandlers/getRoomRouteHandler';
+import createRoomRouteHandler from '../domain/Room/routeHandlers/createRoomRouteHandler';
+import updateRoomRouteHandler from '../domain/Room/routeHandlers/updateRoomRouteHandler';
+import deleteRoomRouteHandler from '../domain/Room/routeHandlers/deleteRoomRouteHandler';
 
 // Kakti API gateway
 
@@ -40,34 +58,55 @@ export default (server: Express) => {
 	server.route('/users').get(listUsersRouteHandler);
 	server.route('/users/:userId').get(getUserRouteHandler);
 	server.route('/users').post(createUserRouteHandler);
-	server.route('/users/update').post(updateUserRouteHandler);
-	server.route('/users/:userEmail/delete').post(deleteUserRouteHandler);
+	server.route('/users/:userId').put(updateUserRouteHandler);
+	server.route('/users/:userId').delete(deleteUserRouteHandler);
 
 	//subject routes
 	server.route('/subjects').get(listSubjectsRouteHandler);
 	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
 	server.route('/subjects').post(createSubjectRouteHandler);
-	server.route('/subjects/:subjectTitle').put(updateSubjectRouteHandler);
-	server.route('/subjects/:subjectTitle').delete(deleteSubjectRouteHandler);
+	server.route('/subjects/:subjectId').put(updateSubjectRouteHandler);
+	server.route('/subjects/:subjectId').delete(deleteSubjectRouteHandler);
 
 	// seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);
 	server.route('/seminars/:seminarId').get(getSeminarRouteHandler);
 	server.route('/seminars').post(createSeminarRouteHandler);
+	server.route('/seminars/:seminarId').put(updateSeminarRouteHandler);
+	server.route('/seminars/:seminarId').delete(deleteSeminarRouteHandler);
+
+	// seminar suggestion routes
+	server.route('/seminarSuggestions').get(listSeminarSuggestionsRouteHandler);
+	server.route('/seminarSuggestions/:seminarSuggestionId').get(getSeminarSuggestionRouteHandler);
+	server.route('/seminarSuggestions').post(createSeminarSuggestionRouteHandler);
+	server.route('/seminarSuggestions/:seminarSuggestionId').put(updateSeminarSuggestionRouteHandler);
+	server.route('/seminarSuggestions/:seminarSuggestionId').delete(deleteSeminarSuggestionRouteHandler);
 
 	// post routes
 	server.route('/posts').get(listPostsRouteHandler);
 	server.route('/posts/:postId').get(getPostRouteHandler);
 	server.route('/posts').post(createPostRouteHandler);
+	server.route('/posts/:postId').put(updatePostRouteHandler);
+	server.route('/posts/:postId').delete(deletePostRouteHandler);
 	
 	// event routes
 	server.route('/events').get(listEventsRouteHandler);
 	server.route('/events/:eventId').get(getEventRouteHandler);
 	server.route('/events').post(createEventRouteHandler);
-	
+	server.route('/events/:eventId').put(updateEventRouteHandler);
+	server.route('/events/:eventId').delete(deleteEventRouteHandler);
 	
 	// content routes
 	server.route('/contents').get(listContentsRouteHandler);
 	server.route('/contents/:contentId').get(getContentRouteHandler);
 	server.route('/contents').post(createContentRouteHandler); 
+	server.route('/contents/:contentId').put(updateContentRouteHandler);
+	server.route('/contents/:contentId').delete(deleteContentRouteHandler);
+
+	// room routes
+	server.route('/rooms').get(listRoomsRouteHandler);
+	server.route('/rooms/:roomId').get(getRoomRouteHandler);
+	server.route('/rooms').post(createRoomRouteHandler); 
+	server.route('/rooms/:roomId').put(updateRoomRouteHandler);
+	server.route('/rooms/:roomId').delete(deleteRoomRouteHandler);
 };

@@ -26,24 +26,66 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 		return seminar;
 	}
 
+	async update(seminarData: SeminarEntity) {
+
+		let updatedSeminar: any = {};
+
+			if(seminarData.title) updatedSeminar["title"] = seminarData.title;
+			if(seminarData.description) updatedSeminar["description"] = seminarData.description;
+			if(seminarData.mentorId) updatedSeminar["mentorId"] = seminarData.mentorId;
+			if(seminarData.type) updatedSeminar["type"] = seminarData.type;
+			if(seminarData.contentId) updatedSeminar["contentId"] = seminarData.contentId;
+			if(seminarData.subjectId) updatedSeminar["subjectId"] = seminarData.subjectId;
+			if(seminarData.userId) updatedSeminar["userId"] = seminarData.userId;
+		
+		let updatedData = await prisma.seminar.update({
+			
+			where: {
+				id: seminarData.id,
+			},
+			data: {
+				title: updatedSeminar.title,
+				description: updatedSeminar.description,
+				mentorId: updatedSeminar.mentorId,
+				type: updatedSeminar.type,
+				contentId: updatedSeminar.contentId,
+				subjectId: updatedSeminar.subjectId,
+				userId: updatedSeminar.userId,
+			},
+		});		
+		let rez = new SeminarEntity(updatedData);
+
+		return rez;
+		
+	}
+
 	async create(seminar: SeminarEntity) {
-		console.log('Hary je tu')
 		let response = await prisma.seminar.create({
 			data: {
+				id: seminar.id,
 				title: seminar.title,
                 description: seminar.description,
                 mentorId: seminar.mentorId,
                 type: seminar.type,
                 contentId: seminar.contentId,
                 subjectId: seminar.subjectId,
-                userId: seminar.userId,
+				userId: seminar.userId
 			}
 		});
-		console.log('Hary proso')
 
 		console.log(response);
 
 		let out = new SeminarEntity(response);
 		return out;
+	}
+
+	async delete(seminarId: string) {
+		let response = await prisma.seminar.delete({
+			where: {
+				id: seminarId
+			}
+		});
+
+		return response;
 	}
 }

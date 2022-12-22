@@ -4,10 +4,10 @@ export default class PostEntity {
 	id: string;
 	title: string;
 	date: Date;			// Date
-    ownerId: string;			// User
+    ownerId: string;
     linkedEntity: LinkedEntity;			// LinkedEntity
     linkedEntityId: string;	
-	contentId: string;		// Number ???
+	contentId: string;
 
 
 	constructor(props: Post) {
