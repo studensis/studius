@@ -7,8 +7,6 @@ export default async function listUsersRouteHandler(
 	req: Request,
 	res: Response
 ) {
-	console.log('/users GET');
-
 	try {
 		let repo = new UserRepositoryPrisma();
 		let users = await listUsersInteractor(repo);

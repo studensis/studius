@@ -1,0 +1,53 @@
+'use client';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { getFetch, httpBatchLink, loggerLink } from '@trpc/client';
+import { createTRPCReact } from '@trpc/react-query';
+import { useState } from 'react';
+import type { AppRouter } from 'studius-backend';
+
+export const trpc = createTRPCReact<AppRouter>();
+
+function TrpcProvider({ children }: { children: React.ReactNode }) {
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						staleTime: 5 * 1000,
+						// refetchInterval: 10 * 1000,
+					},
+				},
+			})
+	);
+
+	const [trpcClient] = useState(() =>
+		trpc.createClient({
+			links: [
+				loggerLink(),
+				httpBatchLink({
+					url: 'http://localhost:4000/trpc',
+					fetch: async (input, init?) => {
+						const fetch = getFetch();
+						return fetch(input, {
+							...init,
+							credentials: 'include',
+						});
+					},
+				}),
+			],
+		})
+	);
+
+	return (
+		<trpc.Provider client={trpcClient} queryClient={queryClient}>
+			<QueryClientProvider client={queryClient}>
+				{children}
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
+		</trpc.Provider>
+	);
+}
+
+export default TrpcProvider;
