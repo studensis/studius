@@ -27,31 +27,28 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 		return eventUserPresence;
 	}
 
-	// async update(eventUserPresenceData: EventUserPresenceEntity) {
+	async update(eventUserPresenceData: EventUserPresenceEntity) {
 
-	// 	let updatedEventUserPresence: any = {};
+		let updatedEventUserPresence: any = {};
 
-	// 		if(eventUserPresenceData.presenceStatus) updatedEventUserPresence["presenceStatus"] = eventUserPresenceData.presenceStatus;
-	// 		if(eventUserPresenceData.roomTimeEventId) updatedEventUserPresence["roomTimeEventId"] = eventUserPresenceData.roomTimeEventId;
-	// 		if(eventUserPresenceData.userId) updatedEventUserPresence["userId"] = eventUserPresenceData.userId;
-
+			if(eventUserPresenceData.presenceStatus) updatedEventUserPresence["presenceStatus"] = eventUserPresenceData.presenceStatus;
+			if(eventUserPresenceData.roomTimeEventId) updatedEventUserPresence["roomTimeEventId"] = eventUserPresenceData.roomTimeEventId;
 		
-	// 	let updatedData = await prisma.eventUserPresence.update({
+		let updatedData = await prisma.eventUserPresence.update({
 			
-	// 		where: {
-	// 			id: eventUserPresenceData.id,
-	// 		},
-	// 		data: {
-	// 			presenceStatus: updatedEventUserPresence.presenceStatus,
-	// 			roomTimeEventId: updatedEventUserPresence.roomTimeEventId,
-	// 			userId: updatedEventUserPresence.userId,
-	// 		},
-	// 	});		
-	// 	let rez = new EventUserPresenceEntity(updatedData);
+			where: {
+				id: eventUserPresenceData.id,
+			},
+			data: {
+				presenceStatus: updatedEventUserPresence.presenceStatus,
+				roomTimeEventId: updatedEventUserPresence.roomTimeEventId,
+			},
+		});		
+		let rez = new EventUserPresenceEntity(updatedData);
 
-	// 	return rez;
+		return rez;
 		
-	// }
+	}
 
 
 	async create(eventUserPresence: EventUserPresenceEntity) {
@@ -63,6 +60,7 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 				eventUserPresence: {
 					create:[
 						{
+							id: eventUserPresence.id,
 							presenceStatus: eventUserPresence.presenceStatus,
 							roomTimeEventId: eventUserPresence.roomTimeEventId,
 						}
@@ -77,13 +75,13 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 		return out;
 	}
 
-	// async delete(eventUserPresenceId: string) {
-	// 	let response = await prisma.eventUserPresence.delete({
-	// 		where: {
-	// 			id: eventUserPresenceId
-	// 		}
-	// 	});
+	async delete(eventUserPresenceId: string) {
+		let response = await prisma.eventUserPresence.delete({
+			where: {
+				id: eventUserPresenceId
+			}
+		});
 
-	// 	return response;
-	// }
+		return response;
+	}
 }

@@ -42,8 +42,8 @@ import deleteRoomRouteHandler from '../domain/Room/routeHandlers/deleteRoomRoute
 import listEventUserPresencesRouteHandler from '../domain/EventUserPresence/routeHandlers/listEventUserPresencesRouterHandler';
 import getEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/getEventUserPresenceRouteHandler';
 import createEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/createEventUserPresenceRouteHandler';
-// import updateEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/updateEventUserPresenceRouteHandler';
-// import deleteEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/deleteEventUserPresenceRouteHandler';
+import updateEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/updateEventUserPresenceRouteHandler';
+import deleteEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/deleteEventUserPresenceRouteHandler';
 
 // Kakti API gateway
 
@@ -105,8 +105,8 @@ export default (server: Express) => {
 	server.route('/eventUserPresences').get(listEventUserPresencesRouteHandler);
 	server.route('/eventUserPresences/:eventUserPresenceId').get(getEventUserPresenceRouteHandler);
 	server.route('/eventUserPresences').post(createEventUserPresenceRouteHandler); 
-	// server.route('/eventUserPresences/:eventUserPresenceId').put(updateEventUserPresenceRouteHandler);
-	// server.route('/eventUserPresences/:eventUserPresenceId').delete(deleteEventUserPresenceRouteHandler);
+	server.route('/eventUserPresences/:eventUserPresenceId').put(updateEventUserPresenceRouteHandler);
+	server.route('/eventUserPresences/:eventUserPresenceId').delete(deleteEventUserPresenceRouteHandler);
 	
 	// Content routes
 	server.route('/contents').get(listContentsRouteHandler);

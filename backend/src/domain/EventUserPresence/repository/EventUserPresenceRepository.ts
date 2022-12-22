@@ -11,10 +11,10 @@ export abstract class EventUserPresenceRepository {
 	async create(eventUserPresence: EventUserPresenceEntity): Promise<UserEntity> {
 		throw new Error('Method not implemented.');
 	}
-	// async update(eventUserPresence: EventUserPresenceEntity): Promise<EventUserPresenceEntity>{
-	// 	throw new Error('Method not implemented.');
-	// }
-	// async delete(eventUserPresenceId: string): Promise<EventUserPresenceEntity>{
-	// 	throw new Error('Method not implemented.');
-	// }
+	async update(eventUserPresence: EventUserPresenceEntity): Promise<EventUserPresenceEntity>{
+		throw new Error('Method not implemented.');
+	}
+	async delete(eventUserPresenceId: string): Promise<EventUserPresenceEntity>{
+		throw new Error('Method not implemented.');
+	}
 }

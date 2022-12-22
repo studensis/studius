@@ -3,7 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import createEventUserPresenceInteractor from '../interactors/createEventUserPresenceInteractor';
 import EventUserPresenceRepositoryPrisma from '../repository/EventUserPresenceRepositoryPrisma';
 import EventUserPresenceEntity from '../EventUserPresence';
-import { RoomTimeEvent, User } from '@prisma/client';
 
 export default async function createEventUserPresenceRouteHandler(
 	req: Request,
