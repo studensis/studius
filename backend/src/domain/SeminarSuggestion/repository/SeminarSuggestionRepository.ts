@@ -7,7 +7,7 @@ export abstract class SeminarSuggestionRepository {
 	async getById(id: string): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async create(SeminarSuggestion: SeminarSuggestionEntity): Promise<SeminarSuggestionEntity> {
+	async create(seminarSuggestion: SeminarSuggestionEntity): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
 	async update(seminarSuggestion: SeminarSuggestionEntity): Promise<SeminarSuggestionEntity>{

@@ -12,18 +12,18 @@ datasource db {
 }
 
 model User {
-  id            String              @id @default(uuid())
-  password      String
-  firstname     String
-  lastname      String
-  jmbag         String?             @unique
-  email         String              @unique
-  userRole      Role
-  mentorID      String?
-  mentor        User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
-  mentee        User[]              @relation("Mentorstvo")
-  enrollment    Enrollment[]
-  eventPresence EventUserPresence[]
+  id                String              @id @default(uuid())
+  password          String
+  firstname         String
+  lastname          String
+  jmbag             String?             @unique
+  email             String              @unique
+  userRole          Role
+  mentorID          String?
+  mentor            User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
+  mentee            User[]              @relation("Mentorstvo")
+  enrollment        Enrollment[]
+  eventUserPresence EventUserPresence[]
 }
 
 // treba stavit @unique na neke
@@ -101,20 +101,20 @@ model Room {
 }
 
 model RoomTimeEvent {
-  id                String              @id @default(uuid())
-  dateStart         DateTime
-  dateEnd           DateTime
-  eventId           String
-  roomId            String
-  EventUserPresence EventUserPresence[]
+  id        String   @id @default(uuid())
+  dateStart DateTime
+  dateEnd   DateTime
+  eventId   String
+  roomId    String
+  // EventUserPresence EventUserPresence[]
 }
 
 model EventUserPresence {
-  id              String        @id @default(uuid())
+  id              String  @id @default(uuid())
   presenceStatus  Boolean
-  roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
+  // roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
   roomTimeEventId String
-  user            User          @relation(fields: [userId], references: [id])
+  user            User    @relation(fields: [userId], references: [id])
   userId          String
 }
 
