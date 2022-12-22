@@ -52,26 +52,18 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 
 
 	async create(eventUserPresence: EventUserPresenceEntity) {
-		let response = await prisma.user.update({
-			where: {
-				id: eventUserPresence.userId
-			},
+		let response = await prisma.eventUserPresence.create({
 			data: {
-				eventUserPresence: {
-					create:[
-						{
-							id: eventUserPresence.id,
-							presenceStatus: eventUserPresence.presenceStatus,
-							roomTimeEventId: eventUserPresence.roomTimeEventId,
-						}
-					]
-				}
-			}
+				id: eventUserPresence.id,
+				presenceStatus: eventUserPresence.presenceStatus,
+				roomTimeEventId: eventUserPresence.roomTimeEventId,
+				userId: eventUserPresence.userId,
+			},
 		});
 
 		console.log(response);
 
-		let out = new UserEntity(response);
+		let out = new EventUserPresenceEntity(response);
 		return out;
 	}
 
