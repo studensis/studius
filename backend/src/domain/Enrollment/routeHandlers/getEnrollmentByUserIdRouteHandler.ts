@@ -6,7 +6,7 @@ import EnrollmentRepositoryPrisma from "../repository/EnrollmentRepositoryPrisma
 
 export default async function getEnrollmentByUserIdRouteHandler(req:Request,
     res:Response) {
-        console.log('enrollment/user/:userId GET');
+        console.log('enrollments/user/:userId GET');
 
         try{
             let userId = req.params.userId as string

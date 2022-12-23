@@ -1,7 +1,7 @@
 import { EventUserPresence, RoomTimeEvent, User } from '@prisma/client';
 import { Subject } from '@prisma/client';
 
-export default class eventUserPresenceEntity {
+export default class EventUserPresenceEntity {
 	id: string;
 	presenceStatus: boolean;
 	roomTimeEventId: string;

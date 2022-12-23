@@ -9,7 +9,7 @@ export default async function createEnrollmentRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('/enrollment POST');
+    console.log('/enrollments POST');
 
     try {
         let newEnrollment = new EnrollmentEntity({

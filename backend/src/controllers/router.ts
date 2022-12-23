@@ -50,6 +50,11 @@ import deleteEnrollmentRouteHandler from '../domain/Enrollment/routeHandlers/del
 import listEnrollmentsRouteHandler from '../domain/Enrollment/routeHandlers/listEnrollmentsRouteHandler';
 import getEnrollmentByUserIdRouteHandler from '../domain/Enrollment/routeHandlers/getEnrollmentByUserIdRouteHandler';
 import getEnrollmentBySubjectIdRouteHandler from '../domain/Enrollment/routeHandlers/getEnrollmentBySubjectIdRouteHandler';
+import listRoomTimeEventsRouteHandler from '../domain/RoomTimeEvent/routeHandlers/listRoomTimeEventsRouterHandler';
+import getRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/getRoomTimeEventRouteHandler';
+import createRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/createRoomTimeEventRouteHandler';
+import updateRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/updateRoomTimeEventRouteHandler';
+import deleteRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/deleteRoomTimeEventRouteHandler';
 
 // Kakti API gateway
 
@@ -113,6 +118,13 @@ export default (server: Express) => {
 	server.route('/eventUserPresences').post(createEventUserPresenceRouteHandler); 
 	server.route('/eventUserPresences/:eventUserPresenceId').put(updateEventUserPresenceRouteHandler);
 	server.route('/eventUserPresences/:eventUserPresenceId').delete(deleteEventUserPresenceRouteHandler);
+
+	// RoomTimeEvent routes
+	server.route('/roomTimeEvents').get(listRoomTimeEventsRouteHandler);
+	server.route('/roomTimeEvents/:roomTimeEventId').get(getRoomTimeEventRouteHandler);
+	server.route('/roomTimeEvents').post(createRoomTimeEventRouteHandler); 
+	server.route('/roomTimeEvents/:roomTimeEventId').put(updateRoomTimeEventRouteHandler);
+	server.route('/roomTimeEvents/:roomTimeEventId').delete(deleteRoomTimeEventRouteHandler);
 	
 	// Content routes
 	server.route('/contents').get(listContentsRouteHandler);
@@ -129,12 +141,11 @@ export default (server: Express) => {
 	server.route('/rooms/:roomId').delete(deleteRoomRouteHandler);
 
 	// Enrollment routes
-	server.route('/enrollment').post(createEnrollmentRouteHandler);
-	server.route('/enrollment').put(updateEnrollmentRouteHandler);
-	server.route('/enrollment').delete(deleteEnrollmentRouteHandler);
+	server.route('/enrollments').post(createEnrollmentRouteHandler);
+	server.route('/enrollments').put(updateEnrollmentRouteHandler);
+	server.route('/enrollments').delete(deleteEnrollmentRouteHandler);
 	server.route('/enrollments').get(listEnrollmentsRouteHandler);
 	server.route('/enrollments/user/:userId').get(getEnrollmentByUserIdRouteHandler);
 	server.route('/enrollments/subject/:subjectId').get(getEnrollmentBySubjectIdRouteHandler);
-
 
 };

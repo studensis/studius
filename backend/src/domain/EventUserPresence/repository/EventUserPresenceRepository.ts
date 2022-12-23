@@ -1,5 +1,5 @@
 import UserEntity from '../../User/UserEntity';
-import EventUserPresenceEntity from '../EventUserPresence'
+import EventUserPresenceEntity from '../EventUserPresenceEntity'
 
 export abstract class EventUserPresenceRepository {
 	async getAll(): Promise<EventUserPresenceEntity[]> {

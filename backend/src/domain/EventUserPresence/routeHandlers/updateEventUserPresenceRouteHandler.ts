@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import updateEventUserPresenceInteractor from '../interactors/updateEventUserPresenceInteractor';
 import EventUserPresenceRepositoryPrisma from '../repository/EventUserPresenceRepositoryPrisma';
-import EventUserPresenceEntity from '../EventUserPresence';
+import EventUserPresenceEntity from '../EventUserPresenceEntity';
 
 
 export default async function updateEventUserPresenceRouteHandler(

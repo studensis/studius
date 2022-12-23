@@ -9,7 +9,7 @@ export default async function updateEnrollmentRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('enrollment PUT');
+    console.log('enrollments PUT');
 
     try{
         let newData = new EnrollmentEntity({

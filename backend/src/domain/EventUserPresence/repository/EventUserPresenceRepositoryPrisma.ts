@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { userInfo } from 'os';
 import UserEntity from '../../User/UserEntity';
-import EventUserPresenceEntity from '../EventUserPresence';
+import EventUserPresenceEntity from '../EventUserPresenceEntity';
 import { EventUserPresenceRepository } from './EventUserPresenceRepository';
 
 const prisma = new PrismaClient();
