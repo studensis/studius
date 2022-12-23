@@ -39,6 +39,12 @@ import getRoomRouteHandler from '../domain/Room/routeHandlers/getRoomRouteHandle
 import createRoomRouteHandler from '../domain/Room/routeHandlers/createRoomRouteHandler';
 import updateRoomRouteHandler from '../domain/Room/routeHandlers/updateRoomRouteHandler';
 import deleteRoomRouteHandler from '../domain/Room/routeHandlers/deleteRoomRouteHandler';
+import createEnrollmentRouteHandler from '../domain/Enrollment/routeHandlers/createEnrollmentRouteHandler';
+import updateEnrollmentRouteHandler from '../domain/Enrollment/routeHandlers/updateEnrollmentRouteHandler';
+import deleteEnrollmentRouteHandler from '../domain/Enrollment/routeHandlers/deleteEnrollmentRouter';
+import listEnrollmentsRouteHandler from '../domain/Enrollment/routeHandlers/listEnrollmentsRouteHandler';
+import getEnrollmentByUserIdRouteHandler from '../domain/Enrollment/routeHandlers/getEnrollmentByUserIdRouteHandler';
+import getEnrollmentBySubjectIdRouteHandler from '../domain/Enrollment/routeHandlers/getEnrollmentBySubjectIdRouteHandler';
 
 // Kakti API gateway
 
@@ -109,4 +115,14 @@ export default (server: Express) => {
 	server.route('/rooms').post(createRoomRouteHandler); 
 	server.route('/rooms/:roomId').put(updateRoomRouteHandler);
 	server.route('/rooms/:roomId').delete(deleteRoomRouteHandler);
+
+	// enrollment routes
+	server.route('/enrollment').post(createEnrollmentRouteHandler);
+	server.route('/enrollment').put(updateEnrollmentRouteHandler);
+	server.route('/enrollment').delete(deleteEnrollmentRouteHandler);
+	server.route('/enrollments').get(listEnrollmentsRouteHandler);
+	server.route('/enrollments/user/:userId').get(getEnrollmentByUserIdRouteHandler);
+	server.route('/enrollments/subject/:subjectId').get(getEnrollmentBySubjectIdRouteHandler);
+
+
 };
