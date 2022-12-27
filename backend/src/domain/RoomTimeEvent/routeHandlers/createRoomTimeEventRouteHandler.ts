@@ -13,8 +13,8 @@ export default async function createRoomTimeEventRouteHandler(
 	try {
 		let newRoomTimeEvent = new RoomTimeEventEntity({
 			id: req.query.id as string,
-			dateStart: new Date(Date.now()) as Date,		// placeholder
-			dateEnd: new Date(Date.now()) as Date,			// placeholder
+			dateStart: new Date(Date.parse(String(req.query.dateStart))) as Date,		// placeholder
+			dateEnd: new Date(Date.parse(String(req.query.dateEnd))) as Date,		// placeholder
 			roomId: req.query.roomId as string,
 			eventId: req.query.eventId as string,
 		});

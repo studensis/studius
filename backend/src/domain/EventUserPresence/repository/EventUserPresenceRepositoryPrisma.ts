@@ -32,7 +32,6 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 		let updatedEventUserPresence: any = {};
 
 			if(eventUserPresenceData.presenceStatus) updatedEventUserPresence["presenceStatus"] = eventUserPresenceData.presenceStatus;
-			if(eventUserPresenceData.roomTimeEventId) updatedEventUserPresence["roomTimeEventId"] = eventUserPresenceData.roomTimeEventId;
 		
 		let updatedData = await prisma.eventUserPresence.update({
 			
@@ -41,7 +40,6 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 			},
 			data: {
 				presenceStatus: updatedEventUserPresence.presenceStatus,
-				roomTimeEventId: updatedEventUserPresence.roomTimeEventId,
 			},
 		});		
 		let rez = new EventUserPresenceEntity(updatedData);
