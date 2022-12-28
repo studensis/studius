@@ -19,7 +19,7 @@ export default async function createPostRouteHandler(
 			linkedEntity: req.query.linkedEntity as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,
-			date: undefined
+			date: new Date(Date.parse(String(req.query.date))) as Date, 
 		});
 		// newPost.validate();
 		let repo = new PostRepositoryPrisma();

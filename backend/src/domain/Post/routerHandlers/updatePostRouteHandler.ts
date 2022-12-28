@@ -20,7 +20,7 @@ export default async function updatePostRouteHandler(
 			linkedEntity: req.query.linkedEntity as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,
-			date: undefined	
+			date: new Date(Date.parse(String(req.query.date))) as Date, 
         });
         let repo = new PostRepositoryPrisma();
         let updatedPost = await updatePostInteractor(repo,postData);
