@@ -20,7 +20,7 @@ export default async function updateUserRouteHandler(
 			password: req.query.password as string,
 			jmbag: req.query.jmbag as string,
 			email: req.query.email as string, 
-			userRole: req.query.userRole as UserRole,
+			userRole: (String(req.query.userRole)).toUpperCase() as UserRole,
             mentorID: req.query.mentorID as string, 
         });
         //potrebno staviti validaciju novih podataka 

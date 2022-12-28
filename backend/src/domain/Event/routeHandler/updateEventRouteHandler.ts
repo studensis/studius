@@ -17,7 +17,7 @@ export default async function updateEventRouteHandler(
             id: req.params.eventId as string,
 			title: req.query.title as string,
 			description: req.query.description as string,
-			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntity: (String(req.query.linkedEntity)).toUpperCase() as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
         });
         let repo = new EventRepositoryPrisma();

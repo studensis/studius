@@ -17,7 +17,7 @@ export default async function updatePostRouteHandler(
             id: req.params.postId as string,
 			title: req.query.title as string,
 			ownerId: req.query.ownerId as string,
-			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntity: (String(req.query.linkedEntity)).toUpperCase() as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,
 			date: new Date(Date.parse(String(req.query.date))) as Date, 

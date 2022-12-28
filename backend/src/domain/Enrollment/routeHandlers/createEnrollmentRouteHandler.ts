@@ -15,9 +15,9 @@ export default async function createEnrollmentRouteHandler(
         let newEnrollment = new EnrollmentEntity({
             userId: req.query.userId as string, 
             subjectId: req.query.subjectId as string, 
-            enrollmentDate: undefined,
-            roleTitle: req.query.roleTitle as SubjectRole,
-            status: req.query.status as Status
+            enrollmentDate: new Date(Date.parse(String(req.query.enrollmentDate))) as Date, 
+            roleTitle: (String(req.query.roleTitle)).toUpperCase() as SubjectRole,
+            status: (String(req.query.status)).toUpperCase() as Status
         })
 
         let repo = new EnrollmentRepositoryPrisma();

@@ -82,6 +82,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 			}
 		});
 
-		return response;
+		let out = new SubjectEntity(response);
+		return out;
 	}
 }

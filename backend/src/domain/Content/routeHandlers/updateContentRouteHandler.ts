@@ -18,7 +18,7 @@ export default async function updateContentRouteHandler(
 			markdownText: req.query.markdownText as string,
 			plainText: req.query.plainText as string,
 			date: new Date(Date.parse(String(req.query.date))) as Date,
-			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntity: (String(req.query.linkedEntity)).toUpperCase() as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string
         });
         let repo = new ContentRepositoryPrisma();
