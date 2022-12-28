@@ -17,9 +17,9 @@ const app = express();
 app.use((req, _res, next) => {
 	console.log('');
 	console.log('⬅️ ', req.method, req.path);
-	console.log('body \t', req.body);
-	console.log('query \t', req.query);
-	console.log('params \t', req.params);
+	// console.log('body \t', req.body);
+	// console.log('query \t', req.query);
+	// console.log('params \t', req.params);
 	next();
 });
 
@@ -30,8 +30,6 @@ app.use(
 	})
 );
 
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(cookieParser());
 
 app.use(
@@ -41,6 +39,8 @@ app.use(
 		createContext,
 	})
 );
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (_req, res) => res.send('hello'));
 

@@ -25,10 +25,15 @@ export const createContext = async ({
 		}
 	};
 
+	const cookie = req.headers.cookie;
+	console.log('cookie is:');
+	console.log(cookie);
+
 	return {
 		req,
 		res,
 		user: await getUserFromHeader(),
+		cookie,
 	};
 };
 type Context = inferAsyncReturnType<typeof createContext>;

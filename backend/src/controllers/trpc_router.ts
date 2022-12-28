@@ -39,21 +39,25 @@ const isAuthed = trpc.middleware(({ next, ctx }) => {
 });
 
 const postRouter = trpc.router({
-	listPosts: publicProcedure.use(isAuthed).query(() => posts),
+	listPosts: publicProcedure.query(() => posts),
+	// listPosts: publicProcedure.use(isAuthed).query(() => posts),
 
-	createPost: trpc.procedure.input(z.string()).mutation(({ input }) => {
-		console.log('This is Input:');
-		console.log(input);
+	createPost: trpc.procedure
+		.use(isAuthed)
+		.input(z.object({ text: z.string() }))
+		.mutation(({ input }) => {
+			console.log('This is Input:');
+			console.log(input);
 
-		const post: Post = {
-			id: ++last_id,
-			title: input ? input : 'undefined title',
-			createdAt: Date.now(),
-			updatedAt: Date.now(),
-		};
-		posts.push(post);
-		return post;
-	}),
+			const post: Post = {
+				id: ++last_id,
+				title: input.text ? input.text : 'undefined title',
+				createdAt: Date.now(),
+				updatedAt: Date.now(),
+			};
+			posts.push(post);
+			return post;
+		}),
 
 	postById: publicProcedure.input(z.number()).query(({ input }) => {
 		if (input >= last_id) {
@@ -117,36 +121,48 @@ const adminRouter = trpc.router({
 	}),
 });
 
-const loginRoutine = publicProcedure.mutation(({ ctx }) => {
-	const { password } = ctx.req.body;
+const loginRoutine = publicProcedure
+	.input(
+		z.object({
+			username: z.string(),
+			password: z.string(),
+		})
+	)
+	.mutation(({ ctx, input }) => {
+		console.log('login routine');
 
-	// mock db entry
-	const user = {
-		userId: 123,
-		password: '123456',
-		username: 'user',
-		role: 'admin',
-	};
+		// const { password } = ctx.req.body;
+		const { username, password } = input;
+		console.log(password);
+		// console.log(ctx.req);
 
-	console.log(user.password, password);
+		// mock db entry
+		const user = {
+			userId: 123,
+			password: '123456',
+			username: 'user',
+			role: 'admin',
+		};
 
-	if (user.password !== password) {
-		throw new TRPCError({
-			code: 'FORBIDDEN',
-			message: 'Invalid username or password',
+		console.log(user.password, password);
+
+		if (user.password !== password) {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+				message: 'Invalid username or password',
+			});
+		}
+
+		const token = jwt.sign(user, secret, { expiresIn: '1h' });
+
+		ctx.res.cookie('token', token, {
+			httpOnly: true,
+			// secure: true,
+			// signed: true
 		});
-	}
 
-	const token = jwt.sign(user, secret, { expiresIn: '1h' });
-
-	ctx.res.cookie('token', token, {
-		httpOnly: true,
-		// secure: true,
-		// signed: true
+		return 'logged in successfully';
 	});
-
-	return 'logged in successfully';
-});
 
 const loginOutRoutine = publicProcedure.mutation(({ ctx }) => {
 	ctx.res.clearCookie('token');
