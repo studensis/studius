@@ -55,6 +55,7 @@ import getRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/
 import createRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/createRoomTimeEventRouteHandler';
 import updateRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/updateRoomTimeEventRouteHandler';
 import deleteRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/deleteRoomTimeEventRouteHandler';
+import addContentRouteHandler from '../domain/Subject/routeHandlers/addContentRouteHandler';
 
 // Kakti API gateway
 
@@ -83,6 +84,7 @@ export default (server: Express) => {
 	server.route('/subjects').post(createSubjectRouteHandler);
 	server.route('/subjects/:subjectId').put(updateSubjectRouteHandler);
 	server.route('/subjects/:subjectId').delete(deleteSubjectRouteHandler);
+	server.route('/subjects/addContent/:subjectId').put(addContentRouteHandler);
 
 	// Seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);

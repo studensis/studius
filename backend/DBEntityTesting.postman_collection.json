@@ -342,6 +342,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "content",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/subjects/addContent/1",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"subjects",
+								"addContent",
+								"1"
+							],
+							"query": [
+								{
+									"key": "contentId",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

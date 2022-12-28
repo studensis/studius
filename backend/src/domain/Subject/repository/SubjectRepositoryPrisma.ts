@@ -85,4 +85,21 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		let out = new SubjectEntity(response);
 		return out;
 	}
+
+	async addContent(id: string, contentId: string[]) {
+		
+		let updatedData = await prisma.subject.update({
+			where: {
+				id: id,
+			},
+			data: {
+				contentId:{
+					push: contentId,
+				},
+			},
+		});		
+		let rez = new SubjectEntity(updatedData);
+
+		return rez;
+	}
 }
