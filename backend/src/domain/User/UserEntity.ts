@@ -13,7 +13,6 @@ export default class UserEntity {
 
 
 	constructor(props: User) {
-		// mozda je ID problem, kako zaobitci definiciju IDja?
 		this.id = props.id;
 		this.password = props.password;
 		this.firstname = props.firstname;
@@ -22,20 +21,20 @@ export default class UserEntity {
 		this.email = props.email;
 		this.userRole = props.userRole;
 		this.mentorID = props.mentorID;
-		// izbacuje error za zadnja tri atributa
 	}
 
 	validate() {
 		
-		if (this.password.length < 6) {
-			console.log('ERROR password');
-			throw new Error('invalid password');
-		}
+		
 		if (!this.email) {
 			console.log('ERROR email');
 			throw new Error('invalid email');
 		}
 		if (!this.password) {
+			console.log('ERROR password');
+			throw new Error('invalid password');
+		}
+		if (this.password.length < 6) {
 			console.log('ERROR password');
 			throw new Error('invalid password');
 		}
@@ -51,13 +50,13 @@ export default class UserEntity {
 			console.log('ERROR status');
 			throw new Error('invalid status');
 		}
-		// if (!this.jmbag) {
-		// 	console.log('ERROR JMBAG');
-		// 	throw new Error('invalid JMBAG');
-		// }
-		// if(this.jmbag.length < 10){
-		// 	console.log('ERROR jmbag length');
-		// 	throw new Error('invalid JMBAG length')
-		// }
+		if (!this.jmbag) {
+			console.log('ERROR JMBAG');
+			throw new Error('invalid JMBAG');
+		}
+		if(this.jmbag.length < 10){
+			console.log('ERROR jmbag length');
+			throw new Error('invalid JMBAG length')
+		}
 	}
 }
