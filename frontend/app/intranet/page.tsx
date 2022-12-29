@@ -12,7 +12,7 @@ export default function Intranet() {
 			<button
 				className="p-4 bg-red-500"
 				onClick={() => {
-					createPost.mutate('TEST STRING');
+					createPost.mutate({ text: 'TEST STRING' });
 				}}
 			>
 				Test
