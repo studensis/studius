@@ -1,4 +1,5 @@
-import { Semester, Status } from '@prisma/client';
+import {Semester} from "../Semester"
+import {Status} from "../Status"
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSubjectInteractor from '../../Subject/interactors/createSubjectInteractor';

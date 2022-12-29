@@ -1,4 +1,7 @@
-import { Semester, Subject, Status } from '@prisma/client';
+import { Subject } from '@prisma/client';
+import {Semester} from "./Semester"
+import {Status} from "./Status"
+
 
 export default class SubjectEntity {
 	id: string;
