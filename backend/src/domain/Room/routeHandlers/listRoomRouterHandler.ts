@@ -7,7 +7,7 @@ export default async function listRoomsRouteHandler(
 	req: Request,
 	res: Response
 ) {
-	console.log('/rooms GET');
+	console.log(`rooms/${req.params.roomId} GET`);
 
 	try {
 		let repo = new RoomRepositoryPrisma();

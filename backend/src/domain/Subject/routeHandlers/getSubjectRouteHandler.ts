@@ -4,7 +4,7 @@ import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 export default async function getSubjectRouteHandler(req: Request, res: Response) {
-	console.log(`subjects/${req.params.subjectTitle} GET`);
+	console.log(`subjects/${req.params.subjectId} GET`);
 
 	try {
 		let id = String(req.params.subjectId);

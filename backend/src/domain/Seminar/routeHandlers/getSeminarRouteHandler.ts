@@ -4,7 +4,7 @@ import getSeminarInteractor from '../interactors/getSeminarInteractor';
 import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
 
 export default async function getSeminarRouteHandler(req: Request, res: Response) {
-	console.log('/Seminars/:seminarId GET');
+    console.log(`seminars/${req.params.seminarId} GET`);
 
 	try {
 		let id = String(req.params.seminarId);

@@ -4,7 +4,7 @@ import getRoomTimeEventInteractor from '../interactors/getRoomTimeEventInteracto
 import RoomTimeEventRepositoryPrisma from '../repository/RoomTimeEventRepositoryPrisma';
 
 export default async function getRoomTimeEventRouteHandler(req: Request, res: Response) {
-	console.log('/RoomTimeEvents/:roomTimeEventId GET');
+	console.log(`roomTimeEvents/${req.params.roomTimeEventId} GET`);
 
 	try {
 		let id = String(req.params.roomTimeEventId);

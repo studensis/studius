@@ -8,7 +8,7 @@ export default async function updateSubjectRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log(`subjects/${req.params.subjectId} PUT`);
+    console.log(`subjects/addContent/${req.params.subjectId} PATCH`);
 
     try{
         let id: string = req.params.subjectId;

@@ -4,7 +4,7 @@ import getEventUserPresenceInteractor from '../interactors/getEventUserPresenceI
 import EventUserPresenceRepositoryPrisma from '../repository/EventUserPresenceRepositoryPrisma';
 
 export default async function getEventUserPresenceRouteHandler(req: Request, res: Response) {
-	console.log('/EventUserPresences/:eventUserPresenceId GET');
+	console.log(`eventUserPresences/${req.params.eventUserPresenceId} GET`);
 
 	try {
 		let id = String(req.params.eventUserPresenceId);

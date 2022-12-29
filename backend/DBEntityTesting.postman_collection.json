@@ -346,7 +346,7 @@
 				{
 					"name": "content",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/subjects/addContent/1",

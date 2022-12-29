@@ -84,7 +84,7 @@ export default (server: Express) => {
 	server.route('/subjects').post(createSubjectRouteHandler);
 	server.route('/subjects/:subjectId').put(updateSubjectRouteHandler);
 	server.route('/subjects/:subjectId').delete(deleteSubjectRouteHandler);
-	server.route('/subjects/addContent/:subjectId').put(addContentRouteHandler);
+	server.route('/subjects/addContent/:subjectId').patch(addContentRouteHandler);
 
 	// Seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);
