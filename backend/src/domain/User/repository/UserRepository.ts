@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import UserEntity from '../UserEntity';
 
 export abstract class UserRepository {
