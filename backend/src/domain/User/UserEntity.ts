@@ -6,11 +6,10 @@ export default class UserEntity {
 	firstname: string;
 	lastname: string;
 	password: string;
-	jmbag: string;
+	jmbag: string | null;
 	email: string;
 	userRole: UserRole;
-	mentorID:  string;
-
+	mentorID: string | null;
 
 	constructor(props: User) {
 		this.id = props.id;
@@ -24,8 +23,6 @@ export default class UserEntity {
 	}
 
 	validate() {
-		
-		
 		if (!this.email) {
 			console.log('ERROR email');
 			throw new Error('invalid email');
