@@ -15,8 +15,8 @@ export default async function getEnrollmentBySubjectIdRouteHandler(req:Request,
             let rez = await getEnrollmentBySubjectIdInteractor(repo,subjectId);
             res.send(rez);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
         }
     }

@@ -21,8 +21,8 @@ export default async function updateRoomRouteHandler(
         let updatedRoom = await updateRoomInteractor(repo,roomData);
         return res.send(updatedRoom);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

@@ -11,7 +11,8 @@ export default async function getUserRouteHandler(req: Request, res: Response) {
 		let repo = new UserRepositoryPrisma();
 		let user = await getUserInteractor(repo, id);
 		return res.send(user);
-	} catch {
-		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

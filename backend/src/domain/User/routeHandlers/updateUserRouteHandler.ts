@@ -28,9 +28,9 @@ export default async function updateUserRouteHandler(
         let updatedUser = await updateUserInteractor(repo,userData);
         return res.send(updatedUser);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }
 

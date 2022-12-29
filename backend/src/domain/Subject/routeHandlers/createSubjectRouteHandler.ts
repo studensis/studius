@@ -26,6 +26,7 @@ export default async function createSubjectRouteHandler(
 		let subject = await createSubjectInteractor(repo, newSubject);
 		return res.send(subject);
 	} catch (err) {
+		console.log(err);
 		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

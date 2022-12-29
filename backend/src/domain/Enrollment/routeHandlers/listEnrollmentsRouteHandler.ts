@@ -11,10 +11,10 @@ export default async function listEnrollmentsRouteHandler(req:Request,
             let repo = new EnrollmentRepositoryPrisma();
             let rez = await listEnrollmentsInteractor(repo);
             console.log(rez);
-            res.send(rez)
+            return res.send(rez)
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
         }
     }

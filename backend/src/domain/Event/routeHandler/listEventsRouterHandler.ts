@@ -12,8 +12,9 @@ export default async function listEventsRouteHandler(
 	try {
 		let repo = new EventRepositoryPrisma();
 		let events = await listEventsInteractor(repo);
-		res.send(events);
-	} catch {
-		res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+		return res.send(events);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

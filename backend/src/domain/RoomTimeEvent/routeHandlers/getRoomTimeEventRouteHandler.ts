@@ -11,7 +11,8 @@ export default async function getRoomTimeEventRouteHandler(req: Request, res: Re
 		let repo = new RoomTimeEventRepositoryPrisma();
 		let roomTimeEvent = await getRoomTimeEventInteractor(repo, id);
 		return res.send(roomTimeEvent);
-	} catch {
-		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

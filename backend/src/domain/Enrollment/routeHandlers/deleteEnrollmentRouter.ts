@@ -16,8 +16,8 @@ export default async function deleteEnrollmentRouteHandler(req:Request,
             let rez = await deleteEnrollmentInteractor(repo, key);
             res.send(rez)
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
         }
     }

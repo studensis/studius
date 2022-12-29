@@ -11,7 +11,8 @@ export default async function getEventUserPresenceRouteHandler(req: Request, res
 		let repo = new EventUserPresenceRepositoryPrisma();
 		let eventUserPresence = await getEventUserPresenceInteractor(repo, id);
 		return res.send(eventUserPresence);
-	} catch {
-		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

@@ -11,7 +11,8 @@ export default async function getRoomRouteHandler(req: Request, res: Response) {
 		let repo = new RoomRepositoryPrisma();
 		let room = await getRoomInteractor(repo, id);
 		return res.send(room);
-	} catch {
-		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

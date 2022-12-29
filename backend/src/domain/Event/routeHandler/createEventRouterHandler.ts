@@ -24,6 +24,7 @@ export default async function createEventRouteHandler(
 		let event = await createEventInteractor(repo, newEvent);
 		return res.send(event);
 	} catch (err) {
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

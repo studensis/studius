@@ -26,8 +26,8 @@ export default async function updateSubjectRouteHandler(
         let updatedSubject = await updateSubjectInteractor(repo,subjectData);
         return res.send(updatedSubject);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

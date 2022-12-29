@@ -22,7 +22,7 @@ export default async function createEventUserPresenceRouteHandler(
 		let eventUserPresence = await createEventUserPresenceInteractor(repo, newEventUserPresence);
 		return res.send(eventUserPresence);
 	} catch (err) {
-		console.log(err)
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

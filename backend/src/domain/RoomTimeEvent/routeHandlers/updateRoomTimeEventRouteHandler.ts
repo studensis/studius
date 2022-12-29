@@ -23,8 +23,8 @@ export default async function updateRoomTimeEventRouteHandler(
         let updatedRoomTimeEvent = await updateRoomTimeEventInteractor(repo,roomTimeEventData);
         return res.send(updatedRoomTimeEvent);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

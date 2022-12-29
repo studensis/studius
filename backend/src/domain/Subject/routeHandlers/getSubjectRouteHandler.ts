@@ -11,7 +11,8 @@ export default async function getSubjectRouteHandler(req: Request, res: Response
 		let repo = new SubjectRepositoryPrisma();
 		let subject = await getSubjectInteractor(repo, id);
 		return res.send(subject);
-	} catch {
-		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

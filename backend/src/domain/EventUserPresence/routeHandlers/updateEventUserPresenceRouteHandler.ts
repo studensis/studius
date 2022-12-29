@@ -22,8 +22,8 @@ export default async function updateEventUserPresenceRouteHandler(
         let updatedEventUserPresence = await updateEventUserPresenceInteractor(repo,eventUserPresenceData);
         return res.send(updatedEventUserPresence);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

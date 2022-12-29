@@ -12,8 +12,9 @@ export default async function listEventUserPresencesRouteHandler(
 	try {
 		let repo = new EventUserPresenceRepositoryPrisma();
 		let eventUserPresences = await listEventUserPresencesInteractor(repo);
-		res.send(eventUserPresences);
-	} catch {
-		res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+		return res.send(eventUserPresences);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

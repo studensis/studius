@@ -25,8 +25,8 @@ export default async function updateContentRouteHandler(
         let updatedContent = await updateContentInteractor(repo,contentData);
         return res.send(updatedContent);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

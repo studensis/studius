@@ -26,8 +26,8 @@ export default async function updatePostRouteHandler(
         let updatedPost = await updatePostInteractor(repo,postData);
         return res.send(updatedPost);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }
