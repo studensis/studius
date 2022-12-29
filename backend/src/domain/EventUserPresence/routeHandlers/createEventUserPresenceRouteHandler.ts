@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createEventUserPresenceInteractor from '../interactors/createEventUserPresenceInteractor';
 import EventUserPresenceRepositoryPrisma from '../repository/EventUserPresenceRepositoryPrisma';
-import EventUserPresenceEntity from '../EventUserPresence';
+import EventUserPresenceEntity from '../EventUserPresenceEntity';
 
 export default async function createEventUserPresenceRouteHandler(
 	req: Request,
@@ -22,7 +22,7 @@ export default async function createEventUserPresenceRouteHandler(
 		let eventUserPresence = await createEventUserPresenceInteractor(repo, newEventUserPresence);
 		return res.send(eventUserPresence);
 	} catch (err) {
-		console.log(err)
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

@@ -15,7 +15,7 @@ export default async function deleteEventRouteHandler(
     let response = await deleteEventInteractor(id, repo);
     return res.send(response);
   } catch (err) {
-    console.log(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-  }
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

@@ -33,6 +33,8 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 			if(contentData.plainText) updatedContent["plainText"] = contentData.plainText;
 			if(contentData.linkedEntity) updatedContent["linkedEntity"] = contentData.linkedEntity;
 			if(contentData.linkedEntityId) updatedContent["linkedEntityId"] = contentData.linkedEntityId;
+			if(contentData.date) updatedContent["date"] = contentData.date;
+
 		
 		let updatedData = await prisma.content.update({
 			
@@ -44,6 +46,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 			    plainText: updatedContent.plainText,
 				linkedEntity: updatedContent.linkedEntity,
     			linkedEntityId: updatedContent.linkedEntityId,
+				date: updatedContent.date,
 			},
 		});		
 		let rez = new ContentEntity(updatedData);
@@ -60,6 +63,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 			    plainText: content.plainText,
 				linkedEntity: content.linkedEntity,
     			linkedEntityId: content.linkedEntityId,
+				date: content.date,
 			}
 		});
 

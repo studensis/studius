@@ -16,10 +16,10 @@ export default async function createPostRouteHandler(
 			id: req.query.id as string,
 			title: req.query.title as string,
 			ownerId: req.query.ownerId as string,
-			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			linkedEntity: (String(req.query.linkedEntity)).toUpperCase() as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,
-			date: undefined
+			date: new Date(Date.parse(String(req.query.date))) as Date, 
 		});
 		// newPost.validate();
 		let repo = new PostRepositoryPrisma();
@@ -27,6 +27,6 @@ export default async function createPostRouteHandler(
 		return res.send(post);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

@@ -9,15 +9,15 @@ export default async function createEnrollmentRouteHandler(
     req: Request,
     res: Response
 ) {
-    console.log('/enrollment POST');
+    console.log('/enrollments POST');
 
     try {
         let newEnrollment = new EnrollmentEntity({
             userId: req.query.userId as string, 
             subjectId: req.query.subjectId as string, 
-            enrollmentDate: undefined,
-            roleTitle: req.query.roleTitle as SubjectRole,
-            status: req.query.status as Status
+            enrollmentDate: new Date(Date.parse(String(req.query.enrollmentDate))) as Date, 
+            roleTitle: (String(req.query.roleTitle)).toUpperCase() as SubjectRole,
+            status: (String(req.query.status)).toUpperCase() as Status
         })
 
         let repo = new EnrollmentRepositoryPrisma();
@@ -26,8 +26,8 @@ export default async function createEnrollmentRouteHandler(
 
         res.send(response)
     }
-    catch(err){
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-    }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

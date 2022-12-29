@@ -35,6 +35,8 @@ export default class PostRepositoryPrisma extends PostRepository {
 			if(postData.linkedEntity) updatedPost["linkedEntity"] = postData.linkedEntity;
 			if(postData.linkedEntityId) updatedPost["linkedEntityId"] = postData.linkedEntityId;
 			if(postData.contentId) updatedPost["contentId"] = postData.contentId;
+			if(postData.date) updatedPost["date"] = postData.date;
+
 			
 		let updatedData = await prisma.post.update({
 			
@@ -47,6 +49,7 @@ export default class PostRepositoryPrisma extends PostRepository {
 			    linkedEntity: updatedPost.linkedEntity,
 			    linkedEntityId: updatedPost.linkedEntityId,
 				contentId: updatedPost.contentId,
+				date: updatedPost.date,
 			},
 		});		
 		let rez = new PostEntity(updatedData);
@@ -64,6 +67,7 @@ export default class PostRepositoryPrisma extends PostRepository {
 			    linkedEntity: post.linkedEntity,
 			    linkedEntityId: post.linkedEntityId,
 				contentId: post.contentId,
+				date: post.date,
 			}
 		});
 

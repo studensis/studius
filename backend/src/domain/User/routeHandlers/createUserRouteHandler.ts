@@ -21,7 +21,7 @@ export default async function createUserRouteHandler(
 			jmbag: req.query.jmbag as string,
 			email: req.query.email as string,
 			mentorID: req.query.mentorID as string, 
-			userRole: req.query.userRole as UserRole,
+			userRole: (String(req.query.userRole)).toUpperCase() as UserRole,
 		});
 		newUser.validate();
 		let repo = new UserRepositoryPrisma();
@@ -29,6 +29,6 @@ export default async function createUserRouteHandler(
 		return res.send(user);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('err');
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

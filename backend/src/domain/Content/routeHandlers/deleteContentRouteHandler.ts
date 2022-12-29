@@ -14,8 +14,9 @@ export default async function deleteContentRouteHandler(
     let repo = new ContentRepositoryPrisma();
     let response = await deleteContentInteractor(id, repo);
     return res.send(response);
-  } catch (err) {
-    console.log(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
   }
+  catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

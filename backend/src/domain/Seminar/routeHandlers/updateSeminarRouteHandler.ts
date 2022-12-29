@@ -27,8 +27,8 @@ export default async function updateSeminarRouteHandler(
         let updatedSeminar = await updateSeminarInteractor(repo,seminarData);
         return res.send(updatedSeminar);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

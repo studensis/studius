@@ -16,4 +16,7 @@ export abstract class SubjectRepository {
 	async delete(subjectId: string): Promise<SubjectEntity>{
 		throw new Error('Method not implemented.');
 	}
+	async addContent(id: string, contentId: string[]): Promise<SubjectEntity>{
+		throw new Error('Method not implemented.');
+	}
 }

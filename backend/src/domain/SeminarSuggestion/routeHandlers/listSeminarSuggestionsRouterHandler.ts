@@ -12,8 +12,9 @@ export default async function listSeminarSuggestionsRouteHandler(
 	try {
 		let repo = new SeminarSuggestionRepositoryPrisma();
 		let seminarSuggestions = await listSeminarSuggestionsInteractor(repo);
-		res.send(seminarSuggestions);
-	} catch {
-		res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+		return res.send(seminarSuggestions);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

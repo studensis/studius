@@ -1,4 +1,5 @@
-import { Semester, Status } from '@prisma/client';
+import {Semester} from "../Semester"
+import {Status} from "../Status"
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSubjectInteractor from '../../Subject/interactors/createSubjectInteractor';
@@ -17,15 +18,16 @@ export default async function createSubjectRouteHandler(
 			title: req.query.title as string,
 			description: req.query.description as string,
 			ectsBod: req.query.ectsBod as string,
-			semester: req.query.semester as Semester,   
-			status: req.query.status as Status, 
+			semester: (String(req.query.semester)).toUpperCase() as Semester,   
+			status: (String(req.query.status)).toUpperCase() as Status, 
 			contentId: String(req.query.contentId).split(",") as string[],        
 		});
-		//newSubject.validate();
+		newSubject.validate();
 		let repo = new SubjectRepositoryPrisma();
 		let subject = await createSubjectInteractor(repo, newSubject);
 		return res.send(subject);
 	} catch (err) {
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

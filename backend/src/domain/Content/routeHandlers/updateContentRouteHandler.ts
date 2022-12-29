@@ -17,16 +17,16 @@ export default async function updateContentRouteHandler(
             id: req.params.contentId as string,
 			markdownText: req.query.markdownText as string,
 			plainText: req.query.plainText as string,
-			date: undefined,                 // Date
-			linkedEntity: req.query.linkedEntity as LinkedEntity,
+			date: new Date(Date.parse(String(req.query.date))) as Date,
+			linkedEntity: (String(req.query.linkedEntity)).toUpperCase() as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string
         });
         let repo = new ContentRepositoryPrisma();
         let updatedContent = await updateContentInteractor(repo,contentData);
         return res.send(updatedContent);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

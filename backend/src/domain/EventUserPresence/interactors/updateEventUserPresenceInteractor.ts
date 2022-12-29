@@ -1,5 +1,5 @@
 import { EventUserPresenceRepository } from '../repository/EventUserPresenceRepository';
-import EventUserPresenceEntity from '../EventUserPresence';
+import EventUserPresenceEntity from '../EventUserPresenceEntity';
 
 export default async function updateEventUserPresenceInteractor(
     eventUserPresenceRepository: EventUserPresenceRepository,

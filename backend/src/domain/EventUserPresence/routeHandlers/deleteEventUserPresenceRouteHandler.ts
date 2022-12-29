@@ -15,7 +15,7 @@ export default async function deleteEventUserPresenceRouteHandler(
     let response = await deleteEventUserPresenceInteractor(id, repo);
     return res.send(response);
   } catch (err) {
-    console.log(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-  }
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

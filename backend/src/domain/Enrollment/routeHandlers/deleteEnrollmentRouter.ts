@@ -6,7 +6,7 @@ import EnrollmentRepositoryPrisma from "../repository/EnrollmentRepositoryPrisma
 
 export default async function deleteEnrollmentRouteHandler(req:Request,
     res: Response) {
-        console.log('/enrollment DELETE');
+        console.log(`/enrollments DELETE`);
         
         try{
             let key: key = {userId: req.query.userId as string,
@@ -16,8 +16,8 @@ export default async function deleteEnrollmentRouteHandler(req:Request,
             let rez = await deleteEnrollmentInteractor(repo, key);
             res.send(rez)
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
         }
     }

@@ -11,7 +11,8 @@ export default async function getPostRouteHandler(req: Request, res: Response) {
 		let repo = new PostRepositoryPrisma();
 		let post = await getPostInteractor(repo, id);
 		return res.send(post);
-	} catch {
-		return res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+	} catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 	}
 }

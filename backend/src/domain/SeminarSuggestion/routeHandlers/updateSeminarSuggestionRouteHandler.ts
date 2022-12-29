@@ -22,8 +22,8 @@ export default async function updateSeminarSuggestionRouteHandler(
         let updatedSeminarSuggestion = await updateSeminarSuggestionInteractor(repo,seminarSuggestionData);
         return res.send(updatedSeminarSuggestion);
     }
-    catch(err) {
-        console.log(err);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
-     }
+    catch (err) {
+		console.log(err);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+	}
 }

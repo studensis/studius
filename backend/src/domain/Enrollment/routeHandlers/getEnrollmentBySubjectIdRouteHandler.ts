@@ -7,7 +7,7 @@ import EnrollmentRepositoryPrisma from "../repository/EnrollmentRepositoryPrisma
 
 export default async function getEnrollmentBySubjectIdRouteHandler(req:Request,
     res:Response) {
-        console.log('enrollment/subject/:subjectId GET');
+        console.log(`enrollments/subject/${req.params.subjectId} GET`);
 
         try{
             let subjectId = req.params.subjectId as string
@@ -15,8 +15,8 @@ export default async function getEnrollmentBySubjectIdRouteHandler(req:Request,
             let rez = await getEnrollmentBySubjectIdInteractor(repo,subjectId);
             res.send(rez);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
         }
     }
