@@ -4,7 +4,7 @@ import logoutRoutine from './logoutRoutine';
 import meRoutine from './meRoutine';
 
 export default t.router({
-	logIn: loginRoutine,
-	logOut: logoutRoutine,
+	login: loginRoutine,
+	logout: logoutRoutine,
 	me: meRoutine,
 });

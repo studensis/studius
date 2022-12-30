@@ -1,23 +1,30 @@
-import Link from 'next/link';
-import { getUsers } from '../../resources/backend';
+'use client';
 
-async function SubjectList() {
-	const users = await getUsers();
+import Link from 'next/link';
+import { trpc } from '../../components/hooks/TrpcProvider';
+
+export default function SubjectList() {
+	// const users = await getUsers();
+
+	const users = trpc.user.listUsers.useQuery(undefined, {
+		refetchInterval: 5000,
+	});
 
 	return (
 		<div className="grid grid-cols-3 gap-4">
-			{users.map((user) => {
-				return (
-					<>
-						<Link href={'/user/' + user.id} key={user.id}>
-							<div className="p-6 border-light-accent-weak border">
-								<p className="title1">{user.firstname}</p>
-								<p>{user.id}</p>
-							</div>
-						</Link>
-					</>
-				);
-			})}
+			{users.data &&
+				users.data.map((user) => {
+					return (
+						<>
+							<Link href={'/user/' + user.id} key={user.id}>
+								<div className="p-6 border-light-accent-weak border">
+									<p className="title1">{user.firstname}</p>
+									<p>{user.id}</p>
+								</div>
+							</Link>
+						</>
+					);
+				})}
 			{/* {subjects.map((subject) => (
 				<Link href={'/subject/' + subject.id} key={subject.id}>
 					<p>
@@ -28,5 +35,3 @@ async function SubjectList() {
 		</div>
 	);
 }
-
-export default SubjectList;

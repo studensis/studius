@@ -22,7 +22,7 @@ export default t.procedure
 			userId: 123,
 			password: '123456',
 			username: 'user',
-			role: 'admin',
+			role: 'ADMIN',
 		};
 
 		console.log(user.password, password);

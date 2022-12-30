@@ -8,7 +8,7 @@ export const isAdmin = t.middleware(({ next, ctx }) => {
 			message: 'Please log in.',
 		});
 	}
-	if (ctx.user.role != 'admin' && ctx.user.role != 'superadmin') {
+	if (ctx.user.role != 'ADMIN' && ctx.user.role != 'SUPERADMIN') {
 		throw new TRPCError({
 			code: 'UNAUTHORIZED',
 			message: 'Operation not permitted: rank too low.',

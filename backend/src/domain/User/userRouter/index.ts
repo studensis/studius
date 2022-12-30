@@ -1,6 +1,9 @@
 import { z } from 'zod';
+import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import createUserInteractor from '../interactors/createUserInteractor';
+import deleteUserInteractor from '../interactors/deleteUserInteractor';
+import getUserInteractor from '../interactors/getUserInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
@@ -10,6 +13,7 @@ let repo = new UserRepositoryPrisma();
 
 export default t.router({
 	createUser: t.procedure
+		.use(isAdmin)
 		.input(
 			z.object({
 				// id: z.string(),
@@ -34,17 +38,22 @@ export default t.router({
 			return newUser;
 		}),
 
-	deleteUserById: t.procedure.mutation(() => {
-		return 'TODO';
-	}),
+	deleteUserById: t.procedure
+		.use(isAdmin)
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let a = await deleteUserInteractor(input, repo);
+			return a;
+		}),
 
-	getUserById: t.procedure.query(() => {
-		return 'TODO';
+	getUserById: t.procedure.input(z.string()).query(async ({ input }) => {
+		let user = await getUserInteractor(repo, input);
+		return user;
 	}),
 
 	listUsers: t.procedure.query(async () => {
 		let users = await listUsersInteractor(repo);
-		return users;
+		return users as UserEntity[];
 	}),
 
 	updateUser: t.procedure
