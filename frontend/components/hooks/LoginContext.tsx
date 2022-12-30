@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface ILoginContext {
 	loggedIn: boolean;
@@ -17,14 +17,14 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 	const [loginRole, setLoginRole] = useState<string>('default');
 	const router = useRouter();
 
-	useEffect(() => {
-		let LS_loginState = JSON.parse(localStorage.getItem('loginState'));
-		if (LS_loginState == true) {
-			setLoginState(true);
-		} else {
-			setLoginState(false);
-		}
-	}, [loginState]);
+	// useEffect(() => {
+	// 	let LS_loginState = JSON.parse(localStorage.getItem('loginState'));
+	// 	if (LS_loginState == true) {
+	// 		setLoginState(true);
+	// 	} else {
+	// 		setLoginState(false);
+	// 	}
+	// }, [loginState]);
 
 	return (
 		<>
