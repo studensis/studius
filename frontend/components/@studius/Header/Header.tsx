@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { trpc } from '../../hooks/TrpcProvider';
+import useLogin from '../../hooks/LoginContext';
 import { Button } from '../Button/Button';
 import Icon, { IconName } from '../Icon/Icon';
 
@@ -28,13 +28,13 @@ const NavItem = ({
 
 function Header() {
 	// let { loggedIn, logIn, logOut, loginRole } = useLogin();
-	const me = trpc.auth.me.useQuery();
-	const login = trpc.auth.login.useMutation();
-	const logout = trpc.auth.logout.useMutation();
+	const { loggedIn, user, login, logout } = useLogin();
+
+	// const login = trpc.auth.login.useMutation();
+	// const logout = trpc.auth.logout.useMutation();
 
 	return (
 		<>
-			{/* {loggedIn ? ( */}
 			<>
 				<div className="w-full px-6 py-4 flex place-content-between place-items-center">
 					<div className="flex gap-2">
@@ -49,7 +49,7 @@ function Header() {
 							icon="home"
 							title="Homepage"
 						/>
-						{me.data && me.data.role === 'ADMIN' && (
+						{user && user.role === 'ADMIN' && (
 							<NavItem
 								href="/admin"
 								icon="adminTools"
@@ -64,24 +64,21 @@ function Header() {
 						/>
 					</div>
 					<div className="flex gap-2">
-						{JSON.stringify(me.data)}
+						{JSON.stringify(user)}
 						<Button
 							onClick={() => {
 								// logOut();
-								if (me.data) {
-									logout.mutate();
+								if (loggedIn) {
+									logout();
 								} else {
-									login.mutate({
+									login({
 										username: 'user',
 										password: '123456',
 									});
 								}
-								setTimeout(() => {
-									me.refetch();
-								}, 200);
 							}}
 						>
-							{me.data ? 'Log Out' : 'Log In'}
+							{loggedIn ? 'Log Out' : 'Log In'}
 						</Button>
 						<div className="w-12 h-12 rounded-[16px] bg-black"></div>
 					</div>
