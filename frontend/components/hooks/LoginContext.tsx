@@ -11,7 +11,7 @@ type User = {
 interface ILoginContext {
 	loggedIn: boolean;
 	user: User | null;
-	login: (input: { username: string; password: string }) => any;
+	login: (input: { email: string; password: string }) => any;
 	logout: () => any;
 	// login: typeof trpc.auth.login.useMutation
 }
@@ -19,7 +19,7 @@ interface ILoginContext {
 const LoginContext = createContext<ILoginContext>({
 	loggedIn: false,
 	user: null,
-	login: (input: { username: string; password: string }) => null,
+	login: (input: { email: string; password: string }) => null,
 	logout: () => null,
 });
 

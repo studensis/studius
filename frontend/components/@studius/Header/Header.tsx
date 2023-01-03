@@ -72,7 +72,7 @@ function Header() {
 									logout();
 								} else {
 									login({
-										username: 'user',
+										email: 'user',
 										password: '123456',
 									});
 								}

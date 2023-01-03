@@ -7,21 +7,21 @@ const secret = '3qtv47890hn689n72cdx3049b*&%a';
 export default t.procedure
 	.input(
 		z.object({
-			username: z.string(),
+			email: z.string(),
 			password: z.string(),
 		})
 	)
 	.mutation(({ ctx, input }) => {
 		console.log('login routine');
 
-		const { username, password } = input;
+		const { email, password } = input;
 		console.log(password);
 
 		// mock db entry
 		const user = {
 			userId: 123,
 			password: '123456',
-			username: 'user',
+			email: 'user',
 			role: 'ADMIN',
 		};
 
@@ -30,7 +30,7 @@ export default t.procedure
 		if (user.password !== password) {
 			throw new TRPCError({
 				code: 'FORBIDDEN',
-				message: 'Invalid username or password',
+				message: 'Invalid email or password',
 			});
 		}
 
