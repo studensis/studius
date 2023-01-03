@@ -1,9 +1,9 @@
 import { UserRepository } from '../repository/UserRepository';
-import UserEntity from '../UserEntity';
+import { updateUserEntity } from '../updateUserEntity';
 
 export default async function updateUserInteractor(
     userRepository: UserRepository,
-    user: UserEntity
+    user: updateUserEntity
 ) {
     let updatedUser = await userRepository.update(user);
     return updatedUser;

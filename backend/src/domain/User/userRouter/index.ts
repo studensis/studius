@@ -7,8 +7,9 @@ import getUserInteractor from '../interactors/getUserInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
-import UserEntity from '../UserEntity';
-import {UserRole} from "../UserRole";
+import {UserEntity} from '../UserEntity';
+import {updateUserEntity} from '../updateUserEntity';
+
 
 let repo = new UserRepositoryPrisma();
 
@@ -24,18 +25,17 @@ export default t.router({
 				jmbag: z.string().optional(),
 				email: z.string(),
 				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']).optional(),
-				// userRole: z.enum(UserRole).optional(),		// testiraj
 				mentorID: z.string().optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let user = new UserEntity({
+			let user:UserEntity = {
 				...input,
 				id: '',
 				jmbag: input.jmbag || null,
 				userRole: input.userRole || 'DEFAULT',
 				mentorID: input.mentorID || null,
-			});
+			}
 			let newUser = await createUserInteractor(repo, user);
 			return newUser;
 		}),
@@ -62,17 +62,17 @@ export default t.router({
 		.input(
 			z.object({
 				id: z.string(),
-				firstname: z.string(),
-				lastname: z.string(),
-				password: z.string(),
-				jmbag: z.string(),
-				email: z.string(),
-				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']),
-				mentorID: z.string(),
+				firstname: z.string().optional(),
+				lastname: z.string().optional(),
+				password: z.string().optional(),
+				jmbag: z.string().optional(),
+				email: z.string().optional(),
+				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']).optional(),
+				mentorID: z.string().optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let user = new UserEntity(input);
+			let user:updateUserEntity = {...input};
 			let updatedUser = await updateUserInteractor(repo, user);
 			return updatedUser;
 		}),
