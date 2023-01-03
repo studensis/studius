@@ -8,6 +8,7 @@ import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 import UserEntity from '../UserEntity';
+import {UserRole} from "../UserRole";
 
 let repo = new UserRepositoryPrisma();
 
@@ -23,6 +24,7 @@ export default t.router({
 				jmbag: z.string().optional(),
 				email: z.string(),
 				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']).optional(),
+				// userRole: z.enum(UserRole).optional(),		// testiraj
 				mentorID: z.string().optional(),
 			})
 		)
