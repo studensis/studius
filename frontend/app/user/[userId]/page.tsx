@@ -1,5 +1,9 @@
+'use client';
+
 import Link from 'next/link';
-import { getUser } from '../../../resources/backend';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { trpc } from '../../../components/hooks/TrpcProvider';
 
 type PageProps = {
 	params: {
@@ -7,32 +11,46 @@ type PageProps = {
 	};
 };
 
-async function SubjectPage(props: PageProps) {
-	const todo = await getUser(props.params.userId);
+export default function SubjectPage(props: PageProps) {
+	const router = useRouter();
+	const user = trpc.user.getUserById.useQuery(props.params.userId);
+	const deleteUser = trpc.user.deleteUserById.useMutation();
+
+	useEffect(() => {
+		if (deleteUser.status === 'success') {
+			router.push('/user');
+		}
+		console.log(deleteUser.status);
+	}, [deleteUser]);
 
 	return (
 		<div>
 			<Link href="/user">
 				<p className="title2 mb-12">{'<-'} back to Users</p>
 			</Link>
-			<h1 className="display1">{todo.firstname}</h1>
+			<h2 className="display2">{user.data?.firstname}</h2>
+			<button
+				className="p-4 bg-red-500"
+				onClick={() => {
+					deleteUser.mutate(props.params.userId);
+				}}
+			>
+				Delete me
+			</button>
+
+			{deleteUser.isSuccess && (
+				<pre className="p-4 bg-light-neutral-weak">
+					{JSON.stringify(deleteUser.data)}
+				</pre>
+			)}
+			{deleteUser.error && (
+				<pre className="p-4 bg-light-danger">
+					{JSON.stringify(deleteUser.error.shape?.message, null, 2)}
+				</pre>
+			)}
 			<pre className=" bg-light-neutral-weak p-8">
-				{JSON.stringify(props, null, 2)}
+				{JSON.stringify(user.data, null, 2)}
 			</pre>
 		</div>
 	);
 }
-
-export default SubjectPage;
-
-// export async function generateStaticParams() {
-// 	const res = await fetch('https://jsonplaceholder.typicode.com/todos/');
-// 	let todos: Todo[] = await res.json();
-
-// 	// rate limiting prevention, will prerender first 10 items only.
-// 	todos = todos.splice(10);
-
-// 	return todos.map((todo) => {
-// 		return { userId: todo.id.toString() };
-// 	});
-// }

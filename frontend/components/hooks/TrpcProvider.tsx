@@ -27,7 +27,7 @@ function TrpcProvider({ children }: { children: React.ReactNode }) {
 			links: [
 				loggerLink(),
 				httpBatchLink({
-					url: 'http://localhost:4000/trpc',
+					url: 'http://localhost:4000',
 					fetch: async (input, init?) => {
 						const fetch = getFetch();
 						return fetch(input, {

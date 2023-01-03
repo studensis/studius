@@ -3,8 +3,8 @@
 import { trpc } from '../../components/hooks/TrpcProvider';
 
 export default function Intranet() {
-	const posts = trpc.post.listPosts.useQuery();
-	const createPost = trpc.post.createPost.useMutation();
+	const posts = trpc.postExample.listPosts.useQuery();
+	const createPost = trpc.postExample.createPost.useMutation();
 
 	return (
 		<>

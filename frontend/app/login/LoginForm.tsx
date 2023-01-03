@@ -1,10 +1,8 @@
 'use client';
 
 import { Button } from '../../components/@studius/Button/Button';
-import useLogin from '../../components/hooks/LoginContext';
 
 export default function LoginForm() {
-	const { logIn } = useLogin();
 	return (
 		<>
 			<form>
@@ -17,14 +15,14 @@ export default function LoginForm() {
 				Log in as:
 				<Button
 					onClick={() => {
-						logIn();
+						// logIn();
 					}}
 				>
 					Default User
 				</Button>
 				<Button
 					onClick={() => {
-						logIn('admin');
+						// logIn('admin');
 					}}
 				>
 					Admin

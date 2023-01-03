@@ -2,13 +2,15 @@
 
 import Link from 'next/link';
 import { Button } from '../../components/@studius/Button/Button';
-import useLogin from '../../components/hooks/LoginContext';
+import { trpc } from '../../components/hooks/TrpcProvider';
 
 export default function AdminToolbar() {
-	const { loginRole } = useLogin();
+	const me = trpc.auth.me.useQuery();
+
 	return (
 		<>
-			{loginRole == 'admin' ? (
+			{me.data &&
+			(me.data.role == 'ADMIN' || me.data.role == 'SUPERADMIN') ? (
 				<Link href="/user/create">
 					<Button rightIcon="user">Create user</Button>
 				</Link>

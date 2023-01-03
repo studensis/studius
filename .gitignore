@@ -38,4 +38,7 @@ next-env.d.ts
 */dist
 node_modules
 package-lock.json
-yarn.lock
+*/package-lock.json
+backend/package-lock.json
+backend/package-lock.json
+backend/package-lock.json

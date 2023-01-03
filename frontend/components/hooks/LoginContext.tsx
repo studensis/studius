@@ -1,56 +1,68 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { trpc } from './TrpcProvider';
+
+type User = {
+	userId: string;
+	role: string;
+};
 
 interface ILoginContext {
 	loggedIn: boolean;
-	loginRole: string;
-	logIn: (role?: string) => void;
-	logOut: () => void;
+	user: User | null;
+	login: (input: { email: string; password: string }) => any;
+	logout: () => any;
+	// login: typeof trpc.auth.login.useMutation
 }
 
-const LoginContext = createContext<ILoginContext | null>(null);
+const LoginContext = createContext<ILoginContext>({
+	loggedIn: false,
+	user: null,
+	login: (input: { email: string; password: string }) => null,
+	logout: () => null,
+});
 
 function LoginProvider({ children }: { children: React.ReactNode }) {
 	const [loginState, setLoginState] = useState<boolean>(false);
-	const [loginRole, setLoginRole] = useState<string>('default');
-	const router = useRouter();
+	const [user, setUser] = useState<User | null>(null);
+
+	const me = trpc.auth.me.useQuery(undefined, { refetchInterval: 10000 });
 
 	useEffect(() => {
-		let LS_loginState = JSON.parse(localStorage.getItem('loginState'));
-		if (LS_loginState == true) {
-			setLoginState(true);
-		} else {
+		if (!me.data) {
 			setLoginState(false);
+			setUser(null);
+		} else {
+			setLoginState(true);
+			setUser(me.data);
 		}
-	}, [loginState]);
+	}, [me]);
+
+	const login = trpc.auth.login.useMutation();
+	const logout = trpc.auth.logout.useMutation();
+
+	const refetch = () => {
+		me.refetch();
+	};
 
 	return (
 		<>
 			<LoginContext.Provider
 				value={{
 					loggedIn: loginState,
-					loginRole: loginRole,
-					logIn: (role?: string) => {
-						localStorage.setItem(
-							'loginState',
-							JSON.stringify(true)
-						);
-						if (role) {
-							setLoginRole(role);
-						}
-						setLoginState(true);
-						router.push('/');
+					user: user,
+					login: (input) => {
+						login.mutate(input);
+						setTimeout(() => {
+							refetch();
+						}, 200);
 					},
-					logOut: () => {
-						localStorage.setItem(
-							'loginState',
-							JSON.stringify(false)
-						);
-						setLoginRole('default');
-						setLoginState(false);
-						router.push('/login');
+					logout: () => {
+						logout.mutate();
+						setTimeout(() => {
+							refetch();
+						}, 200);
 					},
 				}}
 			>

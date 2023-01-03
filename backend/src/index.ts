@@ -4,22 +4,17 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import customConfig from './config/default';
-// import { createContext } from './context';
-import router from './controllers/router';
-import { createContext } from './controllers/trpc_context';
-import appRouter from './controllers/trpc_router';
+import appRouter from './controllers/router';
+import { createContext } from './controllers/trpc';
 
 // ---------
 
 const app = express();
 
 // request logger
-app.use((req, _res, next) => {
+app.use((req, res, next) => {
 	console.log('');
 	console.log('⬅️ ', req.method, req.path);
-	// console.log('body \t', req.body);
-	// console.log('query \t', req.query);
-	// console.log('params \t', req.params);
 	next();
 });
 
@@ -32,8 +27,10 @@ app.use(
 
 app.use(cookieParser());
 
+app.get('/', (req, res) => res.send('Welcome to Studius Backend v1.0.0'));
+
 app.use(
-	'/trpc',
+	'/',
 	trpcExpress.createExpressMiddleware({
 		router: appRouter,
 		createContext,
@@ -42,8 +39,6 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (_req, res) => res.send('hello'));
-
 const port = customConfig.port;
 
 app.listen(port, () => {
@@ -51,6 +46,6 @@ app.listen(port, () => {
 	console.log(`🚀 Server listening on port ${port}`);
 });
 
-router(app);
+// router(app);
 
 export type AppRouter = typeof appRouter;

@@ -1,9 +1,10 @@
-import { inferAsyncReturnType } from '@trpc/server';
+import { inferAsyncReturnType, initTRPC } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
 
 import * as jwt from 'jsonwebtoken';
 
 const secret = '3qtv47890hn689n72cdx3049b*&%a';
+
 export const createContext = async ({
 	req,
 	res,
@@ -25,16 +26,14 @@ export const createContext = async ({
 		}
 	};
 
-	const cookie = req.headers.cookie;
-	console.log('cookie is:');
-	console.log(cookie);
-
 	return {
 		req,
 		res,
 		user: await getUserFromHeader(),
-		cookie,
+		cookie: req.headers.cookie,
 	};
 };
 type Context = inferAsyncReturnType<typeof createContext>;
 export default Context;
+
+export const t = initTRPC.context<Context>().create();
