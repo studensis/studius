@@ -28,13 +28,9 @@ const NavItem = ({
 };
 
 function Header() {
-	// let { loggedIn, logIn, logOut, loginRole } = useLogin();
 	const { loggedIn, user, login, logout } = useLogin();
 
 	const router = useRouter();
-
-	// const login = trpc.auth.login.useMutation();
-	// const logout = trpc.auth.logout.useMutation();
 
 	return (
 		<>
@@ -44,9 +40,6 @@ function Header() {
 						<Link href="/">
 							<div className="w-12 h-12 rounded-[16px] bg-black"></div>
 						</Link>
-						{/* <div className="w-[240px] h-12 rounded-[16px] bg-light-section"></div> */}
-						{/* </div> */}
-						{/* <div className="flex gap-10"> */}
 						<NavItem
 							href="/intranet"
 							icon="home"
@@ -65,15 +58,10 @@ function Header() {
 					<div className="flex gap-2">
 						<Button
 							onClick={() => {
-								// logOut();
 								if (loggedIn) {
 									logout();
 								} else {
 									router.push('/login');
-									// login({
-									// 	email: 'user',
-									// 	password: '123456',
-									// });
 								}
 							}}
 						>
@@ -83,9 +71,6 @@ function Header() {
 					</div>
 				</div>
 			</>
-			{/* ) : (
-				<></>
-			)} */}
 		</>
 	);
 }
