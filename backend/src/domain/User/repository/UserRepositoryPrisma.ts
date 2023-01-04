@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import {UserEntity} from '../UserEntity';
-import {updateUserEntity} from '../updateUserEntity';
+import { updateUserEntity } from '../updateUserEntity';
+import { UserEntity } from '../UserEntity';
 import { UserRepository } from './UserRepository';
 
 const prisma = new PrismaClient();
@@ -13,7 +13,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 		// map to UserEntities
 		let users: UserEntity[] = [];
 		datas.forEach((data) => {
-			let user:UserEntity = data;
+			let user: UserEntity = data;
 			users.push(user);
 		});
 
@@ -21,7 +21,6 @@ export default class UserRepositoryPrisma extends UserRepository {
 	}
 
 	async update(newData: updateUserEntity) {
-
 		let updatedData = await prisma.user.update({
 			where: {
 				id: newData.id,
@@ -36,7 +35,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 				mentorID: newData.mentorID ? newData.mentorID : undefined,
 			},
 		});
-		let rez:UserEntity = updatedData;
+		let rez: UserEntity = updatedData;
 
 		return rez;
 	}
@@ -44,7 +43,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 	async getById(id: string) {
 		let data = await prisma.user.findUnique({ where: { id: id } });
 		if (data) {
-			let user:UserEntity = data;
+			let user: UserEntity = data;
 			return user;
 		} else {
 			return null;
@@ -67,7 +66,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		console.log(response);
 
-		let out:UserEntity = response;
+		let out: UserEntity = response;
 		return out;
 	}
 
@@ -78,8 +77,19 @@ export default class UserRepositoryPrisma extends UserRepository {
 			},
 		});
 
-		let rez:UserEntity = response;
+		let rez: UserEntity = response;
 
 		return rez;
+	}
+
+	async getByEmail(email: string): Promise<UserEntity | null> {
+		console.log(email);
+		let data = await prisma.user.findFirst({ where: { email: email } });
+		if (data) {
+			let user: UserEntity = data;
+			return user;
+		} else {
+			return null;
+		}
 	}
 }

@@ -1,5 +1,5 @@
 import { updateUserEntity } from '../updateUserEntity';
-import {UserEntity} from '../UserEntity';
+import { UserEntity } from '../UserEntity';
 
 export abstract class UserRepository {
 	async getAll(): Promise<UserEntity[]> {
@@ -15,6 +15,9 @@ export abstract class UserRepository {
 		throw new Error('Method not implemented.');
 	}
 	async delete(userId: string): Promise<UserEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async getByEmail(email: string): Promise<UserEntity | null> {
 		throw new Error('Method not implemented.');
 	}
 }

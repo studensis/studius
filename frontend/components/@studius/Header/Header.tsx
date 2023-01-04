@@ -52,13 +52,15 @@ function Header() {
 							icon="home"
 							title="Homepage"
 						/>
-						{user && user.role === 'ADMIN' && (
-							<NavItem
-								href="/admin"
-								icon="adminTools"
-								title="Admin"
-							/>
-						)}
+						{user &&
+							(user.role === 'ADMIN' ||
+								user.role === 'SUPERADMIN') && (
+								<NavItem
+									href="/admin"
+									icon="adminTools"
+									title="Admin"
+								/>
+							)}
 					</div>
 					<div className="flex gap-2">
 						<Button
