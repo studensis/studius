@@ -14,7 +14,7 @@ export default function SubjectList() {
 				users.data.map((user) => {
 					return (
 						<Link href={'/user/' + user.id} key={user.id}>
-							<div className="p-6 border-light-accent-weak border">
+							<div className="p-6 border-accent-weak border">
 								<p className="title1">{user.firstname}</p>
 								<p>{user.id}</p>
 							</div>

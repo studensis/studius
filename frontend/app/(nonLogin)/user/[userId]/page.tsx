@@ -42,16 +42,16 @@ export default function SubjectPage(props: PageProps) {
 			</button>
 
 			{deleteUser.isSuccess && (
-				<pre className="p-4 bg-light-neutral-weak">
+				<pre className="p-4 bg-neutral-weak">
 					{JSON.stringify(deleteUser.data)}
 				</pre>
 			)}
 			{deleteUser.error && (
-				<pre className="p-4 bg-light-danger">
+				<pre className="p-4 bg-danger">
 					{JSON.stringify(deleteUser.error.shape?.message, null, 2)}
 				</pre>
 			)}
-			<pre className=" bg-light-neutral-weak p-8">
+			<pre className=" bg-neutral-weak p-8">
 				{JSON.stringify(user.data, null, 2)}
 			</pre>
 			<h3 className="title2"> Enrolled subjects </h3>
@@ -70,7 +70,7 @@ export default function SubjectPage(props: PageProps) {
 						</Link>
 					))}
 			</div>
-			<pre className=" bg-light-neutral-weak p-8">
+			<pre className=" bg-neutral-weak p-8">
 				{JSON.stringify(enrolledSubjects.data, null, 2)}
 			</pre>
 		</div>

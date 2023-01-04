@@ -64,12 +64,12 @@ export default function Calendar() {
 				</Button>
 
 				{createUser.isSuccess && (
-					<pre className="p-4 bg-light-neutral-weak">
+					<pre className="p-4 bg-neutral-weak">
 						{JSON.stringify(createUser.data)}
 					</pre>
 				)}
 				{createUser.error && (
-					<pre className="p-4 bg-light-danger">
+					<pre className="p-4 bg-danger">
 						{JSON.stringify(
 							createUser.error.shape?.message,
 							null,

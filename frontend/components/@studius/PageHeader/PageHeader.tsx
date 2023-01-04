@@ -5,15 +5,15 @@ export default function PageHeader(props: {
 }) {
 	return (
 		<>
-			<div className="md:px-20 md:py-20 px-6 py-10 rounded-2xl md:rounded-3xl bg-light-section mb-10">
+			<div className="md:px-20 md:py-20 px-6 py-10 rounded-2xl md:rounded-3xl bg-section mb-10">
 				<p className="title2"> {props.subtitle} </p>
 				{props.title && (
-					<h1 className="display3 mb-6 text-light-neutral">
+					<h1 className="display3 mb-6 text-neutral">
 						{props.title}
 					</h1>
 				)}
 				{props.description && (
-					<p className="body1 text-light-neutral-strong">
+					<p className="body1 text-neutral-strong">
 						{props.description}
 					</p>
 				)}

@@ -11,11 +11,11 @@ export default function SectionButton(props: {
 		<Link href={props.href}>
 			<button
 				className={
-					'flex justify-center items-center p-6 md:px-10 md:py-12 bg-light-section text-light-accent rounded-2xl hover:opacity-80 active:opacity-50 w-full '
+					'flex justify-center items-center p-6 md:px-10 md:py-12 bg-section text-accent rounded-2xl hover:opacity-80 active:opacity-50 w-full '
 				}
 			>
 				<div className="select-none flex gap-2 w-full">
-					<Icon icon={props.icon} className={'bg-light-accent'} />
+					<Icon icon={props.icon} className={'bg-accent'} />
 					<div className="button-large justify-center items-center gap-1">
 						{props.title}
 					</div>

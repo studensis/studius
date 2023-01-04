@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import useLogin from '../../hooks/LoginContext';
@@ -19,7 +20,7 @@ const NavItem = ({
 		<>
 			<Link href={href}>
 				<div className="p-4 flex gap-1">
-					<Icon icon={icon} className={'bg-light-accent'} size={16} />
+					<Icon icon={icon} className={'bg-accent'} size={16} />
 					<p className="button-small">{title}</p>
 				</div>
 			</Link>
@@ -38,7 +39,14 @@ function Header() {
 				<div className="w-full px-6 py-4 flex place-content-between place-items-center">
 					<div className="flex gap-2">
 						<Link href="/">
-							<div className="w-12 h-12 rounded-[16px] bg-black"></div>
+							<div className="relative w-12 h-12 rounded-[16px] bg-special-black">
+								<Image
+									src={'/assets/FER/logo.png'}
+									fill
+									style={{ objectFit: 'contain' }}
+									alt=""
+								/>
+							</div>
 						</Link>
 						<NavItem
 							href="/intranet"
