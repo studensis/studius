@@ -11,7 +11,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 
 		// map to SubjectEntities
 		let subjects: SubjectEntity[] = [];
-		datas.forEach((data) => {
+		datas.forEach((data: any) => {
 			let subject = new SubjectEntity(data);
 			subjects.push(subject);
 		});

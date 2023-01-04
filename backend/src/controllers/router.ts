@@ -1,3 +1,4 @@
+import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
 import authRouter from './Authentication/authRouter';
 import postExampleRouter from './PostExample/postExampleRouter';
@@ -12,7 +13,7 @@ const appRouter = t.router({
 	postExample: postExampleRouter,
 	auth: authRouter,
 	user: userRouter,
-	subject: todoRoutine,
+	subject: subjectRouter,
 	// enrollment: todoRoutine,
 	room: todoRoutine,
 	event: todoRoutine,
