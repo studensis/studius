@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { trpc } from '../../components/hooks/TrpcProvider';
+import { trpc } from '../../../components/hooks/TrpcProvider';
 
 // const fetchTodos = async () => {
 // 	const res = await fetch('https://jsonplaceholder.typicode.com/todos/', {
@@ -9,20 +9,19 @@ import { trpc } from '../../components/hooks/TrpcProvider';
 // 	return subjects;
 // };
 
-async function SubjectList() {
+export default function SubjectList() {
 	const subjects = trpc.subject.listSubjects.useQuery();
 
 	return (
 		<div>
-			{subjects?.map((subject: { id: string; title: any }) => (
-				<Link href={'/subject/' + subject?.id} key={subject?.id}>
-					<p>
-						[{subject?.id}] {subject?.title}
-					</p>
-				</Link>
-			))}
+			{subjects.data &&
+				subjects.data.map((subject) => (
+					<Link href={'/subject/' + subject?.id} key={subject?.id}>
+						<p>
+							[{subject?.id}] {subject?.title}
+						</p>
+					</Link>
+				))}
 		</div>
 	);
 }
-
-export default SubjectList;
