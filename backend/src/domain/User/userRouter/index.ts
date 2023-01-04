@@ -7,9 +7,13 @@ import getUserInteractor from '../interactors/getUserInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
-import {UserEntity} from '../UserEntity';
-import {updateUserEntity} from '../updateUserEntity';
-
+import { UserEntity } from '../UserEntity';
+import { updateUserEntity } from '../updateUserEntity';
+import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+import enrollUserInteractor from '../interactors/enrollUserIneractor';
+import listEnrollmentsInteractor from '../../Enrollment/interactors/listEnrollmentsInteractor';
+import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
+import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 
 let repo = new UserRepositoryPrisma();
 
@@ -23,18 +27,18 @@ export default t.router({
 				password: z.string(),
 				jmbag: z.string().optional(),
 				email: z.string(),
-				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']).optional(),
+				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']),
 				mentorID: z.string().optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let user:UserEntity = {
+			let user: UserEntity = {
 				...input,
 				id: '',
 				jmbag: input.jmbag || null,
 				userRole: input.userRole,
 				mentorID: input.mentorID || null,
-			}
+			};
 			let newUser = await createUserInteractor(repo, user);
 			return newUser;
 		}),
@@ -71,8 +75,53 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let user:updateUserEntity = {...input};
+			let user: updateUserEntity = { ...input };
 			let updatedUser = await updateUserInteractor(repo, user);
 			return updatedUser;
 		}),
+
+	enrollUser: t.procedure.input(z.object({
+		userId: z.string(),
+		subjectId: z.string(),
+		enrollmentDate: z.date().optional(),
+		roleTitle: z.enum(['STUDENT', 'PROFESSOR','OWNER','DEMONSTRATOR','ASSISTANT']),
+		status: z.enum(['ACTIVE','ARCHIVED'])
+		})).mutation(async ({ input }) => {
+			let enrollment: EnrollmentEntity = {
+				...input, 
+				userId : input.userId, 
+				subjectId : input.subjectId, 
+				enrollmentDate: input.enrollmentDate || null,
+				roleTitle: input.roleTitle, 
+				status: input.status
+			}
+
+			let newEnrollment = await enrollUserInteractor(enrollment, repo);
+			return newEnrollment;
+		}),
+
+	getEnrolledSubjects: t.procedure.input(z.string()).query(async ({input}) => {
+		let enrollments = await listEnrolledSubjectsInteractor(input, repo);
+		return enrollments;
+	}),
+
+	updateEnrollment: t.procedure.input(z.object({
+		userId: z.string(),
+		subjectId: z.string(),
+		enrollmentDate: z.date().optional(),
+		roleTitle: z.enum(['STUDENT', 'PROFESSOR','OWNER','DEMONSTRATOR','ASSISTANT']).optional(),
+		status: z.enum(['ACTIVE','ARCHIVED']).optional()
+	})).mutation(async ({input}) => {
+		let updateData = {
+			...input,
+			userId : input.userId, 
+			subjectId : input.subjectId, 
+			roleTitle: input.roleTitle, 
+			status: input.status
+		}
+
+		let updatedEnrollment = await updateEnrollmentInteractor(repo, updateData);
+		return updatedEnrollment;
+	})
+	
 });

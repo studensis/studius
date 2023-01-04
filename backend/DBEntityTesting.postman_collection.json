@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "84dd6a90-b20f-4daa-9a78-7c53862edb73",
+		"_postman_id": "d688f379-43f4-4b9d-836c-de45c788fe0c",
 		"name": "DBEntityTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24356078"
+		"_exporter_id": "24928693"
 	},
 	"item": [
 		{
@@ -104,42 +104,42 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "firstname",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "lastname",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "jmbag",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "email",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "userRole",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "mentorId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -169,6 +169,96 @@
 							"port": "4000",
 							"path": [
 								"user.deleteUserById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enroll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"5\",\r\n    \"subjectId\": \"1\",\r\n    \"roleTitle\": \"PROFESSOR\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/user.enrollUser",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user.enrollUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEnrollment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"5\",\r\n    \"subjectId\": \"1\",\r\n    \"status\": \"ARCHIVED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/user.updateEnrollment",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user.updateEnrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEnrolledSubjects",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/user.getEnrolledSubjects?input=\"4\"",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user.getEnrolledSubjects"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"4\""
+								}
 							]
 						}
 					},
@@ -233,31 +323,31 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "title",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "description",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "ectsBod",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "semester",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "status",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "contentId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -282,37 +372,37 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "ectsBod",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "semester",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "status",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "contentId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -360,6 +450,30 @@
 									"key": "contentId",
 									"value": "",
 									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEnrolledUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/subject.getEnrolledUsers?input=\"1\"",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"subject.getEnrolledUsers"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
 								}
 							]
 						}
@@ -425,27 +539,27 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "markdownText",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "plainText",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "date",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "linkedEntity",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "linkedEntityId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -470,32 +584,32 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "markdownText",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "plainText",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "date",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "linkedEntity",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "linkedEntityId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -581,31 +695,31 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "title",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "date",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "contentId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "linkedEntity",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "linkedEntityId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "ownerId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -630,37 +744,37 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "date",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "contentId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "linkedEntity",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "linkedEntityId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "ownerId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -746,35 +860,35 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "title",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "description",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "mentorId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "type",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "contentId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "subjectId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "userId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -799,42 +913,42 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "mentorId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "type",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "contentId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "subjectId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "userId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -920,15 +1034,15 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "seminarId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "subjectId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -953,17 +1067,17 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "seminarId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "subjectId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1049,23 +1163,23 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "dateStart",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "dateEnd",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "roomId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "eventId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1110,7 +1224,7 @@
 								},
 								{
 									"key": "eventId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1196,19 +1310,19 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "presenceStatus",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "roomTimeEventId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "userId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1233,22 +1347,22 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "presenceStatus",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "roomTimeEventId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "userId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1334,11 +1448,11 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "capacity",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1454,23 +1568,23 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "title",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "description",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "linkedEntity",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "linkedEntityId",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1495,27 +1609,27 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "linkedEntity",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "linkedEntityId",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1622,23 +1736,23 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "subjectId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "enrollmentDate",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "roleTitle",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "status",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1662,25 +1776,25 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "subjectId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "enrollmentDate",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "roleTitle",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "status",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1705,11 +1819,11 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "subjectId",
-									"value": null
+									"value": ""
 								}
 							]
 						}

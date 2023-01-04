@@ -1,5 +1,5 @@
 import { SubjectRepository } from '../repository/SubjectRepository';
-import SubjectEntity from '../SubjectEntity';
+import {SubjectEntity} from '../SubjectEntity';
 
 export default async function createSubjectInteractor(
 	subjectRepository: SubjectRepository,

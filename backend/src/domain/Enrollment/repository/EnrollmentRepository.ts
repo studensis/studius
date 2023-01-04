@@ -1,4 +1,4 @@
-import { key } from "../compositeKey";
+import { key } from "../../User/compositeKey";
 import EnrollmentEntity from "../EnrollmentEntity";
 
 export abstract class EnrollmentRepository {

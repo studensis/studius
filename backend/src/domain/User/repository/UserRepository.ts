@@ -1,3 +1,4 @@
+import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
 import { updateUserEntity } from '../updateUserEntity';
 import { UserEntity } from '../UserEntity';
 
@@ -17,6 +18,20 @@ export abstract class UserRepository {
 	async delete(userId: string): Promise<UserEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async enrollUser(
+		enrollmentData: EnrollmentEntity
+	): Promise<EnrollmentEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async getEnrolledSubjects(userId: string): Promise<EnrollmentEntity[]> {
+		throw new Error('Method not implemented.');
+	}
+	async updateEnrollment(
+		newData: EnrollmentEntity
+	): Promise<EnrollmentEntity> {
+		throw new Error('Method not implemented.');
+	}
+
 	async getByEmail(email: string): Promise<UserEntity | null> {
 		throw new Error('Method not implemented.');
 	}
