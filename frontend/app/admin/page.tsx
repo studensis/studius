@@ -2,12 +2,16 @@
 
 import Link from 'next/link';
 import { Button } from '../../components/@studius/Button/Button';
+import PageHeader from '../../components/@studius/PageHeader/PageHeader';
 
 export default function AdminTools() {
 	return (
 		<>
 			<div>
-				<h1 className="display3"> Workspace Tools </h1>
+				<PageHeader
+					title="Workspace Tools"
+					description="A set of tools to help you manage and moderate your workspace."
+				/>
 				<Link href="/user">
 					<Button>Users</Button>
 				</Link>

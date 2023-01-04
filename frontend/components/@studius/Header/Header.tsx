@@ -56,12 +56,6 @@ function Header() {
 								title="Admin"
 							/>
 						)}
-						<NavItem href="/user" icon="users" title="User List" />
-						<NavItem
-							href="/calendar"
-							icon="calendar"
-							title="Calendar"
-						/>
 					</div>
 					<div className="flex gap-2">
 						{JSON.stringify(user)}
