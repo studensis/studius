@@ -1,4 +1,5 @@
 import SubjectEntity from '../SubjectEntity';
+import { updateSubjectEntity } from '../updateSubjectEntity';
 
 export abstract class SubjectRepository {
 	async getAll(): Promise<SubjectEntity[]> {
@@ -10,13 +11,13 @@ export abstract class SubjectRepository {
 	async create(subject: SubjectEntity): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(subject: SubjectEntity): Promise<SubjectEntity>{
+	async update(subject: updateSubjectEntity): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(subjectId: string): Promise<SubjectEntity>{
+	async delete(subjectId: string): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async addContent(id: string, contentId: string[]): Promise<SubjectEntity>{
+	async addContent(id: string, contentId: string[]): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
 }
