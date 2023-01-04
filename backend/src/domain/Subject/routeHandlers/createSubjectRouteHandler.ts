@@ -1,9 +1,9 @@
-import {Semester} from "../Semester"
-import {Status} from "../Status"
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSubjectInteractor from '../../Subject/interactors/createSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
+import { Semester } from '../Semester';
+import { Status } from '../Status';
 import SubjectEntity from '../SubjectEntity';
 
 export default async function createSubjectRouteHandler(
@@ -18,9 +18,9 @@ export default async function createSubjectRouteHandler(
 			title: req.query.title as string,
 			description: req.query.description as string,
 			ectsBod: req.query.ectsBod as string,
-			semester: (String(req.query.semester)).toUpperCase() as Semester,   
-			status: (String(req.query.status)).toUpperCase() as Status, 
-			contentId: String(req.query.contentId).split(",") as string[],        
+			semester: String(req.query.semester).toUpperCase() as Semester,
+			status: String(req.query.status).toUpperCase() as Status,
+			contentId: String(req.query.contentId).split(',') as string[],
 		});
 		newSubject.validate();
 		let repo = new SubjectRepositoryPrisma();
@@ -28,6 +28,6 @@ export default async function createSubjectRouteHandler(
 		return res.send(subject);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

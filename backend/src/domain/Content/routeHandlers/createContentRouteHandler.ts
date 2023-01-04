@@ -1,9 +1,9 @@
+import { LinkedEntity } from '@prisma/client';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import ContentEntity from '../ContentEntity';
 import createContentInteractor from '../interactors/createContentInteractor';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
-import ContentEntity from '../ContentEntity';
-import { LinkedEntity } from '@prisma/client';
 
 export default async function createContentRouteHandler(
 	req: Request,
@@ -16,17 +16,18 @@ export default async function createContentRouteHandler(
 			id: req.query.id as string,
 			markdownText: req.query.markdownText as string,
 			plainText: req.query.plainText as string,
-			date: new Date(Date.parse(String(req.query.date))) as Date, 
-			linkedEntity: (String(req.query.linkedEntity)).toUpperCase() as LinkedEntity,
-			linkedEntityId: req.query.linkedEntityId as string
+			date: new Date(Date.parse(String(req.query.date))) as Date,
+			linkedEntity: String(
+				req.query.linkedEntity
+			).toUpperCase() as LinkedEntity,
+			linkedEntityId: req.query.linkedEntityId as string,
 		});
 		// newContent.validate();
 		let repo = new ContentRepositoryPrisma();
 		let content = await createContentInteractor(repo, newContent);
 		return res.send(content);
-	}
-	catch (err) {
+	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

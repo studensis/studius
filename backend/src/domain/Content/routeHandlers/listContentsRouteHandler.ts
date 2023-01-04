@@ -13,9 +13,8 @@ export default async function listContentsRouteHandler(
 		let repo = new ContentRepositoryPrisma();
 		let contents = await listContentsInteractor(repo);
 		return res.send(contents);
-	}
-	catch (err) {
+	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

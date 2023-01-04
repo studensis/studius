@@ -3,7 +3,10 @@ import { StatusCodes } from 'http-status-codes';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
-export default async function getSubjectRouteHandler(req: Request, res: Response) {
+export default async function getSubjectRouteHandler(
+	req: Request,
+	res: Response
+) {
 	console.log(`subjects/${req.params.subjectId} GET`);
 
 	try {
@@ -13,6 +16,6 @@ export default async function getSubjectRouteHandler(req: Request, res: Response
 		return res.send(subject);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

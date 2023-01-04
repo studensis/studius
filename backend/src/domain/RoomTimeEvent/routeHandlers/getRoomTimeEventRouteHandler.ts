@@ -3,7 +3,10 @@ import { StatusCodes } from 'http-status-codes';
 import getRoomTimeEventInteractor from '../interactors/getRoomTimeEventInteractor';
 import RoomTimeEventRepositoryPrisma from '../repository/RoomTimeEventRepositoryPrisma';
 
-export default async function getRoomTimeEventRouteHandler(req: Request, res: Response) {
+export default async function getRoomTimeEventRouteHandler(
+	req: Request,
+	res: Response
+) {
 	console.log(`roomTimeEvents/${req.params.roomTimeEventId} GET`);
 
 	try {
@@ -13,6 +16,6 @@ export default async function getRoomTimeEventRouteHandler(req: Request, res: Re
 		return res.send(roomTimeEvent);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

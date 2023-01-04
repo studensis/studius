@@ -3,7 +3,10 @@ import { StatusCodes } from 'http-status-codes';
 import getEventInteractor from '../interactors/getEventInteractor';
 import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 
-export default async function getEventRouteHandler(req: Request, res: Response) {
+export default async function getEventRouteHandler(
+	req: Request,
+	res: Response
+) {
 	console.log(`events/${req.params.eventId} GET`);
 
 	try {
@@ -13,6 +16,6 @@ export default async function getEventRouteHandler(req: Request, res: Response) 
 		return res.send(event);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

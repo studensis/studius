@@ -13,17 +13,22 @@ export default async function createRoomTimeEventRouteHandler(
 	try {
 		let newRoomTimeEvent = new RoomTimeEventEntity({
 			id: req.query.id as string,
-			dateStart: new Date(Date.parse(String(req.query.dateStart))) as Date,
+			dateStart: new Date(
+				Date.parse(String(req.query.dateStart))
+			) as Date,
 			dateEnd: new Date(Date.parse(String(req.query.dateEnd))) as Date,
 			roomId: req.query.roomId as string,
 			eventId: req.query.eventId as string,
 		});
 		//newRoomTimeEvent.validate();
 		let repo = new RoomTimeEventRepositoryPrisma();
-		let roomTimeEvent = await createRoomTimeEventInteractor(repo, newRoomTimeEvent);
+		let roomTimeEvent = await createRoomTimeEventInteractor(
+			repo,
+			newRoomTimeEvent
+		);
 		return res.send(roomTimeEvent);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

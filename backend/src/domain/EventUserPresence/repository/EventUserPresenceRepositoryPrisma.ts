@@ -1,6 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { userInfo } from 'os';
-import UserEntity from '../../User/UserEntity';
 import EventUserPresenceEntity from '../EventUserPresenceEntity';
 import { EventUserPresenceRepository } from './EventUserPresenceRepository';
 
@@ -22,32 +20,36 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 	}
 
 	async getById(id: string) {
-		let data = await prisma.eventUserPresence.findUnique({ where: { id: id } });
-		let eventUserPresence = new EventUserPresenceEntity(data);
-		return eventUserPresence;
+		let data = await prisma.eventUserPresence.findUnique({
+			where: { id: id },
+		});
+		if (data) {
+			let eventUserPresence = new EventUserPresenceEntity(data);
+			return eventUserPresence;
+		} else {
+			throw new Error('no data');
+		}
 	}
 
 	async update(eventUserPresenceData: EventUserPresenceEntity) {
-
 		let updatedEventUserPresence: any = {};
 
-			if(eventUserPresenceData.presenceStatus) updatedEventUserPresence["presenceStatus"] = eventUserPresenceData.presenceStatus;
-		
+		if (eventUserPresenceData.presenceStatus)
+			updatedEventUserPresence['presenceStatus'] =
+				eventUserPresenceData.presenceStatus;
+
 		let updatedData = await prisma.eventUserPresence.update({
-			
 			where: {
 				id: eventUserPresenceData.id,
 			},
 			data: {
 				presenceStatus: updatedEventUserPresence.presenceStatus,
 			},
-		});		
+		});
 		let rez = new EventUserPresenceEntity(updatedData);
 
 		return rez;
-		
 	}
-
 
 	async create(eventUserPresence: EventUserPresenceEntity) {
 		let response = await prisma.eventUserPresence.create({
@@ -68,8 +70,8 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 	async delete(eventUserPresenceId: string) {
 		let response = await prisma.eventUserPresence.delete({
 			where: {
-				id: eventUserPresenceId
-			}
+				id: eventUserPresenceId,
+			},
 		});
 
 		return response;

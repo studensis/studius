@@ -13,6 +13,6 @@ export default async function getPostRouteHandler(req: Request, res: Response) {
 		return res.send(post);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

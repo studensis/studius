@@ -15,6 +15,6 @@ export default async function listRoomsRouteHandler(
 		return res.send(rooms);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }
