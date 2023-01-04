@@ -111,10 +111,8 @@ export default class UserRepositoryPrisma extends UserRepository {
 			},
 		});
 
-		let result: EnrollmentEntity[] = [];
-		rez.forEach((e: EnrollmentEntity) => {
-			let data: EnrollmentEntity = e;
-			result.push(data);
+		let result = rez.map((e) => {
+			return e;
 		});
 
 		return result;
