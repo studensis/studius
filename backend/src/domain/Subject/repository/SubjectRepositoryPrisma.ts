@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import SubjectEntity from '../SubjectEntity';
+import {SubjectEntity} from '../SubjectEntity';
+import { updateSubjectEntity } from '../updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
 
 const prisma = new PrismaClient();
@@ -12,39 +13,30 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		// map to SubjectEntities
 		let subjects: SubjectEntity[] = [];
 		datas.forEach((data: any) => {
-			let subject = new SubjectEntity(data);
+			let subject:SubjectEntity = data;
 			subjects.push(subject);
 		});
 
 		return subjects;
 	}
 
-	async update(subjectData: SubjectEntity) {
+	async update(subjectData: updateSubjectEntity) {
 
-		let updatedSubject: any = {};
-			if(subjectData.title) updatedSubject["title"] = subjectData.title;
-			if(subjectData.description) updatedSubject["description"] = subjectData.description;
-			if(subjectData.ectsBod) updatedSubject["ectsBod"] = subjectData.ectsBod;
-			if(subjectData.semester) updatedSubject["semester"] = subjectData.semester;
-			if(subjectData.status) updatedSubject["status"] = subjectData.status;
-			if(subjectData.contentId) updatedSubject["contentId"] = subjectData.contentId;
-
-		
 		let updatedData = await prisma.subject.update({
 			
 			where: {
 				id: subjectData.id,
 			},
 			data: {
-				title: updatedSubject.title,
-				description: updatedSubject.description,
-				ectsBod: updatedSubject.ectsBod,
-				semester: updatedSubject.semester,
-				status: updatedSubject.status,
-				contentId: updatedSubject.contentId,
+				title: subjectData.title ? subjectData.title : undefined,
+				description: subjectData.description ? subjectData.description : undefined,
+				ectsBod: subjectData.ectsBod ? subjectData.ectsBod : undefined,
+				semester: subjectData.semester ? subjectData.semester : undefined,
+				status: subjectData.status ? subjectData.status : undefined,
+				contentId: subjectData.contentId ? subjectData.contentId : undefined,
 			},
 		});		
-		let rez = new SubjectEntity(updatedData);
+		let rez:SubjectEntity = updatedData;
 
 		return rez;
 		
@@ -52,8 +44,12 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 
 	async getById(id: string) {
 		let data = await prisma.subject.findUnique({ where: { id: id } });
-		let subject = new SubjectEntity(data);
-		return subject;
+		if (data) {
+			let subject:SubjectEntity = data;
+			return subject;
+		} else {
+			return null;
+		}
 	}
 
 	async create(subject: SubjectEntity) {
@@ -71,7 +67,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 
 		console.log(response);
 
-		let out = new SubjectEntity(response);
+		let out:SubjectEntity = response;
 		return out;
 	}
 	
@@ -82,7 +78,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 			}
 		});
 
-		let out = new SubjectEntity(response);
+		let out:SubjectEntity = response;
 		return out;
 	}
 
@@ -98,7 +94,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 				},
 			},
 		});		
-		let rez = new SubjectEntity(updatedData);
+		let rez:SubjectEntity = updatedData;
 
 		return rez;
 	}

@@ -1,11 +1,11 @@
-import SubjectEntity from '../SubjectEntity';
+import {SubjectEntity} from '../SubjectEntity';
 import { updateSubjectEntity } from '../updateSubjectEntity';
 
 export abstract class SubjectRepository {
 	async getAll(): Promise<SubjectEntity[]> {
 		throw new Error('Method not implemented.');
 	}
-	async getById(id: string): Promise<SubjectEntity> {
+	async getById(id: string): Promise<SubjectEntity | null> {
 		throw new Error('Method not implemented.');
 	}
 	async create(subject: SubjectEntity): Promise<SubjectEntity> {

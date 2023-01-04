@@ -23,7 +23,7 @@ export default t.router({
 				password: z.string(),
 				jmbag: z.string().optional(),
 				email: z.string(),
-				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']).optional(),
+				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']),
 				mentorID: z.string().optional(),
 			})
 		)

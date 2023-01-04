@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { nullable, z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
@@ -7,7 +7,8 @@ import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
-import SubjectEntity from '../SubjectEntity';
+import {SubjectEntity} from '../SubjectEntity';
+import { updateSubjectEntity } from '../updateSubjectEntity';
 
 let repo = new SubjectRepositoryPrisma();
 
@@ -22,11 +23,11 @@ export default t.router({
 				ectsBod: z.string(),
 				semester: z.enum(['WINTER', 'SUMMER']),
 				status: z.enum(['ACTIVE', 'ARCHIVED']),
-				contentId: z.array(z.string()).nullable()
+				contentId: z.array(z.string()).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let subject = new SubjectEntity({
+			let subject:SubjectEntity = {
 				...input,
 				id: '',
 				title: input.title,
@@ -34,9 +35,9 @@ export default t.router({
 				ectsBod: input.ectsBod,
 				semester: input.semester,
 				status: input.status,
-				contentId: input.contentId
+				contentId: (input.contentId ? input.contentId : []),
 
-			});
+			};
 			let newSubject = await createSubjectInteractor(repo, subject);
 			return newSubject;
 		}),
@@ -55,26 +56,24 @@ export default t.router({
 	}),
 
 	listSubjects: t.procedure.query(async () => {
-		console.log('jedan');	
 		let subjects = await listSubjectsInteractor(repo);
-		console.log(subjects);
 		return subjects;
 	}),
 
-	updateSubject: t.procedure
+	updateSubjectById: t.procedure
 		.input(
 			z.object({
 				id: z.string(),
-				title: z.string(),
-				description: z.string(),
-				ectsBod: z.string(),
-				semester: z.enum(['WINTER', 'SUMMER']),
-				status: z.enum(['ACTIVE', 'ARCHIVED']),
-				contentId: z.array(z.string()).nullable()
+				title: z.string().optional(),
+				description: z.string().optional(),
+				ectsBod: z.string().optional(),
+				semester: z.enum(['WINTER', 'SUMMER']).optional(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']).optional(),
+				contentId: z.array(z.string()).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let subject = new SubjectEntity(input);
+			let subject:updateSubjectEntity = {...input};
 			let updatedSubject = await updateSubjectInteractor(repo, subject);
 			return updatedSubject;
 		}),
