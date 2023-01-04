@@ -1,8 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { Button } from '../../components/@studius/Button/Button';
 import PageHeader from '../../components/@studius/PageHeader/PageHeader';
+import SectionButton from '../../components/@studius/SectionButton/SectionButton';
 
 export default function AdminTools() {
 	return (
@@ -12,13 +11,18 @@ export default function AdminTools() {
 					title="Workspace Tools"
 					description="A set of tools to help you manage and moderate your workspace."
 				/>
-				<Link href="/user">
-					<Button>Users</Button>
-				</Link>
-				<Link href="/subject">
-					<Button>Subjects</Button>
-				</Link>
-				<h1>Test</h1>
+				<div className="grid w-full grid-cols-1 md:grid-cols-3 gap-2">
+					<SectionButton
+						icon={'users'}
+						href={'/user'}
+						title={'User Management'}
+					/>
+					<SectionButton
+						icon={'subjects'}
+						href={'/subject'}
+						title={'Subject Management'}
+					/>
+				</div>
 			</div>
 		</>
 	);

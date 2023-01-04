@@ -11,7 +11,32 @@ module.exports = {
         'side': '32px 0px 32px -32px rgba(0, 93, 255, 0.25)',
       },
       colors:{
-        
+				accent: {
+					DEFAULT: 'var(--color-accent)',
+					strong: 'var(--color-accent-strong)',
+					medium: 'var(--color-accent-medium)',
+					weak: 'var(--color-accent-weak)',
+				},
+				neutral: {
+					DEFAULT: 'var(--color-neutral)',
+					strong: 'var(--color-neutral-strong)',
+					medium: 'var(--color-neutral-medium)',
+					weak: 'var(--color-neutral-weak)',
+				},
+				section: 'var(--color-section)',
+				background: 'var(--color-background)',
+				success: {
+					DEFAULT: 'var(--color-success)',
+					weak: 'var(--color-success-weak)'
+				},
+				danger: {
+					DEFAULT: 'var(--color-danger)',
+					weak: 'var(--color-danger-weak)'
+				},
+				warning: {
+					default: 'var(--color-warning)',
+					weak: 'var(--color-warning-weak)'
+				},
         dark: {
           accent: {
             DEFAULT: '#005DFF',
@@ -73,7 +98,6 @@ module.exports = {
           black: '#000000',
           white: '#FFFFFF'
         }
-        
       }
     },
     fontFamily: {
@@ -82,5 +106,5 @@ module.exports = {
     }
   },
   plugins: [],
-  darkMode: 'class'
+  darkMode: 'class',
 }

@@ -16,6 +16,7 @@ type ButtonProps = {
 	style?: any;
 	onClick?: any;
 	formType?: any;
+	className?: string;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -29,6 +30,7 @@ const Button: FC<ButtonProps> = ({
 	style,
 	onClick,
 	formType,
+	className,
 }) => {
 	return (
 		<button
@@ -40,23 +42,24 @@ const Button: FC<ButtonProps> = ({
 			<div className="select-none">
 				<div
 					style={style ?? style}
-					className={
-						children
-							? outline == true
-								? disabled == true
-									? 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] w-max h-[40px] rounded-2xl opacity-40 border-2'
-									: 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] border-2 w-max h-[40px] rounded-2xl hover:opacity-80 hover:bg-[#C0D3F7] hover:border-[#005DFF] active:opacity-50 active:bg-[#005DFF] active:text-white '
-								: disabled == true
-								? 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-max h-[40px] rounded-2xl opacity-20'
-								: 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-max h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
-							: outline == true
+					className={(children
+						? outline == true
 							? disabled == true
-								? 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] w-[40px] h-[40px] rounded-2xl opacity-40 border-2'
-								: 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] border-2 [40px] h-[40px] rounded-2xl hover:opacity-80 hover:bg-[#C0D3F7] hover:border-[#005DFF] active:opacity-50 active:bg-[#005DFF] active:text-white '
+								? 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] w-max h-[40px] rounded-2xl opacity-40 border-2'
+								: 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] border-2 w-max h-[40px] rounded-2xl hover:opacity-80 hover:bg-[#C0D3F7] hover:border-[#005DFF] active:opacity-50 active:bg-[#005DFF] active:text-white '
 							: disabled == true
-							? 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-[40px] h-[40px] rounded-2xl opacity-20'
-							: 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-[40px] h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
-					}
+							? 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-max h-[40px] rounded-2xl opacity-20'
+							: 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-max h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
+						: outline == true
+						? disabled == true
+							? 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] w-[40px] h-[40px] rounded-2xl opacity-40 border-2'
+							: 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] border-2 [40px] h-[40px] rounded-2xl hover:opacity-80 hover:bg-[#C0D3F7] hover:border-[#005DFF] active:opacity-50 active:bg-[#005DFF] active:text-white '
+						: disabled == true
+						? 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-[40px] h-[40px] rounded-2xl opacity-20'
+						: 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-[40px] h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
+					)
+						.concat(' ')
+						.concat(className ? className : '')}
 				>
 					<h1
 						className={

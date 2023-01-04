@@ -11,16 +11,16 @@ type User = {
 interface ILoginContext {
 	loggedIn: boolean;
 	user: User | null;
-	login: (input: { email: string; password: string }) => any;
-	logout: () => any;
+	login: (input: { email: string; password: string }) => void;
+	logout: () => void;
 	// login: typeof trpc.auth.login.useMutation
 }
 
 const LoginContext = createContext<ILoginContext>({
 	loggedIn: false,
 	user: null,
-	login: (input: { email: string; password: string }) => null,
-	logout: () => null,
+	login: (input: { email: string; password: string }) => {},
+	logout: () => {},
 });
 
 function LoginProvider({ children }: { children: React.ReactNode }) {
