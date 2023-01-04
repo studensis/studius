@@ -15,6 +15,6 @@ export default async function listEventUserPresencesRouteHandler(
 		return res.send(eventUserPresences);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

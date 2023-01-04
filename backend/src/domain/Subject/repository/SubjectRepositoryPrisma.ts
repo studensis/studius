@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import SubjectEntity from '../SubjectEntity';
+import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+import { SubjectEntity } from '../SubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
 
 const prisma = new PrismaClient();
@@ -11,49 +12,47 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 
 		// map to SubjectEntities
 		let subjects: SubjectEntity[] = [];
-		datas.forEach((data) => {
-			let subject = new SubjectEntity(data);
+		datas.forEach((data: any) => {
+			let subject: SubjectEntity = data;
 			subjects.push(subject);
 		});
 
 		return subjects;
 	}
 
-	async update(subjectData: SubjectEntity) {
-
-		let updatedSubject: any = {};
-			if(subjectData.title) updatedSubject["title"] = subjectData.title;
-			if(subjectData.description) updatedSubject["description"] = subjectData.description;
-			if(subjectData.ectsBod) updatedSubject["ectsBod"] = subjectData.ectsBod;
-			if(subjectData.semester) updatedSubject["semester"] = subjectData.semester;
-			if(subjectData.status) updatedSubject["status"] = subjectData.status;
-			if(subjectData.contentId) updatedSubject["contentId"] = subjectData.contentId;
-
-		
+	async update(subjectData: updateSubjectEntity) {
 		let updatedData = await prisma.subject.update({
-			
 			where: {
 				id: subjectData.id,
 			},
 			data: {
-				title: updatedSubject.title,
-				description: updatedSubject.description,
-				ectsBod: updatedSubject.ectsBod,
-				semester: updatedSubject.semester,
-				status: updatedSubject.status,
-				contentId: updatedSubject.contentId,
+				title: subjectData.title ? subjectData.title : undefined,
+				description: subjectData.description
+					? subjectData.description
+					: undefined,
+				ectsBod: subjectData.ectsBod ? subjectData.ectsBod : undefined,
+				semester: subjectData.semester
+					? subjectData.semester
+					: undefined,
+				status: subjectData.status ? subjectData.status : undefined,
+				contentId: subjectData.contentId
+					? subjectData.contentId
+					: undefined,
 			},
-		});		
-		let rez = new SubjectEntity(updatedData);
+		});
+		let rez: SubjectEntity = updatedData;
 
 		return rez;
-		
 	}
 
 	async getById(id: string) {
 		let data = await prisma.subject.findUnique({ where: { id: id } });
-		let subject = new SubjectEntity(data);
-		return subject;
+		if (data) {
+			let subject: SubjectEntity = data;
+			return subject;
+		} else {
+			return null;
+		}
 	}
 
 	async create(subject: SubjectEntity) {
@@ -66,40 +65,58 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 				semester: subject.semester,
 				status: subject.status,
 				contentId: subject.contentId,
-			}
+			},
 		});
 
 		console.log(response);
 
-		let out = new SubjectEntity(response);
+		let out: SubjectEntity = response;
 		return out;
 	}
-	
+
 	async delete(subjectId: string) {
 		let response = await prisma.subject.delete({
 			where: {
-				id: subjectId
-			}
+				id: subjectId,
+			},
 		});
 
-		let out = new SubjectEntity(response);
+		let out: SubjectEntity = response;
 		return out;
 	}
 
 	async addContent(id: string, contentId: string[]) {
-		
 		let updatedData = await prisma.subject.update({
 			where: {
 				id: id,
 			},
 			data: {
-				contentId:{
+				contentId: {
 					push: contentId,
 				},
 			},
-		});		
-		let rez = new SubjectEntity(updatedData);
+		});
+		let rez: SubjectEntity = updatedData;
 
 		return rez;
+	}
+
+	async getEnrolledUsers(subjectId: string) {
+		let users = await prisma.enrollment.findMany({
+			where: {
+				subjectId: subjectId,
+				status: 'ACTIVE',
+			},
+			include: {
+				user: true,
+			},
+		});
+
+		let userData: EnrollmentEntity[] = [];
+		users.forEach((e: EnrollmentEntity) => {
+			let user: EnrollmentEntity = e;
+			userData.push(user);
+		});
+		return userData;
 	}
 }

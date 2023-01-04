@@ -3,10 +3,5 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return (
-		<div>
-			<h1 className="display2">Subjects</h1>
-			{children}
-		</div>
-	);
+	return <div>{children}</div>;
 }

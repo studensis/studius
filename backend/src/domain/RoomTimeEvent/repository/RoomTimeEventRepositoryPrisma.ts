@@ -21,22 +21,27 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 
 	async getById(id: string) {
 		let data = await prisma.roomTimeEvent.findUnique({ where: { id: id } });
-		let roomTimeEvent = new RoomTimeEventEntity(data);
-		return roomTimeEvent;
+		if (data) {
+			let roomTimeEvent = new RoomTimeEventEntity(data);
+			return roomTimeEvent;
+		} else {
+			throw new Error('no data');
+		}
 	}
 
 	async update(roomTimeEventData: RoomTimeEventEntity) {
-
 		let updatedRoomTimeEvent: any = {};
 
-			if(roomTimeEventData.dateStart) updatedRoomTimeEvent["dateStart"] = roomTimeEventData.dateStart;
-			if(roomTimeEventData.dateEnd) updatedRoomTimeEvent["dateEnd"] = roomTimeEventData.dateEnd;
-			if(roomTimeEventData.roomId) updatedRoomTimeEvent["roomId"] = roomTimeEventData.roomId;
-			if(roomTimeEventData.eventId) updatedRoomTimeEvent["eventId"] = roomTimeEventData.eventId;
+		if (roomTimeEventData.dateStart)
+			updatedRoomTimeEvent['dateStart'] = roomTimeEventData.dateStart;
+		if (roomTimeEventData.dateEnd)
+			updatedRoomTimeEvent['dateEnd'] = roomTimeEventData.dateEnd;
+		if (roomTimeEventData.roomId)
+			updatedRoomTimeEvent['roomId'] = roomTimeEventData.roomId;
+		if (roomTimeEventData.eventId)
+			updatedRoomTimeEvent['eventId'] = roomTimeEventData.eventId;
 
-		
 		let updatedData = await prisma.roomTimeEvent.update({
-			
 			where: {
 				id: roomTimeEventData.id,
 			},
@@ -46,13 +51,11 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 				roomId: updatedRoomTimeEvent.roomId,
 				eventId: updatedRoomTimeEvent.eventId,
 			},
-		});		
+		});
 		let rez = new RoomTimeEventEntity(updatedData);
 
 		return rez;
-		
 	}
-
 
 	async create(roomTimeEvent: RoomTimeEventEntity) {
 		let response = await prisma.roomTimeEvent.create({
@@ -74,8 +77,8 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 	async delete(roomTimeEventId: string) {
 		let response = await prisma.roomTimeEvent.delete({
 			where: {
-				id: roomTimeEventId
-			}
+				id: roomTimeEventId,
+			},
 		});
 
 		return response;

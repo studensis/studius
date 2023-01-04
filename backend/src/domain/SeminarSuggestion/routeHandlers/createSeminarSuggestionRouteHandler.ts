@@ -18,10 +18,13 @@ export default async function createSeminarSuggestionRouteHandler(
 		});
 		//newSeminarSuggestion.validate();
 		let repo = new SeminarSuggestionRepositoryPrisma();
-		let seminarSuggestion = await createSeminarSuggestionInteractor(repo, newSeminarSuggestion);
+		let seminarSuggestion = await createSeminarSuggestionInteractor(
+			repo,
+			newSeminarSuggestion
+		);
 		return res.send(seminarSuggestion);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

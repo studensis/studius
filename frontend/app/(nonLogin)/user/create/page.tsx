@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button } from '../../../components/@studius/Button/Button';
-import { trpc } from '../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../components/@studius/Button/Button';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 export default function Calendar() {
 	const createUser = trpc.user.createUser.useMutation();
@@ -64,12 +64,12 @@ export default function Calendar() {
 				</Button>
 
 				{createUser.isSuccess && (
-					<pre className="p-4 bg-light-neutral-weak">
+					<pre className="p-4 bg-neutral-weak">
 						{JSON.stringify(createUser.data)}
 					</pre>
 				)}
 				{createUser.error && (
-					<pre className="p-4 bg-light-danger">
+					<pre className="p-4 bg-danger">
 						{JSON.stringify(
 							createUser.error.shape?.message,
 							null,

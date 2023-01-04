@@ -1,4 +1,7 @@
-import UserEntity from '../UserEntity';
+import { Subject } from '@prisma/client';
+import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+import { updateUserEntity } from '../updateUserEntity';
+import { UserEntity } from '../UserEntity';
 
 export abstract class UserRepository {
 	async getAll(): Promise<UserEntity[]> {
@@ -10,10 +13,29 @@ export abstract class UserRepository {
 	async create(user: UserEntity): Promise<UserEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(userData: UserEntity): Promise<UserEntity> {
+	async update(userData: updateUserEntity): Promise<UserEntity> {
 		throw new Error('Method not implemented.');
 	}
 	async delete(userId: string): Promise<UserEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async enrollUser(
+		enrollmentData: EnrollmentEntity
+	): Promise<EnrollmentEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async getEnrolledSubjects(
+		userId: string
+	): Promise<(EnrollmentEntity & { subject: Subject })[]> {
+		throw new Error('Method not implemented.');
+	}
+	async updateEnrollment(
+		newData: EnrollmentEntity
+	): Promise<EnrollmentEntity> {
+		throw new Error('Method not implemented.');
+	}
+
+	async getByEmail(email: string): Promise<UserEntity | null> {
 		throw new Error('Method not implemented.');
 	}
 }

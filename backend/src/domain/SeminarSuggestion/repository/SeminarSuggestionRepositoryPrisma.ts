@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { userInfo } from 'os';
 import SeminarSuggestionEntity from '../SeminarSuggestionEntity';
 import { SeminarSuggestionRepository } from './SeminarSuggestionRepository';
 
@@ -21,20 +20,28 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	}
 
 	async getById(id: string) {
-		let data = await prisma.seminarSuggestion.findUnique({ where: { id: id } });
-		let seminarSuggestion = new SeminarSuggestionEntity(data);
-		return seminarSuggestion;
+		let data = await prisma.seminarSuggestion.findUnique({
+			where: { id: id },
+		});
+		if (data) {
+			let seminarSuggestion = new SeminarSuggestionEntity(data);
+			return seminarSuggestion;
+		} else {
+			throw new Error('no data');
+		}
 	}
 
 	async update(seminarSuggestionData: SeminarSuggestionEntity) {
-
 		let updatedSeminarSuggestion: any = {};
 
-			if(seminarSuggestionData.seminarId) updatedSeminarSuggestion["seminarId"] = seminarSuggestionData.seminarId;
-			if(seminarSuggestionData.subjectId) updatedSeminarSuggestion["subjectId"] = seminarSuggestionData.subjectId;
-		
+		if (seminarSuggestionData.seminarId)
+			updatedSeminarSuggestion['seminarId'] =
+				seminarSuggestionData.seminarId;
+		if (seminarSuggestionData.subjectId)
+			updatedSeminarSuggestion['subjectId'] =
+				seminarSuggestionData.subjectId;
+
 		let updatedData = await prisma.seminarSuggestion.update({
-			
 			where: {
 				id: seminarSuggestionData.id,
 			},
@@ -42,11 +49,10 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 				seminarId: updatedSeminarSuggestion.seminarId,
 				subjectId: updatedSeminarSuggestion.subjectId,
 			},
-		});		
+		});
 		let rez = new SeminarSuggestionEntity(updatedData);
 
 		return rez;
-		
 	}
 
 	async create(seminarSuggestion: SeminarSuggestionEntity) {
@@ -55,7 +61,7 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 				id: seminarSuggestion.id,
 				seminarId: seminarSuggestion.seminarId,
 				subjectId: seminarSuggestion.subjectId,
-			}
+			},
 		});
 
 		console.log(response);
@@ -67,8 +73,8 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	async delete(seminarSuggestionId: string) {
 		let response = await prisma.seminarSuggestion.delete({
 			where: {
-				id: seminarSuggestionId
-			}
+				id: seminarSuggestionId,
+			},
 		});
 
 		return response;

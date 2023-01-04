@@ -21,47 +21,50 @@ export default class EventRepositoryPrisma extends EventRepository {
 
 	async getById(id: string) {
 		let data = await prisma.event.findUnique({ where: { id: id } });
-		let event = new EventEntity(data);
-		return event;
+		if (data) {
+			let event = new EventEntity(data);
+			return event;
+		} else {
+			throw new Error('no data');
+		}
 	}
 
 	async update(eventData: EventEntity) {
-
 		let updatedEvent: any = {};
 
-			if(eventData.title) updatedEvent["title"] = eventData.title;
-			if(eventData.description) updatedEvent["description"] = eventData.description;
-			if(eventData.linkedEntity) updatedEvent["linkedEntity"] = eventData.linkedEntity;
-			if(eventData.linkedEntityId) updatedEvent["linkedEntityId"] = eventData.linkedEntityId;
-			
+		if (eventData.title) updatedEvent['title'] = eventData.title;
+		if (eventData.description)
+			updatedEvent['description'] = eventData.description;
+		if (eventData.linkedEntity)
+			updatedEvent['linkedEntity'] = eventData.linkedEntity;
+		if (eventData.linkedEntityId)
+			updatedEvent['linkedEntityId'] = eventData.linkedEntityId;
+
 		let updatedData = await prisma.event.update({
-			
 			where: {
 				id: eventData.id,
 			},
 			data: {
 				title: updatedEvent.title,
-			    description: updatedEvent.description,
-			    linkedEntity: updatedEvent.linkedEntity,
-			    linkedEntityId: updatedEvent.linkedEntityId,
-			    
+				description: updatedEvent.description,
+				linkedEntity: updatedEvent.linkedEntity,
+				linkedEntityId: updatedEvent.linkedEntityId,
 			},
-		});		
+		});
 		let rez = new EventEntity(updatedData);
 
 		return rez;
-		
 	}
 
 	async create(event: EventEntity) {
 		let response = await prisma.event.create({
 			data: {
 				id: event.id,
-			    title: event.title,
-			    description: event.description,
-			    linkedEntity: event.linkedEntity,
-			    linkedEntityId: event.linkedEntityId,
-			}
+				title: event.title,
+				description: event.description,
+				linkedEntity: event.linkedEntity,
+				linkedEntityId: event.linkedEntityId,
+			},
 		});
 
 		console.log(response);
@@ -73,8 +76,8 @@ export default class EventRepositoryPrisma extends EventRepository {
 	async delete(eventId: string) {
 		let response = await prisma.event.delete({
 			where: {
-				id: eventId
-			}
+				id: eventId,
+			},
 		});
 
 		return response;

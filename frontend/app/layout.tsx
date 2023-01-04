@@ -1,7 +1,7 @@
-import PageContainer from '../components/@studius/Container/Container';
-import Header from '../components/@studius/Header/Header';
 import { LoginProvider } from '../components/hooks/LoginContext';
+import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
+import '../styles/colors.css';
 import '../styles/globals.css';
 
 export default function RootLayout({
@@ -14,14 +14,15 @@ export default function RootLayout({
 			<body>
 				<TrpcProvider>
 					<LoginProvider>
-						<div
-							className={
-								'bg-light-background min-h-screen w-screen'
-							}
-						>
-							<Header />
-							<PageContainer>{children}</PageContainer>
-						</div>
+						<ThemeProvider>
+							<div
+								className={
+									'bg-background dark:bg-dark-background min-h-screen w-screen overflow-x-hidden'
+								}
+							>
+								{children}
+							</div>
+						</ThemeProvider>
 					</LoginProvider>
 				</TrpcProvider>
 			</body>

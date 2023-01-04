@@ -1,9 +1,11 @@
+'use client';
+
 import SubjectList from './SubjectList';
 
-async function Page() {
+function Page() {
 	return (
 		<>
-			{/* @ts-ignore */}
+			<h1 className="display2">Subjects</h1>
 			<SubjectList />
 		</>
 	);

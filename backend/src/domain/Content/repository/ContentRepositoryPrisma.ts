@@ -21,50 +21,54 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 
 	async getById(id: string) {
 		let data = await prisma.content.findUnique({ where: { id: id } });
-		let content = new ContentEntity(data);
-		return content;
+		if (data) {
+			let content = new ContentEntity(data);
+			return content;
+		} else {
+			throw new Error('no data');
+		}
 	}
 
 	async update(contentData: ContentEntity) {
-
 		let updatedContent: any = {};
 
-			if(contentData.markdownText) updatedContent["markdownText"] = contentData.markdownText;
-			if(contentData.plainText) updatedContent["plainText"] = contentData.plainText;
-			if(contentData.linkedEntity) updatedContent["linkedEntity"] = contentData.linkedEntity;
-			if(contentData.linkedEntityId) updatedContent["linkedEntityId"] = contentData.linkedEntityId;
-			if(contentData.date) updatedContent["date"] = contentData.date;
+		if (contentData.markdownText)
+			updatedContent['markdownText'] = contentData.markdownText;
+		if (contentData.plainText)
+			updatedContent['plainText'] = contentData.plainText;
+		if (contentData.linkedEntity)
+			updatedContent['linkedEntity'] = contentData.linkedEntity;
+		if (contentData.linkedEntityId)
+			updatedContent['linkedEntityId'] = contentData.linkedEntityId;
+		if (contentData.date) updatedContent['date'] = contentData.date;
 
-		
 		let updatedData = await prisma.content.update({
-			
 			where: {
 				id: contentData.id,
 			},
 			data: {
-			    markdownText: updatedContent.markdownText,
-			    plainText: updatedContent.plainText,
+				markdownText: updatedContent.markdownText,
+				plainText: updatedContent.plainText,
 				linkedEntity: updatedContent.linkedEntity,
-    			linkedEntityId: updatedContent.linkedEntityId,
+				linkedEntityId: updatedContent.linkedEntityId,
 				date: updatedContent.date,
 			},
-		});		
+		});
 		let rez = new ContentEntity(updatedData);
 
 		return rez;
-		
 	}
 
 	async create(content: ContentEntity) {
 		let response = await prisma.content.create({
 			data: {
 				id: content.id,
-			    markdownText: content.markdownText,
-			    plainText: content.plainText,
+				markdownText: content.markdownText,
+				plainText: content.plainText,
 				linkedEntity: content.linkedEntity,
-    			linkedEntityId: content.linkedEntityId,
+				linkedEntityId: content.linkedEntityId,
 				date: content.date,
-			}
+			},
 		});
 
 		console.log(response);
@@ -76,8 +80,8 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 	async delete(contentId: string) {
 		let response = await prisma.content.delete({
 			where: {
-				id: contentId
-			}
+				id: contentId,
+			},
 		});
 
 		return response;

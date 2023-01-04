@@ -3,8 +3,11 @@ import { StatusCodes } from 'http-status-codes';
 import getSeminarInteractor from '../interactors/getSeminarInteractor';
 import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
 
-export default async function getSeminarRouteHandler(req: Request, res: Response) {
-    console.log(`seminars/${req.params.seminarId} GET`);
+export default async function getSeminarRouteHandler(
+	req: Request,
+	res: Response
+) {
+	console.log(`seminars/${req.params.seminarId} GET`);
 
 	try {
 		let id = String(req.params.seminarId);
@@ -13,6 +16,6 @@ export default async function getSeminarRouteHandler(req: Request, res: Response
 		return res.send(seminar);
 	} catch (err) {
 		console.log(err);
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
 	}
 }

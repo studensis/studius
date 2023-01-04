@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { userInfo } from 'os';
 import SeminarEntity from '../SeminarEntity';
 import { SeminarRepository } from './SeminarRepository';
 
@@ -22,24 +21,30 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 
 	async getById(id: string) {
 		let data = await prisma.seminar.findUnique({ where: { id: id } });
-		let seminar = new SeminarEntity(data);
-		return seminar;
+		if (data) {
+			let seminar = new SeminarEntity(data);
+			return seminar;
+		} else {
+			throw new Error('no data');
+		}
 	}
 
 	async update(seminarData: SeminarEntity) {
-
 		let updatedSeminar: any = {};
 
-			if(seminarData.title) updatedSeminar["title"] = seminarData.title;
-			if(seminarData.description) updatedSeminar["description"] = seminarData.description;
-			if(seminarData.mentorId) updatedSeminar["mentorId"] = seminarData.mentorId;
-			if(seminarData.type) updatedSeminar["type"] = seminarData.type;
-			if(seminarData.contentId) updatedSeminar["contentId"] = seminarData.contentId;
-			if(seminarData.subjectId) updatedSeminar["subjectId"] = seminarData.subjectId;
-			if(seminarData.userId) updatedSeminar["userId"] = seminarData.userId;
-		
+		if (seminarData.title) updatedSeminar['title'] = seminarData.title;
+		if (seminarData.description)
+			updatedSeminar['description'] = seminarData.description;
+		if (seminarData.mentorId)
+			updatedSeminar['mentorId'] = seminarData.mentorId;
+		if (seminarData.type) updatedSeminar['type'] = seminarData.type;
+		if (seminarData.contentId)
+			updatedSeminar['contentId'] = seminarData.contentId;
+		if (seminarData.subjectId)
+			updatedSeminar['subjectId'] = seminarData.subjectId;
+		if (seminarData.userId) updatedSeminar['userId'] = seminarData.userId;
+
 		let updatedData = await prisma.seminar.update({
-			
 			where: {
 				id: seminarData.id,
 			},
@@ -52,11 +57,10 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 				subjectId: updatedSeminar.subjectId,
 				userId: updatedSeminar.userId,
 			},
-		});		
+		});
 		let rez = new SeminarEntity(updatedData);
 
 		return rez;
-		
 	}
 
 	async create(seminar: SeminarEntity) {
@@ -64,13 +68,13 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 			data: {
 				id: seminar.id,
 				title: seminar.title,
-                description: seminar.description,
-                mentorId: seminar.mentorId,
-                type: seminar.type,
-                contentId: seminar.contentId,
-                subjectId: seminar.subjectId,
-				userId: seminar.userId
-			}
+				description: seminar.description,
+				mentorId: seminar.mentorId,
+				type: seminar.type,
+				contentId: seminar.contentId,
+				subjectId: seminar.subjectId,
+				userId: seminar.userId,
+			},
 		});
 
 		console.log(response);
@@ -82,8 +86,8 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 	async delete(seminarId: string) {
 		let response = await prisma.seminar.delete({
 			where: {
-				id: seminarId
-			}
+				id: seminarId,
+			},
 		});
 
 		return response;

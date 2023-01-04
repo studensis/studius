@@ -1,13 +1,15 @@
-import { z } from 'zod';
+import { nullable, z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
+import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
-import SubjectEntity from '../SubjectEntity';
+import { SubjectEntity } from '../SubjectEntity';
+import { updateSubjectEntity } from '../updateSubjectEntity';
 
 let repo = new SubjectRepositoryPrisma();
 
@@ -22,17 +24,20 @@ export default t.router({
 				ectsBod: z.string(),
 				semester: z.enum(['WINTER', 'SUMMER']),
 				status: z.enum(['ACTIVE', 'ARCHIVED']),
-				subjectRole: z.array(z.string()),		// id-jevi odvojeni zarezima
+				contentId: z.array(z.string()).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let subject = new SubjectEntity({
+			let subject: SubjectEntity = {
 				...input,
 				id: '',
-				jmbag: input.jmbag || null,
-				subjectRole: input.subjectRole || 'DEFAULT',
-				mentorID: input.mentorID || null,
-			});
+				title: input.title,
+				description: input.description,
+				ectsBod: input.ectsBod,
+				semester: input.semester,
+				status: input.status,
+				contentId: input.contentId ? input.contentId : [],
+			};
 			let newSubject = await createSubjectInteractor(repo, subject);
 			return newSubject;
 		}),
@@ -52,25 +57,29 @@ export default t.router({
 
 	listSubjects: t.procedure.query(async () => {
 		let subjects = await listSubjectsInteractor(repo);
-		return subjects as SubjectEntity[];
+		return subjects;
 	}),
 
-	updateSubject: t.procedure
+	updateSubjectById: t.procedure
 		.input(
 			z.object({
 				id: z.string(),
-				firstname: z.string(),
-				lastname: z.string(),
-				password: z.string(),
-				jmbag: z.string(),
-				email: z.string(),
-				subjectRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']),
-				mentorID: z.string(),
+				title: z.string().optional(),
+				description: z.string().optional(),
+				ectsBod: z.string().optional(),
+				semester: z.enum(['WINTER', 'SUMMER']).optional(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']).optional(),
+				contentId: z.array(z.string()).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
-			let subject = new SubjectEntity(input);
+			let subject: updateSubjectEntity = { ...input };
 			let updatedSubject = await updateSubjectInteractor(repo, subject);
 			return updatedSubject;
 		}),
+
+	getEnrolledUsers: t.procedure.input(z.string()).query(async ({input}) =>{
+		let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
+		return enrolledUsers;
+	}),
 });

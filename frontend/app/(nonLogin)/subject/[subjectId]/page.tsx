@@ -1,12 +1,6 @@
-import { Todo } from '../../../typings';
+'use client';
 
-const fetchSubject = async (subjectId: string) => {
-	const res = await fetch(
-		'https://jsonplaceholder.typicode.com/todos/' + subjectId
-	);
-	const subject: Todo = await res.json();
-	return subject;
-};
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
 	params: {
@@ -14,14 +8,14 @@ type PageProps = {
 	};
 };
 
-async function SubjectPage(props: PageProps) {
-	const todo = await fetchSubject(props.params.subjectId);
+function SubjectPage(props: PageProps) {
+	const todo = trpc.subject.getSubjectById.useQuery(props.params.subjectId);
 
 	return (
 		<div>
 			<p>This is a subject page</p>
-			<h1>{todo.title}</h1>
-			<p>{todo.completed}</p>
+			<h1 className="display3">{todo.data?.title}</h1>
+			<p>{todo.data?.description}</p>
 		</div>
 	);
 }

@@ -51,7 +51,7 @@ export const Icon: React.FC<{
 }> = ({ icon, size, invert, className }) => {
 	return (
 		<div
-			className={'transition-all ease-in duration-200 bg-light-neutral '.concat(
+			className={'transition-all ease-in duration-200 '.concat(
 				className ? className : ''
 			)}
 			style={{

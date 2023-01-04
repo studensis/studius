@@ -11,69 +11,36 @@ module.exports = {
         'side': '32px 0px 32px -32px rgba(0, 93, 255, 0.25)',
       },
       colors:{
-        
-        dark: {
-          accent: {
-            DEFAULT: '#005DFF',
-            strong: '#004ACC',
-            medium: '#0A3889',
-            weak: '#102343'
-          },
-          neutral: {
-            DEFAULT: '#FFFFFF',
-            strong: '#808080',
-            medium: '#4D4D4D',
-            weak: '#202020'
-          },
-          section: '#000000',
-          background: '#141414',
-          success: {
-            DEFAULT: '#359A73',
-            weak: 'rgba(53, 154, 115, 0.06)'
-          },
-          danger: {
-            DEFAULT: '#DB5125',
-            weak: 'rgba(219, 81, 37, 0.06)'
-          },
-          warning: {
-            default: '#CB8A14',
-            weak: 'rgba(203, 138, 20, 0.06)'
-          },
-        },
-        light: {
-          background: '#F5F6FA',
-          accent: {
-            DEFAULT: '#005DFF',
-            strong: '#004ACC',
-            medium: '#78A7FA',
-            weak: '#C0D3F7'
-          },
-          neutral: {
-            DEFAULT: '#000000',
-            strong: '#7C7D80',
-            medium: '#C0C1C4',
-            weak: '#E4E5E9'
-          },
-          section: '#FFFFFF',
-          background: '#F5F6FA',
-          success: {
-            DEFAULT: '#359A73',
-            weak: 'rgba(53, 154, 115, 0.06)'
-          },
-          danger: {
-            DEFAULT: '#DB5125',
-            weak: 'rgba(219, 81, 37, 0.06)'
-          },
-          warning: {
-            DEFAULT: '#CB8A14',
-            weak: 'rgba(203, 138, 20, 0.06)'
-          },
-        },
+				accent: {
+					DEFAULT: 'var(--color-accent)',
+					strong: 'var(--color-accent-strong)',
+					medium: 'var(--color-accent-medium)',
+					weak: 'var(--color-accent-weak)',
+				},
+				neutral: {
+					DEFAULT: 'var(--color-neutral)',
+					strong: 'var(--color-neutral-strong)',
+					medium: 'var(--color-neutral-medium)',
+					weak: 'var(--color-neutral-weak)',
+				},
+				section: 'var(--color-section)',
+				background: 'var(--color-background)',
+				success: {
+					DEFAULT: 'var(--color-success)',
+					weak: 'var(--color-success-weak)'
+				},
+				danger: {
+					DEFAULT: 'var(--color-danger)',
+					weak: 'var(--color-danger-weak)'
+				},
+				warning: {
+					default: 'var(--color-warning)',
+					weak: 'var(--color-warning-weak)'
+				},
         special: {
-          black: '#000000',
-          white: '#FFFFFF'
+          black: 'var(--color-special-black)',
+          white: 'var(--color-special-white)'
         }
-        
       }
     },
     fontFamily: {
@@ -82,5 +49,5 @@ module.exports = {
     }
   },
   plugins: [],
-  darkMode: 'class'
+  darkMode: 'class',
 }
