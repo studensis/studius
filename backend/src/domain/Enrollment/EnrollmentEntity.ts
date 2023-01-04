@@ -1,19 +1,11 @@
-import { Enrollment, Status, SubjectRole } from "@prisma/client";
+import { Status, SubjectRole } from "@prisma/client";
 
 
-export default class EnrollmentEntity {
-    userId: string;
-    subjectId: string;
-    enrollmentDate: Date;
-    roleTitle: SubjectRole;
+export type EnrollmentEntity = { 
+    userId: string, 
+    subjectId: string, 
+    enrollmentDate: Date | null , 
+    roleTitle: SubjectRole,
     status: Status
-
-    constructor (props: Enrollment) {
-        this.userId = props.userId,
-        this.subjectId = props.subjectId,
-        this.enrollmentDate = props.enrollmentDate,
-        this.roleTitle = props.roleTitle,
-        this.status = props.status
-    }
-
 }
+

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { key } from "../compositeKey";
+import { key } from "../../User/compositeKey";
 import deleteEnrollmentInteractor from "../interactors/deleteEnrollmentInteractor";
 import EnrollmentRepositoryPrisma from "../repository/EnrollmentRepositoryPrisma";
 

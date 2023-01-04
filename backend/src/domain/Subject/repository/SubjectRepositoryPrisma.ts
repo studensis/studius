@@ -1,7 +1,10 @@
 import { PrismaClient } from '@prisma/client';
+import { UserEntity } from '../../User/UserEntity';
 import {SubjectEntity} from '../SubjectEntity';
 import { updateSubjectEntity } from '../updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
+import {  EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+
 
 const prisma = new PrismaClient();
 
@@ -97,5 +100,26 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		let rez:SubjectEntity = updatedData;
 
 		return rez;
+	}
+
+	async getEnrolledUsers(subjectId: string) {
+		
+		let users = await prisma.enrollment.findMany({
+			where: {
+				subjectId: subjectId, 
+				status: 'ACTIVE'
+			},
+			include: {
+				user: true
+			}
+		})
+
+		let userData: EnrollmentEntity[] = [];
+		users.forEach((e: EnrollmentEntity) => {
+			let user: EnrollmentEntity = e;
+			userData.push(user);
+			});
+		return userData;
+
 	}
 }

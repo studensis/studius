@@ -1,3 +1,3 @@
-export type key = {
+export type enrollmentKey = {
     userId: string, 
     subjectId: string}

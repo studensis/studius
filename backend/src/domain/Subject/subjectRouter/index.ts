@@ -4,10 +4,11 @@ import { t } from '../../../controllers/trpc';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
+import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
-import {SubjectEntity} from '../SubjectEntity';
+import { SubjectEntity } from '../SubjectEntity';
 import { updateSubjectEntity } from '../updateSubjectEntity';
 
 let repo = new SubjectRepositoryPrisma();
@@ -27,7 +28,7 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let subject:SubjectEntity = {
+			let subject: SubjectEntity = {
 				...input,
 				id: '',
 				title: input.title,
@@ -35,8 +36,7 @@ export default t.router({
 				ectsBod: input.ectsBod,
 				semester: input.semester,
 				status: input.status,
-				contentId: (input.contentId ? input.contentId : []),
-
+				contentId: input.contentId ? input.contentId : [],
 			};
 			let newSubject = await createSubjectInteractor(repo, subject);
 			return newSubject;
@@ -73,8 +73,13 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let subject:updateSubjectEntity = {...input};
+			let subject: updateSubjectEntity = { ...input };
 			let updatedSubject = await updateSubjectInteractor(repo, subject);
 			return updatedSubject;
 		}),
+
+	getEnrolledUsers: t.procedure.input(z.string()).query(async ({input}) =>{
+		let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
+		return enrolledUsers;
+	}),
 });

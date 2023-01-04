@@ -1,5 +1,9 @@
 import { updateUserEntity } from '../updateUserEntity';
 import {UserEntity} from '../UserEntity';
+import {enrollmentKey} from '../compositeKey'
+import {EnrollmentEntity} from '../../Enrollment/EnrollmentEntity'
+import { SubjectEntity } from '../../Subject/SubjectEntity';
+import { updateEnrollmentEntity } from '../../Enrollment/updateEnrollment';
 
 export abstract class UserRepository {
 	async getAll(): Promise<UserEntity[]> {
@@ -17,4 +21,14 @@ export abstract class UserRepository {
 	async delete(userId: string): Promise<UserEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async enrollUser(enrollmentData: EnrollmentEntity): Promise<EnrollmentEntity> {
+		throw new Error('Method not implemented.')
+	}
+	async getEnrolledSubjects(userId: string): Promise<EnrollmentEntity[]> {
+		throw new Error('Method not implemented.')
+	}
+	async updateEnrollment(newData: EnrollmentEntity): Promise<EnrollmentEntity> {
+		throw new Error('Method not implemented.')
+	}
+
 }

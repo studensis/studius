@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { key } from "../compositeKey";
+import { key } from "../../User/compositeKey";
 import EnrollmentEntity from "../EnrollmentEntity";
 import{ EnrollmentRepository } from "./EnrollmentRepository";
 
@@ -100,6 +100,8 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository{
         return result;
         
     }
+
+
 
 
 

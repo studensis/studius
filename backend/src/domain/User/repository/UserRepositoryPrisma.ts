@@ -2,6 +2,10 @@ import { PrismaClient } from '@prisma/client';
 import {UserEntity} from '../UserEntity';
 import {updateUserEntity} from '../updateUserEntity';
 import { UserRepository } from './UserRepository';
+import {  EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+import { enrollmentKey } from '../compositeKey';
+import { SubjectEntity } from '../../Subject/SubjectEntity';
+import { updateEnrollmentEntity } from '../../Enrollment/updateEnrollment';
 
 const prisma = new PrismaClient();
 
@@ -12,7 +16,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		// map to UserEntities
 		let users: UserEntity[] = [];
-		datas.forEach((data) => {
+		datas.forEach((data: UserEntity) => {
 			let user:UserEntity = data;
 			users.push(user);
 		});
@@ -82,4 +86,62 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		return rez;
 	}
+
+	async enrollUser(enrollmentData: EnrollmentEntity): Promise<EnrollmentEntity> {
+
+		let enrollment = await prisma.enrollment.create({
+            data: {
+                userId: enrollmentData.userId,
+                subjectId: enrollmentData.subjectId,
+                enrollmentDate: undefined,
+                roleTitle: enrollmentData.roleTitle,
+                status: enrollmentData.status
+            },
+        })
+        let rez : EnrollmentEntity = enrollment;
+        return rez;
+		
+	}
+
+	async getEnrolledSubjects(userId: string) {
+        let rez = await prisma.enrollment.findMany({
+            where: {
+                userId: userId,
+				status: 'ACTIVE'
+            },
+			include: {
+				subject: true
+			}
+        })
+
+        let result: EnrollmentEntity[] = [];
+        rez.forEach((e: EnrollmentEntity) => {
+            let data: EnrollmentEntity = e;
+			result.push(data);
+        })
+
+        return result;
+	}
+
+	async updateEnrollment(newData: updateEnrollmentEntity) {
+
+		let updatedData = await prisma.enrollment.update({
+            where: {
+                userId_subjectId:{
+                    userId: newData.userId,
+                    subjectId: newData.subjectId
+                } 
+            },
+            data: {
+                roleTitle: newData.roleTitle,
+                status: newData.status                
+            }
+        })
+
+		let rez :EnrollmentEntity = updatedData;
+		return rez;
+
+		
+	}
 }
+
