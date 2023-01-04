@@ -15,14 +15,12 @@ export default function SubjectList() {
 			{users.data &&
 				users.data.map((user) => {
 					return (
-						<>
-							<Link href={'/user/' + user.id} key={user.id}>
-								<div className="p-6 border-light-accent-weak border">
-									<p className="title1">{user.firstname}</p>
-									<p>{user.id}</p>
-								</div>
-							</Link>
-						</>
+						<Link href={'/user/' + user.id} key={user.id}>
+							<div className="p-6 border-light-accent-weak border">
+								<p className="title1">{user.firstname}</p>
+								<p>{user.id}</p>
+							</div>
+						</Link>
 					);
 				})}
 			{/* {subjects.map((subject) => (
