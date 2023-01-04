@@ -1,11 +1,7 @@
-'use client';
-
 import Link from 'next/link';
 import { trpc } from '../../components/hooks/TrpcProvider';
 
-export default function SubjectList() {
-	// const users = await getUsers();
-
+export default function UserList() {
 	const users = trpc.user.listUsers.useQuery(undefined, {
 		refetchInterval: 5000,
 	});
@@ -25,13 +21,6 @@ export default function SubjectList() {
 						</>
 					);
 				})}
-			{/* {subjects.map((subject) => (
-				<Link href={'/subject/' + subject.id} key={subject.id}>
-					<p>
-						[{subject.id}] {subject.title}
-					</p>
-				</Link>
-			))} */}
 		</div>
 	);
 }
