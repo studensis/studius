@@ -18,7 +18,6 @@ export default t.router({
 		.use(isAdmin)
 		.input(
 			z.object({
-				// id: z.string(),
 				firstname: z.string(),
 				lastname: z.string(),
 				password: z.string(),
@@ -33,7 +32,7 @@ export default t.router({
 				...input,
 				id: '',
 				jmbag: input.jmbag || null,
-				userRole: input.userRole || 'DEFAULT',
+				userRole: input.userRole,
 				mentorID: input.mentorID || null,
 			}
 			let newUser = await createUserInteractor(repo, user);
@@ -58,7 +57,7 @@ export default t.router({
 		return users as UserEntity[];
 	}),
 
-	updateUser: t.procedure
+	updateUserById: t.procedure
 		.input(
 			z.object({
 				id: z.string(),

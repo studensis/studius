@@ -10,12 +10,12 @@ import { Todo } from '../../typings';
 // 	return subjects;
 // };
 
-async function SubjectList() {
+export default function SubjectList() {
 	const subjects = trpc.subject.listSubjects.useQuery();
 
 	return (
 		<div>
-			{subjects?.map((subject: { id: string; title: any }) => (
+			{subjects.data.map((subject: { id: string; title: any }) => (
 				<Link href={'/subject/' + subject?.id} key={subject?.id}>
 					<p>
 						[{subject?.id}] {subject?.title}
@@ -25,5 +25,3 @@ async function SubjectList() {
 		</div>
 	);
 }
-
-export default SubjectList;
