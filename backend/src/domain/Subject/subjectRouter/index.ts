@@ -22,16 +22,20 @@ export default t.router({
 				ectsBod: z.string(),
 				semester: z.enum(['WINTER', 'SUMMER']),
 				status: z.enum(['ACTIVE', 'ARCHIVED']),
-				subjectRole: z.array(z.string()),		// id-jevi odvojeni zarezima
+				subjectRole: z.enum(['STUDENT', 'PROFESSOR', 'OWNER', 'DEMONSTRATOR', 'ASSISTANT']),
 			})
 		)
 		.mutation(async ({ input }) => {
 			let subject = new SubjectEntity({
 				...input,
 				id: '',
-				jmbag: input.jmbag || null,
-				subjectRole: input.subjectRole || 'DEFAULT',
-				mentorID: input.mentorID || null,
+				title: input.title,
+				description: input.description,
+				ectsBod: input.ectsBod,
+				semester: input.semester,
+				status: input.status,
+				subjectRole: input.subjectRole || 'STUDENT',
+
 			});
 			let newSubject = await createSubjectInteractor(repo, subject);
 			return newSubject;
@@ -51,7 +55,9 @@ export default t.router({
 	}),
 
 	listSubjects: t.procedure.query(async () => {
+		console.log('jedan');
 		let subjects = await listSubjectsInteractor(repo);
+		console.log(subjects);
 		return subjects as SubjectEntity[];
 	}),
 
