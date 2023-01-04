@@ -54,7 +54,6 @@ deploy-backend-railway:
   only:
     - .gitlab-ci.yml
     - backend/*
-    - pushes
     - main
   script:
     - apt-get update && apt-get install -y curl
