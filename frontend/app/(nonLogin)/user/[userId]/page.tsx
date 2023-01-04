@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { trpc } from '../../../components/hooks/TrpcProvider';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
 	params: {

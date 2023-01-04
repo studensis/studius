@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '../../components/@studius/Button/Button';
-import { trpc } from '../../components/hooks/TrpcProvider';
+import { Button } from '../../../components/@studius/Button/Button';
+import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function AdminToolbar() {
 	const me = trpc.auth.me.useQuery();

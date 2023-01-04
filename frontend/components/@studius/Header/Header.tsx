@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import useLogin from '../../hooks/LoginContext';
 import { Button } from '../Button/Button';
 import Icon, { IconName } from '../Icon/Icon';
@@ -30,6 +31,8 @@ function Header() {
 	// let { loggedIn, logIn, logOut, loginRole } = useLogin();
 	const { loggedIn, user, login, logout } = useLogin();
 
+	const router = useRouter();
+
 	// const login = trpc.auth.login.useMutation();
 	// const logout = trpc.auth.logout.useMutation();
 
@@ -58,17 +61,17 @@ function Header() {
 						)}
 					</div>
 					<div className="flex gap-2">
-						{JSON.stringify(user)}
 						<Button
 							onClick={() => {
 								// logOut();
 								if (loggedIn) {
 									logout();
 								} else {
-									login({
-										email: 'user',
-										password: '123456',
-									});
+									router.push('/login');
+									// login({
+									// 	email: 'user',
+									// 	password: '123456',
+									// });
 								}
 							}}
 						>

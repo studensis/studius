@@ -1,4 +1,4 @@
-import { Todo } from '../../../typings';
+import { Todo } from '../../../../typings';
 
 const fetchSubject = async (subjectId: string) => {
 	const res = await fetch(

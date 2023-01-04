@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { trpc } from '../../components/hooks/TrpcProvider';
+import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
 	// const users = await getUsers();

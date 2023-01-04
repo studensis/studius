@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button } from '../../../components/@studius/Button/Button';
-import { trpc } from '../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../components/@studius/Button/Button';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 export default function Calendar() {
 	const createUser = trpc.user.createUser.useMutation();

@@ -1,8 +1,7 @@
-import Header from '../components/@studius/Header/Header';
-import PageContainer from '../components/@studius/PageContainer/PageContainer';
 import { LoginProvider } from '../components/hooks/LoginContext';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
+import '../styles/colors.css';
 import '../styles/globals.css';
 
 export default function RootLayout({
@@ -12,7 +11,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html>
-			<body className="">
+			<body>
 				<TrpcProvider>
 					<LoginProvider>
 						<ThemeProvider>
@@ -21,8 +20,7 @@ export default function RootLayout({
 									'bg-background dark:bg-dark-background min-h-screen w-screen overflow-x-hidden'
 								}
 							>
-								<Header />
-								<PageContainer>{children}</PageContainer>
+								{children}
 							</div>
 						</ThemeProvider>
 					</LoginProvider>

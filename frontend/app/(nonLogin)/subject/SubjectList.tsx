@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { trpc } from '../../components/hooks/TrpcProvider';
-import { Todo } from '../../typings';
+import { trpc } from '../../../components/hooks/TrpcProvider';
 
 // const fetchTodos = async () => {
 // 	const res = await fetch('https://jsonplaceholder.typicode.com/todos/', {

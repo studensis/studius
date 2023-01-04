@@ -1,7 +1,7 @@
 'use client';
 
-import PageHeader from '../../components/@studius/PageHeader/PageHeader';
-import SectionButton from '../../components/@studius/SectionButton/SectionButton';
+import PageHeader from '../../../components/@studius/PageHeader/PageHeader';
+import SectionButton from '../../../components/@studius/SectionButton/SectionButton';
 
 export default function AdminTools() {
 	return (
