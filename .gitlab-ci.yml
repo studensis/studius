@@ -58,6 +58,4 @@ deploy-backend-railway:
   script:
     - apt-get update && apt-get install -y curl
     - curl -fsSL https://railway.app/install.sh | sh
-    - cd backend
-    - npx prisma generate
     - railway up --service=$RAILWAY_SERVICE_NAME -d

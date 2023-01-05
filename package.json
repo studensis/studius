@@ -6,8 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+		"start-backend": "cd ./backend && yarn start",
     "start": "concurrently \"wsrun --parallel start\"",
-    "dev": "concurrently \"wsrun --parallel dev\""
+    "dev": "concurrently \"wsrun --parallel dev\"",
+    "build": "concurrently \"wsrun --parallel build\""
   },
   "workspaces": [
     "frontend",

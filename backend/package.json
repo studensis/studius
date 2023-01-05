@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev --transpile-only src/index.ts",
-    "build": "tsc -p .",
+    "build": "npx prisma generate && tsc -p .",
     "dev": "ts-node-dev --respawn --transpile-only --exit-child src/index.ts"
   },
   "dependencies": {
