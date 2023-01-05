@@ -11,6 +11,9 @@ export const createContext = async ({
 }: trpcExpress.CreateExpressContextOptions) => {
 	const getUserFromHeader = async () => {
 		const token = req.cookies.token;
+		if (!token) {
+			return null;
+		}
 		try {
 			const user = jwt.verify(token, secret) as {
 				userId: string;

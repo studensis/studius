@@ -54,6 +54,11 @@ export default t.procedure
 			);
 
 			ctx.res.cookie('token', token, {
+				...(process.env.NODE_ENV === 'production' && {
+					sameSite: 'none',
+					secure: true,
+				}),
+				maxAge: 1000 * 60 * 60, // 1h
 				// httpOnly: true,
 				// secure: true,
 				// signed: true
