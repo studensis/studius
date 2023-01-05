@@ -5,7 +5,7 @@ import { updateUserEntity } from '../updateUserEntity';
 
 export default async function updateEnrollmentInteractor(
     userRepository: UserRepository,
-    newData: EnrollmentEntity
+    newData: updateEnrollmentEntity
 ) {
     let updatedEnrollment = await userRepository.updateEnrollment(newData);
     return updatedEnrollment;
