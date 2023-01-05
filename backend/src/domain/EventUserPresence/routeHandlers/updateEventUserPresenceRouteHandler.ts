@@ -16,8 +16,8 @@ export default async function updateEventUserPresenceRouteHandler(
 			presenceStatus: eval(
 				String(req.query.presenceStatus).toLowerCase()
 			) as boolean,
-			roomTimeEventId: undefined,
-			userId: undefined,
+			roomTimeEventId: req.query.roomTimeEventId as string,
+			userId: req.query.userId as string,
 		});
 		let repo = new EventUserPresenceRepositoryPrisma();
 		let updatedEventUserPresence = await updateEventUserPresenceInteractor(

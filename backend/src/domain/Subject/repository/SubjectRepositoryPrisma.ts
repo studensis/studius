@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
 import { SubjectEntity } from '../SubjectEntity';
+import { updateSubjectEntity } from '../updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
 
 const prisma = new PrismaClient();

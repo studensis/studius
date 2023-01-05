@@ -4,7 +4,7 @@ import createSubjectInteractor from '../../Subject/interactors/createSubjectInte
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 import { Semester } from '../Semester';
 import { Status } from '../Status';
-import SubjectEntity from '../SubjectEntity';
+import { SubjectEntity } from '../SubjectEntity';
 
 export default async function createSubjectRouteHandler(
 	req: Request,
@@ -13,7 +13,7 @@ export default async function createSubjectRouteHandler(
 	console.log('/subjects POST');
 
 	try {
-		let newSubject = new SubjectEntity({
+		let newSubject: SubjectEntity = {
 			id: req.query.id as string,
 			title: req.query.title as string,
 			description: req.query.description as string,
@@ -21,8 +21,7 @@ export default async function createSubjectRouteHandler(
 			semester: String(req.query.semester).toUpperCase() as Semester,
 			status: String(req.query.status).toUpperCase() as Status,
 			contentId: String(req.query.contentId).split(',') as string[],
-		});
-		newSubject.validate();
+		};
 		let repo = new SubjectRepositoryPrisma();
 		let subject = await createSubjectInteractor(repo, newSubject);
 		return res.send(subject);

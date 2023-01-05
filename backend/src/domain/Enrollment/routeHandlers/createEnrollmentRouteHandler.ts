@@ -1,7 +1,7 @@
 import { Status, SubjectRole } from '@prisma/client';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import EnrollmentEntity from '../EnrollmentEntity';
+import { EnrollmentEntity } from '../EnrollmentEntity';
 import createEnrollmentInteractor from '../interactors/createEnrollmentInteractor';
 import EnrollmentRepositoryPrisma from '../repository/EnrollmentRepositoryPrisma';
 
@@ -12,7 +12,7 @@ export default async function createEnrollmentRouteHandler(
 	console.log('/enrollments POST');
 
 	try {
-		let newEnrollment = new EnrollmentEntity({
+		let newEnrollment: EnrollmentEntity = {
 			userId: req.query.userId as string,
 			subjectId: req.query.subjectId as string,
 			enrollmentDate: new Date(
@@ -20,7 +20,7 @@ export default async function createEnrollmentRouteHandler(
 			) as Date,
 			roleTitle: String(req.query.roleTitle).toUpperCase() as SubjectRole,
 			status: String(req.query.status).toUpperCase() as Status,
-		});
+		};
 
 		let repo = new EnrollmentRepositoryPrisma();
 
