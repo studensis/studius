@@ -18,7 +18,9 @@ export default () => {
 					<ListItems.Action
 						text="View Profile"
 						icon="user"
-						onClick={() => {}}
+						onClick={() => {
+							router.push('/user/' + user!.userId);
+						}}
 					/>
 					<ListItems.Action
 						text="Settings"
