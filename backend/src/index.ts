@@ -20,7 +20,11 @@ app.use((req, res, next) => {
 
 app.use(
 	cors({
-		origin: [customConfig.origin, 'http://localhost:3000'],
+		origin: [
+			customConfig.origin,
+			'http://localhost:3000',
+			'https://studius-eta.vercel.app/',
+		],
 		credentials: true,
 	})
 );
