@@ -54,7 +54,7 @@ export default t.procedure
 			);
 
 			ctx.res.cookie('token', token, {
-				httpOnly: true,
+				// httpOnly: true,
 				// secure: true,
 				// signed: true
 			});
