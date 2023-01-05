@@ -1,9 +1,9 @@
-import { LoginProvider } from '../components/hooks/LoginContext';
 import {
 	ModalOverlay,
 	ModalProvider,
 	ModalSidebar,
-} from '../components/hooks/ModalProvider';
+} from '../components/@studius/Modal/ModalProvider';
+import { LoginProvider } from '../components/hooks/LoginContext';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
 import '../styles/colors.css';
