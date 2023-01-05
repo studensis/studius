@@ -3,19 +3,19 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface IThemeContext {
-	theme: 'dark' | 'light';
+	theme: 'dark' | 'light' | null;
 	setLight: () => void;
 	setDark: () => void;
 }
 
 const ThemeContext = createContext<IThemeContext>({
-	theme: 'light',
+	theme: null,
 	setLight: () => {},
 	setDark: () => {},
 });
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
-	const [theme, setTheme] = useState<'light' | 'dark'>('light');
+	const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
 	useEffect(() => {
 		if (
@@ -32,7 +32,9 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 	}, []);
 
 	useEffect(() => {
-		localStorage.theme = theme;
+		if (theme !== null) {
+			localStorage.theme = theme;
+		}
 	}, [theme]);
 
 	return (

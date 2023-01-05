@@ -8,7 +8,12 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        'side': '32px 0px 32px -32px rgba(0, 93, 255, 0.25)',
+        'side': '32px 0px 32px -32px var(--color-shadow)',
+				'lg-left': '-32px 0px 32px -32px var(--color-shadow)',
+				'lg-right': '32px 0px 32px -32px var(--color-shadow)',
+				'lg-top': '0px -32px 32px -32px var(--color-shadow)',
+				'sm-top': '0px -16px 16px -16px var(--color-shadow)',
+				'sm-bottom': '0px 16px 16px -16px var(--color-shadow)'
       },
       colors:{
 				accent: {
@@ -31,11 +36,17 @@ module.exports = {
 				},
 				danger: {
 					DEFAULT: 'var(--color-danger)',
+					strong: 'var(--color-danger-strong)',
+					medium: 'var(--color-danger-medium)',
 					weak: 'var(--color-danger-weak)'
 				},
 				warning: {
-					default: 'var(--color-warning)',
+					DEFAULT: 'var(--color-warning)',
 					weak: 'var(--color-warning-weak)'
+				},
+				info: {
+					DEFAULT: 'var(--color-info)',
+					weak: 'var(--color-info-weak)'
 				},
         special: {
           black: 'var(--color-special-black)',

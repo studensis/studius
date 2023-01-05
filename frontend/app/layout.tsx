@@ -1,4 +1,5 @@
 import { LoginProvider } from '../components/hooks/LoginContext';
+import { ModalProvider, ModalSidebar } from '../components/hooks/ModalProvider';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
 import '../styles/colors.css';
@@ -15,13 +16,16 @@ export default function RootLayout({
 				<TrpcProvider>
 					<LoginProvider>
 						<ThemeProvider>
-							<div
-								className={
-									'bg-background dark:bg-dark-background min-h-screen w-screen overflow-x-hidden'
-								}
-							>
-								{children}
-							</div>
+							<ModalProvider>
+								<div
+									className={
+										'relative bg-background dark:bg-dark-background min-h-screen w-screen overflow-x-hidden'
+									}
+								>
+									{children}
+									<ModalSidebar />
+								</div>
+							</ModalProvider>
 						</ThemeProvider>
 					</LoginProvider>
 				</TrpcProvider>
