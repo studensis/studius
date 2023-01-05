@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import useLogin from '../components/hooks/LoginContext';
+import useLogin from '../../components/hooks/LoginContext';
 
 export default function Home() {
 	const { loggedIn } = useLogin();
