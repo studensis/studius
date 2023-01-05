@@ -27,7 +27,10 @@ function TrpcProvider({ children }: { children: React.ReactNode }) {
 			links: [
 				loggerLink(),
 				httpBatchLink({
-					url: 'http://localhost:4000',
+					url:
+						process.env.NODE_ENV == 'production'
+							? (process.env.BACKEND_ENDPOINT as string)
+							: 'http://localhost:4000',
 					fetch: async (input, init?) => {
 						const fetch = getFetch();
 						return fetch(input, {
