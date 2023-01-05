@@ -1,5 +1,6 @@
 import { Subject } from '@prisma/client';
 import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+import { updateEnrollmentEntity } from '../../Enrollment/updateEnrollment';
 import { updateUserEntity } from '../updateUserEntity';
 import { UserEntity } from '../UserEntity';
 
@@ -30,7 +31,7 @@ export abstract class UserRepository {
 		throw new Error('Method not implemented.');
 	}
 	async updateEnrollment(
-		newData: EnrollmentEntity
+		newData: updateEnrollmentEntity
 	): Promise<EnrollmentEntity> {
 		throw new Error('Method not implemented.');
 	}

@@ -1,23 +1,31 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+	createContext,
+	useContext,
+	useEffect,
+	useLayoutEffect,
+	useState,
+} from 'react';
 
 interface IThemeContext {
-	theme: 'dark' | 'light';
+	theme: 'dark' | 'light' | null;
 	setLight: () => void;
 	setDark: () => void;
+	toggle: () => void;
 }
 
 const ThemeContext = createContext<IThemeContext>({
-	theme: 'light',
+	theme: null,
 	setLight: () => {},
 	setDark: () => {},
+	toggle: () => {},
 });
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
-	const [theme, setTheme] = useState<'light' | 'dark'>('light');
+	const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (
 			localStorage.theme === 'dark' ||
 			(!('theme' in localStorage) &&
@@ -32,7 +40,15 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 	}, []);
 
 	useEffect(() => {
-		localStorage.theme = theme;
+		if (theme !== null) {
+			localStorage.theme = theme;
+			if (theme === 'light') {
+				document.body.classList.remove('dark');
+			}
+			if (theme === 'dark') {
+				document.body.classList.add('dark');
+			}
+		}
 	}, [theme]);
 
 	return (
@@ -47,6 +63,15 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 					setDark: () => {
 						setTheme('dark');
 						localStorage.theme = 'dark';
+					},
+					toggle: () => {
+						if (theme === 'light') {
+							setTheme('dark');
+							localStorage.theme = 'dark';
+						} else {
+							setTheme('light');
+							localStorage.theme = 'light';
+						}
 					},
 				}}
 			>

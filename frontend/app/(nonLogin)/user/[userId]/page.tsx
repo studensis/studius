@@ -57,8 +57,11 @@ export default function SubjectPage(props: PageProps) {
 			<h3 className="title2"> Enrolled subjects </h3>
 			<div className="grid gap-2 grid-cols-1 md:grid-cols-3">
 				{enrolledSubjects.isSuccess &&
-					enrolledSubjects.data.map((enrolledSubject) => (
-						<Link href={'/subject/' + enrolledSubject.subject.id}>
+					enrolledSubjects.data.map((enrolledSubject: any) => (
+						<Link
+							href={'/subject/' + enrolledSubject.subject.id}
+							key={enrolledSubject.subject.id}
+						>
 							<div className="p-10 bg-section rounded-3xl">
 								<p className="body">
 									{enrolledSubject.subject.id}

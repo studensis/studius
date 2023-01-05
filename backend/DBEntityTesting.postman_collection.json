@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d688f379-43f4-4b9d-836c-de45c788fe0c",
+		"_postman_id": "2a9347e6-aa06-4101-8a18-da5b3fcfa3a2",
 		"name": "DBEntityTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24928693"
+		"_exporter_id": "24356078"
 	},
 	"item": [
 		{
@@ -58,7 +58,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstname\":\"\",\r\n    \"lastname\":\"\",\r\n    \"password\":\"\",\r\n    \"email\":\"\",\r\n    \"userRole\":\"\"\r\n}",
+							"raw": "{\r\n    \"firstname\":\"\",\r\n    \"lastname\":\"\",\r\n    \"password\":\"\",\r\n    \"email\":\"\",\r\n    \"userRole\":\"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,55 +93,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/user.updateUser",
+							"raw": "localhost:4000/user.updateUserById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"user.updateUser"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "password",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "firstname",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "lastname",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "jmbag",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "email",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "userRole",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "mentorId",
-									"value": "",
-									"disabled": true
-								}
+								"user.updateUserById"
 							]
 						}
 					},
@@ -275,13 +233,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/subjects",
+							"raw": "localhost:4000/subject.listSubjects",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"subjects"
+								"subject.listSubjects"
 							]
 						}
 					},
@@ -293,163 +251,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/subjects/1",
+							"raw": "localhost:4000/subject.getSubjectById?input=\"1\"",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"subjects",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/subjects?id&title&description&ectsBod&semester&status&contentId",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"subjects"
+								"subject.getSubjectById"
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "title",
-									"value": ""
-								},
-								{
-									"key": "description",
-									"value": ""
-								},
-								{
-									"key": "ectsBod",
-									"value": ""
-								},
-								{
-									"key": "semester",
-									"value": ""
-								},
-								{
-									"key": "status",
-									"value": ""
-								},
-								{
-									"key": "contentId",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/subjects/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"subjects",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "description",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "ectsBod",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "semester",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "status",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "contentId",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/subjects/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"subjects",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "content",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/subjects/addContent/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"subjects",
-								"addContent",
-								"1"
-							],
-							"query": [
-								{
-									"key": "contentId",
-									"value": "",
-									"disabled": true
+									"key": "input",
+									"value": "\"1\""
 								}
 							]
 						}
@@ -479,6 +292,87 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"\",\r\n    \"description\":\"\",\r\n    \"ectsBod\":\"\",\r\n    \"semester\":\"\",\r\n    \"status\":\"\",\r\n    \"contentId\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/subject.createSubject",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"subject.createSubject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"title\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/subject.updateSubjectById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"subject.updateSubjectById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/subject.deleteSubjectById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"subject.deleteSubjectById"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -491,13 +385,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/contents",
+							"raw": "localhost:4000/content.listContents",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"contents"
+								"content.listContents"
 							]
 						}
 					},
@@ -509,128 +403,100 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/contents/1",
+							"raw": "localhost:4000/content.getContentById?input=\"1\"",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"contents",
-								"1"
+								"content.getContentById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "create",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"markdownText\":\"\",\r\n    \"plainText\":\"\",\r\n    \"date\":\"\",\r\n    \"linkedEntity\":\"USER\",\r\n    \"linkedEntityId\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/contents?id&markdownText&plainText&date&linkedEntity&linkedEntityId",
+							"raw": "localhost:4000/content.createContent",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"contents"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "markdownText",
-									"value": ""
-								},
-								{
-									"key": "plainText",
-									"value": ""
-								},
-								{
-									"key": "date",
-									"value": ""
-								},
-								{
-									"key": "linkedEntity",
-									"value": ""
-								},
-								{
-									"key": "linkedEntityId",
-									"value": ""
-								}
+								"content.createContent"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "update",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"markdownText\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/contents/1",
+							"raw": "localhost:4000/content.updateContentById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"contents",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "markdownText",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "plainText",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "date",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "linkedEntity",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "linkedEntityId",
-									"value": "",
-									"disabled": true
-								}
+								"content.updateContentById"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "delete",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/contents/1",
+							"raw": "localhost:4000/content.deleteContentById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"contents",
-								"1"
+								"content.deleteContentById"
 							]
 						}
 					},
@@ -684,7 +550,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/posts?id&title&date&contentId&linkedEntity&linkedEntityId&ownerId",
+							"raw": "localhost:4000/posts?id=&title=&date=&contentId=&linkedEntity=&linkedEntityId=&ownerId=",
 							"host": [
 								"localhost"
 							],
@@ -849,7 +715,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/seminars?id&title&description&mentorId&type&contentId&subjectId&userId",
+							"raw": "localhost:4000/seminars?id=&title=&description=&mentorId=&type=&contentId=&subjectId=&userId=",
 							"host": [
 								"localhost"
 							],
@@ -1023,7 +889,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/seminarSuggestions?id&seminarId&subjectId",
+							"raw": "localhost:4000/seminarSuggestions?id=&seminarId=&subjectId=",
 							"host": [
 								"localhost"
 							],
@@ -1152,7 +1018,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/roomTimeEvents?id&dateStart&dateEnd&roomId&eventId",
+							"raw": "localhost:4000/roomTimeEvents?id=&dateStart=&dateEnd=&roomId=&eventId=",
 							"host": [
 								"localhost"
 							],
@@ -1299,7 +1165,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/eventUserPresences?id&presenceStatus&roomTimeEventId&userId",
+							"raw": "localhost:4000/eventUserPresences?id=&presenceStatus=&roomTimeEventId=&userId=",
 							"host": [
 								"localhost"
 							],
@@ -1437,7 +1303,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/rooms?id&capacity",
+							"raw": "localhost:4000/rooms?id=&capacity=",
 							"host": [
 								"localhost"
 							],
@@ -1557,7 +1423,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/events?id&title&description&linkedEntity&linkedEntityId",
+							"raw": "localhost:4000/events?id=&title=&description=&linkedEntity=&linkedEntityId=",
 							"host": [
 								"localhost"
 							],
@@ -1725,7 +1591,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/enrollments?userId&subjectId&enrollmentDate&roleTitle&status",
+							"raw": "localhost:4000/enrollments?userId=&subjectId=&enrollmentDate=&roleTitle=&status=",
 							"host": [
 								"localhost"
 							],
@@ -1765,7 +1631,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/enrollments?userId&subjectId",
+							"raw": "localhost:4000/enrollments?userId=&subjectId=",
 							"host": [
 								"localhost"
 							],
@@ -1808,7 +1674,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/enrollments?userId&subjectId",
+							"raw": "localhost:4000/enrollments?userId=&subjectId=",
 							"host": [
 								"localhost"
 							],
@@ -1842,7 +1708,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user\",\r\n    \"password\":\"123456\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@fer.hr\",\r\n    \"password\":\"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

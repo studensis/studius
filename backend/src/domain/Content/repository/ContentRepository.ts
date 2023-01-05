@@ -1,4 +1,5 @@
-import ContentEntity from '../ContentEntity';
+import { ContentEntity } from '../ContentEntity';
+import { updateContentEntity } from '../updateContentEntity';
 
 export abstract class ContentRepository {
 	async getAll(): Promise<ContentEntity[]> {
@@ -10,10 +11,10 @@ export abstract class ContentRepository {
 	async create(content: ContentEntity): Promise<ContentEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(content: ContentEntity): Promise<ContentEntity>{
+	async update(content: updateContentEntity): Promise<updateContentEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(contentId: string): Promise<ContentEntity>{
+	async delete(contentId: string): Promise<ContentEntity> {
 		throw new Error('Method not implemented.');
 	}
 }

@@ -12,7 +12,6 @@ type ButtonProps = {
 	disabled?: boolean;
 	leftIcon?: IconName;
 	rightIcon?: IconName;
-	darkMode?: boolean;
 	style?: any;
 	onClick?: any;
 	formType?: any;
@@ -26,7 +25,6 @@ const Button: FC<ButtonProps> = ({
 	outline,
 	small,
 	children,
-	darkMode,
 	style,
 	onClick,
 	formType,
@@ -45,18 +43,18 @@ const Button: FC<ButtonProps> = ({
 					className={(children
 						? outline == true
 							? disabled == true
-								? 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] w-max h-[40px] rounded-2xl opacity-40 border-2'
-								: 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] border-2 w-max h-[40px] rounded-2xl hover:opacity-80 hover:bg-[#C0D3F7] hover:border-[#005DFF] active:opacity-50 active:bg-[#005DFF] active:text-white '
+								? 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong w-max h-[40px] rounded-2xl opacity-40 border-2'
+								: 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong border-2 w-max h-[40px] rounded-2xl hover:opacity-80 hover:bg-accent-weak hover:border-accent-strong active:opacity-50 active:bg-accent-strong active:text-section '
 							: disabled == true
-							? 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-max h-[40px] rounded-2xl opacity-20'
-							: 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-max h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
+							? 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-max h-[40px] rounded-2xl opacity-20'
+							: 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-max h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
 						: outline == true
 						? disabled == true
-							? 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] w-[40px] h-[40px] rounded-2xl opacity-40 border-2'
-							: 'flex justify-center items-center py-2 px-4 bg-white text-[#005DFF] border-2 [40px] h-[40px] rounded-2xl hover:opacity-80 hover:bg-[#C0D3F7] hover:border-[#005DFF] active:opacity-50 active:bg-[#005DFF] active:text-white '
+							? 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong w-[40px] h-[40px] rounded-2xl opacity-40 border-2'
+							: 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong border-2 [40px] h-[40px] rounded-2xl hover:opacity-80 hover:bg-accent-weak hover:border-accent-strong active:opacity-50 active:bg-accent-strong active:text-section '
 						: disabled == true
-						? 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-[40px] h-[40px] rounded-2xl opacity-20'
-						: 'flex justify-center items-center py-2 px-4 bg-[#005DFF] text-white w-[40px] h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
+						? 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-[40px] h-[40px] rounded-2xl opacity-20'
+						: 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-[40px] h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
 					)
 						.concat(' ')
 						.concat(className ? className : '')}
@@ -64,8 +62,8 @@ const Button: FC<ButtonProps> = ({
 					<h1
 						className={
 							small == true
-								? 'button-small justify-center flex items-center gap-1'
-								: 'button-large justify-center flex items-center gap-1'
+								? 'button-small justify-center flex items-center gap-1 text-special-white'
+								: 'button-large justify-center flex items-center gap-1 text-special-white'
 						}
 					>
 						{leftIcon && (
@@ -73,7 +71,7 @@ const Button: FC<ButtonProps> = ({
 								icon={leftIcon}
 								size={small == true ? 12 : 16}
 								className={'bg-special-white'}
-								// color={darkMode ? "white" : "#005DFF"}
+								// color={darkMode ? "white" : accent-strong}
 							/>
 						)}
 						{children}
@@ -82,7 +80,7 @@ const Button: FC<ButtonProps> = ({
 								icon={rightIcon}
 								size={small == true ? 12 : 16}
 								className={'bg-special-white'}
-								// color={darkMode ? "white" : "#005DFF"}
+								// color={darkMode ? "white" : accent-strong}
 							/>
 						)}
 					</h1>

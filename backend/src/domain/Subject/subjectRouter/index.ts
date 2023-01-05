@@ -80,6 +80,7 @@ export default t.router({
 
 	getEnrolledUsers: t.procedure.input(z.string()).query(async ({input}) =>{
 		let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
+		console.log(enrolledUsers);
 		return enrolledUsers;
 	}),
 });

@@ -55,7 +55,6 @@ export default class UserRepositoryPrisma extends UserRepository {
 	async create(user: UserEntity) {
 		let response = await prisma.user.create({
 			data: {
-				// id: user.id,
 				email: user.email,
 				password: user.password,
 				firstname: user.firstname,

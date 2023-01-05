@@ -1,7 +1,7 @@
 import { LinkedEntity } from '@prisma/client';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import ContentEntity from '../ContentEntity';
+import { ContentEntity } from '../ContentEntity';
 import createContentInteractor from '../interactors/createContentInteractor';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
 
@@ -12,7 +12,7 @@ export default async function createContentRouteHandler(
 	console.log('/contents POST');
 
 	try {
-		let newContent = new ContentEntity({
+		let newContent: ContentEntity = {
 			id: req.query.id as string,
 			markdownText: req.query.markdownText as string,
 			plainText: req.query.plainText as string,
@@ -21,7 +21,7 @@ export default async function createContentRouteHandler(
 				req.query.linkedEntity
 			).toUpperCase() as LinkedEntity,
 			linkedEntityId: req.query.linkedEntityId as string,
-		});
+		};
 		// newContent.validate();
 		let repo = new ContentRepositoryPrisma();
 		let content = await createContentInteractor(repo, newContent);

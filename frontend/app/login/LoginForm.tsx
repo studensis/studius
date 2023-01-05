@@ -1,9 +1,33 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { Button } from '../../components/@studius/Button/Button';
 import useLogin from '../../components/hooks/LoginContext';
+
+const TextInput = ({
+	onChange,
+	placeholder,
+	name,
+	type,
+}: {
+	onChange?: ChangeEventHandler<HTMLInputElement>;
+	placeholder: string;
+	name: string;
+	type?: 'text' | 'password';
+}) => {
+	return (
+		<input
+			type={type || 'text'}
+			onChange={onChange}
+			placeholder={placeholder}
+			name={name}
+			className={
+				'px-4 py-6 border border-neutral-weak rounded-xl w-full mb-4'
+			}
+		></input>
+	);
+};
 
 export default function LoginForm() {
 	const { login, user, loggedIn } = useLogin();
@@ -24,23 +48,22 @@ export default function LoginForm() {
 	return (
 		<>
 			<form>
-				<input
+				<TextInput
 					type="text"
 					placeholder="email"
 					name="email"
 					onChange={(e) => {
 						setForm({ ...form, email: e.target.value });
 					}}
-				></input>
-				<input
+				></TextInput>
+				<TextInput
 					type="password"
 					placeholder="password"
 					name="password"
 					onChange={(e) => {
 						setForm({ ...form, password: e.target.value });
 					}}
-				></input>
-				Log in as:
+				></TextInput>
 				<Button
 					onClick={() => {
 						login(form);

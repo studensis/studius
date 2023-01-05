@@ -59,7 +59,6 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 	async create(subject: SubjectEntity) {
 		let response = await prisma.subject.create({
 			data: {
-				id: subject.id,
 				title: subject.title,
 				description: subject.description,
 				ectsBod: subject.ectsBod,
