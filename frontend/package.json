@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "build-css": "tailwindcss -i src/globals.css -o public/globals.css"
   },
   "dependencies": {
@@ -17,7 +16,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@trpc/client": "latest",
     "@trpc/react-query": "latest",
-    "@trpc/server": "latest",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
