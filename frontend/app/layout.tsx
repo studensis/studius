@@ -16,14 +16,14 @@ export default function RootLayout({
 }) {
 	return (
 		<html>
-			<body>
+			<body className="overflow-x-hidden bg-background">
 				<TrpcProvider>
 					<LoginProvider>
 						<ThemeProvider>
 							<ModalProvider>
 								<div
 									className={
-										'relative bg-background dark:bg-dark-background min-h-screen w-screen overflow-x-hidden'
+										'relative min-h-screen w-screen overflow-x-hidden'
 									}
 								>
 									{children}

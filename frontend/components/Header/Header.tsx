@@ -38,56 +38,50 @@ function Header() {
 
 	return (
 		<>
-			<>
-				<div className="w-full px-6 py-4 flex place-content-between place-items-center">
-					<div className="flex gap-2">
-						<Link href="/">
-							<div className="relative w-12 h-12 rounded-[16px] bg-neutral-medium">
-								<Image
-									src={'/assets/FER/logo.png'}
-									fill
-									style={{ objectFit: 'contain' }}
-									alt=""
-								/>
-							</div>
-						</Link>
-						<NavItem
-							href="/intranet"
-							icon="home"
-							title="Homepage"
-						/>
-						{user &&
-							(user.role === 'ADMIN' ||
-								user.role === 'SUPERADMIN') && (
-								<NavItem
-									href="/admin"
-									icon="adminTools"
-									title="Admin"
-								/>
-							)}
-					</div>
-					<div className="flex gap-2">
-						{loggedIn ? (
-							<div
-								className="w-12 h-12 rounded-[16px] bg-neutral-medium"
-								onClick={() => {
-									setSidebar(<MainSidebar />);
-								}}
-							></div>
-						) : (
-							<>
-								<Button
-									onClick={() => {
-										router.push('/login');
-									}}
-								>
-									Log in
-								</Button>
-							</>
+			<div className="fixed top-0 w-full px-6 py-4 flex place-content-between place-items-center">
+				<div className="flex gap-2">
+					<Link href="/">
+						<div className="relative w-12 h-12 rounded-[16px] bg-neutral-medium">
+							<Image
+								src={'/assets/FER/logo.png'}
+								fill
+								style={{ objectFit: 'contain' }}
+								alt=""
+							/>
+						</div>
+					</Link>
+					<NavItem href="/intranet" icon="home" title="Homepage" />
+					{user &&
+						(user.role === 'ADMIN' ||
+							user.role === 'SUPERADMIN') && (
+							<NavItem
+								href="/admin"
+								icon="adminTools"
+								title="Admin"
+							/>
 						)}
-					</div>
 				</div>
-			</>
+				<div className="flex gap-2">
+					{loggedIn ? (
+						<div
+							className="w-12 h-12 rounded-[16px] bg-neutral-medium"
+							onClick={() => {
+								setSidebar(<MainSidebar />);
+							}}
+						></div>
+					) : (
+						<>
+							<Button
+								onClick={() => {
+									router.push('/login');
+								}}
+							>
+								Log in
+							</Button>
+						</>
+					)}
+				</div>
+			</div>
 		</>
 	);
 }
