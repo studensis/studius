@@ -4,7 +4,7 @@ import useModal from '../@studius/Modal/ModalProvider';
 import useLogin from '../hooks/LoginContext';
 import useTheme from '../hooks/ThemeProvider';
 
-export default () => {
+export default function MainSidebar() {
 	const { loggedIn, logout, user } = useLogin();
 	const router = useRouter();
 	const { setSidebar } = useModal();
@@ -50,4 +50,4 @@ export default () => {
 			)}
 		</>
 	);
-};
+}
