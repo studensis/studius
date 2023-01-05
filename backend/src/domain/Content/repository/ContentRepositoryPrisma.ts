@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import ContentEntity from '../ContentEntity';
+import { ContentEntity } from '../ContentEntity';
+import { updateContentEntity } from '../updateContentEntity';
 import { ContentRepository } from './ContentRepository';
 
 const prisma = new PrismaClient();
@@ -12,7 +13,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 		// map to ContentEntities
 		let contents: ContentEntity[] = [];
 		datas.forEach((data) => {
-			let content = new ContentEntity(data);
+			let content: ContentEntity = data;
 			contents.push(content);
 		});
 
@@ -22,39 +23,35 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 	async getById(id: string) {
 		let data = await prisma.content.findUnique({ where: { id: id } });
 		if (data) {
-			let content = new ContentEntity(data);
+			let content: ContentEntity = data;
 			return content;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(contentData: ContentEntity) {
-		let updatedContent: any = {};
-
-		if (contentData.markdownText)
-			updatedContent['markdownText'] = contentData.markdownText;
-		if (contentData.plainText)
-			updatedContent['plainText'] = contentData.plainText;
-		if (contentData.linkedEntity)
-			updatedContent['linkedEntity'] = contentData.linkedEntity;
-		if (contentData.linkedEntityId)
-			updatedContent['linkedEntityId'] = contentData.linkedEntityId;
-		if (contentData.date) updatedContent['date'] = contentData.date;
-
+	async update(contentData: updateContentEntity) {
 		let updatedData = await prisma.content.update({
 			where: {
 				id: contentData.id,
 			},
 			data: {
-				markdownText: updatedContent.markdownText,
-				plainText: updatedContent.plainText,
-				linkedEntity: updatedContent.linkedEntity,
-				linkedEntityId: updatedContent.linkedEntityId,
-				date: updatedContent.date,
+				markdownText: contentData.markdownText
+					? contentData.markdownText
+					: undefined,
+				plainText: contentData.plainText
+					? contentData.plainText
+					: undefined,
+				linkedEntity: contentData.linkedEntity
+					? contentData.linkedEntity
+					: undefined,
+				linkedEntityId: contentData.linkedEntityId
+					? contentData.linkedEntityId
+					: undefined,
+				date: contentData.date ? contentData.date : undefined,
 			},
 		});
-		let rez = new ContentEntity(updatedData);
+		let rez: ContentEntity = updatedData;
 
 		return rez;
 	}
@@ -62,7 +59,6 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 	async create(content: ContentEntity) {
 		let response = await prisma.content.create({
 			data: {
-				id: content.id,
 				markdownText: content.markdownText,
 				plainText: content.plainText,
 				linkedEntity: content.linkedEntity,
@@ -71,9 +67,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 			},
 		});
 
-		console.log(response);
-
-		let out = new ContentEntity(response);
+		let out: ContentEntity = response;
 		return out;
 	}
 

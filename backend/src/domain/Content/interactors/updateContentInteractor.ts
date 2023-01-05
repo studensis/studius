@@ -1,10 +1,10 @@
 import { ContentRepository } from '../repository/ContentRepository';
-import ContentEntity from '../ContentEntity';
+import { updateContentEntity } from '../updateContentEntity';
 
 export default async function updateContentInteractor(
-    contentRepository: ContentRepository,
-    content: ContentEntity
+	contentRepository: ContentRepository,
+	content: updateContentEntity
 ) {
-    let updatedContent = await contentRepository.update(content);
-    return updatedContent;
+	let updatedContent = await contentRepository.update(content);
+	return updatedContent;
 }

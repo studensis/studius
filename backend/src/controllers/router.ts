@@ -1,3 +1,4 @@
+import contentRouter from '../domain/Content/contentRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
 import authRouter from './Authentication/authRouter';
@@ -22,7 +23,7 @@ const appRouter = t.router({
 	post: todoRoutine,
 	seminar: todoRoutine,
 	seminarSuggestion: todoRoutine,
-	content: todoRoutine,
+	content: contentRouter,
 });
 
 export default appRouter;
