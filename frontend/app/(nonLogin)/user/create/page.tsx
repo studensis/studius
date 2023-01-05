@@ -57,6 +57,7 @@ export default function Calendar() {
 							...(formData.mentorID
 								? { mentorID: formData.mentorID }
 								: {}),
+							userRole: 'DEFAULT',
 						});
 					}}
 				>
