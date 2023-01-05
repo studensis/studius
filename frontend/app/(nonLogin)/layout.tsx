@@ -1,5 +1,5 @@
-import Header from '../../components/@studius/Header/Header';
 import PageContainer from '../../components/@studius/PageContainer/PageContainer';
+import Header from '../../components/Header/Header';
 import '../../styles/colors.css';
 import '../../styles/globals.css';
 

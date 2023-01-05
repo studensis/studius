@@ -3,9 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import useLogin from '../../hooks/LoginContext';
-import { Button } from '../Button/Button';
-import Icon, { IconName } from '../Icon/Icon';
+import { Button } from '../@studius/Button/Button';
+import Icon, { IconName } from '../@studius/Icon/Icon';
+import useModal from '../@studius/Modal/ModalProvider';
+import useLogin from '../hooks/LoginContext';
+import MainSidebar from '../Sidebars/MainSidebar';
 
 const NavItem = ({
 	href,
@@ -29,7 +31,8 @@ const NavItem = ({
 };
 
 function Header() {
-	const { loggedIn, user, login, logout } = useLogin();
+	const { user, loggedIn } = useLogin();
+	const { setSidebar } = useModal();
 
 	const router = useRouter();
 
@@ -39,7 +42,7 @@ function Header() {
 				<div className="w-full px-6 py-4 flex place-content-between place-items-center">
 					<div className="flex gap-2">
 						<Link href="/">
-							<div className="relative w-12 h-12 rounded-[16px] bg-special-black">
+							<div className="relative w-12 h-12 rounded-[16px] bg-neutral-medium">
 								<Image
 									src={'/assets/FER/logo.png'}
 									fill
@@ -64,18 +67,24 @@ function Header() {
 							)}
 					</div>
 					<div className="flex gap-2">
-						<Button
-							onClick={() => {
-								if (loggedIn) {
-									logout();
-								} else {
-									router.push('/login');
-								}
-							}}
-						>
-							{loggedIn ? 'Log Out' : 'Log In'}
-						</Button>
-						<div className="w-12 h-12 rounded-[16px] bg-black"></div>
+						{loggedIn ? (
+							<div
+								className="w-12 h-12 rounded-[16px] bg-neutral-medium"
+								onClick={() => {
+									setSidebar(<MainSidebar />);
+								}}
+							></div>
+						) : (
+							<>
+								<Button
+									onClick={() => {
+										router.push('/login');
+									}}
+								>
+									Log in
+								</Button>
+							</>
+						)}
 					</div>
 				</div>
 			</>
