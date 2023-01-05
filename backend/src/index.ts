@@ -39,7 +39,8 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const port = customConfig.port;
+// const port = customConfig.port;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
 	console.clear();
