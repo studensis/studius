@@ -1,5 +1,9 @@
 import { LoginProvider } from '../components/hooks/LoginContext';
-import { ModalProvider, ModalSidebar } from '../components/hooks/ModalProvider';
+import {
+	ModalOverlay,
+	ModalProvider,
+	ModalSidebar,
+} from '../components/hooks/ModalProvider';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
 import '../styles/colors.css';
@@ -23,6 +27,7 @@ export default function RootLayout({
 									}
 								>
 									{children}
+									<ModalOverlay />
 									<ModalSidebar />
 								</div>
 							</ModalProvider>
