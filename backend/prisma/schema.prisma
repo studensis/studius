@@ -97,6 +97,7 @@ model SeminarSuggestion {
 
 model Room {
   id       String @id @default(uuid())
+  title    String @default("")
   capacity Int
 }
 

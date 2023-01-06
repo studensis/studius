@@ -1,14 +1,13 @@
-import { Room, User } from '@prisma/client';
-import { Subject } from '@prisma/client';
-import internal from 'stream';
+import { Room } from '@prisma/client';
 
 export default class RoomEntity {
 	id: string;
-	capacity: number;		// User
-
+	capacity: number; // User
+	title: string;
 
 	constructor(props: Room) {
 		this.id = props.id;
 		this.capacity = props.capacity;
+		this.title = props.title;
 	}
 }
