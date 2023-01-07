@@ -1,6 +1,5 @@
 import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
-import { UserEntity } from '../../User/UserEntity';
-import {SubjectEntity} from '../SubjectEntity';
+import { SubjectEntity } from '../SubjectEntity';
 import { updateSubjectEntity } from '../updateSubjectEntity';
 
 export abstract class SubjectRepository {
@@ -22,8 +21,10 @@ export abstract class SubjectRepository {
 	async addContent(id: string, contentId: string[]): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async isUserEditor(subjectId: string, userId: string): Promise<boolean> {
+		throw new Error('Method not implemented.');
+	}
 	async getEnrolledUsers(subjectId: string): Promise<EnrollmentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
-
 }

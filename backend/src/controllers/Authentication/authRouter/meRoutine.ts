@@ -1,5 +1,5 @@
-import { t } from '../../trpc';
+import { publicProcedure } from '../../middleware/auth';
 
-export default t.procedure.query(({ ctx }) => {
+export default publicProcedure.query(({ ctx }) => {
 	return ctx.user;
 });

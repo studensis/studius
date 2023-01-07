@@ -1,4 +1,5 @@
-import RoomEntity from '../RoomEntity'
+import { RoomEntity } from '../RoomEntity';
+import { updateRoomEntity } from '../updateRoomEntity';
 
 export abstract class RoomRepository {
 	async getAll(): Promise<RoomEntity[]> {
@@ -10,10 +11,10 @@ export abstract class RoomRepository {
 	async create(Room: RoomEntity): Promise<RoomEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(room: RoomEntity): Promise<RoomEntity>{
+	async update(room: updateRoomEntity): Promise<RoomEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(roomId: string): Promise<RoomEntity>{
+	async delete(roomId: string): Promise<RoomEntity> {
 		throw new Error('Method not implemented.');
 	}
 }

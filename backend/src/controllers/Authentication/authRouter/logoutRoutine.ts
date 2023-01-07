@@ -1,6 +1,6 @@
-import { t } from '../../trpc';
+import { publicProcedure } from '../../middleware/auth';
 
-export default t.procedure.mutation(({ ctx }) => {
+export default publicProcedure.mutation(({ ctx }) => {
 	// ctx.res.clearCookie('token');
 	ctx.res.cookie('token', 'deleted', {
 		...(process.env.NODE_ENV === 'production' && {

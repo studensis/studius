@@ -101,6 +101,26 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		return rez;
 	}
 
+	async isUserEditor(subjectId: string, userId: string) {
+		let users = await prisma.enrollment.findMany({
+			where: {
+				subjectId: subjectId,
+				status: 'ACTIVE',
+			},
+			include: {
+				user: true,
+			},
+		});
+
+		let user = users.filter(
+			(user) =>
+				user.userId === userId &&
+				['PROFESSOR', 'OWNER'].includes(user.roleTitle)
+		);
+
+		return user.length >= 1;
+	}
+
 	async getEnrolledUsers(subjectId: string) {
 		let users = await prisma.enrollment.findMany({
 			where: {

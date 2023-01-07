@@ -1,10 +1,10 @@
 import { EventRepository } from '../repository/EventRepository';
-import EventEntity from '../EventEntity';
+import { updateEventEntity } from '../updateEventEntity';
 
 export default async function updateEventInteractor(
-    eventRepository: EventRepository,
-    event: EventEntity
+	eventRepository: EventRepository,
+	event: updateEventEntity
 ) {
-    let updatedEvent = await eventRepository.update(event);
-    return updatedEvent;
+	let updatedEvent = await eventRepository.update(event);
+	return updatedEvent;
 }
