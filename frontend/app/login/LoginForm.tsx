@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { Button } from '../../components/@studius/Button/Button';
 import useLogin from '../../components/hooks/LoginContext';
+import { trpc } from '../../components/hooks/TrpcProvider';
 
 const TextInput = ({
 	onChange,
@@ -30,7 +31,7 @@ const TextInput = ({
 };
 
 export default function LoginForm() {
-	const { login, user, loggedIn } = useLogin();
+	const { refetch, user, loggedIn } = useLogin();
 
 	const [form, setForm] = useState({
 		email: '',
@@ -39,14 +40,28 @@ export default function LoginForm() {
 
 	const router = useRouter();
 
+	const login = trpc.auth.login.useMutation();
+
+	// useEffect(() => {
+	// 	if (loggedIn && user) {
+	// 		router.push('/intranet');
+	// 	}
+	// }, [loggedIn]);
+
 	useEffect(() => {
-		if (loggedIn && user) {
+		if (login.isSuccess) {
 			router.push('/intranet');
+			refetch();
 		}
-	}, [loggedIn]);
+	}, [login]);
 
 	return (
 		<>
+			{login.isError && (
+				<pre className="bg-danger-weak p-10 mb-4 rounded-2xl">
+					{login.error.shape?.message}
+				</pre>
+			)}
 			<form>
 				<TextInput
 					type="text"
@@ -66,7 +81,7 @@ export default function LoginForm() {
 				></TextInput>
 				<Button
 					onClick={() => {
-						login(form);
+						login.mutate(form);
 					}}
 				>
 					Log in

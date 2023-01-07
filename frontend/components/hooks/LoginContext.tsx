@@ -13,6 +13,7 @@ interface ILoginContext {
 	user: User | null;
 	login: (input: { email: string; password: string }) => void;
 	logout: () => void;
+	refetch: () => void;
 	// login: typeof trpc.auth.login.useMutation
 }
 
@@ -21,13 +22,14 @@ const LoginContext = createContext<ILoginContext>({
 	user: null,
 	login: (input: { email: string; password: string }) => {},
 	logout: () => {},
+	refetch: () => {},
 });
 
 function LoginProvider({ children }: { children: React.ReactNode }) {
 	const [loginState, setLoginState] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>(null);
 
-	const me = trpc.auth.me.useQuery(undefined, { refetchInterval: 10000 });
+	const me = trpc.auth.me.useQuery(undefined, { refetchInterval: 30000 });
 
 	useEffect(() => {
 		if (!me.data) {
@@ -42,9 +44,9 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 	const login = trpc.auth.login.useMutation();
 	const logout = trpc.auth.logout.useMutation();
 
-	const refetch = () => {
+	useEffect(() => {
 		me.refetch();
-	};
+	}, [login, logout]);
 
 	return (
 		<>
@@ -54,15 +56,12 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 					user: user,
 					login: (input) => {
 						login.mutate(input);
-						setTimeout(() => {
-							refetch();
-						}, 200);
 					},
 					logout: () => {
 						logout.mutate();
-						setTimeout(() => {
-							refetch();
-						}, 200);
+					},
+					refetch: () => {
+						me.refetch();
 					},
 				}}
 			>
