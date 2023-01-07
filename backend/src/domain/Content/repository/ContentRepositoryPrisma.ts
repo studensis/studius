@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { ContentEntity } from '../ContentEntity';
-import { updateContentEntity } from '../updateContentEntity';
+import { ContentEntity } from '../model/ContentEntity';
+import { updateContentEntity } from '../model/updateContentEntity';
 import { ContentRepository } from './ContentRepository';
 
 const prisma = new PrismaClient();

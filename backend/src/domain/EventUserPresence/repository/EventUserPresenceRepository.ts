@@ -1,4 +1,4 @@
-import EventUserPresenceEntity from '../EventUserPresenceEntity';
+import EventUserPresenceEntity from '../model/EventUserPresenceEntity';
 
 export abstract class EventUserPresenceRepository {
 	async getAll(): Promise<EventUserPresenceEntity[]> {

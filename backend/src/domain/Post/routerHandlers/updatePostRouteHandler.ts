@@ -2,7 +2,7 @@ import { LinkedEntity } from '@prisma/client';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import updatePostInteractor from '../interactors/updatePostInteractor';
-import PostEntity from '../PostEntity';
+import PostEntity from '../model/PostEntity';
 import PostRepositoryPrisma from '../repository/PostRepositoryPrisma';
 
 export default async function updatePostRouteHandler(

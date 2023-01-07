@@ -1,4 +1,4 @@
-import RoomTimeEventEntity from '../RoomTimeEventEntity';
+import RoomTimeEventEntity from '../model/RoomTimeEventEntity';
 
 export abstract class RoomTimeEventRepository {
 	async getAll(): Promise<RoomTimeEventEntity[]> {

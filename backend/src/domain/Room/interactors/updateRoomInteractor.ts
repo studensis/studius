@@ -1,5 +1,5 @@
+import { updateRoomEntity } from '../model/updateRoomEntity';
 import { RoomRepository } from '../repository/RoomRepository';
-import { updateRoomEntity } from '../updateRoomEntity';
 
 export default async function updateRoomInteractor(
 	roomRepository: RoomRepository,

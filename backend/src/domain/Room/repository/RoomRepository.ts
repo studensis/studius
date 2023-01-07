@@ -1,5 +1,5 @@
-import { RoomEntity } from '../RoomEntity';
-import { updateRoomEntity } from '../updateRoomEntity';
+import { RoomEntity } from '../model/RoomEntity';
+import { updateRoomEntity } from '../model/updateRoomEntity';
 
 export abstract class RoomRepository {
 	async getAll(): Promise<RoomEntity[]> {

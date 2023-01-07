@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import updateRoomTimeEventInteractor from '../interactors/updateRoomTimeEventInteractor';
+import RoomTimeEventEntity from '../model/RoomTimeEventEntity';
 import RoomTimeEventRepositoryPrisma from '../repository/RoomTimeEventRepositoryPrisma';
-import RoomTimeEventEntity from '../RoomTimeEventEntity';
 
 export default async function updateRoomTimeEventRouteHandler(
 	req: Request,

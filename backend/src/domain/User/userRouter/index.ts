@@ -4,7 +4,7 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
+import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
@@ -13,9 +13,9 @@ import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsI
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
+import { updateUserEntity } from '../model/updateUserEntity';
+import { UserEntity } from '../model/UserEntity';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
-import { updateUserEntity } from '../updateUserEntity';
-import { UserEntity } from '../UserEntity';
 
 let repo = new UserRepositoryPrisma();
 

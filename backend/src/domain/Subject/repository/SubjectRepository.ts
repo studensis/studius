@@ -1,6 +1,6 @@
-import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
-import { SubjectEntity } from '../SubjectEntity';
-import { updateSubjectEntity } from '../updateSubjectEntity';
+import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import { SubjectEntity } from '../model/SubjectEntity';
+import { updateSubjectEntity } from '../model/updateSubjectEntity';
 
 export abstract class SubjectRepository {
 	async getAll(): Promise<SubjectEntity[]> {

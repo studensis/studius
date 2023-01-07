@@ -1,5 +1,5 @@
-import { key } from '../compositeKey';
-import { EnrollmentEntity } from '../EnrollmentEntity';
+import { key } from '../model/compositeKey';
+import { EnrollmentEntity } from '../model/EnrollmentEntity';
 
 export abstract class EnrollmentRepository {
 	async create(data: EnrollmentEntity): Promise<EnrollmentEntity> {

@@ -1,4 +1,4 @@
-import { key } from '../compositeKey';
+import { key } from '../model/compositeKey';
 import { EnrollmentRepository } from '../repository/EnrollmentRepository';
 
 export default async function deleteEnrollmentInteractor(

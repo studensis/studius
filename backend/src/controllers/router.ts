@@ -1,7 +1,7 @@
 import contentRouter from '../domain/Content/contentRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
-import authRouter from './Authentication/authRouter';
+import authRouter from '../services/authentication/authRouter';
 import { t } from './trpc';
 
 const todoRoutine = t.procedure.query(() => {

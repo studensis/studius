@@ -1,5 +1,5 @@
+import { ContentEntity } from '../model/ContentEntity';
 import { ContentRepository } from '../repository/ContentRepository';
-import { ContentEntity } from '../ContentEntity';
 
 export default async function createContentInteractor(
 	contentRepository: ContentRepository,

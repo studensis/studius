@@ -1,4 +1,4 @@
-import { t } from '../../trpc';
+import { t } from '../../../controllers/trpc';
 import loginRoutine from './loginRoutine';
 import logoutRoutine from './logoutRoutine';
 import meRoutine from './meRoutine';

@@ -1,5 +1,5 @@
-import { ContentEntity } from '../ContentEntity';
-import { updateContentEntity } from '../updateContentEntity';
+import { ContentEntity } from '../model/ContentEntity';
+import { updateContentEntity } from '../model/updateContentEntity';
 
 export abstract class ContentRepository {
 	async getAll(): Promise<ContentEntity[]> {

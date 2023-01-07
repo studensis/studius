@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
-import { updateEnrollmentEntity } from '../../Enrollment/updateEnrollment';
-import { updateUserEntity } from '../updateUserEntity';
-import { UserEntity } from '../UserEntity';
+import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollment';
+import { updateUserEntity } from '../model/updateUserEntity';
+import { UserEntity } from '../model/UserEntity';
 import { UserRepository } from './UserRepository';
 
 const prisma = new PrismaClient();

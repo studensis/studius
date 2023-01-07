@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import SeminarSuggestionEntity from '../SeminarSuggestionEntity';
+import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
 import { SeminarSuggestionRepository } from './SeminarSuggestionRepository';
 
 const prisma = new PrismaClient();

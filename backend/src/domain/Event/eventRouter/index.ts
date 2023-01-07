@@ -1,14 +1,14 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import { EventEntity } from '../EventEntity';
 import createEventInteractor from '../interactors/createEventInteractor';
 import deleteEventInteractor from '../interactors/deleteEventInteractor';
 import getEventInteractor from '../interactors/getEventInteractor';
 import listEventsInteractor from '../interactors/listEventsInteractor';
 import updateEventInteractor from '../interactors/updateEventInteractor';
+import { EventEntity } from '../model/EventEntity';
+import { updateEventEntity } from '../model/updateEventEntity';
 import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
-import { updateEventEntity } from '../updateEventEntity';
 
 let repo = new EventRepositoryPrisma();
 

@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../middleware/auth';
+import { publicProcedure } from '../../../controllers/middleware/auth';
 
 export default publicProcedure.mutation(({ ctx }) => {
 	// ctx.res.clearCookie('token');

@@ -1,9 +1,9 @@
 import { TRPCError } from '@trpc/server';
 import * as jwt from 'jsonwebtoken';
 import { z } from 'zod';
+import { publicProcedure } from '../../../controllers/middleware/auth';
 import getUserByEmailInteractor from '../../../domain/User/interactors/getUserByEmailInteractor';
 import UserRepositoryPrisma from '../../../domain/User/repository/UserRepositoryPrisma';
-import { publicProcedure } from '../../middleware/auth';
 const secret = '3qtv47890hn689n72cdx3049b*&%a';
 
 const userRepo = new UserRepositoryPrisma();

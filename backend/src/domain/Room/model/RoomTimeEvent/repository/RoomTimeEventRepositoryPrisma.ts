@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import RoomTimeEventEntity from '../RoomTimeEventEntity';
+import RoomTimeEventEntity from '../model/RoomTimeEventEntity';
 import { RoomTimeEventRepository } from './RoomTimeEventRepository';
 
 const prisma = new PrismaClient();

@@ -1,5 +1,5 @@
+import { updateEventEntity } from '../model/updateEventEntity';
 import { EventRepository } from '../repository/EventRepository';
-import { updateEventEntity } from '../updateEventEntity';
 
 export default async function updateEventInteractor(
 	eventRepository: EventRepository,

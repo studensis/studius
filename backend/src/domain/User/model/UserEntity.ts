@@ -10,4 +10,3 @@ export type UserEntity = {
 	userRole: UserRole;
 	mentorID: string | null;
 };
-

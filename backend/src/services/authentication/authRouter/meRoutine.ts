@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../middleware/auth';
+import { publicProcedure } from '../../../controllers/middleware/auth';
 
 export default publicProcedure.query(({ ctx }) => {
 	return ctx.user;

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import EventUserPresenceEntity from '../EventUserPresenceEntity';
+import EventUserPresenceEntity from '../model/EventUserPresenceEntity';
 import { EventUserPresenceRepository } from './EventUserPresenceRepository';
 
 const prisma = new PrismaClient();
