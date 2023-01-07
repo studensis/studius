@@ -4,14 +4,14 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import { ContentEntity } from '../ContentEntity';
 import createContentInteractor from '../interactors/createContentInteractor';
 import deleteContentInteractor from '../interactors/deleteContentInteractor';
 import getContentInteractor from '../interactors/getContentInteractor';
 import listContentsInteractor from '../interactors/listContentsInteractor';
 import updateContentInteractor from '../interactors/updateContentInteractor';
+import { ContentEntity } from '../model/ContentEntity';
+import { updateContentEntity } from '../model/updateContentEntity';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
-import { updateContentEntity } from '../updateContentEntity';
 
 let repo = new ContentRepositoryPrisma();
 

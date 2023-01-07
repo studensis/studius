@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSeminarSuggestionInteractor from '../interactors/createSeminarSuggestionInteractor';
+import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
 import SeminarSuggestionRepositoryPrisma from '../repository/SeminarSuggestionRepositoryPrisma';
-import SeminarSuggestionEntity from '../SeminarSuggestionEntity';
 
 export default async function createSeminarSuggestionRouteHandler(
 	req: Request,

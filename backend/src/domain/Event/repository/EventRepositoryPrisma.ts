@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { EventEntity } from '../EventEntity';
-import { updateEventEntity } from '../updateEventEntity';
+import { EventEntity } from '../model/EventEntity';
+import { updateEventEntity } from '../model/updateEventEntity';
 import { EventRepository } from './EventRepository';
 
 const prisma = new PrismaClient();

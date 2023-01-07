@@ -1,8 +1,8 @@
 import { LinkedEntity } from '@prisma/client';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { ContentEntity } from '../ContentEntity';
 import updateContentInteractor from '../interactors/updateContentInteractor';
+import { ContentEntity } from '../model/ContentEntity';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
 
 export default async function updateContentRouteHandler(

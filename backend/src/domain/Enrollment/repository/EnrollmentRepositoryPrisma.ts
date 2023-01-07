@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { key } from '../compositeKey';
-import { EnrollmentEntity } from '../EnrollmentEntity';
+import { key } from '../model/compositeKey';
+import { EnrollmentEntity } from '../model/EnrollmentEntity';
 import { EnrollmentRepository } from './EnrollmentRepository';
 
 const prisma = new PrismaClient();

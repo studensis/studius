@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import PostEntity from '../PostEntity';
+import PostEntity from '../model/PostEntity';
 import { PostRepository } from './PostRepository';
 
 const prisma = new PrismaClient();

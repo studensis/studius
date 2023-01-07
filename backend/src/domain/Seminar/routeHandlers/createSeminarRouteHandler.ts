@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSeminarInteractor from '../interactors/createSeminarInteractor';
+import SeminarEntity from '../model/SeminarEntity';
 import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
-import SeminarEntity from '../SeminarEntity';
 
 export default async function createSeminarRouteHandler(
 	req: Request,

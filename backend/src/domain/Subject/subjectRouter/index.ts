@@ -11,9 +11,9 @@ import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
+import { SubjectEntity } from '../model/SubjectEntity';
+import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
-import { SubjectEntity } from '../SubjectEntity';
-import { updateSubjectEntity } from '../updateSubjectEntity';
 
 let repo = new SubjectRepositoryPrisma();
 

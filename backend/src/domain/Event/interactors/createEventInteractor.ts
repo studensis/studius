@@ -1,4 +1,4 @@
-import { EventEntity } from '../EventEntity';
+import { EventEntity } from '../model/EventEntity';
 import { EventRepository } from '../repository/EventRepository';
 
 export default async function createEventInteractor(

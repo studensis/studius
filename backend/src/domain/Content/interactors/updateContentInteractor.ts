@@ -1,5 +1,5 @@
+import { updateContentEntity } from '../model/updateContentEntity';
 import { ContentRepository } from '../repository/ContentRepository';
-import { updateContentEntity } from '../updateContentEntity';
 
 export default async function updateContentInteractor(
 	contentRepository: ContentRepository,

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createPostInteractor from '../interactors/createPostInteractor';
-import { LinkedEntity } from '../LinkedEntity';
-import PostEntity from '../PostEntity';
+import { LinkedEntity } from '../model/LinkedEntity';
+import PostEntity from '../model/PostEntity';
 import PostRepositoryPrisma from '../repository/PostRepositoryPrisma';
 
 export default async function createPostRouteHandler(

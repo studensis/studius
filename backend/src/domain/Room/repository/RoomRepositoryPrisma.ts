@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { RoomEntity } from '../RoomEntity';
-import { updateRoomEntity } from '../updateRoomEntity';
+import { RoomEntity } from '../model/RoomEntity';
+import { updateRoomEntity } from '../model/updateRoomEntity';
 import { RoomRepository } from './RoomRepository';
 
 const prisma = new PrismaClient();

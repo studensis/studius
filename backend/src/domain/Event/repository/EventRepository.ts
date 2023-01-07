@@ -1,5 +1,5 @@
-import { EventEntity } from '../EventEntity';
-import { updateEventEntity } from '../updateEventEntity';
+import { EventEntity } from '../model/EventEntity';
+import { updateEventEntity } from '../model/updateEventEntity';
 
 export abstract class EventRepository {
 	async getAll(): Promise<EventEntity[]> {

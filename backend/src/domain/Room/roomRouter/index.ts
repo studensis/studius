@@ -6,8 +6,8 @@ import deleteRoomInteractor from '../interactors/deleteRoomInteractor';
 import getRoomInteractor from '../interactors/getRoomInteractor';
 import listRoomsInteractor from '../interactors/listRoomsInteractor';
 import updateRoomInteractor from '../interactors/updateRoomInteractor';
+import { RoomEntity } from '../model/RoomEntity';
 import RoomRepositoryPrisma from '../repository/RoomRepositoryPrisma';
-import { RoomEntity } from '../RoomEntity';
 
 let repo = new RoomRepositoryPrisma();
 

@@ -1,0 +1,36 @@
+{
+	"editor.tabSize": 2,
+
+	"editor.renderWhitespace": "boundary",
+	"diffEditor.wordWrap": "on",
+	"editor.wordWrap": "on",
+
+	"javascript.format.semicolons": "insert",
+	"typescript.format.semicolons": "insert",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+
+	"editor.formatOnSave": true,
+	"[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.singleQuote": true,
+	"prettier.trailingComma": "none",
+	"prettier.useTabs": true,
+	"prettier.bracketSameLine": true,
+
+	"git.autofetch": true,
+
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true
+	},
+
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.patterns": {
+		"package.json": ".env, README.md, tsconfig.json, yarn.lock, yarn-error.log, tailwind.config.js, postcss.config.js, next.config.js, .eslintrc.json, node_modules/, next-env.d.ts, .prettierignore, .prettierrc, .gitignore, .gitlab-ci.yml, postman.json"
+	},
+
+	"markdown-pdf.styles": ["document.css"],
+	"markdown-pdf.stylesRelativePathFile": true
+}

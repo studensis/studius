@@ -1,4 +1,4 @@
-import SeminarSuggestionEntity from '../SeminarSuggestionEntity'
+import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
 
 export abstract class SeminarSuggestionRepository {
 	async getAll(): Promise<SeminarSuggestionEntity[]> {
@@ -7,13 +7,19 @@ export abstract class SeminarSuggestionRepository {
 	async getById(id: string): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async create(seminarSuggestion: SeminarSuggestionEntity): Promise<SeminarSuggestionEntity> {
+	async create(
+		seminarSuggestion: SeminarSuggestionEntity
+	): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(seminarSuggestion: SeminarSuggestionEntity): Promise<SeminarSuggestionEntity>{
+	async update(
+		seminarSuggestion: SeminarSuggestionEntity
+	): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(seminarSuggestionId: string): Promise<SeminarSuggestionEntity>{
+	async delete(
+		seminarSuggestionId: string
+	): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
 }
