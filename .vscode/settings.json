@@ -26,6 +26,11 @@
 		"source.organizeImports": true
 	},
 
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.patterns": {
+		"package.json": ".env, README.md, tsconfig.json, yarn.lock, yarn-error.log, tailwind.config.js, postcss.config.js, next.config.js, .eslintrc.json, node_modules/, next-env.d.ts, .prettierignore, .prettierrc, .gitignore, .gitlab-ci.yml, postman.json"
+	},
+
 	"markdown-pdf.styles": ["document.css"],
 	"markdown-pdf.stylesRelativePathFile": true
 }
