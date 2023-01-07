@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import EventEntity from '../EventEntity';
+import { EventEntity } from '../EventEntity';
+import { updateEventEntity } from '../updateEventEntity';
 import { EventRepository } from './EventRepository';
 
 const prisma = new PrismaClient();
@@ -12,7 +13,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 		// map to EventEntities
 		let events: EventEntity[] = [];
 		datas.forEach((data) => {
-			let event = new EventEntity(data);
+			let event: EventEntity = data;
 			events.push(event);
 		});
 
@@ -22,36 +23,32 @@ export default class EventRepositoryPrisma extends EventRepository {
 	async getById(id: string) {
 		let data = await prisma.event.findUnique({ where: { id: id } });
 		if (data) {
-			let event = new EventEntity(data);
+			let event: EventEntity = data;
 			return event;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(eventData: EventEntity) {
-		let updatedEvent: any = {};
-
-		if (eventData.title) updatedEvent['title'] = eventData.title;
-		if (eventData.description)
-			updatedEvent['description'] = eventData.description;
-		if (eventData.linkedEntity)
-			updatedEvent['linkedEntity'] = eventData.linkedEntity;
-		if (eventData.linkedEntityId)
-			updatedEvent['linkedEntityId'] = eventData.linkedEntityId;
-
+	async update(eventData: updateEventEntity) {
 		let updatedData = await prisma.event.update({
 			where: {
 				id: eventData.id,
 			},
 			data: {
-				title: updatedEvent.title,
-				description: updatedEvent.description,
-				linkedEntity: updatedEvent.linkedEntity,
-				linkedEntityId: updatedEvent.linkedEntityId,
+				title: eventData.title ? eventData.title : undefined,
+				description: eventData.description
+					? eventData.description
+					: undefined,
+				linkedEntity: eventData.linkedEntity
+					? eventData.linkedEntity
+					: undefined,
+				linkedEntityId: eventData.linkedEntityId
+					? eventData.linkedEntityId
+					: undefined,
 			},
 		});
-		let rez = new EventEntity(updatedData);
+		let rez: EventEntity = updatedData;
 
 		return rez;
 	}
@@ -59,7 +56,6 @@ export default class EventRepositoryPrisma extends EventRepository {
 	async create(event: EventEntity) {
 		let response = await prisma.event.create({
 			data: {
-				id: event.id,
 				title: event.title,
 				description: event.description,
 				linkedEntity: event.linkedEntity,
@@ -69,7 +65,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 
 		console.log(response);
 
-		let out = new EventEntity(response);
+		let out: EventEntity = response;
 		return out;
 	}
 

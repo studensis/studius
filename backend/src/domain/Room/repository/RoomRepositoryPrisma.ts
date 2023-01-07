@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import RoomEntity from '../RoomEntity';
+import { RoomEntity } from '../RoomEntity';
+import { updateRoomEntity } from '../updateRoomEntity';
 import { RoomRepository } from './RoomRepository';
 
 const prisma = new PrismaClient();
@@ -12,7 +13,7 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 		// map to RoomEntities
 		let rooms: RoomEntity[] = [];
 		datas.forEach((data) => {
-			let room = new RoomEntity(data);
+			let room: RoomEntity = data;
 			rooms.push(room);
 		});
 
@@ -22,27 +23,23 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 	async getById(id: string) {
 		let data = await prisma.room.findUnique({ where: { id: id } });
 		if (data) {
-			let room = new RoomEntity(data);
+			let room: RoomEntity = data;
 			return room;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(roomData: RoomEntity) {
-		let updatedRoom: any = {};
-
-		if (roomData.capacity) updatedRoom['capacity'] = roomData.capacity;
-
+	async update(roomData: updateRoomEntity) {
 		let updatedData = await prisma.room.update({
 			where: {
 				id: roomData.id,
 			},
 			data: {
-				capacity: updatedRoom.capacity,
+				capacity: roomData.capacity ? roomData.capacity : undefined,
 			},
 		});
-		let rez = new RoomEntity(updatedData);
+		let rez: RoomEntity = updatedData;
 
 		return rez;
 	}
@@ -50,19 +47,18 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 	async create(room: RoomEntity) {
 		let response = await prisma.room.create({
 			data: {
-				id: room.id,
 				capacity: room.capacity,
 			},
 		});
 
 		console.log(response);
 
-		let out = new RoomEntity(response);
+		let out: RoomEntity = response;
 		return out;
 	}
 
 	async delete(roomId: string) {
-		let response: RoomEntity = await prisma.room.delete({
+		let response = await prisma.room.delete({
 			where: {
 				id: roomId,
 			},

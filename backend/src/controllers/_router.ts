@@ -10,11 +10,6 @@ import getEnrollmentBySubjectIdRouteHandler from '../domain/Enrollment/routeHand
 import getEnrollmentByUserIdRouteHandler from '../domain/Enrollment/routeHandlers/getEnrollmentByUserIdRouteHandler';
 import listEnrollmentsRouteHandler from '../domain/Enrollment/routeHandlers/listEnrollmentsRouteHandler';
 import updateEnrollmentRouteHandler from '../domain/Enrollment/routeHandlers/updateEnrollmentRouteHandler';
-import createEventRouteHandler from '../domain/Event/routeHandler/createEventRouterHandler';
-import deleteEventRouteHandler from '../domain/Event/routeHandler/deleteEventRouteHandler';
-import getEventRouteHandler from '../domain/Event/routeHandler/getEventRouterHandler';
-import listEventsRouteHandler from '../domain/Event/routeHandler/listEventsRouterHandler';
-import updateEventRouteHandler from '../domain/Event/routeHandler/updateEventRouteHandler';
 import createEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/createEventUserPresenceRouteHandler';
 import deleteEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/deleteEventUserPresenceRouteHandler';
 import getEventUserPresenceRouteHandler from '../domain/EventUserPresence/routeHandlers/getEventUserPresenceRouteHandler';
@@ -25,11 +20,6 @@ import deletePostRouteHandler from '../domain/Post/routerHandlers/deletePostRout
 import getPostRouteHandler from '../domain/Post/routerHandlers/getPostRouteHandler';
 import listPostsRouteHandler from '../domain/Post/routerHandlers/listPostsRouteHandler';
 import updatePostRouteHandler from '../domain/Post/routerHandlers/updatePostRouteHandler';
-import createRoomRouteHandler from '../domain/Room/routeHandlers/createRoomRouteHandler';
-import deleteRoomRouteHandler from '../domain/Room/routeHandlers/deleteRoomRouteHandler';
-import getRoomRouteHandler from '../domain/Room/routeHandlers/getRoomRouteHandler';
-import listRoomsRouteHandler from '../domain/Room/routeHandlers/listRoomRouterHandler';
-import updateRoomRouteHandler from '../domain/Room/routeHandlers/updateRoomRouteHandler';
 import createRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/createRoomTimeEventRouteHandler';
 import deleteRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/deleteRoomTimeEventRouteHandler';
 import getRoomTimeEventRouteHandler from '../domain/RoomTimeEvent/routeHandlers/getRoomTimeEventRouteHandler';
@@ -100,11 +90,11 @@ export default (server: Express) => {
 	server.route('/posts/:postId').delete(deletePostRouteHandler);
 
 	// Event routes
-	server.route('/events').get(listEventsRouteHandler);
-	server.route('/events/:eventId').get(getEventRouteHandler);
-	server.route('/events').post(createEventRouteHandler);
-	server.route('/events/:eventId').put(updateEventRouteHandler);
-	server.route('/events/:eventId').delete(deleteEventRouteHandler);
+	// server.route('/events').get(listEventsRouteHandler);
+	// server.route('/events/:eventId').get(getEventRouteHandler);
+	// server.route('/events').post(createEventRouteHandler);
+	// server.route('/events/:eventId').put(updateEventRouteHandler);
+	// server.route('/events/:eventId').delete(deleteEventRouteHandler);
 
 	// EventUserPresence routes
 	server.route('/eventUserPresences').get(listEventUserPresencesRouteHandler);
@@ -142,11 +132,11 @@ export default (server: Express) => {
 	server.route('/contents/:contentId').delete(deleteContentRouteHandler);
 
 	// Room routes
-	server.route('/rooms').get(listRoomsRouteHandler);
-	server.route('/rooms/:roomId').get(getRoomRouteHandler);
-	server.route('/rooms').post(createRoomRouteHandler);
-	server.route('/rooms/:roomId').put(updateRoomRouteHandler);
-	server.route('/rooms/:roomId').delete(deleteRoomRouteHandler);
+	// server.route('/rooms').get(listRoomsRouteHandler);
+	// server.route('/rooms/:roomId').get(getRoomRouteHandler);
+	// server.route('/rooms').post(createRoomRouteHandler);
+	// server.route('/rooms/:roomId').put(updateRoomRouteHandler);
+	// server.route('/rooms/:roomId').delete(deleteRoomRouteHandler);
 
 	// Enrollment routes
 	server.route('/enrollments').post(createEnrollmentRouteHandler);

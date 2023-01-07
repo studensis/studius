@@ -1,5 +1,5 @@
+import { EventEntity } from '../EventEntity';
 import { EventRepository } from '../repository/EventRepository';
-import EventEntity from '../EventEntity';
 
 export default async function createEventInteractor(
 	eventRepository: EventRepository,

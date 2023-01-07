@@ -1,10 +1,10 @@
 import { RoomRepository } from '../repository/RoomRepository';
-import RoomEntity from '../RoomEntity';
+import { updateRoomEntity } from '../updateRoomEntity';
 
 export default async function updateRoomInteractor(
-    roomRepository: RoomRepository,
-    room: RoomEntity
+	roomRepository: RoomRepository,
+	room: updateRoomEntity
 ) {
-    let updatedRoom = await roomRepository.update(room);
-    return updatedRoom;
+	let updatedRoom = await roomRepository.update(room);
+	return updatedRoom;
 }
