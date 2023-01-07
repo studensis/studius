@@ -1,6 +1,10 @@
 import { z } from 'zod';
-import { isAdmin } from '../../../controllers/middleware/auth';
+import {
+	adminProcedure,
+	publicProcedure,
+} from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { ContentEntity } from '../ContentEntity';
 import createContentInteractor from '../interactors/createContentInteractor';
 import deleteContentInteractor from '../interactors/deleteContentInteractor';
 import getContentInteractor from '../interactors/getContentInteractor';
@@ -8,13 +12,11 @@ import listContentsInteractor from '../interactors/listContentsInteractor';
 import updateContentInteractor from '../interactors/updateContentInteractor';
 import ContentRepositoryPrisma from '../repository/ContentRepositoryPrisma';
 import { updateContentEntity } from '../updateContentEntity';
-import { ContentEntity } from '../ContentEntity';
 
 let repo = new ContentRepositoryPrisma();
 
 export default t.router({
-	createContent: t.procedure
-		.use(isAdmin)
+	createContent: adminProcedure
 		.input(
 			z.object({
 				markdownText: z.string(),
@@ -35,25 +37,26 @@ export default t.router({
 			return newContent;
 		}),
 
-	deleteContentById: t.procedure
-		.use(isAdmin)
+	deleteContentById: adminProcedure
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let a = await deleteContentInteractor(input, repo);
 			return a;
 		}),
 
-	getContentById: t.procedure.input(z.string()).query(async ({ input }) => {
-		let content = await getContentInteractor(repo, input);
-		return content;
-	}),
+	getContentById: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let content = await getContentInteractor(repo, input);
+			return content;
+		}),
 
-	listContents: t.procedure.query(async () => {
+	listContents: publicProcedure.query(async () => {
 		let contents = await listContentsInteractor(repo);
 		return contents as ContentEntity[];
 	}),
 
-	updateContentById: t.procedure
+	updateContentById: publicProcedure
 		.input(
 			z.object({
 				id: z.string(),

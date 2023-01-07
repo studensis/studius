@@ -1,5 +1,8 @@
 import { z } from 'zod';
-import { isAdmin } from '../../../controllers/middleware/auth';
+import {
+	adminProcedure,
+	publicProcedure,
+} from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/EnrollmentEntity';
 import createUserInteractor from '../interactors/createUserInteractor';
@@ -17,8 +20,7 @@ import { UserEntity } from '../UserEntity';
 let repo = new UserRepositoryPrisma();
 
 export default t.router({
-	createUser: t.procedure
-		.use(isAdmin)
+	createUser: adminProcedure
 		.input(
 			z.object({
 				firstname: z.string(),
@@ -42,25 +44,25 @@ export default t.router({
 			return newUser;
 		}),
 
-	deleteUserById: t.procedure
-		.use(isAdmin)
+	deleteUserById: adminProcedure
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let a = await deleteUserInteractor(input, repo);
 			return a;
 		}),
 
-	getUserById: t.procedure.input(z.string()).query(async ({ input }) => {
+	getUserById: publicProcedure.input(z.string()).query(async ({ input }) => {
 		let user = await getUserInteractor(repo, input);
 		return user;
 	}),
 
-	listUsers: t.procedure.query(async () => {
+	listUsers: publicProcedure.query(async () => {
 		let users = await listUsersInteractor(repo);
 		return users as UserEntity[];
 	}),
 
-	updateUserById: t.procedure
+	updateUserById: publicProcedure
+
 		.input(
 			z.object({
 				id: z.string(),
@@ -79,7 +81,8 @@ export default t.router({
 			return updatedUser;
 		}),
 
-	enrollUser: t.procedure
+	enrollUser: publicProcedure
+
 		.input(
 			z.object({
 				userId: z.string(),
@@ -109,14 +112,16 @@ export default t.router({
 			return newEnrollment;
 		}),
 
-	getEnrolledSubjects: t.procedure
+	getEnrolledSubjects: publicProcedure
+
 		.input(z.string())
 		.query(async ({ input }) => {
 			let enrollments = await listEnrolledSubjectsInteractor(input, repo);
 			return enrollments;
 		}),
 
-	updateEnrollment: t.procedure
+	updateEnrollment: publicProcedure
+
 		.input(
 			z.object({
 				userId: z.string(),

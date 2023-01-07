@@ -62,7 +62,7 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 	}
 
 	async delete(roomId: string) {
-		let response = await prisma.room.delete({
+		let response: RoomEntity = await prisma.room.delete({
 			where: {
 				id: roomId,
 			},

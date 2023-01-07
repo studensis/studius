@@ -1,5 +1,9 @@
-import { nullable, z } from 'zod';
-import { isAdmin } from '../../../controllers/middleware/auth';
+import { z } from 'zod';
+import {
+	adminProcedure,
+	authedProcedure,
+	publicProcedure,
+} from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
@@ -13,9 +17,13 @@ import { updateSubjectEntity } from '../updateSubjectEntity';
 
 let repo = new SubjectRepositoryPrisma();
 
+const isEditor = t.middleware(({ next, ctx }) => {
+	ctx.user;
+	return next();
+});
+
 export default t.router({
-	createSubject: t.procedure
-		.use(isAdmin)
+	createSubject: adminProcedure
 		.input(
 			z.object({
 				// id: z.string(),
@@ -42,25 +50,26 @@ export default t.router({
 			return newSubject;
 		}),
 
-	deleteSubjectById: t.procedure
-		.use(isAdmin)
+	deleteSubjectById: adminProcedure
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let a = await deleteSubjectInteractor(input, repo);
 			return a;
 		}),
 
-	getSubjectById: t.procedure.input(z.string()).query(async ({ input }) => {
-		let subject = await getSubjectInteractor(repo, input);
-		return subject;
-	}),
+	getSubjectById: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let subject = await getSubjectInteractor(repo, input);
+			return subject;
+		}),
 
-	listSubjects: t.procedure.query(async () => {
+	listSubjects: publicProcedure.query(async () => {
 		let subjects = await listSubjectsInteractor(repo);
 		return subjects;
 	}),
 
-	updateSubjectById: t.procedure
+	updateSubjectById: authedProcedure
 		.input(
 			z.object({
 				id: z.string(),
@@ -72,15 +81,21 @@ export default t.router({
 				contentId: z.array(z.string()).optional(),
 			})
 		)
-		.mutation(async ({ input }) => {
+		.mutation(async ({ ctx, input }) => {
 			let subject: updateSubjectEntity = { ...input };
-			let updatedSubject = await updateSubjectInteractor(repo, subject);
+			let updatedSubject = await updateSubjectInteractor(
+				ctx.user.userId,
+				repo,
+				subject
+			);
 			return updatedSubject;
 		}),
 
-	getEnrolledUsers: t.procedure.input(z.string()).query(async ({input}) =>{
-		let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
-		console.log(enrolledUsers);
-		return enrolledUsers;
-	}),
+	getEnrolledUsers: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
+			console.log(enrolledUsers);
+			return enrolledUsers;
+		}),
 });

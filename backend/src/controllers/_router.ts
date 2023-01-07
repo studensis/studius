@@ -45,12 +45,6 @@ import deleteSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/rou
 import getSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/getSeminarSuggestionRouteHandler';
 import listSeminarSuggestionsRouteHandler from '../domain/SeminarSuggestion/routeHandlers/listSeminarSuggestionsRouterHandler';
 import updateSeminarSuggestionRouteHandler from '../domain/SeminarSuggestion/routeHandlers/updateSeminarSuggestionRouteHandler';
-import addContentRouteHandler from '../domain/Subject/routeHandlers/addContentRouteHandler';
-import createSubjectRouteHandler from '../domain/Subject/routeHandlers/createSubjectRouteHandler';
-import deleteSubjectRouteHandler from '../domain/Subject/routeHandlers/deleteSubjectRouteHandler';
-import getSubjectRouteHandler from '../domain/Subject/routeHandlers/getSubjectRouteHandler';
-import listSubjectsRouteHandler from '../domain/Subject/routeHandlers/listSubjectsRouteHandler';
-import updateSubjectRouteHandler from '../domain/Subject/routeHandlers/updateSubjectRouteHandler';
 
 // Kakti API gateway
 
@@ -67,14 +61,14 @@ export default (server: Express) => {
 	});
 
 	// Subject routes
-	server.route('/subjects').get(listSubjectsRouteHandler);
-	server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
-	server.route('/subjects').post(createSubjectRouteHandler);
-	server.route('/subjects/:subjectId').put(updateSubjectRouteHandler);
-	server.route('/subjects/:subjectId').delete(deleteSubjectRouteHandler);
-	server
-		.route('/subjects/addContent/:subjectId')
-		.patch(addContentRouteHandler);
+	// server.route('/subjects').get(listSubjectsRouteHandler);
+	// server.route('/subjects/:subjectId').get(getSubjectRouteHandler);
+	// server.route('/subjects').post(createSubjectRouteHandler);
+	// server.route('/subjects/:subjectId').put(updateSubjectRouteHandler);
+	// server.route('/subjects/:subjectId').delete(deleteSubjectRouteHandler);
+	// server
+	// 	.route('/subjects/addContent/:subjectId')
+	// 	.patch(addContentRouteHandler);
 
 	// Seminar routes
 	server.route('/seminars').get(listSeminarsRouteHandler);

@@ -11,10 +11,11 @@ export default async function updateRoomRouteHandler(
 	console.log(`rooms/${req.params.roomId} PUT`);
 
 	try {
-		let roomData = new RoomEntity({
-			id: req.params.roomId as string,
-			capacity: parseInt(String(req.query.capacity)) as number,
-		});
+		let roomData: RoomEntity = {
+			id: req.params.roomId,
+			title: req.params.title,
+			capacity: parseInt(String(req.query.capacity)),
+		};
 		let repo = new RoomRepositoryPrisma();
 		let updatedRoom = await updateRoomInteractor(repo, roomData);
 		return res.send(updatedRoom);

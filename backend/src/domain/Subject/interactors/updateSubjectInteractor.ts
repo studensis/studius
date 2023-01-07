@@ -1,10 +1,19 @@
+import { TRPCError } from '@trpc/server';
 import { SubjectRepository } from '../repository/SubjectRepository';
 import { updateSubjectEntity } from '../updateSubjectEntity';
 
 export default async function updateSubjectInteractor(
-    subjectRepository: SubjectRepository,
-    subject: updateSubjectEntity
+	userId: string,
+	subjectRepository: SubjectRepository,
+	subject: updateSubjectEntity
 ) {
-    let updatedSubject = await subjectRepository.update(subject);
-    return updatedSubject;
+	let isEditor = await subjectRepository.isUserEditor(userId, subject.id);
+	if (!isEditor) {
+		throw new TRPCError({
+			code: 'FORBIDDEN',
+			message: 'Not permitted to edit subject',
+		});
+	}
+	let updatedSubject = await subjectRepository.update(subject);
+	return updatedSubject;
 }

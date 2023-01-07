@@ -11,10 +11,11 @@ export default async function createRoomRouteHandler(
 	console.log('/rooms POST');
 
 	try {
-		let newRoom = new RoomEntity({
+		let newRoom: RoomEntity = {
 			id: req.query.id as string,
-			capacity: parseInt(String(req.query.capacity)) as number,
-		});
+			title: req.query.title as string,
+			capacity: parseInt(String(req.query.capacity)),
+		};
 		//newRoom.validate();
 		let repo = new RoomRepositoryPrisma();
 		let room = await createRoomInteractor(repo, newRoom);
