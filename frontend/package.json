@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build-css && next build",
     "start": "next start",
-    "build-css": "tailwindcss -i src/globals.css -o public/globals.css"
+    "build-css": "tailwindcss -i ./styles/globals.css -o ./public/styles/globals.css"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.20.4",

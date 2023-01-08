@@ -12,8 +12,8 @@ export const Stack: FC<{
 				'grid',
 				'w-full',
 				'gap-2',
-				cols ? 'md:grid-cols-' + cols : 'md:grid-cols-1',
-				mobileCols ? 'grid-cols-' + mobileCols : 'grid-cols-1'
+				cols ? `md:grid-cols-${cols}` : 'md:grid-cols-1',
+				mobileCols ? `grid-cols-${mobileCols}` : 'grid-cols-1'
 			)}
 		>
 			{children}

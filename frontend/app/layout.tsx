@@ -6,6 +6,7 @@ import {
 import { LoginProvider } from '../components/hooks/LoginContext';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
+import { TailwindCache } from '../components/TailwindCache';
 import '../styles/colors.css';
 import '../styles/globals.css';
 
@@ -22,11 +23,10 @@ export default function RootLayout({
 						<ThemeProvider>
 							<ModalProvider>
 								<div
-									className={
-										'relative min-h-screen w-screen overflow-x-hidden'
-									}
+									className={'relative min-h-screen w-screen overflow-x-hidden'}
 								>
 									{children}
+									<TailwindCache />
 									<ModalOverlay />
 									<ModalSidebar />
 								</div>
