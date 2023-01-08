@@ -3,6 +3,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { Button } from '../../../../components/@studius/Button/Button';
+import { Block } from '../../../../components/@studius/PageElements/Block';
+import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
+import {
+	PageStack,
+	Stack,
+} from '../../../../components/@studius/PageElements/Stack';
+import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
@@ -27,55 +35,66 @@ export default function SubjectPage(props: PageProps) {
 	}, [deleteUser]);
 
 	return (
-		<div>
-			<Link href="/user">
-				<p className="title2 mb-12">{'<-'} back to Users</p>
-			</Link>
-			<h2 className="display2">{user.data?.firstname}</h2>
-			<button
-				className="p-4 bg-red-500"
-				onClick={() => {
-					deleteUser.mutate(props.params.userId);
-				}}
-			>
-				Delete me
-			</button>
+		<PageStack>
+			<PageHeader
+				title={
+					user.data?.firstname && user.data?.lastname
+						? user.data?.firstname + ' ' + user.data?.lastname
+						: 'Subject'
+				}
+			/>
+			<div className="flex gap-2">
+				<Link href={'/user'}>
+					<Button leftIcon="chevronLeft">Back to Users</Button>
+				</Link>
+				<Button
+					onClick={() => {
+						deleteUser.mutate(props.params.userId);
+					}}
+				>
+					Delete me
+				</Button>
+			</div>
 
 			{deleteUser.isSuccess && (
-				<pre className="p-4 bg-neutral-weak">
-					{JSON.stringify(deleteUser.data)}
-				</pre>
+				<Block>
+					<pre>{JSON.stringify(deleteUser.data)}</pre>
+				</Block>
 			)}
 			{deleteUser.error && (
-				<pre className="p-4 bg-danger">
-					{JSON.stringify(deleteUser.error.shape?.message, null, 2)}
-				</pre>
+				<Block>
+					<pre>{JSON.stringify(deleteUser.error.shape?.message, null, 2)}</pre>
+				</Block>
 			)}
-			<pre className=" bg-neutral-weak p-8">
-				{JSON.stringify(user.data, null, 2)}
-			</pre>
-			<h3 className="title2"> Enrolled subjects </h3>
-			<div className="grid gap-2 grid-cols-1 md:grid-cols-3">
-				{enrolledSubjects.isSuccess &&
-					enrolledSubjects.data.map((enrolledSubject: any) => (
-						<Link
-							href={'/subject/' + enrolledSubject.subject.id}
-							key={enrolledSubject.subject.id}
-						>
-							<div className="p-10 bg-section rounded-3xl">
-								<p className="body">
-									{enrolledSubject.subject.id}
-								</p>
-								<p className="title3">
-									{enrolledSubject.subject.title}
-								</p>
-							</div>
-						</Link>
-					))}
+
+			<Block>
+				<pre>{JSON.stringify(user.data, null, 2)}</pre>
+			</Block>
+			<div>
+				<SectionTop>
+					<h3 className="title2"> Enrolled subjects </h3>
+				</SectionTop>
+				<Stack cols={3}>
+					{enrolledSubjects.isSuccess &&
+						enrolledSubjects.data.map((enrolledSubject: any) => (
+							<Link
+								href={'/subject/' + enrolledSubject.subject.id}
+								key={enrolledSubject.subject.id}
+							>
+								<Block>
+									<p className="text-neutral-strong caption">
+										{enrolledSubject.subject.id}
+									</p>
+									<p className="title2">{enrolledSubject.subject.title}</p>
+								</Block>
+							</Link>
+						))}
+				</Stack>
 			</div>
-			<pre className=" bg-neutral-weak p-8">
-				{JSON.stringify(enrolledSubjects.data, null, 2)}
-			</pre>
-		</div>
+
+			<Block>
+				<pre>{JSON.stringify(enrolledSubjects.data, null, 2)}</pre>
+			</Block>
+		</PageStack>
 	);
 }

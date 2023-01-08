@@ -1,6 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { Block } from '../../../../components/@studius/PageElements/Block';
+import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
+import {
+	PageStack,
+	Stack,
+} from '../../../../components/@studius/PageElements/Stack';
+import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
+import Tag from '../../../../components/@studius/Tag/Tag';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
@@ -10,37 +18,46 @@ type PageProps = {
 };
 
 function SubjectPage(props: PageProps) {
-	const todo = trpc.subject.getSubjectById.useQuery(props.params.subjectId);
-	const enrolled = trpc.subject.getEnrolledUsers.useQuery(
+	const subject = trpc.subject.getSubjectById.useQuery(props.params.subjectId);
+	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(
 		props.params.subjectId
 	);
 
 	return (
 		<>
-			<div>
-				<p>This is a subject page</p>
-				<h1 className="display3">{todo.data?.title}</h1>
-				<p>{todo.data?.description}</p>
-			</div>
+			<PageStack>
+				<PageHeader
+					title={subject.data?.title || 'Subject'}
+					description={subject.data?.description}
+				/>
 
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-				{enrolled.data &&
-					enrolled.data.map((enrolledUser: any) => (
-						<Link
-							href={'/user/' + enrolledUser.user.id}
-							key={enrolledUser.user.id}
-						>
-							<div className="p-10 bg-section rounded-3xl">
-								<p className="title1">
-									{enrolledUser.user.firstname}
-								</p>
-								<p className="body1">
-									[{enrolledUser.user.lastname}]
-								</p>
-							</div>
-						</Link>
-					))}
-			</div>
+				<div>
+					<SectionTop>
+						<h3 className="title2">Enrolled Users</h3>
+					</SectionTop>
+					<Stack cols={3}>
+						{enrolledUsers.data &&
+							enrolledUsers.data.map((enrolledUser) => (
+								<Link
+									href={'/user/' + enrolledUser.user.id}
+									key={enrolledUser.user.id}
+								>
+									<Block>
+										<p className="caption text-neutral-strong">
+											{enrolledUser.user.id}
+										</p>
+										<p className="title1">
+											{enrolledUser.user.firstname +
+												' ' +
+												enrolledUser.user.lastname}
+										</p>
+										<Tag>{enrolledUser.roleTitle}</Tag>
+									</Block>
+								</Link>
+							))}
+					</Stack>
+				</div>
+			</PageStack>
 		</>
 	);
 }
@@ -48,13 +65,13 @@ function SubjectPage(props: PageProps) {
 export default SubjectPage;
 
 // export async function generateStaticParams() {
-// 	const res = await fetch('https://jsonplaceholder.typicode.com/todos/');
-// 	let todos: Todo[] = await res.json();
+// 	const res = await fetch('https://jsonplaceholder.typicode.com/subjects/');
+// 	let subjects: Todo[] = await res.json();
 
 // 	// rate limiting prevention, will prerender first 10 items only.
-// 	todos = todos.splice(10);
+// 	subjects = subjects.splice(10);
 
-// 	return todos.map((todo) => {
-// 		return { subjectId: todo.id.toString() };
+// 	return subjects.map((subject) => {
+// 		return { subjectId: subject.id.toString() };
 // 	});
 // }

@@ -1,6 +1,7 @@
 'use client';
 
 import { PageStack } from '../../../components/@studius/PageElements/Stack';
+import AdminToolbar from '../user/AdminToolbar';
 import SubjectList from './SubjectList';
 
 function Page() {
@@ -8,6 +9,7 @@ function Page() {
 		<>
 			<PageStack>
 				<h1 className="display2">Subjects</h1>
+				<AdminToolbar />
 				<SubjectList />
 			</PageStack>
 		</>

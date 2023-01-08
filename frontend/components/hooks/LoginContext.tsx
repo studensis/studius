@@ -27,6 +27,8 @@ const LoginContext = createContext<ILoginContext>({
 
 function LoginProvider({ children }: { children: React.ReactNode }) {
 	const [loginState, setLoginState] = useState<boolean>(false);
+	// add maybe state and refresh on certain login
+
 	const [user, setUser] = useState<User | null>(null);
 
 	const me = trpc.auth.me.useQuery(undefined, { refetchInterval: 30000 });

@@ -21,12 +21,14 @@ export const RightPanel = () => {
 					<Greeting />!
 				</h1>
 				<Block>
-					<span className="title1">Me:</span>
-					<pre>{JSON.stringify(user)}</pre>
+					<h3 className="title3 mb-2">User::</h3>
+					<pre className="text-neutral-strong">
+						{JSON.stringify(user, null, 2)}
+					</pre>
 				</Block>
 				<div>
 					<SectionTop>
-						<h2 className="title1">Subjects</h2>
+						<h2 className="title2">Subjects</h2>
 						<Link href="/subject">
 							<p className="text-accent button-small">View all</p>
 						</Link>
