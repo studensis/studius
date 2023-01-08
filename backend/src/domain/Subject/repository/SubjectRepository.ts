@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import { SubjectEntity } from '../model/SubjectEntity';
 import { updateSubjectEntity } from '../model/updateSubjectEntity';
@@ -24,7 +25,9 @@ export abstract class SubjectRepository {
 	async isUserEditor(subjectId: string, userId: string): Promise<boolean> {
 		throw new Error('Method not implemented.');
 	}
-	async getEnrolledUsers(subjectId: string): Promise<EnrollmentEntity[]> {
+	async getEnrolledUsers(
+		subjectId: string
+	): Promise<(EnrollmentEntity & { user: User })[]> {
 		throw new Error('Method not implemented.');
 	}
 }

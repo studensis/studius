@@ -5,7 +5,7 @@ export default function RootLayout({
 }) {
 	return (
 		<div>
-			<h1 className="title3">Users</h1>
+			{/* <h1 className="title3">Users</h1> */}
 			{children}
 		</div>
 	);

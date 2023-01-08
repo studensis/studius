@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import { SubjectEntity } from '../model/SubjectEntity';
 import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
@@ -32,13 +31,9 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 					? subjectData.description
 					: undefined,
 				ectsBod: subjectData.ectsBod ? subjectData.ectsBod : undefined,
-				semester: subjectData.semester
-					? subjectData.semester
-					: undefined,
+				semester: subjectData.semester ? subjectData.semester : undefined,
 				status: subjectData.status ? subjectData.status : undefined,
-				contentId: subjectData.contentId
-					? subjectData.contentId
-					: undefined,
+				contentId: subjectData.contentId ? subjectData.contentId : undefined,
 			},
 		});
 		let rez: SubjectEntity = updatedData;
@@ -132,11 +127,6 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 			},
 		});
 
-		let userData: EnrollmentEntity[] = [];
-		users.forEach((e: EnrollmentEntity) => {
-			let user: EnrollmentEntity = e;
-			userData.push(user);
-		});
-		return userData;
+		return users;
 	}
 }

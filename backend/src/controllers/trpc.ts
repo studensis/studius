@@ -24,7 +24,17 @@ export const createContext = async ({
 			let role = user.role;
 			return { userId, role };
 		} catch {
-			res.clearCookie('token');
+			// clear cookie
+			res.cookie('token', 'deleted', {
+				...(process.env.NODE_ENV === 'production' && {
+					sameSite: 'none',
+					secure: true,
+				}),
+				maxAge: 1000 * 60 * 60, // 1h
+				// httpOnly: true,
+				// secure: true,
+				// signed: true
+			});
 			return null;
 		}
 	};

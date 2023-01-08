@@ -10,8 +10,8 @@ export default function AdminToolbar() {
 	return (
 		<>
 			{me.data && (me.data.role == 'ADMIN' || me.data.role == 'SUPERADMIN') ? (
-				<Link href="/subject/create">
-					<Button rightIcon="add">Create subject</Button>
+				<Link href="/user/create">
+					<Button rightIcon="add">Create user</Button>
 				</Link>
 			) : (
 				<> </>
