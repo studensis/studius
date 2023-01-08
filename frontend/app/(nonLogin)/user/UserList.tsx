@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { Block } from '../../../components/@studius/PageElements/Block';
+import { Stack } from '../../../components/@studius/PageElements/Stack';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
@@ -9,18 +11,18 @@ export default function SubjectList() {
 	});
 
 	return (
-		<div className="grid grid-cols-3 gap-4">
+		<Stack cols={2} mobileCols={1}>
 			{users.data &&
 				users.data.map((user) => {
 					return (
 						<Link href={'/user/' + user.id} key={user.id}>
-							<div className="p-6 border-accent-weak border">
-								<p className="title1">{user.firstname}</p>
-								<p>{user.id}</p>
-							</div>
+							<Block>
+								<p className="title1">{user.firstname + ' ' + user.lastname}</p>
+								<p className="text-neutral-strong caption">{user.id}</p>
+							</Block>
 						</Link>
 					);
 				})}
-		</div>
+		</Stack>
 	);
 }
