@@ -1,12 +1,6 @@
 'use client';
 
-import {
-	createContext,
-	useContext,
-	useEffect,
-	useLayoutEffect,
-	useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface IThemeContext {
 	theme: 'dark' | 'light' | null;
@@ -25,7 +19,7 @@ const ThemeContext = createContext<IThemeContext>({
 function ThemeProvider({ children }: { children: React.ReactNode }) {
 	const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (
 			localStorage.theme === 'dark' ||
 			(!('theme' in localStorage) &&

@@ -11,7 +11,9 @@ export default function Home() {
 	useEffect(() => {
 		if (loggedIn) {
 			router.push('/intranet');
+		} else {
+			router.push('/login');
 		}
 	}, [loggedIn]);
-	return <div>Please log in!</div>;
+	return <div>Loading...</div>;
 }
