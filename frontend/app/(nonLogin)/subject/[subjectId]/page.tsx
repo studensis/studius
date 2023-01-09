@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '../../../../components/@studius/Button/Button';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
 import {
 	PageStack,
@@ -21,6 +22,16 @@ function SubjectPage(props: PageProps) {
 		props.params.subjectId
 	);
 
+	const enroll = trpc.user.updateEnrollment.useMutation();
+
+	function unenroll(id: string) {
+		enroll.mutate({
+			userId: id,
+			subjectId: props.params.subjectId,
+			status: 'ARCHIVED',
+		});
+	}
+
 	return (
 		<>
 			<PageStack>
@@ -33,11 +44,22 @@ function SubjectPage(props: PageProps) {
 					<SectionTop>
 						<h3 className="title2">Enrolled Users</h3>
 					</SectionTop>
-					<Stack cols={3}>
+					<Stack cols={2}>
 						{enrolledUsers.data &&
-							enrolledUsers.data.map((enrolledUser) => (
-								<UserCard user={enrolledUser.user} />
-							))}
+							enrolledUsers.data.map((enrolledUser) => {
+								return (
+									<div className="flex items-center">
+										<UserCard user={enrolledUser.user} />
+										<Button
+											onClick={() => unenroll(enrolledUser.userId)}
+											active={true}
+											className="title1 m-4"
+										>
+											Remove from subject
+										</Button>
+									</div>
+								);
+							})}
 					</Stack>
 				</div>
 			</PageStack>
