@@ -1,4 +1,5 @@
-import EventUserPresenceEntity from '../model/EventUserPresenceEntity';
+import { EventUserPresenceEntity } from '../model/EventUserPresenceEntity';
+import { updateEventUserPresenceEntity } from '../model/updateEventUserPresenceEntity';
 
 export abstract class EventUserPresenceRepository {
 	async getAll(): Promise<EventUserPresenceEntity[]> {
@@ -13,13 +14,11 @@ export abstract class EventUserPresenceRepository {
 		throw new Error('Method not implemented.');
 	}
 	async update(
-		eventUserPresence: EventUserPresenceEntity
+		eventUserPresence: updateEventUserPresenceEntity
 	): Promise<EventUserPresenceEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(
-		eventUserPresenceId: string
-	): Promise<EventUserPresenceEntity> {
+	async delete(eventUserPresenceId: string): Promise<EventUserPresenceEntity> {
 		throw new Error('Method not implemented.');
 	}
 }
