@@ -8,6 +8,7 @@ import {
 	Stack,
 } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
+import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import Tag from '../../../../components/@studius/Tag/Tag';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
@@ -26,37 +27,45 @@ function SubjectPage(props: PageProps) {
 	return (
 		<>
 			<PageStack>
-				<PageHeader
-					title={subject.data?.title || 'Subject'}
-					description={subject.data?.description}
-				/>
+				{subject.isLoading ? (
+					<Block>
+						<Spinner />
+					</Block>
+				) : (
+					<>
+						<PageHeader
+							title={subject.data?.title || 'Subject'}
+							description={subject.data?.description}
+						/>
 
-				<div>
-					<SectionTop>
-						<h3 className="title2">Enrolled Users</h3>
-					</SectionTop>
-					<Stack cols={3}>
-						{enrolledUsers.data &&
-							enrolledUsers.data.map((enrolledUser) => (
-								<Link
-									href={'/user/' + enrolledUser.user.id}
-									key={enrolledUser.user.id}
-								>
-									<Block>
-										<p className="caption text-neutral-strong">
-											{enrolledUser.user.id}
-										</p>
-										<p className="title1">
-											{enrolledUser.user.firstname +
-												' ' +
-												enrolledUser.user.lastname}
-										</p>
-										<Tag>{enrolledUser.roleTitle}</Tag>
-									</Block>
-								</Link>
-							))}
-					</Stack>
-				</div>
+						<div>
+							<SectionTop>
+								<h3 className="title2">Enrolled Users</h3>
+							</SectionTop>
+							<Stack cols={3}>
+								{enrolledUsers.data &&
+									enrolledUsers.data.map((enrolledUser) => (
+										<Link
+											href={'/user/' + enrolledUser.user.id}
+											key={enrolledUser.user.id}
+										>
+											<Block>
+												<p className="caption text-neutral-strong">
+													{enrolledUser.user.id}
+												</p>
+												<p className="title1">
+													{enrolledUser.user.firstname +
+														' ' +
+														enrolledUser.user.lastname}
+												</p>
+												<Tag>{enrolledUser.roleTitle}</Tag>
+											</Block>
+										</Link>
+									))}
+							</Stack>
+						</div>
+					</>
+				)}
 			</PageStack>
 		</>
 	);

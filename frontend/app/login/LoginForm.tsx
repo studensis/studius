@@ -89,11 +89,11 @@ export default function LoginForm() {
 					onClick={() => {
 						login.mutate(form);
 					}}
+					loading={login.isLoading}
 				>
 					Log in
 				</Button>
 			</form>
-			{login.isLoading && <>Loading...</>}
 		</>
 	);
 }

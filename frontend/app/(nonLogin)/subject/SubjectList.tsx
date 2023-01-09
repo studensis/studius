@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
+import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
@@ -7,6 +8,7 @@ export default function SubjectList() {
 
 	return (
 		<Stack cols={3} mobileCols={1}>
+			{subjects.isLoading && <Spinner />}
 			{subjects.data &&
 				subjects.data.map((subject) => (
 					<Link href={'/subject/' + subject.id} key={subject.id}>

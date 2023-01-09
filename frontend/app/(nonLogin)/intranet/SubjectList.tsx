@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
+import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import Tag from '../../../components/@studius/Tag/Tag';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
@@ -11,6 +12,7 @@ export default function SubjectList() {
 	return (
 		<>
 			<Stack cols={2}>
+				{enrolledSubjects.isLoading && <Spinner />}
 				{enrolledSubjects.data &&
 					enrolledSubjects.data.map((enrolledSubject) => (
 						<Link

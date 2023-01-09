@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Icon, { IconName } from '../Icon/Icon';
+import { Spinner } from '../Spinner/Spinner';
 
 type ButtonType = 'primary' | 'secondary';
 
@@ -16,6 +17,7 @@ type ButtonProps = {
 	onClick?: any;
 	formType?: any;
 	className?: string;
+	loading?: boolean;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -29,6 +31,7 @@ const Button: FC<ButtonProps> = ({
 	onClick,
 	formType,
 	className,
+	loading,
 }) => {
 	return (
 		<button
@@ -68,23 +71,33 @@ const Button: FC<ButtonProps> = ({
 								: 'button-large justify-center flex items-center gap-1 text-special-white'
 						}
 					>
-						{leftIcon && (
-							<Icon
-								icon={leftIcon}
-								size={small == true ? 12 : 16}
-								className={'bg-special-white'}
-								// color={darkMode ? "white" : accent-strong}
-							/>
+						{leftIcon &&
+							(loading ? (
+								<Spinner />
+							) : (
+								<Icon
+									icon={leftIcon}
+									size={small == true ? 12 : 16}
+									className={'bg-special-white'}
+									// color={darkMode ? "white" : accent-strong}
+								/>
+							))}
+						{!leftIcon && !rightIcon ? (
+							<>{loading ? <Spinner /> : children}</>
+						) : (
+							children
 						)}
-						{children}
-						{rightIcon && (
-							<Icon
-								icon={rightIcon}
-								size={small == true ? 12 : 16}
-								className={'bg-special-white'}
-								// color={darkMode ? "white" : accent-strong}
-							/>
-						)}
+						{rightIcon &&
+							(loading ? (
+								<Spinner />
+							) : (
+								<Icon
+									icon={rightIcon}
+									size={small == true ? 12 : 16}
+									className={'bg-special-white'}
+									// color={darkMode ? "white" : accent-strong}
+								/>
+							))}
 					</h1>
 				</div>
 			</div>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
+import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
@@ -12,6 +13,7 @@ export default function SubjectList() {
 
 	return (
 		<Stack cols={2} mobileCols={1}>
+			{users.isLoading && <Spinner />}
 			{users.data &&
 				users.data.map((user) => {
 					return (
