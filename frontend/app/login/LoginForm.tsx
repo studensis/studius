@@ -62,7 +62,12 @@ export default function LoginForm() {
 					{login.error.shape?.message}
 				</pre>
 			)}
-			<form>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					login.mutate(form);
+				}}
+			>
 				<TextInput
 					type="text"
 					placeholder="email"
@@ -80,6 +85,7 @@ export default function LoginForm() {
 					}}
 				></TextInput>
 				<Button
+					formType={'submit'}
 					onClick={() => {
 						login.mutate(form);
 					}}
