@@ -14,8 +14,9 @@ const ModalContext = createContext<IModalContext>({
 });
 
 function ModalProvider({ children }: { children: React.ReactNode }) {
-	const [sidebarElement, setSidebarElement] =
-		useState<React.ReactNode | null>(null);
+	const [sidebarElement, setSidebarElement] = useState<React.ReactNode | null>(
+		null
+	);
 
 	return (
 		<>
@@ -43,7 +44,7 @@ export function ModalOverlay() {
 		<>
 			{sidebarElement ? (
 				<div
-					className="sm:hidden absolute top-0 left-0 right-0 bottom-0 bg-background opacity-80"
+					className="sm:hidden absolute top-0 left-0 right-0 md:bottom-0 bg-background opacity-80 h-screen"
 					onClick={() => {
 						setSidebar(null);
 					}}
