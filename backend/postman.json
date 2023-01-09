@@ -711,7 +711,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"1\",\r\n    \"markdownText\":\"apdejtano\"\r\n}",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"dateStart\":\"04 Dec 2050 00:12:00 GMT\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -881,6 +881,134 @@
 							"port": "4000",
 							"path": [
 								"event.deleteEventById"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/post.listPosts",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.listPosts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/post.getPostById?input=\"1\"",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.getPostById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"\",\r\n    \"date\":\"04 Dec 1995 00:12:00 GMT\",\r\n    \"linkedEntity\":\"USER\",\r\n    \"linkedEntityId\":\"\",\r\n    \"contentId\":\"\",\r\n    \"ownerId\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/post.createPost",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.createPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"title\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/post.updatePostById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.updatePostById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/post.deletePostById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.deletePostById"
 							]
 						}
 					},

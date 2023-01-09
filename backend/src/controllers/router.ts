@@ -1,6 +1,7 @@
 import contentRouter from '../domain/Content/contentRouter';
 import eventRouter from '../domain/Event/eventRouter';
 import eventUserPresenceRouter from '../domain/EventUserPresence/eventUserPresenceRouter';
+import postRouter from '../domain/Post/postRouter';
 import roomRouter from '../domain/Room/roomRouter';
 import roomTimeEventRouter from '../domain/RoomTimeEvent/roomTimeEventRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
@@ -22,7 +23,7 @@ const appRouter = t.router({
 	event: eventRouter,
 	roomTimeEvent: roomTimeEventRouter,
 	eventUserPresence: eventUserPresenceRouter,
-	post: todoRoutine,
+	post: postRouter,
 	seminar: todoRoutine,
 	seminarSuggestion: todoRoutine,
 	content: contentRouter,

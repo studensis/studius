@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import PostEntity from '../model/PostEntity';
+import { PostEntity } from '../model/PostEntity';
+import { updatePostEntity } from '../model/updatePostEntity';
 import { PostRepository } from './PostRepository';
 
 const prisma = new PrismaClient();
@@ -11,8 +12,8 @@ export default class PostRepositoryPrisma extends PostRepository {
 
 		// map to PostEntities
 		let posts: PostEntity[] = [];
-		datas.forEach((data) => {
-			let post = new PostEntity(data);
+		datas.forEach((data: PostEntity) => {
+			let post: PostEntity = data;
 			posts.push(post);
 		});
 
@@ -22,39 +23,30 @@ export default class PostRepositoryPrisma extends PostRepository {
 	async getById(id: string) {
 		let data = await prisma.post.findUnique({ where: { id: id } });
 		if (data) {
-			let post = new PostEntity(data);
+			let post: PostEntity = data;
 			return post;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(postData: PostEntity) {
-		let updatedPost: any = {};
-
-		if (postData.title) updatedPost['title'] = postData.title;
-		if (postData.ownerId) updatedPost['ownerId'] = postData.ownerId;
-		if (postData.linkedEntity)
-			updatedPost['linkedEntity'] = postData.linkedEntity;
-		if (postData.linkedEntityId)
-			updatedPost['linkedEntityId'] = postData.linkedEntityId;
-		if (postData.contentId) updatedPost['contentId'] = postData.contentId;
-		if (postData.date) updatedPost['date'] = postData.date;
-
+	async update(postData: updatePostEntity) {
 		let updatedData = await prisma.post.update({
 			where: {
 				id: postData.id,
 			},
 			data: {
-				title: updatedPost.title,
-				ownerId: updatedPost.ownerId,
-				linkedEntity: updatedPost.linkedEntity,
-				linkedEntityId: updatedPost.linkedEntityId,
-				contentId: updatedPost.contentId,
-				date: updatedPost.date,
+				title: postData.title ? postData.title : undefined,
+				ownerId: postData.ownerId ? postData.ownerId : undefined,
+				linkedEntity: postData.linkedEntity ? postData.linkedEntity : undefined,
+				linkedEntityId: postData.linkedEntityId
+					? postData.linkedEntityId
+					: undefined,
+				contentId: postData.contentId ? postData.contentId : undefined,
+				date: postData.date ? postData.date : undefined,
 			},
 		});
-		let rez = new PostEntity(updatedData);
+		let rez: PostEntity = updatedData;
 
 		return rez;
 	}
@@ -62,7 +54,6 @@ export default class PostRepositoryPrisma extends PostRepository {
 	async create(post: PostEntity) {
 		let response = await prisma.post.create({
 			data: {
-				id: post.id,
 				title: post.title,
 				ownerId: post.ownerId,
 				linkedEntity: post.linkedEntity,
@@ -74,7 +65,7 @@ export default class PostRepositoryPrisma extends PostRepository {
 
 		console.log(response);
 
-		let out = new PostEntity(response);
+		let out: PostEntity = response;
 		return out;
 	}
 
