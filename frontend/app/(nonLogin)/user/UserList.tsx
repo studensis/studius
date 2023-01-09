@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
-import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
 import { Spinner } from '../../../components/@studius/Spinner/Spinner';
+import UserCard from '../../../components/Cards/UserCard';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
@@ -14,17 +13,7 @@ export default function SubjectList() {
 	return (
 		<Stack cols={2} mobileCols={1}>
 			{users.isLoading && <Spinner />}
-			{users.data &&
-				users.data.map((user) => {
-					return (
-						<Link href={'/user/' + user.id} key={user.id}>
-							<Block>
-								<p className="title1">{user.firstname + ' ' + user.lastname}</p>
-								<p className="text-neutral-strong caption">{user.id}</p>
-							</Block>
-						</Link>
-					);
-				})}
+			{users.data && users.data.map((user) => <UserCard user={user} />)}
 		</Stack>
 	);
 }
