@@ -1,4 +1,4 @@
-import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
+import { SeminarSuggestionEntity } from '../model/SeminarSuggestionEntity';
 import { SeminarSuggestionRepository } from '../repository/SeminarSuggestionRepository';
 
 export default async function createSeminarSuggestionInteractor(

@@ -1145,6 +1145,134 @@
 			]
 		},
 		{
+			"name": "SeminarSuggestion",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.listSeminarSuggestions",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.listSeminarSuggestions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.getSeminarSuggestionById?input=\"1\"",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.getSeminarSuggestionById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacity\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.createSeminarSuggestion",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.createSeminarSuggestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"seminarId\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.updateSeminarSuggestionById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.updateSeminarSuggestionById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.deleteSeminarSuggestionById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.deleteSeminarSuggestionById"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "AUTH",
 			"item": [
 				{
