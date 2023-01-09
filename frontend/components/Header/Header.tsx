@@ -50,11 +50,17 @@ function Header() {
 							/>
 						</div>
 					</Link>
-					<NavItem href="/intranet" icon="home" title="Homepage" />
-					<NavItem href="/calendar" icon="calendar" title="Events" />
-					{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
-						<NavItem href="/admin" icon="adminTools" title="Workspace Tools" />
-					)}
+					<div className="hidden md:block">
+						<NavItem href="/intranet" icon="home" title="Homepage" />
+						<NavItem href="/calendar" icon="calendar" title="Events" />
+						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
+							<NavItem
+								href="/admin"
+								icon="adminTools"
+								title="Workspace Tools"
+							/>
+						)}
+					</div>
 				</div>
 				<div className="flex gap-2">
 					{loggedIn ? (
