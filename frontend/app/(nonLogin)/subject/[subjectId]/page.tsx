@@ -17,6 +17,23 @@ type PageProps = {
 	};
 };
 
+const Content = ({ contentId }: { contentId: string }) => {
+	const content = trpc.content.getContentById.useQuery(contentId);
+	if (content.isLoading || !content.data) {
+		return (
+			<>
+				<Spinner />
+			</>
+		);
+	} else {
+		return (
+			<>
+				<Block>{content.data.markdownText}</Block>
+			</>
+		);
+	}
+};
+
 function SubjectPage(props: PageProps) {
 	const subject = trpc.subject.getSubjectById.useQuery(props.params.subjectId);
 	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(
@@ -48,6 +65,9 @@ function SubjectPage(props: PageProps) {
 									))}
 							</Stack>
 						</div>
+
+						{subject.data?.contentId &&
+							subject.data!.contentId.map((id) => <Content contentId={id} />)}
 					</>
 				)}
 			</PageStack>
