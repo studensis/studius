@@ -24,7 +24,7 @@ const TextInput = ({
 			placeholder={placeholder}
 			name={name}
 			className={
-				'px-4 py-6 border border-neutral-weak rounded-xl w-full mb-4'
+				'px-4 py-6 border border-neutral-weak rounded-xl w-full mb-4 !text-neutral bg-neutral-weak'
 			}
 		></input>
 	);
@@ -87,6 +87,7 @@ export default function LoginForm() {
 					Log in
 				</Button>
 			</form>
+			{login.isLoading && <>Loading...</>}
 		</>
 	);
 }
