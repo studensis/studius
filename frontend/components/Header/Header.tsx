@@ -38,7 +38,7 @@ function Header() {
 
 	return (
 		<>
-			<div className="fixed top-0 w-full px-6 py-4 flex place-content-between place-items-center">
+			<div className="fixed top-0 w-full px-6 py-4 flex place-content-between place-items-center from-background to-background\0 bg-gradient-to-b">
 				<div className="flex gap-2">
 					<Link href="/">
 						<div className="relative w-12 h-12 rounded-[16px] bg-neutral-medium">
