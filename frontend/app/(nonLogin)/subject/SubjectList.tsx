@@ -6,9 +6,11 @@ export default function SubjectList() {
 	const subjects = trpc.subject.listSubjects.useQuery();
 
 	return (
-		<Stack cols={3} mobileCols={1}>
-			{subjects.data &&
-				subjects.data.map((subject) => <SubjectCard subject={subject} />)}
-		</Stack>
+		<div className="">
+			<Stack cols={3} mobileCols={1}>
+				{subjects.data &&
+					subjects.data.map((subject) => <SubjectCard subject={subject} />)}
+			</Stack>
+		</div>
 	);
 }

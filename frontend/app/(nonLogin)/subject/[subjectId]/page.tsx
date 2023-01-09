@@ -1,14 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { Block } from '../../../../components/@studius/PageElements/Block';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
 import {
 	PageStack,
 	Stack,
 } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
-import Tag from '../../../../components/@studius/Tag/Tag';
+import UserCard from '../../../../components/Cards/UserCard';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
@@ -38,22 +36,7 @@ function SubjectPage(props: PageProps) {
 					<Stack cols={3}>
 						{enrolledUsers.data &&
 							enrolledUsers.data.map((enrolledUser) => (
-								<Link
-									href={'/user/' + enrolledUser.user.id}
-									key={enrolledUser.user.id}
-								>
-									<Block>
-										<p className="caption text-neutral-strong">
-											{enrolledUser.user.id}
-										</p>
-										<p className="title1">
-											{enrolledUser.user.firstname +
-												' ' +
-												enrolledUser.user.lastname}
-										</p>
-										<Tag>{enrolledUser.roleTitle}</Tag>
-									</Block>
-								</Link>
+								<UserCard user={enrolledUser.user} />
 							))}
 					</Stack>
 				</div>
