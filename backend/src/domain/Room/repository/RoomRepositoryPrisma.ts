@@ -12,7 +12,7 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 
 		// map to RoomEntities
 		let rooms: RoomEntity[] = [];
-		datas.forEach((data) => {
+		datas.forEach((data: RoomEntity) => {
 			let room: RoomEntity = data;
 			rooms.push(room);
 		});

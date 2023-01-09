@@ -12,7 +12,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 
 		// map to EventEntities
 		let events: EventEntity[] = [];
-		datas.forEach((data) => {
+		datas.forEach((data: EventEntity) => {
 			let event: EventEntity = data;
 			events.push(event);
 		});
@@ -37,9 +37,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 			},
 			data: {
 				title: eventData.title ? eventData.title : undefined,
-				description: eventData.description
-					? eventData.description
-					: undefined,
+				description: eventData.description ? eventData.description : undefined,
 				linkedEntity: eventData.linkedEntity
 					? eventData.linkedEntity
 					: undefined,

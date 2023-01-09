@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import { SubjectEntity } from '../model/SubjectEntity';
 import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
@@ -108,7 +109,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		});
 
 		let user = users.filter(
-			(user) =>
+			(user: EnrollmentEntity) =>
 				user.userId === userId &&
 				['PROFESSOR', 'OWNER'].includes(user.roleTitle)
 		);

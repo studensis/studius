@@ -110,7 +110,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 			},
 		});
 
-		let result = rez.map((e) => {
+		let result = rez.map((e: UserEntity) => {
 			return e;
 		});
 
