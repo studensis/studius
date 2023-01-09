@@ -24,7 +24,7 @@ const TextInput = ({
 			placeholder={placeholder}
 			name={name}
 			className={
-				'px-4 py-6 border border-neutral-weak rounded-xl w-full mb-4'
+				'px-4 py-6 border border-neutral-weak rounded-xl w-full mb-4 !text-neutral bg-neutral-weak'
 			}
 		></input>
 	);
@@ -62,7 +62,12 @@ export default function LoginForm() {
 					{login.error.shape?.message}
 				</pre>
 			)}
-			<form>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					login.mutate(form);
+				}}
+			>
 				<TextInput
 					type="text"
 					placeholder="email"
@@ -80,6 +85,7 @@ export default function LoginForm() {
 					}}
 				></TextInput>
 				<Button
+					formType={'submit'}
 					onClick={() => {
 						login.mutate(form);
 					}}
@@ -87,6 +93,7 @@ export default function LoginForm() {
 					Log in
 				</Button>
 			</form>
+			{login.isLoading && <>Loading...</>}
 		</>
 	);
 }
