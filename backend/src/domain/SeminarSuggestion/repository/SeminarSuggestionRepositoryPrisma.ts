@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
+import { SeminarSuggestionEntity } from '../model/SeminarSuggestionEntity';
+import { updateSeminarSuggestionEntity } from '../model/updateSeminarSuggestionEntity';
 import { SeminarSuggestionRepository } from './SeminarSuggestionRepository';
 
 const prisma = new PrismaClient();
@@ -11,8 +12,8 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 
 		// map to SeminarSuggestionEntities
 		let seminarSuggestions: SeminarSuggestionEntity[] = [];
-		datas.forEach((data) => {
-			let seminarSuggestion = new SeminarSuggestionEntity(data);
+		datas.forEach((data: SeminarSuggestionEntity) => {
+			let seminarSuggestion: SeminarSuggestionEntity = data;
 			seminarSuggestions.push(seminarSuggestion);
 		});
 
@@ -24,33 +25,24 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 			where: { id: id },
 		});
 		if (data) {
-			let seminarSuggestion = new SeminarSuggestionEntity(data);
+			let seminarSuggestion: SeminarSuggestionEntity = data;
 			return seminarSuggestion;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(seminarSuggestionData: SeminarSuggestionEntity) {
-		let updatedSeminarSuggestion: any = {};
-
-		if (seminarSuggestionData.seminarId)
-			updatedSeminarSuggestion['seminarId'] =
-				seminarSuggestionData.seminarId;
-		if (seminarSuggestionData.subjectId)
-			updatedSeminarSuggestion['subjectId'] =
-				seminarSuggestionData.subjectId;
-
+	async update(seminarSuggestionData: updateSeminarSuggestionEntity) {
 		let updatedData = await prisma.seminarSuggestion.update({
 			where: {
 				id: seminarSuggestionData.id,
 			},
 			data: {
-				seminarId: updatedSeminarSuggestion.seminarId,
-				subjectId: updatedSeminarSuggestion.subjectId,
+				seminarId: seminarSuggestionData.seminarId,
+				subjectId: seminarSuggestionData.subjectId,
 			},
 		});
-		let rez = new SeminarSuggestionEntity(updatedData);
+		let rez: SeminarSuggestionEntity = updatedData;
 
 		return rez;
 	}
@@ -58,7 +50,6 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	async create(seminarSuggestion: SeminarSuggestionEntity) {
 		let response = await prisma.seminarSuggestion.create({
 			data: {
-				id: seminarSuggestion.id,
 				seminarId: seminarSuggestion.seminarId,
 				subjectId: seminarSuggestion.subjectId,
 			},
@@ -66,7 +57,7 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 
 		console.log(response);
 
-		let out = new SeminarSuggestionEntity(response);
+		let out: SeminarSuggestionEntity = response;
 		return out;
 	}
 

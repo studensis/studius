@@ -1,9 +1,9 @@
-import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
+import { updateSeminarSuggestionEntity } from '../model/updateSeminarSuggestionEntity';
 import { SeminarSuggestionRepository } from '../repository/SeminarSuggestionRepository';
 
 export default async function updateSeminarSuggestionInteractor(
 	seminarSuggestionRepository: SeminarSuggestionRepository,
-	seminarSuggestion: SeminarSuggestionEntity
+	seminarSuggestion: updateSeminarSuggestionEntity
 ) {
 	let updatedSeminarSuggestion = await seminarSuggestionRepository.update(
 		seminarSuggestion

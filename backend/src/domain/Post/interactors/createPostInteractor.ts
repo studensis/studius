@@ -1,4 +1,4 @@
-import PostEntity from '../model/PostEntity';
+import { PostEntity } from '../model/PostEntity';
 import { PostRepository } from '../repository/PostRepository';
 
 export default async function createPostInteractor(
