@@ -55,11 +55,6 @@
     @apply font-roobert font-[600] md:text-[13px] md:leading-[17px] text-[12px] leading-[16px];
 }
 
-.pozadina {
-    background-image: url("/assets/digitalna.jpg");
-    background-size: cover;
-
-}
 
 body {
     overflow-x: hidden;
