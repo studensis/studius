@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createPostInteractor from '../interactors/createPostInteractor';
 import { LinkedEntity } from '../model/LinkedEntity';
-import PostEntity from '../model/PostEntity';
+import { PostEntity } from '../model/PostEntity';
 import PostRepositoryPrisma from '../repository/PostRepositoryPrisma';
 
 export default async function createPostRouteHandler(
@@ -12,7 +12,7 @@ export default async function createPostRouteHandler(
 	console.log('/posts POST');
 
 	try {
-		let newPost = new PostEntity({
+		let newPost: PostEntity = {
 			id: req.query.id as string,
 			title: req.query.title as string,
 			ownerId: req.query.ownerId as string,
@@ -22,7 +22,7 @@ export default async function createPostRouteHandler(
 			linkedEntityId: req.query.linkedEntityId as string,
 			contentId: req.query.contentId as string,
 			date: new Date(Date.parse(String(req.query.date))) as Date,
-		});
+		};
 		// newPost.validate();
 		let repo = new PostRepositoryPrisma();
 		let post = await createPostInteractor(repo, newPost);

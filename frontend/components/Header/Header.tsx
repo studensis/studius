@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '../@studius/Button/Button';
 import Icon, { IconName } from '../@studius/Icon/Icon';
-import useModal from '../@studius/Modal/ModalProvider';
+import useDialog from '../@studius/Modal/DialogProvider';
 import useLogin from '../hooks/LoginContext';
 import MainSidebar from '../Sidebars/MainSidebar';
 
@@ -32,7 +32,7 @@ const NavItem = ({
 
 function Header() {
 	const { user, loggedIn } = useLogin();
-	const { setSidebar } = useModal();
+	const { setSidebar } = useDialog();
 
 	const router = useRouter();
 
@@ -50,7 +50,7 @@ function Header() {
 							/>
 						</div>
 					</Link>
-					<div className="hidden md:block">
+					<div className="hidden md:flex">
 						<NavItem href="/intranet" icon="home" title="Homepage" />
 						<NavItem href="/calendar" icon="calendar" title="Events" />
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
@@ -65,11 +65,18 @@ function Header() {
 				<div className="flex gap-2">
 					{loggedIn ? (
 						<div
-							className="w-12 h-12 rounded-[16px] bg-neutral-medium"
+							className="relative w-12 h-12 rounded-[16px] bg-neutral-medium overflow-hidden"
 							onClick={() => {
 								setSidebar(<MainSidebar />);
 							}}
-						></div>
+						>
+							<Image
+								src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
+								fill
+								style={{ objectFit: 'cover' }}
+								alt=""
+							/>
+						</div>
 					) : (
 						<>
 							<Button

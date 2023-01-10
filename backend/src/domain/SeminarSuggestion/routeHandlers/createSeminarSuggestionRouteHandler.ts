@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createSeminarSuggestionInteractor from '../interactors/createSeminarSuggestionInteractor';
-import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
+import { SeminarSuggestionEntity } from '../model/SeminarSuggestionEntity';
 import SeminarSuggestionRepositoryPrisma from '../repository/SeminarSuggestionRepositoryPrisma';
 
 export default async function createSeminarSuggestionRouteHandler(
@@ -11,11 +11,11 @@ export default async function createSeminarSuggestionRouteHandler(
 	console.log('/seminarSuggestions POST');
 
 	try {
-		let newSeminarSuggestion = new SeminarSuggestionEntity({
+		let newSeminarSuggestion: SeminarSuggestionEntity = {
 			id: req.query.id as string,
 			seminarId: req.query.seminarId as string,
 			subjectId: req.query.subjectId as string,
-		});
+		};
 		//newSeminarSuggestion.validate();
 		let repo = new SeminarSuggestionRepositoryPrisma();
 		let seminarSuggestion = await createSeminarSuggestionInteractor(

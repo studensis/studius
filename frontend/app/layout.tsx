@@ -1,8 +1,8 @@
 import {
-	ModalOverlay,
-	ModalProvider,
-	ModalSidebar,
-} from '../components/@studius/Modal/ModalProvider';
+	Dialog,
+	DialogOverlay,
+	DialogProvider,
+} from '../components/@studius/Modal/DialogProvider';
 import { LoginProvider } from '../components/hooks/LoginContext';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
@@ -21,16 +21,16 @@ export default function RootLayout({
 				<TrpcProvider>
 					<LoginProvider>
 						<ThemeProvider>
-							<ModalProvider>
+							<DialogProvider>
 								<div
 									className={'relative min-h-screen w-screen overflow-x-hidden'}
 								>
 									{children}
 									<TailwindCache />
-									<ModalOverlay />
-									<ModalSidebar />
+									<DialogOverlay />
+									<Dialog />
 								</div>
-							</ModalProvider>
+							</DialogProvider>
 						</ThemeProvider>
 					</LoginProvider>
 				</TrpcProvider>

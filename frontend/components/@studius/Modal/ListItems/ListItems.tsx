@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 import { trpc } from '../../../hooks/TrpcProvider';
 import Icon, { IconName } from '../../Icon/Icon';
 import Tag from '../../Tag/Tag';
+import useDialog from '../DialogProvider';
 
 export default {
 	Profile: ({ userId }: { userId: string }) => {
@@ -9,7 +11,14 @@ export default {
 		return (
 			<>
 				<div className="p-6 flex gap-4">
-					<div className="w-12 h-12 rounded-2xl bg-neutral"></div>
+					<div className="relative w-12 h-12 rounded-[16px] bg-neutral-medium overflow-hidden">
+						<Image
+							src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
+							fill
+							style={{ objectFit: 'cover' }}
+							alt=""
+						/>
+					</div>
 					<div className="flex flex-col">
 						<p className="title1 text-neutral">
 							{user.data?.firstname} {user.data?.lastname}
@@ -31,11 +40,15 @@ export default {
 		onClick: MouseEventHandler<HTMLDivElement>;
 		icon: IconName;
 	}) => {
+		const { setSidebar } = useDialog();
 		return (
 			<>
 				<div
 					className="px-6 py-4 rounded-lg flex gap-4 hover:bg-accent-weak cursor-pointer"
-					onClick={onClick}
+					onClick={(e) => {
+						onClick(e);
+						setSidebar(null);
+					}}
 				>
 					<div className="flex flex-row gap-2">
 						<span>

@@ -26,7 +26,7 @@ export const RightPanel = () => {
 					<Greeting />!
 				</h1>
 				<Block>
-					<h3 className="title3 mb-2">User::</h3>
+					<h3 className="title3 mb-2">User:</h3>
 					<pre className="text-neutral-strong">
 						{JSON.stringify(user, null, 2)}
 					</pre>

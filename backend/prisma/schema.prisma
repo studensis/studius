@@ -65,7 +65,7 @@ model Enrollment {
   subjectId      String
   enrollmentDate DateTime    @default(now())
   roleTitle      SubjectRole
-  status         Status
+  status         Status      @default(ACTIVE)
 
   @@id([userId, subjectId])
 }
@@ -82,11 +82,12 @@ model Seminar {
 }
 
 model Event {
-  id             String       @id @default(uuid())
+  id             String          @id @default(uuid())
   title          String
   description    String
   linkedEntity   LinkedEntity
   linkedEntityId String
+  RoomTimeEvent  RoomTimeEvent[]
 }
 
 model PinnedEvent {
@@ -96,17 +97,21 @@ model PinnedEvent {
 }
 
 model Room {
-  id       String @id @default(uuid())
-  title    String @default("")
-  capacity Int
+  id            String          @id @default(uuid())
+  title         String          @default("")
+  capacity      Int
+  RoomTimeEvent RoomTimeEvent[]
 }
 
 model RoomTimeEvent {
   id                String              @id @default(uuid())
   dateStart         DateTime
   dateEnd           DateTime
+  event             Event               @relation(fields: [eventId], references: [id])
   eventId           String
+  room              Room                @relation(fields: [roomId], references: [id])
   roomId            String
+  status            Status
   EventUserPresence EventUserPresence[]
 }
 

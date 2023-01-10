@@ -110,11 +110,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 			},
 		});
 
-		let result = rez.map((e: UserEntity) => {
-			return e;
-		});
-
-		return result;
+		return rez;
 	}
 
 	async updateEnrollment(newData: updateEnrollmentEntity) {

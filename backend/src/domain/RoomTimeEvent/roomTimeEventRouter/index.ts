@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import createRoomTimeEventInteractor from '../interactors/createRoomTimeEventInteractor';
 import deleteRoomTimeEventInteractor from '../interactors/deleteRoomTimeEventInteractor';
@@ -14,13 +13,14 @@ let repo = new RoomTimeEventRepositoryPrisma();
 
 export default t.router({
 	createRoomTimeEvent: t.procedure
-		.use(isAdmin)
+		//.use(isAdmin)
 		.input(
 			z.object({
 				dateStart: z.string(),
 				dateEnd: z.string(),
 				eventId: z.string(),
 				roomId: z.string(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -29,6 +29,9 @@ export default t.router({
 				id: '',
 				dateStart: new Date(Date.parse(input.dateStart)),
 				dateEnd: new Date(Date.parse(input.dateEnd)),
+				eventId: input.eventId,
+				roomId: input.roomId,
+				status: input.status,
 			};
 			let newRoomTimeEvent = await createRoomTimeEventInteractor(
 				repo,
@@ -38,7 +41,7 @@ export default t.router({
 		}),
 
 	deleteRoomTimeEventById: t.procedure
-		.use(isAdmin)
+		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let a = await deleteRoomTimeEventInteractor(input, repo);
@@ -65,6 +68,7 @@ export default t.router({
 				dateEnd: z.string().optional(),
 				eventId: z.string().optional(),
 				roomId: z.string().optional(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -76,6 +80,9 @@ export default t.router({
 				dateEnd: input.dateEnd
 					? new Date(Date.parse(input.dateEnd))
 					: undefined,
+				eventId: input.eventId,
+				roomId: input.roomId,
+				status: input.status,
 			};
 			let updatedRoomTimeEvent = await updateRoomTimeEventInteractor(
 				repo,

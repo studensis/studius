@@ -1,13 +1,13 @@
 import { useRouter } from 'next/navigation';
+import useDialog from '../@studius/Modal/DialogProvider';
 import ListItems from '../@studius/Modal/ListItems/ListItems';
-import useModal from '../@studius/Modal/ModalProvider';
 import useLogin from '../hooks/LoginContext';
 import useTheme from '../hooks/ThemeProvider';
 
 export default function MainSidebar() {
 	const { loggedIn, logout, user } = useLogin();
 	const router = useRouter();
-	const { setSidebar } = useModal();
+	const { setSidebar } = useDialog();
 	const { theme, setDark, setLight } = useTheme();
 
 	return (
