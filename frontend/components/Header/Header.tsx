@@ -50,7 +50,7 @@ function Header() {
 							/>
 						</div>
 					</Link>
-					<div className="hidden md:block">
+					<div className="hidden md:flex">
 						<NavItem href="/intranet" icon="home" title="Homepage" />
 						<NavItem href="/calendar" icon="calendar" title="Events" />
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
