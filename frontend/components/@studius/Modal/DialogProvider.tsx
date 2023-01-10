@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { createContext, useContext, useState } from 'react';
 import Icon from '../Icon/Icon';
 
-interface IModalContext {
+interface IDialogContext {
 	dialogElement: React.ReactNode | null;
 	dialogType: 'MODAL' | 'SIDEBAR';
 
@@ -12,14 +12,14 @@ interface IModalContext {
 	setSidebar: (element: React.ReactNode | null) => void;
 }
 
-const ModalContext = createContext<IModalContext>({
+const DialogContext = createContext<IDialogContext>({
 	dialogElement: null,
 	dialogType: 'MODAL',
 	setModal: (element) => {},
 	setSidebar: (element) => {},
 });
 
-function ModalProvider({ children }: { children: React.ReactNode }) {
+function DialogProvider({ children }: { children: React.ReactNode }) {
 	const [sidebarElement, setSidebarElement] = useState<React.ReactNode | null>(
 		null
 	);
@@ -27,7 +27,7 @@ function ModalProvider({ children }: { children: React.ReactNode }) {
 
 	return (
 		<>
-			<ModalContext.Provider
+			<DialogContext.Provider
 				value={{
 					dialogElement: sidebarElement,
 					dialogType: dialogType,
@@ -39,7 +39,7 @@ function ModalProvider({ children }: { children: React.ReactNode }) {
 							document.body.classList.add('sm:overflow-y-auton');
 						} else {
 							setSidebarElement(null);
-							document.body.classList.add('overflow-y-auto');
+							document.body.classList.add('overflow-y-hidden');
 							document.body.classList.add('sm:overflow-y-auto');
 						}
 					},
@@ -51,20 +51,20 @@ function ModalProvider({ children }: { children: React.ReactNode }) {
 							document.body.classList.add('sm:overflow-y-auto');
 						} else {
 							setSidebarElement(null);
-							document.body.classList.remove('overflow-y-auto');
+							document.body.classList.remove('overflow-y-hidden');
 							document.body.classList.remove('sm:overflow-y-auto');
 						}
 					},
 				}}
 			>
 				{children}
-			</ModalContext.Provider>
+			</DialogContext.Provider>
 		</>
 	);
 }
 
 export function DialogOverlay() {
-	const { dialogElement, dialogType, setSidebar } = useModal();
+	const { dialogElement, dialogType, setSidebar } = useDialog();
 	return (
 		<>
 			{dialogElement ? (
@@ -88,7 +88,7 @@ export function DialogOverlay() {
 }
 
 export function Dialog() {
-	const { dialogElement, setSidebar, dialogType } = useModal();
+	const { dialogElement, setSidebar, dialogType } = useDialog();
 	return (
 		<>
 			{dialogElement ? (
@@ -108,7 +108,10 @@ export function Dialog() {
 						className={classNames(
 							'rounded-t-2xl sm:rounded-b-2xl',
 							'overflow-y-scroll',
-							'shadow-sm-top sm:shadow-lg-left w-full relative h-full sm:h-auto max-h-full overflow-x-hidden bg-section pb-6'
+							dialogType === 'MODAL'
+								? 'shadow-sm-top sm:shadow-lg-top'
+								: 'shadow-sm-top sm:shadow-lg-left',
+							'w-full relative h-full sm:h-auto max-h-full overflow-x-hidden bg-section pb-6'
 						)}
 					>
 						<div className="block sm:hidden pt-3 pb-6">
@@ -132,7 +135,7 @@ export function Dialog() {
 	);
 }
 
-const useModal = () => useContext(ModalContext);
-export default useModal;
+const useDialog = () => useContext(DialogContext);
+export default useDialog;
 
-export { ModalProvider };
+export { DialogProvider };

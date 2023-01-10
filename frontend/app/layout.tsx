@@ -1,7 +1,7 @@
 import {
 	Dialog,
 	DialogOverlay,
-	ModalProvider,
+	DialogProvider,
 } from '../components/@studius/Modal/DialogProvider';
 import { LoginProvider } from '../components/hooks/LoginContext';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
@@ -21,7 +21,7 @@ export default function RootLayout({
 				<TrpcProvider>
 					<LoginProvider>
 						<ThemeProvider>
-							<ModalProvider>
+							<DialogProvider>
 								<div
 									className={'relative min-h-screen w-screen overflow-x-hidden'}
 								>
@@ -30,7 +30,7 @@ export default function RootLayout({
 									<DialogOverlay />
 									<Dialog />
 								</div>
-							</ModalProvider>
+							</DialogProvider>
 						</ThemeProvider>
 					</LoginProvider>
 				</TrpcProvider>

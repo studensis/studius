@@ -3,7 +3,7 @@ import { MouseEventHandler } from 'react';
 import { trpc } from '../../../hooks/TrpcProvider';
 import Icon, { IconName } from '../../Icon/Icon';
 import Tag from '../../Tag/Tag';
-import useModal from '../DialogProvider';
+import useDialog from '../DialogProvider';
 
 export default {
 	Profile: ({ userId }: { userId: string }) => {
@@ -40,7 +40,7 @@ export default {
 		onClick: MouseEventHandler<HTMLDivElement>;
 		icon: IconName;
 	}) => {
-		const { setSidebar } = useModal();
+		const { setSidebar } = useDialog();
 		return (
 			<>
 				<div

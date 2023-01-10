@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '../@studius/Button/Button';
 import Icon, { IconName } from '../@studius/Icon/Icon';
-import useModal from '../@studius/Modal/DialogProvider';
+import useDialog from '../@studius/Modal/DialogProvider';
 import useLogin from '../hooks/LoginContext';
 import MainSidebar from '../Sidebars/MainSidebar';
 
@@ -32,7 +32,7 @@ const NavItem = ({
 
 function Header() {
 	const { user, loggedIn } = useLogin();
-	const { setSidebar } = useModal();
+	const { setSidebar } = useDialog();
 
 	const router = useRouter();
 
