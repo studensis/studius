@@ -60,7 +60,7 @@ export function ModalSidebar() {
 	return (
 		<>
 			{sidebarElement ? (
-				<div className="absolute right-0 sm:top-24 bottom-0 py-6 sm:px-6 w-full sm:w-[360px]">
+				<div className="md:fixed absolute right-0 sm:top-24 bottom-0 py-6 sm:px-6 w-full sm:w-[360px]">
 					<div className="shadow-sm-top sm:shadow-lg-left w-full relative max-h-full overflow-x-hidden overlow-y-scroll rounded-2xl bg-section pb-6">
 						<div className="block sm:hidden pt-3 pb-6 ">
 							<div className="w-[120px] h-1 bg-neutral-weak mx-auto"></div>

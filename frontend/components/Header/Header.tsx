@@ -65,11 +65,18 @@ function Header() {
 				<div className="flex gap-2">
 					{loggedIn ? (
 						<div
-							className="w-12 h-12 rounded-[16px] bg-neutral-medium"
+							className="relative w-12 h-12 rounded-[16px] bg-neutral-medium overflow-hidden"
 							onClick={() => {
 								setSidebar(<MainSidebar />);
 							}}
-						></div>
+						>
+							<Image
+								src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
+								fill
+								style={{ objectFit: 'cover' }}
+								alt=""
+							/>
+						</div>
 					) : (
 						<>
 							<Button
