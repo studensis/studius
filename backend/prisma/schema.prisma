@@ -75,10 +75,10 @@ model Seminar {
   title       String @unique
   description String
   mentorId    String
-  type        String
   contentId   String
   subjectId   String
   userId      String
+  status      SeminarStatus
 }
 
 model Event {
@@ -90,10 +90,10 @@ model Event {
   RoomTimeEvent  RoomTimeEvent[]
 }
 
-model SeminarSuggestion {
+model PinnedEvent {
   id        String @id @default(uuid())
-  seminarId String
   subjectId String
+  eventId   String
 }
 
 model Room {
@@ -118,6 +118,7 @@ model RoomTimeEvent {
 model EventUserPresence {
   id              String        @id @default(uuid())
   presenceStatus  Boolean
+  // presenceStatus  RSVP
   roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
   roomTimeEventId String
   user            User          @relation(fields: [userId], references: [id])
@@ -147,6 +148,19 @@ enum Status {
   ACTIVE
   ARCHIVED
 }
+
+enum SeminarStatus {
+  DRAFT
+  CONFIRMED
+}
+
+// enum RSVP {
+//   PRESENT
+//   COMING
+//   CONFIRMED
+//   DECLINED
+//   TENTATIVE
+// }
 
 enum LinkedEntity {
   USER

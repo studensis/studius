@@ -1,3 +1,4 @@
+import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
 import { EventUserPresenceEntity } from '../model/EventUserPresenceEntity';
 import { updateEventUserPresenceEntity } from '../model/updateEventUserPresenceEntity';
 
@@ -19,6 +20,9 @@ export abstract class EventUserPresenceRepository {
 		throw new Error('Method not implemented.');
 	}
 	async delete(eventUserPresenceId: string): Promise<EventUserPresenceEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async getRoomTimeEvent(id: string): Promise<RoomTimeEventEntity> {
 		throw new Error('Method not implemented.');
 	}
 }
