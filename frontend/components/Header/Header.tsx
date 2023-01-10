@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '../@studius/Button/Button';
 import Icon, { IconName } from '../@studius/Icon/Icon';
-import useModal from '../@studius/Modal/ModalProvider';
+import useModal from '../@studius/Modal/DialogProvider';
 import useLogin from '../hooks/LoginContext';
 import MainSidebar from '../Sidebars/MainSidebar';
 

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
+import useModal from '../@studius/Modal/DialogProvider';
 import ListItems from '../@studius/Modal/ListItems/ListItems';
-import useModal from '../@studius/Modal/ModalProvider';
 import useLogin from '../hooks/LoginContext';
 import useTheme from '../hooks/ThemeProvider';
 

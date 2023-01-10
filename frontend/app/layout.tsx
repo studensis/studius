@@ -1,8 +1,8 @@
 import {
-	ModalOverlay,
+	Dialog,
+	DialogOverlay,
 	ModalProvider,
-	ModalSidebar,
-} from '../components/@studius/Modal/ModalProvider';
+} from '../components/@studius/Modal/DialogProvider';
 import { LoginProvider } from '../components/hooks/LoginContext';
 import { ThemeProvider } from '../components/hooks/ThemeProvider';
 import TrpcProvider from '../components/hooks/TrpcProvider';
@@ -27,8 +27,8 @@ export default function RootLayout({
 								>
 									{children}
 									<TailwindCache />
-									<ModalOverlay />
-									<ModalSidebar />
+									<DialogOverlay />
+									<Dialog />
 								</div>
 							</ModalProvider>
 						</ThemeProvider>

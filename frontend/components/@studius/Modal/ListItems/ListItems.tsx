@@ -3,7 +3,7 @@ import { MouseEventHandler } from 'react';
 import { trpc } from '../../../hooks/TrpcProvider';
 import Icon, { IconName } from '../../Icon/Icon';
 import Tag from '../../Tag/Tag';
-import useModal from '../ModalProvider';
+import useModal from '../DialogProvider';
 
 export default {
 	Profile: ({ userId }: { userId: string }) => {
