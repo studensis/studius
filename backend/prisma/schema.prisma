@@ -71,14 +71,14 @@ model Enrollment {
 }
 
 model Seminar {
-  id          String @id @default(uuid())
-  title       String @unique
-  description String
-  mentorId    String
-  contentId   String
-  subjectId   String
-  userId      String
-  status      SeminarStatus
+  id          String        @id @default(uuid())
+  title       String        @unique
+  description String?
+  mentorId    String?
+  contentId   String?
+  subjectId   String?
+  userId      String?
+  status      SeminarStatus @default(DRAFT)
 }
 
 model Event {
@@ -111,7 +111,7 @@ model RoomTimeEvent {
   eventId           String
   room              Room                @relation(fields: [roomId], references: [id])
   roomId            String
-  status            Status
+  status            Status              @default(ACTIVE)
   EventUserPresence EventUserPresence[]
 }
 
