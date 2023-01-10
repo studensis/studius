@@ -1,4 +1,5 @@
-import SeminarSuggestionEntity from '../model/SeminarSuggestionEntity';
+import { SeminarSuggestionEntity } from '../model/SeminarSuggestionEntity';
+import { updateSeminarSuggestionEntity } from '../model/updateSeminarSuggestionEntity';
 
 export abstract class SeminarSuggestionRepository {
 	async getAll(): Promise<SeminarSuggestionEntity[]> {
@@ -13,13 +14,11 @@ export abstract class SeminarSuggestionRepository {
 		throw new Error('Method not implemented.');
 	}
 	async update(
-		seminarSuggestion: SeminarSuggestionEntity
+		seminarSuggestion: updateSeminarSuggestionEntity
 	): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async delete(
-		seminarSuggestionId: string
-	): Promise<SeminarSuggestionEntity> {
+	async delete(seminarSuggestionId: string): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
 }

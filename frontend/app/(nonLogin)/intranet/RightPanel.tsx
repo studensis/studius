@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { SectionTop } from '../../../components/@studius/PageElements/SectionTop';
 import { PageStack } from '../../../components/@studius/PageElements/Stack';
+import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 import SubjectList from './SubjectList';
@@ -9,7 +10,11 @@ import SubjectList from './SubjectList';
 const Greeting = () => {
 	const { user } = useLogin();
 	const name = trpc.user.getUserById.useQuery(user!.userId);
-	return <>Welcome back, {name.data?.firstname}</>;
+	if (name.isLoading && !name.data) {
+		return <Spinner />;
+	} else {
+		return <>Welcome back, {name.data!.firstname}</>;
+	}
 };
 
 export const RightPanel = () => {

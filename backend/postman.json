@@ -428,7 +428,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"markdownText\":\"\",\r\n    \"plainText\":\"\",\r\n    \"date\":\"\",\r\n    \"linkedEntity\":\"USER\",\r\n    \"linkedEntityId\":\"\"\r\n}",
+							"raw": "{\r\n    \"markdownText\":\"\",\r\n    \"plainText\":\"\",\r\n    \"date\":\"04 Dec 1995 00:12:00 GMT\",\r\n    \"linkedEntity\":\"USER\",\r\n    \"linkedEntityId\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -505,7 +505,7 @@
 			]
 		},
 		{
-			"name": "Post",
+			"name": "EventUserPresence",
 			"item": [
 				{
 					"name": "all",
@@ -513,13 +513,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/posts",
+							"raw": "localhost:4000/content.listContents",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"posts"
+								"content.listContents"
 							]
 						}
 					},
@@ -531,440 +531,100 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/posts/1",
+							"raw": "localhost:4000/eventUserPresence.getEventUserPresenceById?input=\"1\"",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"posts",
-								"1"
+								"eventUserPresence.getEventUserPresenceById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "create",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:4000/posts?id=&title=&date=&contentId=&linkedEntity=&linkedEntityId=&ownerId=",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"posts"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "title",
-									"value": ""
-								},
-								{
-									"key": "date",
-									"value": ""
-								},
-								{
-									"key": "contentId",
-									"value": ""
-								},
-								{
-									"key": "linkedEntity",
-									"value": ""
-								},
-								{
-									"key": "linkedEntityId",
-									"value": ""
-								},
-								{
-									"key": "ownerId",
-									"value": ""
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"presenceStatus\":\"1\",\r\n    \"userId\":\"\",\r\n    \"eventId\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/eventUserPresence.createEventUserPresence",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"eventUserPresence.createEventUserPresence"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/posts/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"posts",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "date",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "contentId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "linkedEntity",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "linkedEntityId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "ownerId",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/posts/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"posts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Seminar",
-			"item": [
-				{
-					"name": "all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminars",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminars"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "one",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminars/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminars",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
+					"name": "update",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminars?id=&title=&description=&mentorId=&type=&contentId=&subjectId=&userId=",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminars"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "title",
-									"value": ""
-								},
-								{
-									"key": "description",
-									"value": ""
-								},
-								{
-									"key": "mentorId",
-									"value": ""
-								},
-								{
-									"key": "type",
-									"value": ""
-								},
-								{
-									"key": "contentId",
-									"value": ""
-								},
-								{
-									"key": "subjectId",
-									"value": ""
-								},
-								{
-									"key": "userId",
-									"value": ""
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"presenceStatus\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/eventUserPresence.updateEventUserPresenceById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"eventUserPresence.updateEventUserPresenceById"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminars/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminars",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "description",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "mentorId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "type",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "contentId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "subjectId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "userId",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminars/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminars",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SeminarSuggestion",
-			"item": [
-				{
-					"name": "all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminarSuggestions",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminarSuggestions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "one",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminarSuggestions/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminarSuggestions",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
+					"name": "delete",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminarSuggestions?id=&seminarId=&subjectId=",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminarSuggestions"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "seminarId",
-									"value": ""
-								},
-								{
-									"key": "subjectId",
-									"value": ""
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/seminarSuggestions/1",
+							"raw": "localhost:4000/eventUserPresence.deleteEventUserPresenceById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"seminarSuggestions",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "seminarId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "subjectId",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/seminarSuggestions/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"seminarSuggestions",
-								"1"
+								"eventUserPresence.deleteEventUserPresenceById"
 							]
 						}
 					},
@@ -981,13 +641,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/roomTimeEvents",
+							"raw": "localhost:4000/roomTimeEvent.listRoomTimeEvents",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"roomTimeEvents"
+								"roomTimeEvent.listRoomTimeEvents"
 							]
 						}
 					},
@@ -999,377 +659,100 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/roomTimeEvents/1",
+							"raw": "localhost:4000/roomTimeEvent.getRoomTimeEventById?input=\"1\"",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"roomTimeEvents",
-								"1"
+								"roomTimeEvent.getRoomTimeEventById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "create",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:4000/roomTimeEvents?id=&dateStart=&dateEnd=&roomId=&eventId=",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"roomTimeEvents"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "dateStart",
-									"value": ""
-								},
-								{
-									"key": "dateEnd",
-									"value": ""
-								},
-								{
-									"key": "roomId",
-									"value": ""
-								},
-								{
-									"key": "eventId",
-									"value": ""
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateStart\":\"04 Dec 1995 00:12:00 GMT\",\r\n    \"dateEnd\":\"04 Dec 1995 00:12:00 GMT\",\r\n    \"eventId\":\"\",\r\n    \"roomId\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/roomTimeEvent.createRoomTimeEvent",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"roomTimeEvent.createRoomTimeEvent"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/roomTimeEvents/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"roomTimeEvents",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "dateStart",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "dateEnd",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "roomId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "eventId",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/roomTimeEvents/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"roomTimeEvents",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "EventUserPresence",
-			"item": [
-				{
-					"name": "all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/eventUserPresences",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"eventUserPresences"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "one",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/eventUserPresences/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"eventUserPresences",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
+					"name": "update",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:4000/eventUserPresences?id=&presenceStatus=&roomTimeEventId=&userId=",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"eventUserPresences"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "presenceStatus",
-									"value": ""
-								},
-								{
-									"key": "roomTimeEventId",
-									"value": ""
-								},
-								{
-									"key": "userId",
-									"value": ""
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"dateStart\":\"04 Dec 2050 00:12:00 GMT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/roomTimeEvent.updateRoomTimeEventById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"roomTimeEvent.updateRoomTimeEventById"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/eventUserPresences/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"eventUserPresences",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "presenceStatus",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "roomTimeEventId",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "userId",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/eventUserPresences/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"eventUserPresences",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Room",
-			"item": [
-				{
-					"name": "all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/rooms",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"rooms"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "one",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/rooms/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"rooms",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
+					"name": "delete",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:4000/rooms?id=&capacity=",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"rooms"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "capacity",
-									"value": ""
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "PUT",
-						"header": [],
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/rooms/1",
+							"raw": "localhost:4000/roomTimeEvent.deleteRoomTimeEventById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"rooms",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "capacity",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/rooms/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"rooms",
-								"1"
+								"roomTimeEvent.deleteRoomTimeEventById"
 							]
 						}
 					},
@@ -1386,13 +769,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/events",
+							"raw": "localhost:4000/event.listEvents",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"events"
+								"event.listEvents"
 							]
 						}
 					},
@@ -1404,119 +787,100 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/events/1",
+							"raw": "localhost:4000/event.getEventById?input=\"1\"",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"events",
-								"1"
+								"event.getEventById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "create",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"\",\r\n    \"description\":\"\",\r\n    \"linkedEntity\":\"USER\",\r\n    \"linkedEntityId\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/events?id=&title=&description=&linkedEntity=&linkedEntityId=",
+							"raw": "localhost:4000/event.createEvent",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"events"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								},
-								{
-									"key": "title",
-									"value": ""
-								},
-								{
-									"key": "description",
-									"value": ""
-								},
-								{
-									"key": "linkedEntity",
-									"value": ""
-								},
-								{
-									"key": "linkedEntityId",
-									"value": ""
-								}
+								"event.createEvent"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "update",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"title\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/events/1",
+							"raw": "localhost:4000/event.updateEventById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"events",
-								"1"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "description",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "linkedEntity",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "linkedEntityId",
-									"value": "",
-									"disabled": true
-								}
+								"event.updateEventById"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "delete",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/events/1",
+							"raw": "localhost:4000/event.deleteEventById",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"events",
-								"1"
+								"event.deleteEventById"
 							]
 						}
 					},
@@ -1525,7 +889,7 @@
 			]
 		},
 		{
-			"name": "Enrollment",
+			"name": "Post",
 			"item": [
 				{
 					"name": "all",
@@ -1533,92 +897,164 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/enrollments",
+							"raw": "localhost:4000/post.listPosts",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"enrollments"
+								"post.listPosts"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "by userId",
+					"name": "one",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/enrollments/user/1",
+							"raw": "localhost:4000/post.getPostById?input=\"1\"",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"enrollments",
-								"user",
-								"1"
+								"post.getPostById"
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"1\""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "by subjectId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/enrollments/subject/1",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"enrollments",
-								"subject",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ".",
+					"name": "create",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"\",\r\n    \"date\":\"04 Dec 1995 00:12:00 GMT\",\r\n    \"linkedEntity\":\"USER\",\r\n    \"linkedEntityId\":\"\",\r\n    \"contentId\":\"\",\r\n    \"ownerId\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/enrollments?userId=&subjectId=&enrollmentDate=&roleTitle=&status=",
+							"raw": "localhost:4000/post.createPost",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"enrollments"
+								"post.createPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"title\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/post.updatePostById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.updatePostById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/post.deletePostById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post.deletePostById"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/room.listRooms",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"room.listRooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/room.getRoomById?input=\"1\"",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"room.getRoomById"
 							],
 							"query": [
 								{
-									"key": "userId",
-									"value": ""
-								},
-								{
-									"key": "subjectId",
-									"value": ""
-								},
-								{
-									"key": "enrollmentDate",
-									"value": ""
-								},
-								{
-									"key": "roleTitle",
-									"value": ""
-								},
-								{
-									"key": "status",
-									"value": ""
+									"key": "input",
+									"value": "\"1\""
 								}
 							]
 						}
@@ -1626,42 +1062,127 @@
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "create",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacity\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/enrollments?userId=&subjectId=",
+							"raw": "localhost:4000/room.createRoom",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"enrollments"
+								"room.createRoom"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"capacity\":22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/room.updateRoomById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"room.updateRoomById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/room.deleteRoomById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"room.deleteRoomById"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SeminarSuggestion",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.listSeminarSuggestions",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.listSeminarSuggestions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.getSeminarSuggestionById?input=\"1\"",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.getSeminarSuggestionById"
 							],
 							"query": [
 								{
-									"key": "userId",
-									"value": ""
-								},
-								{
-									"key": "subjectId",
-									"value": ""
-								},
-								{
-									"key": "enrollmentDate",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "roleTitle",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "status",
-									"value": "",
-									"disabled": true
+									"key": "input",
+									"value": "\"1\""
 								}
 							]
 						}
@@ -1669,28 +1190,81 @@
 					"response": []
 				},
 				{
-					"name": ".",
+					"name": "create",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacity\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/enrollments?userId=&subjectId=",
+							"raw": "localhost:4000/seminarSuggestion.createSeminarSuggestion",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"enrollments"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": ""
-								},
-								{
-									"key": "subjectId",
-									"value": ""
+								"seminarSuggestion.createSeminarSuggestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"seminarId\":\"apdejtano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.updateSeminarSuggestionById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.updateSeminarSuggestionById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"1\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/seminarSuggestion.deleteSeminarSuggestionById",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seminarSuggestion.deleteSeminarSuggestionById"
 							]
 						}
 					},

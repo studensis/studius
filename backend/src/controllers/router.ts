@@ -1,4 +1,10 @@
 import contentRouter from '../domain/Content/contentRouter';
+import eventRouter from '../domain/Event/eventRouter';
+import eventUserPresenceRouter from '../domain/EventUserPresence/eventUserPresenceRouter';
+import postRouter from '../domain/Post/postRouter';
+import roomRouter from '../domain/Room/roomRouter';
+import roomTimeEventRouter from '../domain/RoomTimeEvent/roomTimeEventRouter';
+import seminarSuggestionRouter from '../domain/SeminarSuggestion/seminarSuggestionRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
 import authRouter from '../services/authentication/authRouter';
@@ -14,13 +20,13 @@ const appRouter = t.router({
 	user: userRouter,
 	subject: subjectRouter,
 	// enrollment: todoRoutine,
-	room: todoRoutine,
-	event: todoRoutine,
-	// roomTimeEvent: todoRoutine,
-	// eventUserPresence: todoRoutine,
-	post: todoRoutine,
+	room: roomRouter,
+	event: eventRouter,
+	roomTimeEvent: roomTimeEventRouter,
+	eventUserPresence: eventUserPresenceRouter,
+	post: postRouter,
 	seminar: todoRoutine,
-	seminarSuggestion: todoRoutine,
+	seminarSuggestion: seminarSuggestionRouter,
 	content: contentRouter,
 });
 

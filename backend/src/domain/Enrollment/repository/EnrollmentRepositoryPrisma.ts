@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { key } from '../model/compositeKey';
 import { EnrollmentEntity } from '../model/EnrollmentEntity';
+import { updateEnrollmentEntity } from '../model/updateEnrollment';
 import { EnrollmentRepository } from './EnrollmentRepository';
 
 const prisma = new PrismaClient();
@@ -20,7 +21,7 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 		return rez;
 	}
 
-	async update(data: EnrollmentEntity) {
+	async update(data: updateEnrollmentEntity) {
 		let updatedData = await prisma.enrollment.update({
 			where: {
 				userId_subjectId: {
@@ -29,8 +30,8 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 				},
 			},
 			data: {
-				roleTitle: data.roleTitle,
-				status: data.status,
+				roleTitle: data.roleTitle ? data.roleTitle : undefined,
+				status: data.status ? data.status : undefined,
 			},
 		});
 
@@ -56,7 +57,7 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 		let enrollments = await prisma.enrollment.findMany();
 
 		let result: EnrollmentEntity[] = [];
-		enrollments.forEach((e) => {
+		enrollments.forEach((e: EnrollmentEntity) => {
 			let enrollment: EnrollmentEntity = e;
 			result.push(enrollment);
 		});
@@ -71,7 +72,7 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 			},
 		});
 		let result: EnrollmentEntity[] = [];
-		rez.forEach((e) => {
+		rez.forEach((e: EnrollmentEntity) => {
 			let enrollment: EnrollmentEntity = e;
 			result.push(enrollment);
 		});
@@ -86,7 +87,7 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 			},
 		});
 		let result: EnrollmentEntity[] = [];
-		rez.forEach((e) => {
+		rez.forEach((e: EnrollmentEntity) => {
 			let enrollment: EnrollmentEntity = e;
 			result.push(enrollment);
 		});

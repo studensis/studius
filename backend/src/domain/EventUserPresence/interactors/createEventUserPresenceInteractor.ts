@@ -1,4 +1,4 @@
-import EventUserPresenceEntity from '../model/EventUserPresenceEntity';
+import { EventUserPresenceEntity } from '../model/EventUserPresenceEntity';
 import { EventUserPresenceRepository } from '../repository/EventUserPresenceRepository';
 
 export default async function createEventUserPresenceInteractor(

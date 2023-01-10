@@ -12,7 +12,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 
 		// map to ContentEntities
 		let contents: ContentEntity[] = [];
-		datas.forEach((data) => {
+		datas.forEach((data: ContentEntity) => {
 			let content: ContentEntity = data;
 			contents.push(content);
 		});
@@ -39,9 +39,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 				markdownText: contentData.markdownText
 					? contentData.markdownText
 					: undefined,
-				plainText: contentData.plainText
-					? contentData.plainText
-					: undefined,
+				plainText: contentData.plainText ? contentData.plainText : undefined,
 				linkedEntity: contentData.linkedEntity
 					? contentData.linkedEntity
 					: undefined,

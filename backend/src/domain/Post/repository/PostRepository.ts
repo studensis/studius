@@ -1,4 +1,5 @@
-import PostEntity from '../model/PostEntity';
+import { PostEntity } from '../model/PostEntity';
+import { updatePostEntity } from '../model/updatePostEntity';
 
 export abstract class PostRepository {
 	async getAll(): Promise<PostEntity[]> {
@@ -10,7 +11,7 @@ export abstract class PostRepository {
 	async create(post: PostEntity): Promise<PostEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(post: PostEntity): Promise<PostEntity> {
+	async update(post: updatePostEntity): Promise<PostEntity> {
 		throw new Error('Method not implemented.');
 	}
 	async delete(postId: string): Promise<PostEntity> {

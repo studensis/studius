@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import EventUserPresenceEntity from '../model/EventUserPresenceEntity';
+import { EventUserPresenceEntity } from '../model/EventUserPresenceEntity';
+import { updateEventUserPresenceEntity } from '../model/updateEventUserPresenceEntity';
 import { EventUserPresenceRepository } from './EventUserPresenceRepository';
 
 const prisma = new PrismaClient();
@@ -11,8 +12,8 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 
 		// map to EventUserPresenceEntities
 		let eventUserPresences: EventUserPresenceEntity[] = [];
-		datas.forEach((data) => {
-			let eventUserPresence = new EventUserPresenceEntity(data);
+		datas.forEach((data: EventUserPresenceEntity) => {
+			let eventUserPresence: EventUserPresenceEntity = data;
 			eventUserPresences.push(eventUserPresence);
 		});
 
@@ -24,29 +25,23 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 			where: { id: id },
 		});
 		if (data) {
-			let eventUserPresence = new EventUserPresenceEntity(data);
+			let eventUserPresence: EventUserPresenceEntity = data;
 			return eventUserPresence;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(eventUserPresenceData: EventUserPresenceEntity) {
-		let updatedEventUserPresence: any = {};
-
-		if (eventUserPresenceData.presenceStatus)
-			updatedEventUserPresence['presenceStatus'] =
-				eventUserPresenceData.presenceStatus;
-
+	async update(eventUserPresenceData: updateEventUserPresenceEntity) {
 		let updatedData = await prisma.eventUserPresence.update({
 			where: {
 				id: eventUserPresenceData.id,
 			},
 			data: {
-				presenceStatus: updatedEventUserPresence.presenceStatus,
+				presenceStatus: eventUserPresenceData.presenceStatus,
 			},
 		});
-		let rez = new EventUserPresenceEntity(updatedData);
+		let rez: EventUserPresenceEntity = updatedData;
 
 		return rez;
 	}
@@ -54,7 +49,6 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 	async create(eventUserPresence: EventUserPresenceEntity) {
 		let response = await prisma.eventUserPresence.create({
 			data: {
-				id: eventUserPresence.id,
 				presenceStatus: eventUserPresence.presenceStatus,
 				roomTimeEventId: eventUserPresence.roomTimeEventId,
 				userId: eventUserPresence.userId,
@@ -63,7 +57,7 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 
 		console.log(response);
 
-		let out = new EventUserPresenceEntity(response);
+		let out: EventUserPresenceEntity = response;
 		return out;
 	}
 

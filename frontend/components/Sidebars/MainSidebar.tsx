@@ -15,6 +15,31 @@ export default function MainSidebar() {
 			{loggedIn && (
 				<>
 					{user && <ListItems.Profile userId={user.userId} />}
+					<div className="block md:hidden">
+						<ListItems.Action
+							onClick={() => {
+								router.push('/intranet');
+							}}
+							icon="home"
+							text="Homepage"
+						/>
+						<ListItems.Action
+							onClick={() => {
+								router.push('/calendar');
+							}}
+							icon="calendar"
+							text="Events"
+						/>
+						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
+							<ListItems.Action
+								onClick={() => {
+									router.push('/admin');
+								}}
+								icon="adminTools"
+								text="Workspace Tools"
+							/>
+						)}
+					</div>
 					<ListItems.Action
 						text="View Profile"
 						icon="user"
