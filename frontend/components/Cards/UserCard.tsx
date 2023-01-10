@@ -3,8 +3,14 @@ import { FC } from 'react';
 import { Block } from '../@studius/PageElements/Block';
 
 const UserCard: FC<{
-	user: { id: string; firstname: string; lastname: string };
-}> = ({ user }) => {
+	user: {
+		id: string;
+		firstname: string;
+		lastname: string;
+	};
+	roleTitle: 'STUDENT' | 'PROFESSOR' | 'OWNER' | 'DEMONSTRATOR' | 'ASSISTANT';
+	enrolled: boolean;
+}> = ({ user, roleTitle, enrolled }) => {
 	return (
 		<div className="">
 			<Link
@@ -14,7 +20,7 @@ const UserCard: FC<{
 			>
 				<Block>
 					<p className="title1">{user.firstname + ' ' + user.lastname}</p>
-					<p className="text-neutral-strong caption">{user.id}</p>
+					<p className="text-neutral-strong caption">{enrolled && roleTitle}</p>
 				</Block>
 			</Link>
 		</div>

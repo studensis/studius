@@ -10,8 +10,8 @@ import {
 } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import UserCard from '../../../../components/Cards/UserCard';
-import EnrollStudentsSection from '../../../../components/EnrollStudentsSection';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
+import EnrollSection from './EnrollSection';
 
 type PageProps = {
 	params: {
@@ -39,7 +39,6 @@ function SubjectPage(props: PageProps) {
 		});
 		//Iz nekog razloga refresh ne radi, nego da vidis promjenu moras promjenit tab pa se vratit.
 		router.refresh();
-		console.log('hary');
 	}
 
 	return (
@@ -57,11 +56,11 @@ function SubjectPage(props: PageProps) {
 						}}
 						className="m-5 mb-8"
 					>
-						Enroll users
+						Enroll Users
 					</Button>
 
 					{enrollmentPage && (
-						<EnrollStudentsSection
+						<EnrollSection
 							enrollmentPage={enrollmentPage}
 							setEnrollmentPage={setEnrollmentPage}
 							subjectId={props.params.subjectId}
@@ -75,8 +74,12 @@ function SubjectPage(props: PageProps) {
 						{enrolledUsers.data &&
 							enrolledUsers.data.map((enrolledUser) => {
 								return (
-									<div className="flex items-center">
-										<UserCard user={enrolledUser.user} />
+									<div key={enrolledUser.userId} className="flex items-center">
+										<UserCard
+											user={enrolledUser.user}
+											roleTitle={enrolledUser.roleTitle}
+											enrolled={true}
+										/>
 										<Button
 											onClick={() => unenroll(enrolledUser.userId)}
 											active={true}
