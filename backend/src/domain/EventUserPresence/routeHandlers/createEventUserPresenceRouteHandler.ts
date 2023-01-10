@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import createEventUserPresenceInteractor from '../interactors/createEventUserPresenceInteractor';
-import EventUserPresenceEntity from '../model/EventUserPresenceEntity';
+import { EventUserPresenceEntity } from '../model/EventUserPresenceEntity';
 import EventUserPresenceRepositoryPrisma from '../repository/EventUserPresenceRepositoryPrisma';
 
 export default async function createEventUserPresenceRouteHandler(
@@ -11,14 +11,14 @@ export default async function createEventUserPresenceRouteHandler(
 	console.log('/EventUserPresences POST');
 
 	try {
-		let newEventUserPresence = new EventUserPresenceEntity({
+		let newEventUserPresence: EventUserPresenceEntity = {
 			id: req.query.id as string,
 			presenceStatus: eval(
 				String(req.query.presenceStatus).toLowerCase()
 			) as boolean,
 			roomTimeEventId: req.query.roomTimeEventId as string,
 			userId: req.query.userId as string,
-		});
+		};
 		//newEventUserPresence.validate();
 		let repo = new EventUserPresenceRepositoryPrisma();
 		let eventUserPresence = await createEventUserPresenceInteractor(
