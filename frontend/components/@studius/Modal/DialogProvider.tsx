@@ -62,7 +62,7 @@ export function DialogOverlay() {
 			{dialogElement ? (
 				<div
 					className={classNames(
-						'absolute',
+						'fixed',
 						dialogType === 'MODAL'
 							? 'bg-neutral-medium'
 							: 'bg-neutral-medium sm:bg-transparent',
@@ -78,6 +78,7 @@ export function DialogOverlay() {
 		</>
 	);
 }
+
 export function Dialog() {
 	const { dialogElement, setSidebar, dialogType } = useModal();
 	return (
@@ -87,12 +88,21 @@ export function Dialog() {
 					className={classNames(
 						'md:fixed absolute',
 						'overflow-y-scroll',
+						'pt-6 sm:px-6 sm:pb-6',
+						// desktop for Modal or Sidebar
 						dialogType === 'MODAL'
-							? 'left-[50%] translate-x-[-50%] sm:top-24 bottom-0 py-6 sm:px-6 sm:w-full max-w-[900px] w-full'
-							: 'right-0 sm:top-24 bottom-0 py-6 sm:px-6 sm:w-[360px] w-full'
+							? 'left-[50%] translate-x-[-50%] sm:top-2 sm:w-full max-w-[900px] w-full'
+							: 'right-0 sm:top-24 sm:w-[360px] w-full',
+						// mobile dialog
+						'bottom-0 top-2'
 					)}
 				>
-					<div className="shadow-sm-top sm:shadow-lg-left w-full relative max-h-full overflow-x-hidden overlow-y-scroll rounded-2xl bg-section pb-6">
+					<div
+						className={classNames(
+							'rounded-t-2xl sm:rounded-b-2xl',
+							'shadow-sm-top sm:shadow-lg-left w-full relative h-full sm:h-auto max-h-full overflow-x-hidden overlow-y-scroll bg-section pb-6'
+						)}
+					>
 						<div className="block sm:hidden pt-3 pb-6 ">
 							<div className="w-[120px] h-1 bg-neutral-weak mx-auto"></div>
 						</div>
