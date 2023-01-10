@@ -2314,9 +2314,9 @@
   dependencies:
     "glob" "7.1.7"
 
-"@next/swc-win32-x64-msvc@13.1.1":
-  "integrity" "sha512-mVF0/3/5QAc5EGVnb8ll31nNvf3BWpPY4pBb84tk+BfQglWLqc5AC9q1Ht/YMWiEgs8ALNKEQ3GQnbY0bJF2Gg=="
-  "resolved" "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.1.1.tgz"
+"@next/swc-darwin-arm64@13.1.1":
+  "integrity" "sha512-9zRJSSIwER5tu9ADDkPw5rIZ+Np44HTXpYMr0rkM656IvssowPxmhK0rTreC1gpUCYwFsRbxarUJnJsTWiutPg=="
+  "resolved" "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.1.1.tgz"
   "version" "13.1.1"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
@@ -6116,6 +6116,11 @@
   "integrity" "sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw=="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
+
+"fsevents@^2.3.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
@@ -10514,12 +10519,12 @@
   "resolved" "https://registry.npmjs.org/strnum/-/strnum-1.0.5.tgz"
   "version" "1.0.5"
 
-"studius-backend@1.0.0", "studius-backend@file:C:\\Users\\harys\\progeh\\studius\\backend":
+"studius-backend@1.0.0", "studius-backend@file:/Users/mfucek/Documents/Studensis/studius/backend":
   "resolved" "file:backend"
   "version" "1.0.0"
   dependencies:
     "@prisma/client" "^4.8.0"
-    "@trpc/server" "10.7.0"
+    "@trpc/server" "10.8.1"
     "@types/body-parser" "^1.19.2"
     "@types/cookie-parser" "^1.4.3"
     "@types/jsonwebtoken" "^8.5.9"
@@ -10534,7 +10539,7 @@
     "redis" "^4.5.1"
     "zod" "^3.20.2"
 
-"studius-frontend@file:C:\\Users\\harys\\progeh\\studius\\frontend":
+"studius-frontend@file:/Users/mfucek/Documents/Studensis/studius/frontend":
   "resolved" "file:frontend"
   "version" "0.1.0"
   dependencies:
@@ -10543,9 +10548,9 @@
     "@testing-library/jest-dom" "^5.16.5"
     "@testing-library/react" "^13.4.0"
     "@testing-library/user-event" "^13.5.0"
-    "@trpc/client" "latest"
-    "@trpc/react-query" "latest"
-    "@trpc/server" "latest"
+    "@trpc/client" "10.8.1"
+    "@trpc/react-query" "10.8.1"
+    "classnames" "^2.3.2"
     "next" "latest"
     "react" "^18.2.0"
     "react-dom" "^18.2.0"
