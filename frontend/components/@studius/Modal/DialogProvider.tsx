@@ -35,16 +35,24 @@ function ModalProvider({ children }: { children: React.ReactNode }) {
 						if (element) {
 							setSidebarElement(element);
 							setModalType('MODAL');
+							document.body.classList.add('overflow-y-hidden');
+							document.body.classList.add('sm:overflow-y-auton');
 						} else {
 							setSidebarElement(null);
+							document.body.classList.add('overflow-y-auto');
+							document.body.classList.add('sm:overflow-y-auto');
 						}
 					},
 					setSidebar: (element) => {
 						if (element) {
 							setSidebarElement(element);
 							setModalType('SIDEBAR');
+							document.body.classList.add('overflow-y-hidden');
+							document.body.classList.add('sm:overflow-y-auto');
 						} else {
 							setSidebarElement(null);
+							document.body.classList.remove('overflow-y-auto');
+							document.body.classList.remove('sm:overflow-y-auto');
 						}
 					},
 				}}
@@ -86,24 +94,24 @@ export function Dialog() {
 			{dialogElement ? (
 				<div
 					className={classNames(
-						'md:fixed absolute',
-						'overflow-y-scroll',
-						'pt-6 sm:px-6 sm:pb-6',
+						'md:fixed fixed',
+						'sm:px-6 sm:pb-6',
 						// desktop for Modal or Sidebar
 						dialogType === 'MODAL'
 							? 'left-[50%] translate-x-[-50%] sm:top-2 sm:w-full max-w-[900px] w-full'
 							: 'right-0 sm:top-24 sm:w-[360px] w-full',
 						// mobile dialog
-						'bottom-0 top-2'
+						'bottom-0 top-20 overflow-y-scroll'
 					)}
 				>
 					<div
 						className={classNames(
 							'rounded-t-2xl sm:rounded-b-2xl',
-							'shadow-sm-top sm:shadow-lg-left w-full relative h-full sm:h-auto max-h-full overflow-x-hidden overlow-y-scroll bg-section pb-6'
+							'overflow-y-scroll',
+							'shadow-sm-top sm:shadow-lg-left w-full relative h-full sm:h-auto max-h-full overflow-x-hidden bg-section pb-6'
 						)}
 					>
-						<div className="block sm:hidden pt-3 pb-6 ">
+						<div className="block sm:hidden pt-3 pb-6">
 							<div className="w-[120px] h-1 bg-neutral-weak mx-auto"></div>
 						</div>
 						<div
