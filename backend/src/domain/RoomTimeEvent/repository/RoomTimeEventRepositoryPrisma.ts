@@ -47,6 +47,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 					? roomTimeEventData.eventId
 					: undefined,
 				roomId: roomTimeEventData.roomId ? roomTimeEventData.roomId : undefined,
+				status: roomTimeEventData.status ? roomTimeEventData.status : undefined,
 			},
 		});
 		let rez: RoomTimeEventEntity = updatedData;
@@ -61,6 +62,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 				dateEnd: roomTimeEventData.dateEnd,
 				eventId: roomTimeEventData.eventId,
 				roomId: roomTimeEventData.roomId,
+				status: roomTimeEventData.status,
 			},
 		});
 
@@ -71,9 +73,12 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 	}
 
 	async delete(roomTimeEventId: string) {
-		let response = await prisma.roomTimeEvent.delete({
+		let response = await prisma.roomTimeEvent.update({
 			where: {
 				id: roomTimeEventId,
+			},
+			data: {
+				status: 'ARCHIVED',
 			},
 		});
 

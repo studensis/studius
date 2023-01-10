@@ -1,6 +1,6 @@
 import contentRouter from '../domain/Content/contentRouter';
 import eventRouter from '../domain/Event/eventRouter';
-import eventUserPresenceRouter from '../domain/EventUserPresence/eventUserPresenceRouter';
+import eventUserPresenceRouter from '../domain/EventUserPresence/EventUserPresenceRouter';
 import postRouter from '../domain/Post/postRouter';
 import roomRouter from '../domain/Room/roomRouter';
 import roomTimeEventRouter from '../domain/RoomTimeEvent/roomTimeEventRouter';
@@ -15,7 +15,7 @@ const todoRoutine = t.procedure.query(() => {
 });
 
 // root router to call
-const appRouter = t.router({
+const appRouter: any = t.router({
 	auth: authRouter,
 	user: userRouter,
 	subject: subjectRouter,
