@@ -28,7 +28,7 @@ export default function MainSidebar() {
 								router.push('/calendar');
 							}}
 							icon="calendar"
-							text="Events"
+							text="Assignments"
 						/>
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
 							<ListItems.Action
