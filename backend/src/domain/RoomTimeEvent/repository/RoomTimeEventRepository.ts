@@ -22,7 +22,9 @@ export abstract class RoomTimeEventRepository {
 	async delete(roomTimeEventId: string): Promise<RoomTimeEventEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async listEventUserPresences(id: string): Promise<EventUserPresence[]> {
+	async listAssociatedEventUserPresences(
+		id: string
+	): Promise<EventUserPresence[]> {
 		throw new Error('Method not implemented.');
 	}
 }

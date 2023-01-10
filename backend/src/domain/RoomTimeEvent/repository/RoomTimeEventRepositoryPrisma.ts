@@ -86,7 +86,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 		return response;
 	}
 
-	async listEventUserPresences(id: string) {
+	async listAssociatedEventUserPresences(id: string) {
 		// prisma RoomTimeEvents
 		let data = await prisma.roomTimeEvent.findUnique({
 			where: { id: id },
@@ -97,7 +97,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 
 		if (data) {
 			let datas: EventUserPresenceEntity[] = [];
-			data?.EventUserPresence.forEach((data: EventUserPresenceEntity) => {
+			data.EventUserPresence.forEach((data: EventUserPresenceEntity) => {
 				let eventUserPresence: EventUserPresenceEntity = data;
 				datas.push(eventUserPresence);
 			});
