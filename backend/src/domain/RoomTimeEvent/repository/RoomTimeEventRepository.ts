@@ -1,3 +1,4 @@
+import { EventUserPresence } from '@prisma/client';
 import { RoomTimeEventEntity } from '../model/RoomTimeEventEntity';
 import { updateRoomTimeEventEntity } from '../model/updateRoomTimeEventEntity';
 
@@ -19,6 +20,9 @@ export abstract class RoomTimeEventRepository {
 		throw new Error('Method not implemented.');
 	}
 	async delete(roomTimeEventId: string): Promise<RoomTimeEventEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async listEventUserPresences(id: string): Promise<EventUserPresence[]> {
 		throw new Error('Method not implemented.');
 	}
 }

@@ -3,6 +3,7 @@ import { t } from '../../../controllers/trpc';
 import createRoomTimeEventInteractor from '../interactors/createRoomTimeEventInteractor';
 import deleteRoomTimeEventInteractor from '../interactors/deleteRoomTimeEventInteractor';
 import getRoomTimeEventInteractor from '../interactors/getRoomTimeEventInteractor';
+import listEventUserPresencesInteractor from '../interactors/listEventUserPresencesInteractor';
 import listRoomTimeEventsInteractor from '../interactors/listRoomTimeEventsInteractor';
 import updateRoomTimeEventInteractor from '../interactors/updateRoomTimeEventInteractor';
 import { RoomTimeEventEntity } from '../model/RoomTimeEventEntity';
@@ -89,5 +90,15 @@ export default t.router({
 				roomTimeEvent
 			);
 			return updatedRoomTimeEvent;
+		}),
+
+	listEventUserPresences: t.procedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let eventUserPresences = await listEventUserPresencesInteractor(
+				repo,
+				input
+			);
+			return eventUserPresences;
 		}),
 });
