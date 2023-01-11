@@ -35,7 +35,6 @@ export abstract class UserRepository {
 	): Promise<EnrollmentEntity> {
 		throw new Error('Method not implemented.');
 	}
-
 	async getByEmail(email: string): Promise<UserEntity | null> {
 		throw new Error('Method not implemented.');
 	}

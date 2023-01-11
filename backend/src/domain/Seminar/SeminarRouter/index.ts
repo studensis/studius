@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { t } from '../../../controllers/trpc';
+import approveSeminarInteractor from '../interactors/approveSeminarInteractor';
 import createSeminarInteractor from '../interactors/createSeminarInteractor';
 import deleteSeminarInteractor from '../interactors/deleteSeminarInteractor';
 import getSeminarInteractor from '../interactors/getSeminarInteractor';
@@ -84,4 +85,23 @@ export default t.router({
 		let response = await listSeminarsInteractor(repo);
 		return response;
 	}),
+
+	approveSeminar: t.procedure
+		.input(
+			z.object({
+				seminarId: z.string(),
+				dateStart: z.number(),
+				dateEnd: z.number(),
+				roomId: z.string(),
+			})
+		)
+		.mutation(async ({ input }) => {
+			let a = {
+				...input,
+				dateStart: new Date(input.dateStart * 1000),
+				dateEnd: new Date(input.dateEnd * 1000),
+			};
+			let rez = await approveSeminarInteractor(repo, a);
+			return rez;
+		}),
 });
