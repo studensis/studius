@@ -139,4 +139,17 @@ export default class UserRepositoryPrisma extends UserRepository {
 			return null;
 		}
 	}
+	async listMentees(id: string) {
+		let query = await prisma.user.findMany({
+			where: {
+				mentorID: id,
+			},
+		});
+		let mentees: UserEntity[] = [];
+		query.forEach((user: UserEntity) => {
+			mentees.push(user);
+		});
+
+		return mentees;
+	}
 }

@@ -10,6 +10,7 @@ import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
 import getUserInteractor from '../interactors/getUserInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
+import listMenteesInteractor from '../interactors/listMenteeInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
@@ -151,4 +152,9 @@ export default t.router({
 			);
 			return updatedEnrollment;
 		}),
+
+	listMentees: t.procedure.input(z.string()).query(async ({ input }) => {
+		let mentees = await listMenteesInteractor(repo, input);
+		return mentees;
+	}),
 });

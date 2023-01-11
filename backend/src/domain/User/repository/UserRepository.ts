@@ -39,4 +39,7 @@ export abstract class UserRepository {
 	async getByEmail(email: string): Promise<UserEntity | null> {
 		throw new Error('Method not implemented.');
 	}
+	async listMentees(id: string): Promise<UserEntity[] | null> {
+		throw new Error('Method not implemented.');
+	}
 }
