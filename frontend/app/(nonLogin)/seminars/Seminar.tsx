@@ -12,22 +12,51 @@ type form = {
 };
 
 const Seminar: FC<{ userId: string }> = ({ userId }) => {
+	//Querys
 	const user = trpc.user.getUserById.useQuery(userId);
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(userId);
+	const menteeList = trpc.user.listMentees.useQuery(userId);
+	//Mutations
+	const seminar = trpc.seminar.createSeminar.useMutation();
 
+	//useState sekcija
+	const [statusMessage, setStatusMessage] = useState('');
 	const [form, setForm] = useState<form>({
 		subjectId: '',
 		menteeId: '',
 		title: '',
 	});
 
-	function selectSubject(id: string) {
-		setForm({ ...form, subjectId: id });
+	//Delay za status message
+	function delay(ms: number) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
+	}
+
+	//Submit seminara
+	async function confirmSeminar(form: form) {
+		setStatusMessage('Loading');
+		try {
+			seminar.mutate({
+				title: form.title,
+				mentorId: user.data?.id,
+				subjectId: form.subjectId,
+				userId: form.menteeId,
+			});
+			setStatusMessage('Seminar submitted');
+			await delay(1500);
+			setStatusMessage('');
+		} catch (error) {
+			//setStatusMessage(error);
+			setStatusMessage('Error');
+		}
 	}
 
 	return (
 		<div>
-			{
+			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
+				<h1 className="title1 m-4">
+					Choose a subject for a Seminar suggestion
+				</h1>
 				<Stack cols={3}>
 					{enrolledSubjects.data &&
 						enrolledSubjects.data
@@ -53,26 +82,79 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 								</div>
 							))}
 				</Stack>
-			}
+			</div>
+
 			<br />
+
+			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
+				<h1 className="title1 m-4">Choose your mentee for this Seminar </h1>
+				<Stack cols={3}>
+					{menteeList.data &&
+						menteeList.data.map((mentee) => (
+							<div className=" flex " key={mentee.id}>
+								<Link href={'/subject/' + mentee.id} key={3}>
+									<Block>
+										<p className="text-neutral-strong caption">{}</p>
+										<p className="title2">
+											{mentee.firstname + ' ' + mentee.lastname}
+										</p>
+									</Block>
+								</Link>
+								<Button
+									onClick={() => {
+										setForm({
+											...form,
+											menteeId: mentee.id,
+										});
+									}}
+								>
+									Select
+								</Button>
+							</div>
+						))}
+				</Stack>
+			</div>
+
 			<br />
-			<Block>
-				<form className="p-5 flex items-center">
-					<label className="title1 m-5" htmlFor="title">
-						Title
-					</label>
-					<input
-						className="m-5 outline-none rounded-2xl border-accent-strong border-[3px] p-4 w-full "
-						type="text"
-						name="title"
-						placeholder="Input seminar title here"
-						onChange={(e) => {
-							setForm({ ...form, title: e.target.value });
-						}}
-					/>
+			<Block className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
+				<h1 className="title1 m-4">Fill this Seminar Form</h1>
+				<form className="p-5 ">
+					<div className="flex items-center">
+						<label className="title1 m-5" htmlFor="title">
+							Title
+						</label>
+						<input
+							className="m-5 outline-none rounded-2xl border-accent-strong border-[3px] p-4 w-full "
+							type="text"
+							name="title"
+							placeholder="Input seminar title here"
+							onChange={(e) => {
+								setForm({ ...form, title: e.target.value });
+							}}
+						/>
+					</div>
 				</form>
-				<Button />
 			</Block>
+
+			<div className="w-full flex justify-between mt-4 px-10">
+				<h1
+					className={
+						statusMessage != ''
+							? 'title px-5 py-2 rounded-xl border-[2px] border-success text-success'
+							: ''
+					}
+				>
+					{statusMessage}
+				</h1>
+				<Button
+					onClick={() => {
+						confirmSeminar(form);
+					}}
+					className=""
+				>
+					Suggest Seminar
+				</Button>
+			</div>
 			<h1>{JSON.stringify(form)}</h1>
 		</div>
 	);
