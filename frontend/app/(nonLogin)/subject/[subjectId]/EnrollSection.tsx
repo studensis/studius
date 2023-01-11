@@ -15,6 +15,8 @@ const EnrollSection = (props: PageProps) => {
 
 	const users = trpc.user.listUsers.useQuery();
 	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(props.subjectId);
+
+	const [success, setSuccess] = useState('');
 	const [ids, setIds] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -29,77 +31,105 @@ const EnrollSection = (props: PageProps) => {
 
 	const enrollUpdate = trpc.user.enrollUser.useMutation();
 
-	function enroll(
+	function delay(ms: number) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
+	}
+
+	async function enroll(
 		id: string,
-		status: 'STUDENT' | 'PROFESSOR' | 'OWNER' | 'DEMONSTRATOR' | 'ASSISTANT'
+		roleTitle: 'STUDENT' | 'PROFESSOR' | 'OWNER' | 'DEMONSTRATOR' | 'ASSISTANT'
 	) {
+		setSuccess('Loading');
 		enrollUpdate.mutate({
-			roleTitle: status,
+			roleTitle: roleTitle,
 			status: 'ACTIVE',
 			subjectId: props.subjectId,
 			userId: id,
 		});
+		setSuccess('Updated');
+		await delay(1500);
+		setSuccess('');
 	}
 
 	return (
-		<div className="absolute bg-gray-200 top-28 left-20  h-[60%] overflow-y-scroll w-[80%] rounded-xl shadow-2xl p-10 ">
-			<h1 className="title1 text-center mb-8">
-				Enroll Students to {subject.data?.title}
-			</h1>
-			<div className="flex justify-center mt-5">
-				<Button
-					onClick={() => {
-						props.setEnrollmentPage(!props.enrollmentPage);
-					}}
-				>
-					Zatvori izbornik
-				</Button>
+		<div>
+			<div
+				className={
+					success == ''
+						? ''
+						: 'absolute top-10 left-32 title1 text-success border-success border-[2px] bg-gray-100  rounded-xl shadow-xl p-4 '
+				}
+			>
+				{success}
 			</div>
-			<Stack cols={1}>
-				{users.data &&
-					users.data
-						.filter((user) => ids.includes(user.id))
-						.map((user) => (
-							<div className="flex items-center justify-center" key={user.id}>
-								<UserCard user={user} roleTitle={'STUDENT'} enrolled={false} />
-								<Button
-									onClick={() => enroll(user.id, 'PROFESSOR')}
-									active={true}
-									className="title1 m-4"
-								>
-									Professor
-								</Button>
-								<Button
-									onClick={() => enroll(user.id, 'ASSISTANT')}
-									active={true}
-									className="title1 m-4"
-								>
-									Assistant
-								</Button>
-								<Button
-									onClick={() => enroll(user.id, 'OWNER')}
-									active={true}
-									className="title1 m-4"
-								>
-									Owner
-								</Button>
-								<Button
-									onClick={() => enroll(user.id, 'DEMONSTRATOR')}
-									active={true}
-									className="title1 m-4"
-								>
-									Demonstrator
-								</Button>
-								<Button
-									onClick={() => enroll(user.id, 'STUDENT')}
-									active={true}
-									className="title1 m-4"
-								>
-									Student
-								</Button>
-							</div>
-						))}
-			</Stack>
+			<div className="absolute bg-gray-200 top-28 left-20 h-[35vw] overflow-y-scroll w-[80%] rounded-xl shadow-2xl p-10 ">
+				<div>
+					<h1 className="title1 text-center mb-8">
+						Enroll Students to {subject.data?.title}
+					</h1>
+					<div className="flex justify-center mt-5">
+						<Button
+							onClick={() => {
+								props.setEnrollmentPage(!props.enrollmentPage);
+							}}
+						>
+							Zatvori izbornik
+						</Button>
+					</div>
+					<Stack cols={1}>
+						{users.data &&
+							users.data
+								.filter((user) => !ids.includes(user.id))
+								.map((user) => (
+									<div
+										className="flex items-center justify-center"
+										key={user.id}
+									>
+										<UserCard
+											user={user}
+											roleTitle={'STUDENT'}
+											enrolled={false}
+										/>
+										<Button
+											onClick={() => enroll(user.id, 'PROFESSOR')}
+											active={true}
+											className="title1 m-4"
+										>
+											Professor
+										</Button>
+										<Button
+											onClick={() => enroll(user.id, 'ASSISTANT')}
+											active={true}
+											className="title1 m-4"
+										>
+											Assistant
+										</Button>
+										<Button
+											onClick={() => enroll(user.id, 'OWNER')}
+											active={true}
+											className="title1 m-4"
+										>
+											Owner
+										</Button>
+										<Button
+											onClick={() => enroll(user.id, 'DEMONSTRATOR')}
+											active={true}
+											className="title1 m-4"
+										>
+											Demonstrator
+										</Button>
+										<Button
+											onClick={() => enroll(user.id, 'STUDENT')}
+											active={true}
+											className="title1 m-4"
+										>
+											Student
+										</Button>
+									</div>
+								))}
+					</Stack>
+				</div>
+			</div>
 		</div>
 	);
 };

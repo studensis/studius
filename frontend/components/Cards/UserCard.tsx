@@ -19,8 +19,15 @@ const UserCard: FC<{
 				className="border-accent-medium"
 			>
 				<Block>
-					<p className="title1">{user.firstname + ' ' + user.lastname}</p>
-					<p className="text-neutral-strong caption">{enrolled && roleTitle}</p>
+					<div className="flex">
+						{/* <Icon className="bg-black m-1" icon="user" /> */}
+						<div>
+							<p className="title1">{user.firstname + ' ' + user.lastname}</p>
+							<p className="text-neutral-strong caption">
+								{enrolled && roleTitle}
+							</p>
+						</div>
+					</div>
 				</Block>
 			</Link>
 		</div>

@@ -4,14 +4,11 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
-import {
-	PageStack,
-	Stack,
-} from '../../../../components/@studius/PageElements/Stack';
+import { PageStack } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
-import UserCard from '../../../../components/Cards/UserCard';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 import EnrollSection from './EnrollSection';
+import UserList from './UserList';
 
 type PageProps = {
 	params: {
@@ -27,10 +24,9 @@ function SubjectPage(props: PageProps) {
 	);
 	const router = useRouter();
 
-	const enroll = trpc.user.updateEnrollment.useMutation();
-
 	const [enrollmentPage, setEnrollmentPage] = useState(false);
 
+	const enroll = trpc.user.updateEnrollment.useMutation();
 	function unenroll(id: string) {
 		enroll.mutate({
 			userId: id,
@@ -70,27 +66,14 @@ function SubjectPage(props: PageProps) {
 					<SectionTop>
 						<h3 className="title2">List of enrolled Users:</h3>
 					</SectionTop>
-					<Stack cols={2}>
-						{enrolledUsers.data &&
-							enrolledUsers.data.map((enrolledUser) => {
-								return (
-									<div key={enrolledUser.userId} className="flex items-center">
-										<UserCard
-											user={enrolledUser.user}
-											roleTitle={enrolledUser.roleTitle}
-											enrolled={true}
-										/>
-										<Button
-											onClick={() => unenroll(enrolledUser.userId)}
-											active={true}
-											className="title1 m-4"
-										>
-											Remove from subject
-										</Button>
-									</div>
-								);
-							})}
-					</Stack>
+					<UserList roleTitle="PROFESSOR" subjectId={props.params.subjectId} />
+					<UserList roleTitle="STUDENT" subjectId={props.params.subjectId} />
+					<UserList roleTitle="ASSISTANT" subjectId={props.params.subjectId} />
+					<UserList roleTitle="OWNER" subjectId={props.params.subjectId} />
+					<UserList
+						roleTitle="DEMONSTRATOR"
+						subjectId={props.params.subjectId}
+					/>
 				</div>
 			</PageStack>
 		</>
