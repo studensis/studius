@@ -1,5 +1,8 @@
 import { z } from 'zod';
 import { t } from '../../../controllers/trpc';
+import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
+import RoomTimeEventRepositoryPrisma from '../../RoomTimeEvent/repository/RoomTimeEventRepositoryPrisma';
+import SeminarSuggestionRepositoryPrisma from '../../SeminarSuggestion/repository/SeminarSuggestionRepositoryPrisma';
 import approveSeminarInteractor from '../interactors/approveSeminarInteractor';
 import createSeminarInteractor from '../interactors/createSeminarInteractor';
 import deleteSeminarInteractor from '../interactors/deleteSeminarInteractor';
@@ -11,6 +14,9 @@ import { updateSeminarEntity } from '../model/updateSeminarEntity';
 import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
 
 let repo = new SeminarRepositoryPrisma();
+let eventRepo = new EventRepositoryPrisma();
+let rteRepo = new RoomTimeEventRepositoryPrisma();
+let pinnedEventRepo = new SeminarSuggestionRepositoryPrisma();
 
 export default t.router({
 	createSeminar: t.procedure
@@ -101,7 +107,13 @@ export default t.router({
 				dateStart: new Date(input.dateStart * 1000),
 				dateEnd: new Date(input.dateEnd * 1000),
 			};
-			let rez = await approveSeminarInteractor(repo, a);
+			let rez = await approveSeminarInteractor(
+				repo,
+				eventRepo,
+				rteRepo,
+				pinnedEventRepo,
+				a
+			);
 			return rez;
 		}),
 });
