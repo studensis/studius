@@ -1,9 +1,12 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Block } from '../PageElements/Block';
+import { SectionTop } from '../PageElements/SectionTop';
 
 type CalendarEvent = {
+	id: string;
 	title: string;
 	timeDateUnix: number;
 };
@@ -290,13 +293,35 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 					})}
 				</div>
 			</Block>
+			{eventsOnSelectedDay && (
+				<div className="mt-4">
+					<SectionTop>
+						<p className="title3">
+							{
+								[
+									'Monday',
+									'Tuesday',
+									'Wednesday',
+									'Thursday',
+									'Friday',
+									'Saturday',
+									'Sunday',
+								][selectedDate.getDay()]
+							}{' '}
+							{selectedDate.toLocaleDateString('hr')}
+						</p>
+					</SectionTop>
+				</div>
+			)}
 			{eventsOnSelectedDay.map((event, i) => (
-				<Block key={i}>
-					<p className="title3">{event.title}</p>
-					<p className="body3 text-neutral-strong">
-						{new Date(event.timeDateUnix).toString()}
-					</p>
-				</Block>
+				<Link key={i} href={`/event/${event.id}`}>
+					<Block>
+						<p className="title3">{event.title}</p>
+						<p className="body3 text-neutral-strong">
+							{new Date(event.timeDateUnix).toString()}
+						</p>
+					</Block>
+				</Link>
 			))}
 		</>
 	);

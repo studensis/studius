@@ -1,5 +1,5 @@
 export default function PageHeader(props: {
-	title: string;
+	title: string | React.ReactNode;
 	subtitle?: string;
 	description?: string;
 }) {

@@ -70,7 +70,7 @@ export function DialogOverlay() {
 			{dialogElement ? (
 				<div
 					className={classNames(
-						'fixed cursor-pointer',
+						'fixed cursor-pointer z-40',
 						dialogType === 'MODAL'
 							? 'bg-neutral-medium'
 							: 'bg-neutral-medium sm:bg-transparent',
@@ -94,6 +94,7 @@ export function Dialog() {
 			{dialogElement ? (
 				<div
 					className={classNames(
+						'z-40',
 						'md:fixed fixed',
 						// 'sm:mx-6 sm:mb-6',
 						// desktop for Modal or Sidebar
