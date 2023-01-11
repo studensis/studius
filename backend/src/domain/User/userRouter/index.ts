@@ -101,6 +101,7 @@ export default t.router({
 		.mutation(async ({ input }) => {
 			let enrollment: EnrollmentEntity = {
 				...input,
+				id: undefined,
 				userId: input.userId,
 				subjectId: input.subjectId,
 				enrollmentDate: input.enrollmentDate || null,
@@ -124,17 +125,12 @@ export default t.router({
 
 		.input(
 			z.object({
-				userId: z.string(),
-				subjectId: z.string(),
+				id: z.string(),
+				userId: z.string().optional(),
+				subjectId: z.string().optional(),
 				enrollmentDate: z.date().optional(),
 				roleTitle: z
-					.enum([
-						'STUDENT',
-						'PROFESSOR',
-						'OWNER',
-						'DEMONSTRATOR',
-						'ASSISTANT',
-					])
+					.enum(['STUDENT', 'PROFESSOR', 'OWNER', 'DEMONSTRATOR', 'ASSISTANT'])
 					.optional(),
 				status: z.enum(['ACTIVE', 'ARCHIVED']).optional(),
 			})
@@ -142,6 +138,7 @@ export default t.router({
 		.mutation(async ({ input }) => {
 			let updateData = {
 				...input,
+				id: input.id,
 				userId: input.userId,
 				subjectId: input.subjectId,
 				roleTitle: input.roleTitle,

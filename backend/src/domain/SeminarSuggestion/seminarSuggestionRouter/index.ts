@@ -16,7 +16,7 @@ export default t.router({
 		.use(isAdmin)
 		.input(
 			z.object({
-				seminarId: z.string(),
+				eventId: z.string(),
 				subjectId: z.string(),
 			})
 		)

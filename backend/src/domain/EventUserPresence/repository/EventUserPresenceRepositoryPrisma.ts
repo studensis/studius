@@ -72,7 +72,7 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 		return response;
 	}
 
-	async getRoomTimeEvent(id: string) {
+	async getAssociatedRoomTimeEvent(id: string) {
 		let eventUserPresence = await prisma.eventUserPresence.findUnique({
 			where: { id: id },
 			select: {
