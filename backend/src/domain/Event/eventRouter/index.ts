@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import archiveRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/archiveRoomTimeEventInteractor';
 import createRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/createRoomTimeEventInteractor';
 import deleteRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/deleteRoomTimeEventInteractor';
 import getRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/getRoomTimeEventInteractor';
@@ -112,11 +113,19 @@ export default t.router({
 			return newRoomTimeEvent;
 		}),
 
-	unschedule: t.procedure
+	deleteSchedule: t.procedure
 		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let a = await deleteRoomTimeEventInteractor(input, RTErepo);
+			return a;
+		}),
+
+	archiveSchedule: t.procedure
+		//.use(isAdmin)
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let a = await archiveRoomTimeEventInteractor(input, RTErepo);
 			return a;
 		}),
 

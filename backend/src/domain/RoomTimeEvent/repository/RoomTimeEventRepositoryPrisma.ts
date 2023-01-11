@@ -75,6 +75,22 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 	}
 
 	async delete(roomTimeEventId: string) {
+		let deletion = await prisma.eventUserPresence.deleteMany({
+			where: {
+				roomTimeEventId: roomTimeEventId,
+			},
+		});
+
+		let response = await prisma.roomTimeEvent.delete({
+			where: {
+				id: roomTimeEventId,
+			},
+		});
+
+		return response;
+	}
+
+	async archive(roomTimeEventId: string) {
 		let response = await prisma.roomTimeEvent.update({
 			where: {
 				id: roomTimeEventId,
