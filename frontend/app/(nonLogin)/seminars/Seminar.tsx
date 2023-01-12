@@ -16,11 +16,21 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	const user = trpc.user.getUserById.useQuery(userId);
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(userId);
 	const menteeList = trpc.user.listMentees.useQuery(userId);
+	const approveSeminar = trpc.seminar.approveSeminar.useMutation();
+	const seminarList = trpc.seminar.listUserSeminars.useQuery({
+		id: userId,
+		options: { isMentor: true, isStudent: false },
+	});
+
 	//Mutations
 	const seminar = trpc.seminar.createSeminar.useMutation();
 
 	//useState sekcija
 	const [statusMessage, setStatusMessage] = useState('');
+	const [statusMessageConfirmation, setStatusMessageConfirmation] =
+		useState('');
+	const [date, setDate] = useState('');
+	const [time, setTime] = useState('');
 	const [form, setForm] = useState<form>({
 		subjectId: '',
 		menteeId: '',
@@ -33,7 +43,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	}
 
 	//Submit seminara
-	async function confirmSeminar(form: form) {
+	async function suggestSeminar(form: form) {
 		setStatusMessage('Loading');
 		try {
 			seminar.mutate({
@@ -48,6 +58,23 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 		} catch (error) {
 			//setStatusMessage(error);
 			setStatusMessage('Error');
+		}
+	}
+
+	async function confirmDraft(id: string) {
+		setStatusMessageConfirmation('Loading');
+		try {
+			approveSeminar.mutate({
+				roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
+				seminarId: id,
+				dateStart: date + 'T' + time + ':00',
+				dateEnd: date + 'T' + time + ':00',
+			});
+			setStatusMessageConfirmation('Seminar confirmed');
+			await delay(1500);
+			setStatusMessageConfirmation('');
+		} catch (error) {
+			setStatusMessageConfirmation('Error');
 		}
 	}
 
@@ -83,9 +110,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 							))}
 				</Stack>
 			</div>
-
 			<br />
-
 			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
 				<h1 className="title1 m-4">Choose your mentee for this Seminar </h1>
 				<Stack cols={3}>
@@ -114,7 +139,6 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 						))}
 				</Stack>
 			</div>
-
 			<br />
 			<Block className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
 				<h1 className="title1 m-4">Fill this Seminar Form</h1>
@@ -135,7 +159,6 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 					</div>
 				</form>
 			</Block>
-
 			<div className="w-full flex justify-between mt-4 px-10">
 				<h1
 					className={
@@ -148,14 +171,88 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 				</h1>
 				<Button
 					onClick={() => {
-						confirmSeminar(form);
+						suggestSeminar(form);
 					}}
 					className=""
 				>
 					Suggest Seminar
 				</Button>
 			</div>
-			<h1>{JSON.stringify(form)}</h1>
+			<br />
+			<br />
+
+			<div>
+				<h1 className="title1">List of Seminars</h1>
+				<Stack cols={1}>
+					{seminarList.data &&
+						seminarList.data
+							.filter((seminar) => seminar.status !== 'DRAFT')
+							.map((seminar) => (
+								<div
+									key={seminar.id}
+									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
+								>
+									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.title}
+									</div>
+									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.userId}
+									</div>
+									<div className="">{seminar.description}</div>
+								</div>
+							))}
+				</Stack>
+				<br />
+				<Stack cols={1}>
+					{seminarList.data &&
+						seminarList.data
+							.filter((seminar) => seminar.status === 'DRAFT')
+							.map((seminar) => (
+								<div
+									key={seminar.id}
+									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
+								>
+									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.title}
+									</div>
+									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.userId}
+									</div>
+									<div className="">{seminar.description}</div>
+									<Button
+										onClick={() => {
+											confirmDraft(seminar.id);
+										}}
+									>
+										Confirm Draft
+									</Button>
+									<input
+										type="date"
+										onChange={(e) => {
+											setDate(e.target.value);
+										}}
+									/>
+									<input
+										type="time"
+										onChange={(e) => {
+											setTime(e.target.value);
+										}}
+									/>
+								</div>
+							))}
+				</Stack>
+				<div className="mt-10">
+					<h1
+						className={
+							statusMessageConfirmation != ''
+								? 'absolute bottom-5 left-10 title px-5 py-2 rounded-xl border-[2px] border-success text-success'
+								: ''
+						}
+					>
+						{statusMessageConfirmation}
+					</h1>
+				</div>
+			</div>
 		</div>
 	);
 };
