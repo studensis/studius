@@ -15,6 +15,7 @@ model User {
   lastname          String
   jmbag             String?             @unique
   email             String              @unique
+  avatar            String?
   userRole          Role
   mentorID          String?
   enrollment        Enrollment[]
@@ -146,6 +147,7 @@ enum Status {
 enum SeminarStatus {
   DRAFT
   CONFIRMED
+  READY
 }
 
 enum LinkedEntity {

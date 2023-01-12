@@ -30,4 +30,7 @@ export abstract class RoomTimeEventRepository {
 	async archive(roomTimeEventId: string): Promise<RoomTimeEventEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async archiveByEventId(eventId: string): Promise<string> {
+		throw new Error('Method not implemented.');
+	}
 }

@@ -4,6 +4,7 @@ import { t } from '../../../controllers/trpc';
 import deleteEventUserPresenceByRTEIDInteractor from '../../EventUserPresence/interactors/deleteEventUserPresenceByRTEIDInteractor';
 import EventUserPresenceRepositoryPrisma from '../../EventUserPresence/repository/EventUserPresenceRepositoryPrisma';
 import archiveRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/archiveRoomTimeEventInteractor';
+import archiveRTEByEventIdInteractor from '../../RoomTimeEvent/interactors/archiveRTEByEventIdInteractor';
 import createRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/createRoomTimeEventInteractor';
 import deleteRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/deleteRoomTimeEventInteractor';
 import getRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/getRoomTimeEventInteractor';
@@ -86,6 +87,7 @@ export default t.router({
 		.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
+			let b = await archiveRTEByEventIdInteractor(input, RTErepo);
 			let a = await archiveEventInteractor(input, repo);
 			return a;
 		}),

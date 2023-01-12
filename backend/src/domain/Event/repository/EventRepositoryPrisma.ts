@@ -88,15 +88,6 @@ export default class EventRepositoryPrisma extends EventRepository {
 			},
 		});
 
-		let archiveRTEs = await prisma.roomTimeEvent.updateMany({
-			where: {
-				eventId: response.id,
-			},
-			data: {
-				status: 'ARCHIVED',
-			},
-		});
-
 		return response;
 	}
 

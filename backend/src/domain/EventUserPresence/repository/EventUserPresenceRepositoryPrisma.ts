@@ -79,7 +79,8 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 			},
 		}); // ovo je tipa BatchPayload kojeg nema, nez sta je to lmfao budem kasnije
 
-		return 'success';
+		if (response) return 'success';
+		else return 'failure';
 	}
 
 	async getAssociatedRoomTimeEvent(id: string) {
