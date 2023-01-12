@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button } from '../../../components/@studius/Button/Button';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
@@ -30,12 +30,15 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	const [statusMessageConfirmation, setStatusMessageConfirmation] =
 		useState('');
 	const [date, setDate] = useState('');
-	const [time, setTime] = useState('');
+	const [startTime, setStartTime] = useState('');
+	const [endTime, setEndTime] = useState('');
 	const [form, setForm] = useState<form>({
 		subjectId: '',
 		menteeId: '',
 		title: '',
 	});
+
+	useEffect(() => {}, []);
 
 	//Delay za status message
 	function delay(ms: number) {
@@ -67,8 +70,8 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 			approveSeminar.mutate({
 				roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
 				seminarId: id,
-				dateStart: date + 'T' + time + ':00',
-				dateEnd: date + 'T' + time + ':00',
+				dateStart: date + 'T' + startTime + ':00',
+				dateEnd: date + 'T' + endTime + ':00',
 			});
 			setStatusMessageConfirmation('Seminar confirmed');
 			await delay(1500);
@@ -80,6 +83,17 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 
 	return (
 		<div>
+			<div className="fixed top-20 left-10 rounded-md p-2 border-2 opacity-40 w-[8%]">
+				<p className="text-sm">
+					<span className="text-accent-strong">Title:</span> {form.title}
+				</p>
+				<p className="text-sm">
+					<span className="text-accent-strong">Subject:</span> {form.subjectId}
+				</p>
+				<p className="text-sm">
+					<span className="text-accent-strong">Mentee:</span> {form.menteeId}
+				</p>
+			</div>
 			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
 				<h1 className="title1 m-4">
 					Choose a subject for a Seminar suggestion
@@ -182,11 +196,11 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 			<br />
 
 			<div>
-				<h1 className="title1">List of Seminars</h1>
+				<h1 className="title1">List of sent Suggestions</h1>
 				<Stack cols={1}>
 					{seminarList.data &&
 						seminarList.data
-							.filter((seminar) => seminar.status !== 'DRAFT')
+							.filter((seminar) => seminar.status === 'DRAFT')
 							.map((seminar) => (
 								<div
 									key={seminar.id}
@@ -203,10 +217,11 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 							))}
 				</Stack>
 				<br />
+				<h1 className="title1 mb-2">List of Drafts</h1>
 				<Stack cols={1}>
 					{seminarList.data &&
 						seminarList.data
-							.filter((seminar) => seminar.status === 'DRAFT')
+							.filter((seminar) => seminar.status === 'READY')
 							.map((seminar) => (
 								<div
 									key={seminar.id}
@@ -235,9 +250,35 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 									<input
 										type="time"
 										onChange={(e) => {
-											setTime(e.target.value);
+											setStartTime(e.target.value);
 										}}
 									/>
+									<input
+										type="time"
+										onChange={(e) => {
+											setEndTime(e.target.value);
+										}}
+									/>
+								</div>
+							))}
+				</Stack>
+				<h1 className="title1">List of confirmed Seminars</h1>
+				<Stack cols={1}>
+					{seminarList.data &&
+						seminarList.data
+							.filter((seminar) => seminar.status === 'CONFIRMED')
+							.map((seminar) => (
+								<div
+									key={seminar.id}
+									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
+								>
+									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.title}
+									</div>
+									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.userId}
+									</div>
+									<div className="">{seminar.description}</div>
 								</div>
 							))}
 				</Stack>

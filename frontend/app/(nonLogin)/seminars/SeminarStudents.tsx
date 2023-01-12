@@ -16,10 +16,10 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 		options: { isMentor: false, isStudent: true },
 	});
 
-	const [description, setDescription] = useState('');
+	const [content, setContent] = useState('');
 
 	function confirmSeminarDraft(id: string, description: string) {
-		updateSeminar.mutate({ id: id, status: 'DRAFT', description });
+		updateSeminar.mutate({ id: id, status: 'READY', description });
 	}
 
 	return (
@@ -39,22 +39,21 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 								<div className="">
 									<input
 										type="text"
-										placeholder="Description"
+										placeholder="Content"
 										className="w-full rounded-xl outline-none border-accent-medium border-[2px] px-4 p-2 "
 										onChange={(e) => {
-											setDescription(e.target.value);
+											setContent(e.target.value);
 										}}
 									/>
 								</div>
 								<Button
 									onClick={() => {
-										confirmSeminarDraft(seminar.id, description);
+										confirmSeminarDraft(seminar.id, content);
 									}}
 								>
 									Send Seminar Draft
 								</Button>
 							</div>
-							<div>{seminar.description}</div>
 						</div>
 					))}
 			</Stack>
