@@ -27,6 +27,8 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 
 	//useState sekcija
 	const [statusMessage, setStatusMessage] = useState('');
+	const [statusMessageConfirmation, setStatusMessageConfirmation] =
+		useState('');
 	const [date, setDate] = useState('');
 	const [time, setTime] = useState('');
 	const [form, setForm] = useState<form>({
@@ -60,12 +62,20 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	}
 
 	async function confirmDraft(id: string) {
-		approveSeminar.mutate({
-			roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
-			seminarId: id,
-			dateStart: date + 'T' + time + ':00',
-			dateEnd: date + 'T' + time + ':00',
-		});
+		setStatusMessageConfirmation('Loading');
+		try {
+			approveSeminar.mutate({
+				roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
+				seminarId: id,
+				dateStart: date + 'T' + time + ':00',
+				dateEnd: date + 'T' + time + ':00',
+			});
+			setStatusMessageConfirmation('Seminar confirmed');
+			await delay(1500);
+			setStatusMessageConfirmation('');
+		} catch (error) {
+			setStatusMessageConfirmation('Error');
+		}
 	}
 
 	return (
@@ -225,9 +235,17 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 								</div>
 							))}
 				</Stack>
-			</div>
-			<div>
-				<h1>{date + 'T' + time + ':00'}</h1>
+				<div className="mt-10">
+					<h1
+						className={
+							statusMessageConfirmation != ''
+								? 'absolute bottom-5 left-10 title px-5 py-2 rounded-xl border-[2px] border-success text-success'
+								: ''
+						}
+					>
+						{statusMessageConfirmation}
+					</h1>
+				</div>
 			</div>
 		</div>
 	);
