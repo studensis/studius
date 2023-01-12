@@ -7,12 +7,14 @@ export const TextInput = ({
 	placeholder,
 	onChange,
 	disabled,
+	value,
 }: {
 	className?: string;
 	type?: string;
 	placeholder?: string;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	disabled?: boolean;
+	value?: string | null;
 }) => {
 	return (
 		<>
@@ -21,6 +23,7 @@ export const TextInput = ({
 				placeholder={placeholder}
 				disabled={disabled}
 				onChange={onChange ? onChange : () => {}}
+				defaultValue={value || ''}
 				className={classNames(
 					className,
 					'p-4',

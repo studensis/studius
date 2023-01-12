@@ -9,20 +9,18 @@ export default function AdminToolbar() {
 	const me = trpc.auth.me.useQuery();
 	const { setModal } = useDialog();
 
-	return (
-		<>
-			{me.data && (me.data.role == 'ADMIN' || me.data.role == 'SUPERADMIN') ? (
-				<Button
-					rightIcon="add"
-					onClick={() => {
-						setModal(<CreateUserModal />);
-					}}
-				>
-					Create subject
-				</Button>
-			) : (
-				<> </>
-			)}
-		</>
-	);
+	if (me.data && (me.data.role == 'ADMIN' || me.data.role == 'SUPERADMIN')) {
+		return (
+			<Button
+				rightIcon="add"
+				onClick={() => {
+					setModal(<CreateUserModal />);
+				}}
+			>
+				Create subject
+			</Button>
+		);
+	} else {
+		return null;
+	}
 }
