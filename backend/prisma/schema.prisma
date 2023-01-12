@@ -81,8 +81,8 @@ model Event {
   description    String
   linkedEntity   LinkedEntity
   linkedEntityId String
-  RoomTimeEvent  RoomTimeEvent[]
   status         Status          @default(ACTIVE)
+  RoomTimeEvent  RoomTimeEvent[]
 }
 
 model PinnedEvent {
