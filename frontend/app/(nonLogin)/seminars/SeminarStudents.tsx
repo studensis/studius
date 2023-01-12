@@ -28,7 +28,7 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 			<Stack cols={1}>
 				{seminarList.data &&
 					seminarList.data.map((seminar) => (
-						<div>
+						<div key={seminar.id}>
 							<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
 								<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
 									{seminar.title}

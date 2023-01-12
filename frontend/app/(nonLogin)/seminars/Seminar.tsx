@@ -188,7 +188,10 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 						seminarList.data
 							.filter((seminar) => seminar.status !== 'DRAFT')
 							.map((seminar) => (
-								<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
+								<div
+									key={seminar.id}
+									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
+								>
 									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
 										{seminar.title}
 									</div>
@@ -205,7 +208,10 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 						seminarList.data
 							.filter((seminar) => seminar.status === 'DRAFT')
 							.map((seminar) => (
-								<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
+								<div
+									key={seminar.id}
+									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
+								>
 									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
 										{seminar.title}
 									</div>
