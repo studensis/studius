@@ -16,7 +16,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	const user = trpc.user.getUserById.useQuery(userId);
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(userId);
 	const menteeList = trpc.user.listMentees.useQuery(userId);
-	const createPinnedEvent = trpc;
+	const approveSeminar = trpc.seminar.approveSeminar.useMutation();
 	const seminarList = trpc.seminar.listUserSeminars.useQuery({
 		id: userId,
 		options: { isMentor: true, isStudent: false },
@@ -27,6 +27,8 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 
 	//useState sekcija
 	const [statusMessage, setStatusMessage] = useState('');
+	const [date, setDate] = useState('');
+	const [time, setTime] = useState('');
 	const [form, setForm] = useState<form>({
 		subjectId: '',
 		menteeId: '',
@@ -57,7 +59,14 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 		}
 	}
 
-	async function confirmDraft(id: string) {}
+	async function confirmDraft(id: string) {
+		approveSeminar.mutate({
+			roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
+			seminarId: id,
+			dateStart: date + 'T' + time + ':00',
+			dateEnd: date + 'T' + time + ':00',
+		});
+	}
 
 	return (
 		<div>
@@ -201,9 +210,24 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 									>
 										Confirm Draft
 									</Button>
+									<input
+										type="date"
+										onChange={(e) => {
+											setDate(e.target.value);
+										}}
+									/>
+									<input
+										type="time"
+										onChange={(e) => {
+											setTime(e.target.value);
+										}}
+									/>
 								</div>
 							))}
 				</Stack>
+			</div>
+			<div>
+				<h1>{date + 'T' + time + ':00'}</h1>
 			</div>
 		</div>
 	);

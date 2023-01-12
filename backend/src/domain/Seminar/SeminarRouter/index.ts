@@ -103,16 +103,16 @@ export default t.router({
 		.input(
 			z.object({
 				seminarId: z.string(),
-				dateStart: z.number(),
-				dateEnd: z.number(),
+				dateStart: z.string(),
+				dateEnd: z.string(),
 				roomId: z.string(),
 			})
 		)
 		.mutation(async ({ input }) => {
 			let a = {
 				...input,
-				dateStart: new Date(input.dateStart * 1000),
-				dateEnd: new Date(input.dateEnd * 1000),
+				dateStart: new Date(input.dateStart),
+				dateEnd: new Date(input.dateEnd),
 			};
 			let rez = await approveSeminarInteractor(repo, a);
 			return rez;
