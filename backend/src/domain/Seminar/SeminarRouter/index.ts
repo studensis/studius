@@ -4,6 +4,7 @@ import createSeminarInteractor from '../interactors/createSeminarInteractor';
 import deleteSeminarInteractor from '../interactors/deleteSeminarInteractor';
 import getSeminarInteractor from '../interactors/getSeminarInteractor';
 import listSeminarsInteractor from '../interactors/listSeminarsInteractor';
+import listUserSeminars from '../interactors/listUserSeminars';
 import updateSeminarInteractor from '../interactors/updateSeminarInteractor';
 import { SeminarEntity } from '../model/SeminarEntity';
 import { updateSeminarEntity } from '../model/updateSeminarEntity';
@@ -79,6 +80,18 @@ export default t.router({
 		let response = await getSeminarInteractor(repo, input);
 		return response;
 	}),
+
+	listUserSeminars: t.procedure
+		.input(
+			z.object({
+				id: z.string(),
+				options: z.object({ isMentor: z.boolean(), isStudent: z.boolean() }),
+			})
+		)
+		.query(async ({ input }) => {
+			let response = await listUserSeminars(repo, input);
+			return response;
+		}),
 
 	listSeminars: t.procedure.query(async () => {
 		let response = await listSeminarsInteractor(repo);

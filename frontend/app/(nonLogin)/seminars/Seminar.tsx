@@ -16,6 +16,10 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	const user = trpc.user.getUserById.useQuery(userId);
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(userId);
 	const menteeList = trpc.user.listMentees.useQuery(userId);
+	const seminarList = trpc.seminar.listUserSeminars.useQuery({
+		id: userId,
+		options: { isMentor: true, isStudent: false },
+	});
 	//Mutations
 	const seminar = trpc.seminar.createSeminar.useMutation();
 
@@ -83,9 +87,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 							))}
 				</Stack>
 			</div>
-
 			<br />
-
 			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
 				<h1 className="title1 m-4">Choose your mentee for this Seminar </h1>
 				<Stack cols={3}>
@@ -114,7 +116,6 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 						))}
 				</Stack>
 			</div>
-
 			<br />
 			<Block className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
 				<h1 className="title1 m-4">Fill this Seminar Form</h1>
@@ -135,7 +136,6 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 					</div>
 				</form>
 			</Block>
-
 			<div className="w-full flex justify-between mt-4 px-10">
 				<h1
 					className={
@@ -156,6 +156,27 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 				</Button>
 			</div>
 			<h1>{JSON.stringify(form)}</h1>
+			<br />
+			<div>{JSON.stringify(seminarList.data)}</div>
+			<br />
+
+			<div>
+				<h1 className="title1">List of Seminars</h1>
+				<Stack cols={1}>
+					{seminarList.data &&
+						seminarList.data.map((seminar) => (
+							<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
+								<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
+									{seminar.title}
+								</div>
+								<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
+									{seminar.userId}
+								</div>
+								<div className="">{seminar.description}</div>
+							</div>
+						))}
+				</Stack>
+			</div>
 		</div>
 	);
 };
