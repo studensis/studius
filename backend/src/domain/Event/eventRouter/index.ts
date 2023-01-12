@@ -11,6 +11,7 @@ import updateRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/updat
 import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
 import { updateRoomTimeEventEntity } from '../../RoomTimeEvent/model/updateRoomTimeEventEntity';
 import RoomTimeEventRepositoryPrisma from '../../RoomTimeEvent/repository/RoomTimeEventRepositoryPrisma';
+import archiveEventInteractor from '../interactors/archiveEventInteractor';
 import createEventInteractor from '../interactors/createEventInteractor';
 import deleteEventInteractor from '../interactors/deleteEventInteractor';
 import getEventInteractor from '../interactors/getEventInteractor';
@@ -77,6 +78,13 @@ export default t.router({
 			let event: updateEventEntity = { ...input };
 			let updatedEvent = await updateEventInteractor(repo, event);
 			return updatedEvent;
+		}),
+	archiveEventById: t.procedure
+		.use(isAdmin)
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let a = await archiveEventInteractor(input, repo);
+			return a;
 		}),
 	//
 	//

@@ -78,6 +78,28 @@ export default class EventRepositoryPrisma extends EventRepository {
 		return response;
 	}
 
+	async archive(eventId: string) {
+		let response = await prisma.event.update({
+			where: {
+				id: eventId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		let archiveRTEs = await prisma.roomTimeEvent.updateMany({
+			where: {
+				eventId: response.id,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		return response;
+	}
+
 	async listAssociatedRoomTimeEvents(id: string) {
 		let data = await prisma.event.findUnique({
 			where: { id: id },
