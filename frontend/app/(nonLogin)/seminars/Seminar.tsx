@@ -16,10 +16,12 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	const user = trpc.user.getUserById.useQuery(userId);
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(userId);
 	const menteeList = trpc.user.listMentees.useQuery(userId);
+	const createPinnedEvent = trpc;
 	const seminarList = trpc.seminar.listUserSeminars.useQuery({
 		id: userId,
 		options: { isMentor: true, isStudent: false },
 	});
+
 	//Mutations
 	const seminar = trpc.seminar.createSeminar.useMutation();
 
@@ -37,7 +39,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	}
 
 	//Submit seminara
-	async function confirmSeminar(form: form) {
+	async function suggestSeminar(form: form) {
 		setStatusMessage('Loading');
 		try {
 			seminar.mutate({
@@ -54,6 +56,8 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 			setStatusMessage('Error');
 		}
 	}
+
+	async function confirmDraft(id: string) {}
 
 	return (
 		<div>
@@ -148,33 +152,57 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 				</h1>
 				<Button
 					onClick={() => {
-						confirmSeminar(form);
+						suggestSeminar(form);
 					}}
 					className=""
 				>
 					Suggest Seminar
 				</Button>
 			</div>
-			<h1>{JSON.stringify(form)}</h1>
 			<br />
-			<div>{JSON.stringify(seminarList.data)}</div>
 			<br />
 
 			<div>
 				<h1 className="title1">List of Seminars</h1>
 				<Stack cols={1}>
 					{seminarList.data &&
-						seminarList.data.map((seminar) => (
-							<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
-								<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
-									{seminar.title}
+						seminarList.data
+							.filter((seminar) => seminar.status !== 'DRAFT')
+							.map((seminar) => (
+								<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
+									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.title}
+									</div>
+									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.userId}
+									</div>
+									<div className="">{seminar.description}</div>
 								</div>
-								<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
-									{seminar.userId}
+							))}
+				</Stack>
+				<br />
+				<Stack cols={1}>
+					{seminarList.data &&
+						seminarList.data
+							.filter((seminar) => seminar.status === 'DRAFT')
+							.map((seminar) => (
+								<div className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] ">
+									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.title}
+									</div>
+									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
+										{seminar.userId}
+									</div>
+									<div className="">{seminar.description}</div>
+									<Button
+										onClick={() => {
+											confirmDraft(seminar.id);
+										}}
+									>
+										Confirm Draft
+									</Button>
 								</div>
-								<div className="">{seminar.description}</div>
-							</div>
-						))}
+							))}
 				</Stack>
 			</div>
 		</div>
