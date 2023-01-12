@@ -81,6 +81,7 @@ model Event {
   description    String
   linkedEntity   LinkedEntity
   linkedEntityId String
+  status         Status          @default(ACTIVE)
   RoomTimeEvent  RoomTimeEvent[]
 }
 
