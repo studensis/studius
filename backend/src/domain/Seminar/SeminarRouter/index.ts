@@ -58,7 +58,7 @@ export default t.router({
 				contentId: z.string().optional(),
 				subjectId: z.string().optional(),
 				userId: z.string().optional(),
-				status: z.enum(['DRAFT', 'CONFIRMED']).optional(),
+				status: z.enum(['DRAFT', 'CONFIRMED', 'READY']).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {

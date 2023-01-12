@@ -146,6 +146,7 @@ enum Status {
 enum SeminarStatus {
   DRAFT
   CONFIRMED
+  READY
 }
 
 enum LinkedEntity {
