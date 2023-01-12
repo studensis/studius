@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import deleteEventUserPresenceByRTEIDInteractor from '../../EventUserPresence/interactors/deleteEventUserPresenceByRTEIDInteractor';
+import EventUserPresenceRepositoryPrisma from '../../EventUserPresence/repository/EventUserPresenceRepositoryPrisma';
 import archiveRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/archiveRoomTimeEventInteractor';
 import createRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/createRoomTimeEventInteractor';
 import deleteRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/deleteRoomTimeEventInteractor';
@@ -24,6 +26,7 @@ import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 
 let repo = new EventRepositoryPrisma();
 let RTErepo = new RoomTimeEventRepositoryPrisma();
+let EUPrepo = new EventUserPresenceRepositoryPrisma();
 
 export default t.router({
 	createEvent: t.procedure
@@ -125,6 +128,7 @@ export default t.router({
 		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
+			let b = await deleteEventUserPresenceByRTEIDInteractor(input, EUPrepo);
 			let a = await deleteRoomTimeEventInteractor(input, RTErepo);
 			return a;
 		}),

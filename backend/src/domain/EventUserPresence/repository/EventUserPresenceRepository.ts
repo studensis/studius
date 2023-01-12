@@ -22,6 +22,9 @@ export abstract class EventUserPresenceRepository {
 	async delete(eventUserPresenceId: string): Promise<EventUserPresenceEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async deleteByRTEID(RTEID: string): Promise<string> {
+		throw new Error('Method not implemented.');
+	}
 	async getAssociatedRoomTimeEvent(id: string): Promise<RoomTimeEventEntity> {
 		throw new Error('Method not implemented.');
 	}

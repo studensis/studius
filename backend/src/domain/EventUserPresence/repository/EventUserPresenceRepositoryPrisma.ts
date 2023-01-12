@@ -72,6 +72,16 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 		return response;
 	}
 
+	async deleteByRTEID(RTEID: string) {
+		let response = await prisma.eventUserPresence.deleteMany({
+			where: {
+				roomTimeEventId: RTEID,
+			},
+		}); // ovo je tipa BatchPayload kojeg nema, nez sta je to lmfao budem kasnije
+
+		return 'success';
+	}
+
 	async getAssociatedRoomTimeEvent(id: string) {
 		let eventUserPresence = await prisma.eventUserPresence.findUnique({
 			where: { id: id },
