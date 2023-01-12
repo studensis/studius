@@ -5,6 +5,9 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
+import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
@@ -16,6 +19,7 @@ import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
+let userRepo = new UserRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -35,7 +39,7 @@ export default t.router({
 				contentId: z.array(z.string()).optional(),
 			})
 		)
-		.mutation(async ({ input }) => {
+		.mutation(async ({ input, ctx }) => {
 			let subject: SubjectEntity = {
 				...input,
 				id: '',
@@ -47,6 +51,16 @@ export default t.router({
 				contentId: input.contentId ? input.contentId : [],
 			};
 			let newSubject = await createSubjectInteractor(repo, subject);
+
+			let enrollment: EnrollmentEntity = {
+				userId: ctx.user!.userId,
+				subjectId: newSubject.id,
+				roleTitle: 'OWNER',
+				enrollmentDate: new Date(Date.now()),
+				status: 'ACTIVE',
+			};
+			let newEnrollment = await enrollUserInteractor(enrollment, userRepo);
+
 			return newSubject;
 		}),
 
@@ -57,12 +71,10 @@ export default t.router({
 			return a;
 		}),
 
-	getSubjectById: publicProcedure
-		.input(z.string())
-		.query(async ({ input }) => {
-			let subject = await getSubjectInteractor(repo, input);
-			return subject;
-		}),
+	getSubjectById: publicProcedure.input(z.string()).query(async ({ input }) => {
+		let subject = await getSubjectInteractor(repo, input);
+		return subject;
+	}),
 
 	listSubjects: publicProcedure.query(async () => {
 		let subjects = await listSubjectsInteractor(repo);
