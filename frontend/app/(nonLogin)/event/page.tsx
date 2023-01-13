@@ -12,7 +12,7 @@ const page = () => {
 				<Link href="/admin">
 					<Button>Back to Workspace tools</Button>
 				</Link>
-				<PageHeader title={'Post Management'} subtitle={'Workspace Tools'} />
+				<PageHeader title={'Event Management'} subtitle={'Workspace Tools'} />
 				<EventList />;
 			</PageStack>
 		</>
