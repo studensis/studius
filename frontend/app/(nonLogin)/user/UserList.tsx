@@ -91,6 +91,7 @@ export default function SubjectList() {
 															}}
 														/>
 													);
+													users.refetch();
 													// updateUser.mutate({
 													// 	id: user.id,
 													// 	firstname: 'Josip',
