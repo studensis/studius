@@ -22,6 +22,13 @@ const Sections = () => {
 					title={'Subject Management'}
 				/>
 				<SectionButton icon={'calendar'} title={'Event Management'} disabled />
+				<SectionButton icon={'calendar'} title={'Room Management'} disabled />
+				<SectionButton icon={'calendar'} title={'Post Management'} disabled />
+				<SectionButton
+					icon={'calendar'}
+					title={'Seminar Management'}
+					disabled
+				/>
 			</Stack>
 		</>
 	);

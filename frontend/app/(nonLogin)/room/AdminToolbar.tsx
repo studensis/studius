@@ -3,7 +3,7 @@
 import { Button } from '../../../components/@studius/Button/Button';
 import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { trpc } from '../../../components/hooks/TrpcProvider';
-import { CreateUserModal } from './CreateUserModal';
+import { CreateRoomModal } from './CreateRoomModal';
 
 export default function AdminToolbar() {
 	const me = trpc.auth.me.useQuery();
@@ -14,10 +14,10 @@ export default function AdminToolbar() {
 			<Button
 				rightIcon="add"
 				onClick={() => {
-					setModal(<CreateUserModal />);
+					setModal(<CreateRoomModal />);
 				}}
 			>
-				Create user
+				Create room
 			</Button>
 		);
 	} else {
