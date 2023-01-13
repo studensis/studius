@@ -9,22 +9,41 @@ import {
 	Stack,
 } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
+import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 
-export default function EventPage() {
+type PageProps = {
+	params: {
+		eventId: string;
+	};
+};
+
+const Event = ({
+	roomTimeEvent,
+}: {
+	roomTimeEvent: {
+		eventId: string;
+		roomId: string;
+		dateStart: string;
+		dateEnd: string;
+	};
+}) => {
+	const event = trpc.event.getEventById.useQuery(roomTimeEvent.eventId);
+	const room = trpc.room.getRoomById.useQuery(roomTimeEvent.roomId);
 	return (
 		<>
 			<PageStack>
 				<Stack cols={1}>
 					<PageHeader
-						title={'23. Predavanje (P01)'}
-						subtitle={'Kvantna Racunala'}
+						title={event.data ? event.data.title : <Spinner />}
+						subtitle={event.data?.description}
 					/>
 					<div className="grid grid-cols-2 md:grid-cols-3 gap-2">
 						<div>
 							<Block>
 								<div className="flex gap-2">
 									<div className="flex flex-col gap-2 flex-1">
-										<h3 className="title1">A-111</h3>
+										<h3 className="title1">{room.data?.title}</h3>
 										<p className="caption text-neutral-strong">Location</p>
 									</div>
 									<Button outline leftIcon="notifications" onClick={() => {}} />
@@ -35,7 +54,33 @@ export default function EventPage() {
 							<Block>
 								<div className="flex gap-2">
 									<div className="flex flex-col gap-2 flex-1">
-										<h3 className="title1">8:00-10:00</h3>
+										<h3 className="title1">
+											<p className="text-neutral-medium caption">
+												{new Date(roomTimeEvent.dateStart).toLocaleDateString()}
+											</p>
+											<p>
+												{new Date(roomTimeEvent.dateStart)
+													.toLocaleTimeString()
+													.split(':')
+													.reverse()
+													.slice(1)
+													.reverse()
+													.join(':')}
+											</p>
+											to
+											<p className="text-neutral-medium caption">
+												{new Date(roomTimeEvent.dateEnd).toLocaleDateString()}
+											</p>
+											<p>
+												{new Date(roomTimeEvent.dateEnd)
+													.toLocaleTimeString()
+													.split(':')
+													.reverse()
+													.slice(1)
+													.reverse()
+													.join(':')}
+											</p>
+										</h3>
 										<p className="caption text-neutral-strong">Time</p>
 									</div>
 									<Button outline leftIcon="notifications" onClick={() => {}} />
@@ -84,6 +129,24 @@ export default function EventPage() {
 					</div>
 				</Section>
 			</PageStack>
+		</>
+	);
+};
+
+export default function SubjectPage(props: PageProps) {
+	const roomTimeEvent = trpc.event.getSchedule.useQuery(props.params.eventId);
+	return (
+		<>
+			{roomTimeEvent.data && (
+				<Event
+					roomTimeEvent={{
+						eventId: roomTimeEvent.data.eventId,
+						roomId: roomTimeEvent.data.roomId,
+						dateStart: roomTimeEvent.data.dateStart,
+						dateEnd: roomTimeEvent.data.dateEnd,
+					}}
+				/>
+			)}
 		</>
 	);
 }

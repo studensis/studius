@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '../@studius/Button/Button';
 import Icon, { IconName } from '../@studius/Icon/Icon';
-import useModal from '../@studius/Modal/ModalProvider';
+import useDialog from '../@studius/Modal/DialogProvider';
 import useLogin from '../hooks/LoginContext';
 import MainSidebar from '../Sidebars/MainSidebar';
 
@@ -32,7 +32,7 @@ const NavItem = ({
 
 function Header() {
 	const { user, loggedIn } = useLogin();
-	const { setSidebar } = useModal();
+	const { setSidebar } = useDialog();
 
 	const router = useRouter();
 
@@ -52,30 +52,39 @@ function Header() {
 					</Link>
 					<div className="hidden md:flex">
 						<NavItem href="/intranet" icon="home" title="Homepage" />
-						<NavItem href="/calendar" icon="calendar" title="Events" />
+						{/* <NavItem href="/calendar" icon="calendar" title="Assignments" /> */}
+						<NavItem href="/seminars" icon="lessons" title="Seminars" />
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
-							<NavItem
-								href="/admin"
-								icon="adminTools"
-								title="Workspace Tools"
-							/>
+							<>
+								<div className="py-2 h-full mx-2">
+									<div className="w-px h-full bg-neutral-medium"></div>
+								</div>
+								<NavItem
+									href="/admin"
+									icon="adminTools"
+									title="Workspace Tools"
+								/>
+							</>
 						)}
 					</div>
 				</div>
 				<div className="flex gap-2">
 					{loggedIn ? (
-						<div
-							className="relative w-12 h-12 rounded-[16px] bg-neutral-medium overflow-hidden"
-							onClick={() => {
-								setSidebar(<MainSidebar />);
-							}}
-						>
-							<Image
-								src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
-								fill
-								style={{ objectFit: 'cover' }}
-								alt=""
-							/>
+						<div className="flex">
+							<NavItem href={'/'} icon={'notifications'} title={''} />
+							<div
+								className="relative w-12 h-12 rounded-[16px] bg-neutral-medium overflow-hidden"
+								onClick={() => {
+									setSidebar(<MainSidebar />);
+								}}
+							>
+								<Image
+									src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
+									fill
+									style={{ objectFit: 'cover' }}
+									alt=""
+								/>
+							</div>
 						</div>
 					) : (
 						<>

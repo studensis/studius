@@ -5,6 +5,11 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
+import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
+import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
+import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
@@ -16,6 +21,7 @@ import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
+let enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -35,7 +41,7 @@ export default t.router({
 				contentId: z.array(z.string()).optional(),
 			})
 		)
-		.mutation(async ({ input }) => {
+		.mutation(async ({ input, ctx }) => {
 			let subject: SubjectEntity = {
 				...input,
 				id: '',
@@ -47,6 +53,19 @@ export default t.router({
 				contentId: input.contentId ? input.contentId : [],
 			};
 			let newSubject = await createSubjectInteractor(repo, subject);
+
+			let enrollment: EnrollmentEntity = {
+				userId: ctx.user!.userId,
+				subjectId: newSubject.id,
+				roleTitle: 'OWNER',
+				enrollmentDate: new Date(Date.now()),
+				status: 'ACTIVE',
+			};
+			let newEnrollment = await enrollUserInteractor(
+				enrollment,
+				enrollmentRepo
+			);
+
 			return newSubject;
 		}),
 
@@ -57,12 +76,21 @@ export default t.router({
 			return a;
 		}),
 
-	getSubjectById: publicProcedure
+	archiveSubjectById: adminProcedure
 		.input(z.string())
-		.query(async ({ input }) => {
-			let subject = await getSubjectInteractor(repo, input);
-			return subject;
+		.mutation(async ({ input }) => {
+			let b = await archiveEnrollmentBySubjectIdInteractor(
+				input,
+				enrollmentRepo
+			);
+			let a = await archiveSubjectInteractor(input, repo);
+			return a;
 		}),
+
+	getSubjectById: publicProcedure.input(z.string()).query(async ({ input }) => {
+		let subject = await getSubjectInteractor(repo, input);
+		return subject;
+	}),
 
 	listSubjects: publicProcedure.query(async () => {
 		let subjects = await listSubjectsInteractor(repo);
@@ -85,6 +113,8 @@ export default t.router({
 			let subject: updateSubjectEntity = { ...input };
 			let updatedSubject = await updateSubjectInteractor(
 				ctx.user.userId,
+				ctx.user.role,
+				enrollmentRepo,
 				repo,
 				subject
 			);
@@ -94,7 +124,10 @@ export default t.router({
 	getEnrolledUsers: publicProcedure
 		.input(z.string())
 		.query(async ({ input }) => {
-			let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
+			let enrolledUsers = await listEnrolledUsersInteractor(
+				enrollmentRepo,
+				input
+			);
 			console.log(enrolledUsers);
 			return enrolledUsers;
 		}),

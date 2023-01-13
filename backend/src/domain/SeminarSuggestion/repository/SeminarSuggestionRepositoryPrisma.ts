@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestionRepository {
 	async getAll() {
 		// prisma SeminarSuggestions
-		let datas = await prisma.seminarSuggestion.findMany();
+		let datas = await prisma.pinnedEvent.findMany();
 
 		// map to SeminarSuggestionEntities
 		let seminarSuggestions: SeminarSuggestionEntity[] = [];
@@ -21,7 +21,7 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	}
 
 	async getById(id: string) {
-		let data = await prisma.seminarSuggestion.findUnique({
+		let data = await prisma.pinnedEvent.findUnique({
 			where: { id: id },
 		});
 		if (data) {
@@ -33,12 +33,12 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	}
 
 	async update(seminarSuggestionData: updateSeminarSuggestionEntity) {
-		let updatedData = await prisma.seminarSuggestion.update({
+		let updatedData = await prisma.pinnedEvent.update({
 			where: {
 				id: seminarSuggestionData.id,
 			},
 			data: {
-				seminarId: seminarSuggestionData.seminarId,
+				eventId: seminarSuggestionData.eventId,
 				subjectId: seminarSuggestionData.subjectId,
 			},
 		});
@@ -48,9 +48,9 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	}
 
 	async create(seminarSuggestion: SeminarSuggestionEntity) {
-		let response = await prisma.seminarSuggestion.create({
+		let response = await prisma.pinnedEvent.create({
 			data: {
-				seminarId: seminarSuggestion.seminarId,
+				eventId: seminarSuggestion.eventId,
 				subjectId: seminarSuggestion.subjectId,
 			},
 		});
@@ -62,7 +62,7 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	}
 
 	async delete(seminarSuggestionId: string) {
-		let response = await prisma.seminarSuggestion.delete({
+		let response = await prisma.pinnedEvent.delete({
 			where: {
 				id: seminarSuggestionId,
 			},

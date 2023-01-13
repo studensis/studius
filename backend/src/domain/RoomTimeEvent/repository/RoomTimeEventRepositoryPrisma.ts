@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import { EventUserPresenceEntity } from '../../EventUserPresence/model/EventUserPresenceEntity';
 import { RoomTimeEventEntity } from '../model/RoomTimeEventEntity';
+import { updateRoomTimeEventEntity } from '../model/updateRoomTimeEventEntity';
 import { RoomTimeEventRepository } from './RoomTimeEventRepository';
 
 const prisma = new PrismaClient();
@@ -31,7 +33,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 		}
 	}
 
-	async update(roomTimeEventData: RoomTimeEventEntity) {
+	async update(roomTimeEventData: updateRoomTimeEventEntity) {
 		let updatedData = await prisma.roomTimeEvent.update({
 			where: {
 				id: roomTimeEventData.id,
@@ -47,6 +49,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 					? roomTimeEventData.eventId
 					: undefined,
 				roomId: roomTimeEventData.roomId ? roomTimeEventData.roomId : undefined,
+				status: roomTimeEventData.status ? roomTimeEventData.status : undefined,
 			},
 		});
 		let rez: RoomTimeEventEntity = updatedData;
@@ -61,6 +64,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 				dateEnd: roomTimeEventData.dateEnd,
 				eventId: roomTimeEventData.eventId,
 				roomId: roomTimeEventData.roomId,
+				status: roomTimeEventData.status,
 			},
 		});
 
@@ -78,5 +82,54 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 		});
 
 		return response;
+	}
+
+	async archive(roomTimeEventId: string) {
+		let response = await prisma.roomTimeEvent.update({
+			where: {
+				id: roomTimeEventId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		return response;
+	}
+
+	async archiveByEventId(eventId: string) {
+		let response = await prisma.roomTimeEvent.updateMany({
+			where: {
+				eventId: eventId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		if (response.count > 0) return 'success';
+		else return 'failure';
+	}
+
+	async listAssociatedEventUserPresences(id: string) {
+		// prisma RoomTimeEvents
+		let data = await prisma.roomTimeEvent.findUnique({
+			where: { id: id },
+			select: {
+				EventUserPresence: true,
+			},
+		});
+
+		if (data) {
+			let datas: EventUserPresenceEntity[] = [];
+			data.EventUserPresence.forEach((data: EventUserPresenceEntity) => {
+				let eventUserPresence: EventUserPresenceEntity = data;
+				datas.push(eventUserPresence);
+			});
+
+			return datas;
+		} else {
+			throw new Error('no data');
+		}
 	}
 }

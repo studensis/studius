@@ -3,8 +3,7 @@ import eventRouter from '../domain/Event/eventRouter';
 import eventUserPresenceRouter from '../domain/EventUserPresence/eventUserPresenceRouter';
 import postRouter from '../domain/Post/postRouter';
 import roomRouter from '../domain/Room/roomRouter';
-import roomTimeEventRouter from '../domain/RoomTimeEvent/roomTimeEventRouter';
-import seminarSuggestionRouter from '../domain/SeminarSuggestion/seminarSuggestionRouter';
+import SeminarRouter from '../domain/Seminar/SeminarRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
 import authRouter from '../services/authentication/authRouter';
@@ -19,15 +18,13 @@ const appRouter = t.router({
 	auth: authRouter,
 	user: userRouter,
 	subject: subjectRouter,
-	// enrollment: todoRoutine,
 	room: roomRouter,
 	event: eventRouter,
-	roomTimeEvent: roomTimeEventRouter,
-	eventUserPresence: eventUserPresenceRouter,
 	post: postRouter,
-	seminar: todoRoutine,
-	seminarSuggestion: seminarSuggestionRouter,
+	seminar: SeminarRouter,
 	content: contentRouter,
+	// roomTimeEvent: roomTimeEventRouter,
+	eventUserPresence: eventUserPresenceRouter,
 });
 
 export default appRouter;

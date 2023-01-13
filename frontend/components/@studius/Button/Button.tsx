@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import Icon, { IconName } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -65,11 +66,10 @@ const Button: FC<ButtonProps> = ({
 						.concat(className ? className : '')}
 				>
 					<h1
-						className={
-							small == true
-								? 'button-small justify-center flex items-center gap-1 text-special-white'
-								: 'button-large justify-center flex items-center gap-1 text-special-white'
-						}
+						className={classNames(
+							'justify-center flex items-center gap-1 text-special-white',
+							small ? 'button-small' : 'button-large'
+						)}
 					>
 						{leftIcon &&
 							(loading ? (
@@ -78,7 +78,13 @@ const Button: FC<ButtonProps> = ({
 								<Icon
 									icon={leftIcon}
 									size={small == true ? 12 : 16}
-									className={'bg-special-white'}
+									className={
+										outline
+											? disabled
+												? 'bg-accent-medium'
+												: 'bg-accent'
+											: 'bg-special-white'
+									}
 									// color={darkMode ? "white" : accent-strong}
 								/>
 							))}
@@ -94,7 +100,13 @@ const Button: FC<ButtonProps> = ({
 								<Icon
 									icon={rightIcon}
 									size={small == true ? 12 : 16}
-									className={'bg-special-white'}
+									className={
+										outline
+											? disabled
+												? 'bg-accent-medium'
+												: 'bg-accent'
+											: 'bg-special-white'
+									}
 									// color={darkMode ? "white" : accent-strong}
 								/>
 							))}

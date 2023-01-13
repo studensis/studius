@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native"]
@@ -20,13 +17,12 @@ model User {
   email             String              @unique
   userRole          Role
   mentorID          String?
-  mentor            User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
-  mentee            User[]              @relation("Mentorstvo")
+  avatar            String?
   enrollment        Enrollment[]
   eventUserPresence EventUserPresence[]
+  mentor            User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
+  mentee            User[]              @relation("Mentorstvo")
 }
-
-// treba stavit @unique na neke
 
 model Subject {
   id          String       @id @default(uuid())
@@ -59,46 +55,48 @@ model Post {
 }
 
 model Enrollment {
-  user           User        @relation(fields: [userId], references: [id])
   userId         String
-  subject        Subject     @relation(fields: [subjectId], references: [id])
   subjectId      String
   enrollmentDate DateTime    @default(now())
   roleTitle      SubjectRole
-  status         Status
-
-  @@id([userId, subjectId])
+  status         Status      @default(ACTIVE)
+  id             String      @id @default(uuid())
+  subject        Subject     @relation(fields: [subjectId], references: [id])
+  user           User        @relation(fields: [userId], references: [id])
 }
 
 model Seminar {
-  id          String @id @default(uuid())
-  title       String @unique
-  description String
-  mentorId    String
-  type        String
-  contentId   String
-  subjectId   String
-  userId      String
+  id          String        @id @default(uuid())
+  title       String        @unique
+  description String?
+  mentorId    String?
+  contentId   String?
+  subjectId   String?
+  userId      String?
+  status      SeminarStatus @default(DRAFT)
 }
 
 model Event {
-  id             String       @id @default(uuid())
+  id             String          @id @default(uuid())
   title          String
   description    String
   linkedEntity   LinkedEntity
   linkedEntityId String
+  status         Status          @default(ACTIVE)
+  RoomTimeEvent  RoomTimeEvent[]
 }
 
-model SeminarSuggestion {
+model PinnedEvent {
   id        String @id @default(uuid())
-  seminarId String
   subjectId String
+  eventId   String
 }
 
 model Room {
-  id       String @id @default(uuid())
-  title    String @default("")
-  capacity Int
+  id            String          @id @default(uuid())
+  title         String          @default("")
+  capacity      Int
+  RoomTimeEvent RoomTimeEvent[]
 }
 
 model RoomTimeEvent {
@@ -107,16 +105,19 @@ model RoomTimeEvent {
   dateEnd           DateTime
   eventId           String
   roomId            String
+  status            Status              @default(ACTIVE)
   EventUserPresence EventUserPresence[]
+  event             Event               @relation(fields: [eventId], references: [id])
+  room              Room                @relation(fields: [roomId], references: [id])
 }
 
 model EventUserPresence {
   id              String        @id @default(uuid())
   presenceStatus  Boolean
-  roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
   roomTimeEventId String
-  user            User          @relation(fields: [userId], references: [id])
   userId          String
+  roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
 }
 
 enum Role {
@@ -141,6 +142,12 @@ enum Semester {
 enum Status {
   ACTIVE
   ARCHIVED
+}
+
+enum SeminarStatus {
+  DRAFT
+  CONFIRMED
+  READY
 }
 
 enum LinkedEntity {

@@ -1,4 +1,4 @@
-import SeminarEntity from '../model/SeminarEntity';
+import { SeminarEntity } from '../model/SeminarEntity';
 import { SeminarRepository } from '../repository/SeminarRepository';
 
 export default async function createSeminarInteractor(

@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import SeminarEntity from '../model/SeminarEntity';
+import { approvedSeminarEntity } from '../model/approvedSeminarEntity';
+import { SeminarEntity } from '../model/SeminarEntity';
+import { updateSeminarEntity } from '../model/updateSeminarEntity';
 import { SeminarRepository } from './SeminarRepository';
 
 const prisma = new PrismaClient();
@@ -12,7 +14,7 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 		// map to SeminarEntities
 		let seminars: SeminarEntity[] = [];
 		datas.forEach((data) => {
-			let seminar = new SeminarEntity(data);
+			let seminar: SeminarEntity = data;
 			seminars.push(seminar);
 		});
 
@@ -22,27 +24,26 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 	async getById(id: string) {
 		let data = await prisma.seminar.findUnique({ where: { id: id } });
 		if (data) {
-			let seminar = new SeminarEntity(data);
+			let seminar: SeminarEntity = data;
 			return seminar;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(seminarData: SeminarEntity) {
+	async update(seminarData: updateSeminarEntity) {
 		let updatedSeminar: any = {};
 
 		if (seminarData.title) updatedSeminar['title'] = seminarData.title;
 		if (seminarData.description)
 			updatedSeminar['description'] = seminarData.description;
-		if (seminarData.mentorId)
-			updatedSeminar['mentorId'] = seminarData.mentorId;
-		if (seminarData.type) updatedSeminar['type'] = seminarData.type;
+		if (seminarData.mentorId) updatedSeminar['mentorId'] = seminarData.mentorId;
 		if (seminarData.contentId)
 			updatedSeminar['contentId'] = seminarData.contentId;
 		if (seminarData.subjectId)
 			updatedSeminar['subjectId'] = seminarData.subjectId;
 		if (seminarData.userId) updatedSeminar['userId'] = seminarData.userId;
+		if (seminarData.status) updatedSeminar['status'] = seminarData.status;
 
 		let updatedData = await prisma.seminar.update({
 			where: {
@@ -52,13 +53,13 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 				title: updatedSeminar.title,
 				description: updatedSeminar.description,
 				mentorId: updatedSeminar.mentorId,
-				type: updatedSeminar.type,
 				contentId: updatedSeminar.contentId,
 				subjectId: updatedSeminar.subjectId,
 				userId: updatedSeminar.userId,
+				status: updatedSeminar.status,
 			},
 		});
-		let rez = new SeminarEntity(updatedData);
+		let rez: SeminarEntity = updatedData;
 
 		return rez;
 	}
@@ -66,11 +67,10 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 	async create(seminar: SeminarEntity) {
 		let response = await prisma.seminar.create({
 			data: {
-				id: seminar.id,
+				id: undefined,
 				title: seminar.title,
 				description: seminar.description,
 				mentorId: seminar.mentorId,
-				type: seminar.type,
 				contentId: seminar.contentId,
 				subjectId: seminar.subjectId,
 				userId: seminar.userId,
@@ -79,7 +79,7 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 
 		console.log(response);
 
-		let out = new SeminarEntity(response);
+		let out: SeminarEntity = response;
 		return out;
 	}
 
@@ -89,7 +89,21 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 				id: seminarId,
 			},
 		});
+		let rez: SeminarEntity = response;
+		return rez;
+	}
 
-		return response;
+	async approveSeminar(id: string) {
+		let change = await prisma.seminar.update({
+			where: {
+				id: id,
+			},
+			data: {
+				status: 'CONFIRMED',
+			},
+		});
+
+		let rez: approvedSeminarEntity = change;
+		return rez;
 	}
 }

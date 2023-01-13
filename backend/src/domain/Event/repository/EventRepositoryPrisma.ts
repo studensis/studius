@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
 import { EventRepository } from './EventRepository';
@@ -75,5 +76,39 @@ export default class EventRepositoryPrisma extends EventRepository {
 		});
 
 		return response;
+	}
+
+	async archive(eventId: string) {
+		let response = await prisma.event.update({
+			where: {
+				id: eventId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		return response;
+	}
+
+	async listAssociatedRoomTimeEvents(id: string) {
+		let data = await prisma.event.findUnique({
+			where: { id: id },
+			select: {
+				RoomTimeEvent: true,
+			},
+		});
+
+		if (data) {
+			let datas: RoomTimeEventEntity[] = [];
+			data.RoomTimeEvent.forEach((data: RoomTimeEventEntity) => {
+				let eventUserPresence: RoomTimeEventEntity = data;
+				datas.push(eventUserPresence);
+			});
+
+			return datas;
+		} else {
+			throw new Error('no data');
+		}
 	}
 }

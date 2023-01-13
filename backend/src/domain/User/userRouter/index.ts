@@ -5,11 +5,13 @@ import {
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
 import getUserInteractor from '../interactors/getUserInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
+import listMenteesInteractor from '../interactors/listMenteeInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
@@ -18,6 +20,7 @@ import { UserEntity } from '../model/UserEntity';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 let repo = new UserRepositoryPrisma();
+let enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 export default t.router({
 	createUser: adminProcedure
@@ -101,14 +104,17 @@ export default t.router({
 		.mutation(async ({ input }) => {
 			let enrollment: EnrollmentEntity = {
 				...input,
+				id: undefined,
 				userId: input.userId,
 				subjectId: input.subjectId,
 				enrollmentDate: input.enrollmentDate || null,
 				roleTitle: input.roleTitle,
 				status: input.status,
 			};
-
-			let newEnrollment = await enrollUserInteractor(enrollment, repo);
+			let newEnrollment = await enrollUserInteractor(
+				enrollment,
+				enrollmentRepo
+			);
 			return newEnrollment;
 		}),
 
@@ -116,7 +122,10 @@ export default t.router({
 
 		.input(z.string())
 		.query(async ({ input }) => {
-			let enrollments = await listEnrolledSubjectsInteractor(input, repo);
+			let enrollments = await listEnrolledSubjectsInteractor(
+				input,
+				enrollmentRepo
+			);
 			return enrollments;
 		}),
 
@@ -124,17 +133,12 @@ export default t.router({
 
 		.input(
 			z.object({
-				userId: z.string(),
-				subjectId: z.string(),
+				id: z.string(),
+				userId: z.string().optional(),
+				subjectId: z.string().optional(),
 				enrollmentDate: z.date().optional(),
 				roleTitle: z
-					.enum([
-						'STUDENT',
-						'PROFESSOR',
-						'OWNER',
-						'DEMONSTRATOR',
-						'ASSISTANT',
-					])
+					.enum(['STUDENT', 'PROFESSOR', 'OWNER', 'DEMONSTRATOR', 'ASSISTANT'])
 					.optional(),
 				status: z.enum(['ACTIVE', 'ARCHIVED']).optional(),
 			})
@@ -142,6 +146,7 @@ export default t.router({
 		.mutation(async ({ input }) => {
 			let updateData = {
 				...input,
+				id: input.id,
 				userId: input.userId,
 				subjectId: input.subjectId,
 				roleTitle: input.roleTitle,
@@ -149,9 +154,14 @@ export default t.router({
 			};
 
 			let updatedEnrollment = await updateEnrollmentInteractor(
-				repo,
+				enrollmentRepo,
 				updateData as EnrollmentEntity
 			);
 			return updatedEnrollment;
 		}),
+
+	listMentees: t.procedure.input(z.string()).query(async ({ input }) => {
+		let mentees = await listMenteesInteractor(repo, input);
+		return mentees;
+	}),
 });

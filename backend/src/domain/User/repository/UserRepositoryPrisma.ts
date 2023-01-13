@@ -1,6 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
-import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollment';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import { UserRepository } from './UserRepository';
@@ -83,54 +81,6 @@ export default class UserRepositoryPrisma extends UserRepository {
 		return rez;
 	}
 
-	async enrollUser(
-		enrollmentData: EnrollmentEntity
-	): Promise<EnrollmentEntity> {
-		let enrollment = await prisma.enrollment.create({
-			data: {
-				userId: enrollmentData.userId,
-				subjectId: enrollmentData.subjectId,
-				enrollmentDate: undefined,
-				roleTitle: enrollmentData.roleTitle,
-				status: enrollmentData.status,
-			},
-		});
-		let rez: EnrollmentEntity = enrollment;
-		return rez;
-	}
-
-	async getEnrolledSubjects(userId: string) {
-		let rez = await prisma.enrollment.findMany({
-			where: {
-				userId: userId,
-				status: 'ACTIVE',
-			},
-			include: {
-				subject: true,
-			},
-		});
-
-		return rez;
-	}
-
-	async updateEnrollment(newData: updateEnrollmentEntity) {
-		let updatedData = await prisma.enrollment.update({
-			where: {
-				userId_subjectId: {
-					userId: newData.userId,
-					subjectId: newData.subjectId,
-				},
-			},
-			data: {
-				roleTitle: newData.roleTitle,
-				status: newData.status,
-			},
-		});
-
-		let rez: EnrollmentEntity = updatedData;
-		return rez;
-	}
-
 	async getByEmail(email: string): Promise<UserEntity | null> {
 		console.log(email);
 		let data = await prisma.user.findFirst({ where: { email: email } });
@@ -140,5 +90,18 @@ export default class UserRepositoryPrisma extends UserRepository {
 		} else {
 			return null;
 		}
+	}
+	async listMentees(id: string) {
+		let query = await prisma.user.findMany({
+			where: {
+				mentorID: id,
+			},
+		});
+		let mentees: UserEntity[] = [];
+		query.forEach((user: UserEntity) => {
+			mentees.push(user);
+		});
+
+		return mentees;
 	}
 }

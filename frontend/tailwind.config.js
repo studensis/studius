@@ -10,6 +10,7 @@ module.exports = {
       boxShadow: {
         'side': '32px 0px 32px -32px var(--color-shadow)',
 				'lg-left': '-32px 0px 32px -32px var(--color-shadow)',
+				'lg-top': '0px -32px 32px -32px var(--color-shadow)',
 				'lg-right': '32px 0px 32px -32px var(--color-shadow)',
 				'lg-top': '0px -32px 32px -32px var(--color-shadow)',
 				'sm-top': '0px -16px 16px -16px var(--color-shadow)',
