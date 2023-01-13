@@ -173,6 +173,7 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 				</Stack>
 			</div>
 			<div className="m-4 flex justify-between text-accent-medium">
+				<div></div>
 				<Button
 					onClick={() => {
 						suggestSeminar(form);
