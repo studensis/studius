@@ -81,6 +81,34 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		return out;
 	}
 
+	async archive(subjectId: string) {
+		let response = await prisma.subject.update({
+			where: {
+				id: subjectId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		let out: SubjectEntity = response;
+		return out;
+	}
+
+	async archiveEnrollmentBySubjectId(subjectId: string) {
+		let response = await prisma.enrollment.updateMany({
+			where: {
+				subjectId: subjectId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		if (response) return 'success';
+		else return 'failure';
+	}
+
 	async addContent(id: string, contentId: string[]) {
 		let updatedData = await prisma.subject.update({
 			where: {

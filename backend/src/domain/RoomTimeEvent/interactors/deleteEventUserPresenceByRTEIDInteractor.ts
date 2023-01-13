@@ -1,4 +1,4 @@
-import { EventUserPresenceRepository } from '../repository/EventUserPresenceRepository';
+import { EventUserPresenceRepository } from '../../EventUserPresence/repository/EventUserPresenceRepository';
 
 export default async function deleteEventUserPresenceByRTEIDInteractor(
 	RTEID: string,

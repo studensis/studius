@@ -8,6 +8,8 @@ import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
 import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
+import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
+import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
@@ -20,6 +22,7 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
 let userRepo = new UserRepositoryPrisma();
+// let enrollmentRepo = EnrollmentRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -68,6 +71,14 @@ export default t.router({
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let a = await deleteSubjectInteractor(input, repo);
+			return a;
+		}),
+
+	archiveSubjectById: adminProcedure
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let b = await archiveEnrollmentBySubjectIdInteractor(input, repo);
+			let a = await archiveSubjectInteractor(input, repo);
 			return a;
 		}),
 
