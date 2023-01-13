@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+
+card "<<delegate>>\nFrontend web aplikacija" {
+	artifact "<<React Component>>\nReact-view"
+
+}
+card "<<delegate>>\nStudius backend" {
+	artifact "<<React Component>>\nReact-view"
+}
+card "PostgreSQL baza podataka" {
+	artifact "<<React Component>>\nReact-view"
+}
+
+rectangle "Ovo treba doradit!"
+
+@enduml

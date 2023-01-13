@@ -135,3 +135,5 @@ na kojima predaje i jednog studenta na tom predmetu. Zatim predloži temu semina
 preda sadržaj seminara. Na posljetku mentor odobri taj seminar.
 
 ## 4.5 Dijagram komponenti <a name="4.5"> </a>
+
+:[class](../diagrams/UMLComponent/component2.pu)
