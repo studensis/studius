@@ -102,7 +102,8 @@ export function Dialog() {
 							? 'left-[50%] translate-x-[-50%] sm:top-2 sm:w-full max-w-[900px] w-full'
 							: 'right-0 sm:top-24 sm:w-[360px] w-full',
 						// mobile dialog
-						'bottom-0 top-20 overflow-y-scroll'
+						'bottom-0 top-20'
+						// 'overflow-y-scroll'
 					)}
 				>
 					<div
@@ -112,7 +113,8 @@ export function Dialog() {
 							dialogType === 'MODAL'
 								? 'shadow-sm-top sm:shadow-lg-top'
 								: 'shadow-sm-top sm:shadow-lg-left',
-							'w-full relative h-full sm:h-auto max-h-full overflow-x-hidden bg-section pb-6'
+							'w-full relative h-full sm:h-auto max-h-full overflow-x-hidden bg-section pb-6',
+							'border border-accent-weak'
 						)}
 					>
 						<div className="block sm:hidden pt-3 pb-6">

@@ -40,6 +40,7 @@ const icons = {
 	userRole: '/assets/icons/userRole.svg',
 	users: '/assets/icons/users.svg',
 	room: '/assets/icons/room.svg',
+	checkmark: '/assets/icons/checkmark.svg',
 };
 
 export type IconName = keyof typeof icons;
