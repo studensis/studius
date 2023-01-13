@@ -39,6 +39,7 @@ const icons = {
 	user: '/assets/icons/user.svg',
 	userRole: '/assets/icons/userRole.svg',
 	users: '/assets/icons/users.svg',
+	room: '/assets/icons/room.svg',
 };
 
 export type IconName = keyof typeof icons;

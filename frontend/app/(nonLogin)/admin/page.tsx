@@ -22,13 +22,13 @@ const Sections = () => {
 					title={'Subject Management'}
 				/>
 				<SectionButton icon={'calendar'} title={'Event Management'} disabled />
-				<SectionButton icon={'calendar'} title={'Room Management'} disabled />
-				<SectionButton icon={'calendar'} title={'Post Management'} disabled />
+				<SectionButton icon={'room'} title={'Room Management'} href={'/room'} />
 				<SectionButton
-					icon={'calendar'}
-					title={'Seminar Management'}
-					disabled
+					icon={'posts'}
+					title={'Post Management'}
+					href={'/post'}
 				/>
+				<SectionButton icon={'lessons'} title={'Seminar Management'} disabled />
 			</Stack>
 		</>
 	);
