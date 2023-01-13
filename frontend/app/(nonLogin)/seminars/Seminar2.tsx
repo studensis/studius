@@ -11,6 +11,9 @@ type form = {
 	menteeId: string;
 	menteeName: string;
 	title: string;
+	timeStart: string;
+	timeEnd: string;
+	roomId: string;
 };
 
 const Seminar2: FC<{ userId: string }> = ({ userId }) => {
@@ -23,6 +26,7 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 		id: userId,
 		options: { isMentor: true, isStudent: false },
 	});
+	const rooms = trpc.room.listRooms.useQuery();
 
 	//Mutations
 	const seminar = trpc.seminar.createSeminar.useMutation();
@@ -40,6 +44,9 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 		title: '',
 		menteeName: '',
 		subjectTitle: '',
+		roomId: '',
+		timeEnd: '',
+		timeStart: '',
 	});
 
 	//Delay za status message
@@ -64,6 +71,7 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 			//setStatusMessage(error);
 			setStatusMessage('Error');
 		}
+		seminarList.refetch();
 	}
 
 	async function confirmDraft(id: string) {
@@ -72,8 +80,8 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 			approveSeminar.mutate({
 				roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
 				seminarId: id,
-				dateStart: date + 'T' + startTime + ':00',
-				dateEnd: date + 'T' + endTime + ':00',
+				dateStart: form.timeStart,
+				dateEnd: form.timeEnd,
 			});
 			setStatusMessageConfirmation('Seminar confirmed');
 			await delay(1500);
@@ -81,6 +89,7 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 		} catch (error) {
 			setStatusMessageConfirmation('Error');
 		}
+		seminarList.refetch();
 	}
 
 	return (
@@ -219,6 +228,47 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 							actionRow={(seminar) => {
 								return (
 									<>
+										<div className="grid grid-cols-1">
+											<label htmlFor="room">Room:</label>
+											<select
+												name="room"
+												onChange={(e) => {
+													setForm({ ...form, roomId: e.target.value });
+												}}
+												className="rounded-xl p-2 px-4 border-accent-medium border-2"
+											>
+												{rooms.data?.map((room) => {
+													return (
+														<>
+															<option value={room.id}>{room.title}</option>
+														</>
+													);
+												})}
+											</select>
+										</div>
+										<div className="grid grid-cols-1">
+											<label htmlFor="TimeStart">Start Time:</label>
+											<input
+												onChange={(e) => {
+													setForm({ ...form, timeStart: e.target.value });
+												}}
+												name="TimeStart"
+												className="rounded-xl p-2 px-4 border-accent-medium border-2"
+												type="datetime-local"
+											/>
+										</div>
+										<div className="grid grid-cols-1">
+											<label htmlFor="TimeEnd">End Time:</label>
+											<input
+												onChange={(e) => {
+													setForm({ ...form, timeEnd: e.target.value });
+												}}
+												name="TimeEnd"
+												className="rounded-xl p-2 px-4 border-accent-medium border-2"
+												type="datetime-local"
+											/>
+										</div>
+
 										<Button
 											onClick={() => {
 												confirmDraft(seminar.id);
