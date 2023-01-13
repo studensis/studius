@@ -94,7 +94,7 @@ const EventModal: FC<{ eventId: string }> = ({ eventId }) => {
 					titles={{
 						dateStart: 'Starting Date',
 						dateEnd: 'Ending Date',
-						room: 'Room',
+						roomId: 'Room',
 					}}
 					objects={
 						roomTimeEvents.data?.filter((event) => event.eventId == eventId) ||

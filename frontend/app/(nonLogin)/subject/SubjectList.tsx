@@ -26,7 +26,7 @@ export default function SubjectList() {
 						id: 'ID',
 						title: 'Title',
 						semester: 'Semester',
-						brojEcts: 'ECTS',
+						ectsBod: 'ECTS',
 					}}
 					objects={subjectList.data || []}
 					actionRow={(subject) => {
