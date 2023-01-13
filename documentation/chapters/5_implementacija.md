@@ -29,6 +29,8 @@ Komunikacija u time je realizirana korištenjem aplikacija WhatsApp i Slack. Za 
 
 ## 5.3 Dijagram razmještaja <a name="5.3"> </a>
 
+:[class](../diagrams/UMLComponent/component.pu)
+
 ## 5.4 Upute za puštanje u pogon <a name="5.4"> </a>
 
 ## 5.5 Izvođenje razvoja <a name="5.5"> </a>
