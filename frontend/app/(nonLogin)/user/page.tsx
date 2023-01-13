@@ -12,14 +12,14 @@ export default function Page() {
 	return (
 		<>
 			<PageStack>
+				<Link href="/admin">
+					<Button>Back to Workspace tools</Button>
+				</Link>
 				<PageHeader
 					title={'User Management'}
 					subtitle={'Workspace Tools'}
 					actionRow={<AdminToolbar />}
 				/>
-				<Link href="/admin">
-					<Button className="title1 text-black">Back to Workspace tools</Button>
-				</Link>
 				<UserList />
 			</PageStack>
 		</>

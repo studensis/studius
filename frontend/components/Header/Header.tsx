@@ -52,14 +52,19 @@ function Header() {
 					</Link>
 					<div className="hidden md:flex">
 						<NavItem href="/intranet" icon="home" title="Homepage" />
-						<NavItem href="/calendar" icon="calendar" title="Assignments" />
+						{/* <NavItem href="/calendar" icon="calendar" title="Assignments" /> */}
 						<NavItem href="/seminars" icon="lessons" title="Seminars" />
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
-							<NavItem
-								href="/admin"
-								icon="adminTools"
-								title="Workspace Tools"
-							/>
+							<>
+								<div className="py-2 h-full mx-2">
+									<div className="w-px h-full bg-neutral-medium"></div>
+								</div>
+								<NavItem
+									href="/admin"
+									icon="adminTools"
+									title="Workspace Tools"
+								/>
+							</>
 						)}
 					</div>
 				</div>

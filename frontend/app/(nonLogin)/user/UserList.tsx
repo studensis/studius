@@ -38,14 +38,6 @@ export default function SubjectList() {
 							<p className="caption text-neutral-strong">Number of Users</p>
 							<p className="title2 text-neutral">{users.data.length}</p>
 						</Block>
-						<Block>
-							<p className="caption text-neutral-strong">Number of Users</p>
-							<p className="title2 text-neutral">{users.data.length}</p>
-						</Block>
-						<Block>
-							<p className="caption text-neutral-strong">Number of Users</p>
-							<p className="title2 text-neutral">{users.data.length}</p>
-						</Block>
 					</Stack>
 					<Block>
 						<Button

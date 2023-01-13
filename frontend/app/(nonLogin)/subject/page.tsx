@@ -10,12 +10,10 @@ import SubjectList from './SubjectList';
 function Page() {
 	return (
 		<>
-			<Link className="" href="/admin">
-				<Button className="title1 text-black my-4">
-					Back to Workspace tools
-				</Button>
-			</Link>
 			<PageStack>
+				<Link href="/admin">
+					<Button>Back to Workspace tools</Button>
+				</Link>
 				<PageHeader
 					title={'Subject Management'}
 					subtitle={'Workspace Tools'}

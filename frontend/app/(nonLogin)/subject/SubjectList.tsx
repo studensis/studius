@@ -1,6 +1,7 @@
 import { Button } from '../../../components/@studius/Button/Button';
 import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../components/@studius/PageElements/Block';
+import { Stack } from '../../../components/@studius/PageElements/Stack';
 import { Table } from '../../../components/@studius/Table/Table';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 import { UpdateSubjectModal } from './UpdateSubjectModal';
@@ -20,53 +21,61 @@ export default function SubjectList() {
 		// 	</Stack>
 		// </div>
 		<>
-			<Block>
-				<Table
-					titles={{
-						id: 'ID',
-						title: 'Title',
-						semester: 'Semester',
-						ectsBod: 'ECTS',
-					}}
-					objects={subjectList.data || []}
-					actionRow={(subject) => {
-						return (
-							<>
-								<div className="flex gap-2 flex-row-reverse">
-									<Button
-										leftIcon="delete"
-										onClick={() => {
-											subjectDelete.mutate(subject.id);
-										}}
-									></Button>
-									<Button
-										leftIcon="edit"
-										onClick={() => {
-											setModal(
-												<UpdateSubjectModal
-													subject={{
-														id: subject.id,
-														title: subject.title,
-														description: subject.description,
-														ECTS: subject.ectsBod,
-														semester: subject.semester,
-														status: subject.status,
-													}}
-												/>
-											);
-											// updateUser.mutate({
-											// 	id: user.id,
-											// 	firstname: 'Josip',
-											// });
-											subjectList.refetch();
-										}}
-									></Button>
-								</div>
-							</>
-						);
-					}}
-				></Table>
-			</Block>
+			<Stack cols={1}>
+				<Stack cols={3} mobileCols={1}>
+					<Block>
+						<p className="caption text-neutral-strong">Number of Subjects</p>
+						<p className="title2 text-neutral">{subjectList.data?.length}</p>
+					</Block>
+				</Stack>
+				<Block>
+					<Table
+						titles={{
+							id: 'ID',
+							title: 'Title',
+							semester: 'Semester',
+							ectsBod: 'ECTS',
+						}}
+						objects={subjectList.data || []}
+						actionRow={(subject) => {
+							return (
+								<>
+									<div className="flex gap-2 flex-row-reverse">
+										<Button
+											leftIcon="delete"
+											onClick={() => {
+												subjectDelete.mutate(subject.id);
+											}}
+										></Button>
+										<Button
+											leftIcon="edit"
+											onClick={() => {
+												setModal(
+													<UpdateSubjectModal
+														subject={{
+															id: subject.id,
+															title: subject.title,
+															description: subject.description,
+															ECTS: subject.ectsBod,
+															semester: subject.semester,
+															status: subject.status,
+														}}
+													/>
+												);
+												// updateUser.mutate({
+												// 	id: user.id,
+												// 	firstname: 'Josip',
+												// });
+												subjectList.refetch();
+											}}
+										></Button>
+									</div>
+								</>
+							);
+						}}
+					></Table>
+				</Block>
+			</Stack>
 		</>
 	);
 }
