@@ -17,4 +17,7 @@ export abstract class SeminarRepository {
 	async delete(seminarId: string): Promise<SeminarEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async approveSeminar(id: string): Promise<SeminarEntity> {
+		throw new Error('Method not implemented.');
+	}
 }

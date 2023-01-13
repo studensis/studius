@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { EventUserPresenceEntity } from '../../EventUserPresence/model/EventUserPresenceEntity';
 import { RoomTimeEventEntity } from '../model/RoomTimeEventEntity';
+import { updateRoomTimeEventEntity } from '../model/updateRoomTimeEventEntity';
 import { RoomTimeEventRepository } from './RoomTimeEventRepository';
 
 const prisma = new PrismaClient();
@@ -32,7 +33,7 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 		}
 	}
 
-	async update(roomTimeEventData: RoomTimeEventEntity) {
+	async update(roomTimeEventData: updateRoomTimeEventEntity) {
 		let updatedData = await prisma.roomTimeEvent.update({
 			where: {
 				id: roomTimeEventData.id,
@@ -74,6 +75,16 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 	}
 
 	async delete(roomTimeEventId: string) {
+		let response = await prisma.roomTimeEvent.delete({
+			where: {
+				id: roomTimeEventId,
+			},
+		});
+
+		return response;
+	}
+
+	async archive(roomTimeEventId: string) {
 		let response = await prisma.roomTimeEvent.update({
 			where: {
 				id: roomTimeEventId,
@@ -84,6 +95,20 @@ export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventReposito
 		});
 
 		return response;
+	}
+
+	async archiveByEventId(eventId: string) {
+		let response = await prisma.roomTimeEvent.updateMany({
+			where: {
+				eventId: eventId,
+			},
+			data: {
+				status: 'ARCHIVED',
+			},
+		});
+
+		if (response.count > 0) return 'success';
+		else return 'failure';
 	}
 
 	async listAssociatedEventUserPresences(id: string) {

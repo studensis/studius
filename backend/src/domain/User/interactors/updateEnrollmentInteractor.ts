@@ -1,10 +1,10 @@
-import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollment';
-import { UserRepository } from '../repository/UserRepository';
+import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollmentEntity';
+import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepository';
 
 export default async function updateEnrollmentInteractor(
-	userRepository: UserRepository,
+	enrollmentRepository: EnrollmentRepository,
 	newData: updateEnrollmentEntity
 ) {
-	let updatedEnrollment = await userRepository.updateEnrollment(newData);
+	let updatedEnrollment = await enrollmentRepository.updateEnrollment(newData);
 	return updatedEnrollment;
 }

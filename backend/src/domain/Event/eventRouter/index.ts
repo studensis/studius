@@ -1,7 +1,10 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import EventUserPresenceRepositoryPrisma from '../../EventUserPresence/repository/EventUserPresenceRepositoryPrisma';
+import archiveRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/archiveRoomTimeEventInteractor';
 import createRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/createRoomTimeEventInteractor';
+import deleteEventUserPresenceByRTEIDInteractor from '../../RoomTimeEvent/interactors/deleteEventUserPresenceByRTEIDInteractor';
 import deleteRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/deleteRoomTimeEventInteractor';
 import getRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/getRoomTimeEventInteractor';
 import listAssociatedEventUserPresencesInteractor from '../../RoomTimeEvent/interactors/listAssociatedEventUserPresencesInteractor';
@@ -10,6 +13,8 @@ import updateRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/updat
 import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
 import { updateRoomTimeEventEntity } from '../../RoomTimeEvent/model/updateRoomTimeEventEntity';
 import RoomTimeEventRepositoryPrisma from '../../RoomTimeEvent/repository/RoomTimeEventRepositoryPrisma';
+import archiveEventInteractor from '../interactors/archiveEventInteractor';
+import archiveRTEByEventIdInteractor from '../interactors/archiveRTEByEventIdInteractor';
 import createEventInteractor from '../interactors/createEventInteractor';
 import deleteEventInteractor from '../interactors/deleteEventInteractor';
 import getEventInteractor from '../interactors/getEventInteractor';
@@ -22,6 +27,7 @@ import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 
 let repo = new EventRepositoryPrisma();
 let RTErepo = new RoomTimeEventRepositoryPrisma();
+let EUPrepo = new EventUserPresenceRepositoryPrisma();
 
 export default t.router({
 	createEvent: t.procedure
@@ -77,6 +83,14 @@ export default t.router({
 			let updatedEvent = await updateEventInteractor(repo, event);
 			return updatedEvent;
 		}),
+	archiveEventById: t.procedure
+		.use(isAdmin)
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let b = await archiveRTEByEventIdInteractor(input, RTErepo);
+			let a = await archiveEventInteractor(input, repo);
+			return a;
+		}),
 	//
 	//
 	//
@@ -112,11 +126,20 @@ export default t.router({
 			return newRoomTimeEvent;
 		}),
 
-	unschedule: t.procedure
+	deleteSchedule: t.procedure
 		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
+			let b = await deleteEventUserPresenceByRTEIDInteractor(input, EUPrepo);
 			let a = await deleteRoomTimeEventInteractor(input, RTErepo);
+			return a;
+		}),
+
+	archiveSchedule: t.procedure
+		//.use(isAdmin)
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let a = await archiveRoomTimeEventInteractor(input, RTErepo);
 			return a;
 		}),
 

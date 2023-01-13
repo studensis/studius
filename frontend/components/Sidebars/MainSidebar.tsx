@@ -30,6 +30,7 @@ export default function MainSidebar() {
 							icon="calendar"
 							text="Assignments"
 						/>
+
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
 							<ListItems.Action
 								onClick={() => {

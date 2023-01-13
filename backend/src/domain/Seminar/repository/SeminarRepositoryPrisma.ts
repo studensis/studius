@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { approvedSeminarEntity } from '../model/approvedSeminarEntity';
 import { SeminarEntity } from '../model/SeminarEntity';
 import { updateSeminarEntity } from '../model/updateSeminarEntity';
 import { SeminarRepository } from './SeminarRepository';
@@ -89,6 +90,20 @@ export default class SeminarRepositoryPrisma extends SeminarRepository {
 			},
 		});
 		let rez: SeminarEntity = response;
+		return rez;
+	}
+
+	async approveSeminar(id: string) {
+		let change = await prisma.seminar.update({
+			where: {
+				id: id,
+			},
+			data: {
+				status: 'CONFIRMED',
+			},
+		});
+
+		let rez: approvedSeminarEntity = change;
 		return rez;
 	}
 }

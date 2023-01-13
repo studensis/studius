@@ -53,6 +53,7 @@ function Header() {
 					<div className="hidden md:flex">
 						<NavItem href="/intranet" icon="home" title="Homepage" />
 						<NavItem href="/calendar" icon="calendar" title="Assignments" />
+						<NavItem href="/seminars" icon="lessons" title="Seminars" />
 						{user && (user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (
 							<NavItem
 								href="/admin"

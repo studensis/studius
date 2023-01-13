@@ -1,9 +1,11 @@
 import { z } from 'zod';
 import { t } from '../../../controllers/trpc';
+import approveSeminarInteractor from '../interactors/approveSeminarInteractor';
 import createSeminarInteractor from '../interactors/createSeminarInteractor';
 import deleteSeminarInteractor from '../interactors/deleteSeminarInteractor';
 import getSeminarInteractor from '../interactors/getSeminarInteractor';
 import listSeminarsInteractor from '../interactors/listSeminarsInteractor';
+import listUserSeminars from '../interactors/listUserSeminars';
 import updateSeminarInteractor from '../interactors/updateSeminarInteractor';
 import { SeminarEntity } from '../model/SeminarEntity';
 import { updateSeminarEntity } from '../model/updateSeminarEntity';
@@ -56,7 +58,7 @@ export default t.router({
 				contentId: z.string().optional(),
 				subjectId: z.string().optional(),
 				userId: z.string().optional(),
-				status: z.enum(['DRAFT', 'CONFIRMED']).optional(),
+				status: z.enum(['DRAFT', 'CONFIRMED', 'READY']).optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -80,8 +82,39 @@ export default t.router({
 		return response;
 	}),
 
+	listUserSeminars: t.procedure
+		.input(
+			z.object({
+				id: z.string(),
+				options: z.object({ isMentor: z.boolean(), isStudent: z.boolean() }),
+			})
+		)
+		.query(async ({ input }) => {
+			let response = await listUserSeminars(repo, input);
+			return response;
+		}),
+
 	listSeminars: t.procedure.query(async () => {
 		let response = await listSeminarsInteractor(repo);
 		return response;
 	}),
+
+	approveSeminar: t.procedure
+		.input(
+			z.object({
+				seminarId: z.string(),
+				dateStart: z.string(),
+				dateEnd: z.string(),
+				roomId: z.string(),
+			})
+		)
+		.mutation(async ({ input }) => {
+			let a = {
+				...input,
+				dateStart: new Date(input.dateStart),
+				dateEnd: new Date(input.dateEnd),
+			};
+			let rez = await approveSeminarInteractor(repo, a);
+			return rez;
+		}),
 });

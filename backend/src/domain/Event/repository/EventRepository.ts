@@ -18,6 +18,9 @@ export abstract class EventRepository {
 	async delete(eventId: string): Promise<EventEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async archive(eventId: string): Promise<EventEntity> {
+		throw new Error('Method not implemented.');
+	}
 	async listAssociatedRoomTimeEvents(
 		id: string
 	): Promise<RoomTimeEventEntity[]> {
