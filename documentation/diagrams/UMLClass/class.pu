@@ -244,4 +244,4 @@ presenceStatus <- EventUserPresence
 Post ---> LinkedEntity
 Event -> LinkedEntity
 
-@@enduml
+@enduml

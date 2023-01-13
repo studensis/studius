@@ -37,7 +37,7 @@ export default async function approveSeminarInteractor(
 	let seminarRTE = await rteRepo.create(rte);
 
 	let pinnedEvent: SeminarSuggestionEntity = {
-		id: undefined,
+		id: '',
 		subjectId: confirmedSeminar.subjectId!,
 		eventId: seminarEvent.id!,
 	};

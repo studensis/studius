@@ -11,7 +11,7 @@ export abstract class ContentRepository {
 	async create(content: ContentEntity): Promise<ContentEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async update(content: updateContentEntity): Promise<updateContentEntity> {
+	async update(content: updateContentEntity): Promise<ContentEntity> {
 		throw new Error('Method not implemented.');
 	}
 	async delete(contentId: string): Promise<ContentEntity> {

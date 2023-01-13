@@ -4,7 +4,7 @@
 		<h3> Ak. god. 2022./2023. </h3>
 	</div>
 	<div class="middle">
-		<h1> Studensis </h1>
+		<h1> Studius </h1>
 		<h3> Dokumentacija </h3>
 	</div>
 	<div class="bottom">
@@ -108,12 +108,6 @@
 
 ## [8. Zaključak i budući rad](#8)
 
-#### [1. hello](#1)
-
-# O timu Studensis
-
-Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi svojim usmjerenjem tako da pokrivamo cjeloukupan stack potreban za razvoj platforme.
-
 # 1. Dnevnik promjena dokumentacije <a name="1"> </a>
 
 :[Dnevnik izmjena.md](./chapters/1_dnevnik.md)
@@ -144,4 +138,4 @@ Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi
 
 # 8. Zaključak i budući rad <a name="8"> </a>
 
-Zadatak naše grupe bio je stvaranje edukativne platforme, nešto slično ferwebu. Nakon 10 tjedana nastave odradili smo dio projekta. Zbog manjka iskustva rad je bio jako nespretan. U početku je bilo puno proučavanja različitih programskih potpora a s vremenom je bilo i promjena programska potpore. S druge strane u dokumentaciji je bio problem odrediti koliki dio projekta napraviti, s obzirom da nismo znali koliko ćemo stići za vrijeme programskog inženjerstva pa smo bili primorani smanjiti količinu zahtjeva projektnog zadatka. Unatoč mnoštvu problema ipak smo se snašli. Dobra komunikacija je bila ključna. Odvijala se putem Slacka i Whatsappa što nam je pomoglo u informiranju ostatka ekipe o napretku projekta ili postojećim problemima. Sudjelovanje na Studensis projektu je jako korisno iskustvo svim clanovima tima jer smo kroz intenzivnih nekoliko tjedana rada iskusili zajednički rad na projektu. Takoder, osjetili smo važnost dobre organiziranosti i dobre komunikacije među članovima tima. Osim toga naučili smo puno toga o samom kodiranju. Zadovoljni smo postignutim rezultatima, a u budućnosti i nakon programskog inženjerstva planiramo nastaviti raditi na ovom projektu.
+Zadatak naše grupe bio je stvaranje edukativne platforme, nešto slično ferwebu. Nakon 10 tjedana nastave odradili smo dio projekta. Zbog manjka iskustva rad je bio jako nespretan. U početku je bilo puno proučavanja različitih programskih potpora a s vremenom je bilo i promjena programska potpore. S druge strane u dokumentaciji je bio problem odrediti koliki dio projekta napraviti, s obzirom da nismo znali koliko ćemo stići za vrijeme programskog inženjerstva pa smo bili primorani smanjiti količinu zahtjeva projektnog zadatka. Unatoč mnoštvu problema ipak smo se snašli. Dobra komunikacija je bila ključna. Odvijala se putem Slacka i Whatsappa što nam je pomoglo u informiranju ostatka ekipe o napretku projekta ili postojećim problemima. Sudjelovanje na Studius projektu je jako korisno iskustvo svim clanovima tima jer smo kroz intenzivnih nekoliko tjedana rada iskusili zajednički rad na projektu. Takoder, osjetili smo važnost dobre organiziranosti i dobre komunikacije među članovima tima. Osim toga naučili smo puno toga o samom kodiranju. Zadovoljni smo postignutim rezultatima, a u budućnosti i nakon programskog inženjerstva planiramo nastaviti raditi na ovom projektu.

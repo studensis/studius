@@ -40,13 +40,13 @@ end
 else Opcija prijave preko Da
 |||
 
-    A -> B: 4. Odabir prijave preko Da
+    A -> B: 4. Odabir prijave preko Googlea
     	activate B #005DFF
     B -> D
     	activate D #005DFF
     D -> A: Prikaz dostupnih gmail adresa
     A -> D: 5. Odabir gmail adrese
-    D -> D: Provjera s D autentikacijom
+    D -> D: Provjera s Google autentikacijom
     D -> B: Success
     	deactivate D
     B -> A: Session Token
