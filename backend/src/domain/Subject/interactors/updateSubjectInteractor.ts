@@ -5,6 +5,7 @@ import { SubjectRepository } from '../repository/SubjectRepository';
 
 export default async function updateSubjectInteractor(
 	userId: string,
+	role: string,
 	enrollmentRepository: EnrollmentRepository,
 	subjectRepository: SubjectRepository,
 	subject: updateSubjectEntity
@@ -12,7 +13,8 @@ export default async function updateSubjectInteractor(
 	/* BUSINESS LOGIC */
 
 	let isEditor = await enrollmentRepository.isUserEditor(userId, subject.id);
-	if (!isEditor) {
+	console.log(userId, role);
+	if (!isEditor && role !== 'SUPERADMIN') {
 		throw new TRPCError({
 			code: 'FORBIDDEN',
 			message: 'Not permitted to edit subject',
