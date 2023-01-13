@@ -58,13 +58,13 @@ const TableData = ({
 );
 
 export const Table = <T extends { [key: string]: any }>({
-	titles,
 	objects,
-	actionRow,
+	titles,
 	onClick,
+	actionRow,
 }: {
-	titles: { [key: string]: string };
 	objects: T[];
+	titles: { [key in keyof T]?: string };
 	onClick?: (object: T) => void;
 	actionRow?: (object: T) => React.ReactNode;
 }) => {
