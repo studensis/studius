@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { trpc } from '../../../components/hooks/TrpcProvider';
-import Seminar from './Seminar';
+import Seminar2 from './Seminar2';
 import SeminarStudents from './SeminarStudents';
 
 const SeminarPage: FC<{ userId: string }> = ({ userId }) => {
@@ -23,7 +23,7 @@ const SeminarPage: FC<{ userId: string }> = ({ userId }) => {
 	return (
 		<div>
 			{isOwnerOnAnySubject ? (
-				<Seminar userId={userId} />
+				<Seminar2 userId={userId} />
 			) : (
 				<SeminarStudents userId={userId} />
 			)}
