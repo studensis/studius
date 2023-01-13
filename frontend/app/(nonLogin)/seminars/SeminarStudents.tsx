@@ -47,12 +47,17 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 									/>
 								</div>
 								<Button
+									disabled={seminar.status === 'CONFIRMED' ? true : false}
 									onClick={() => {
 										confirmSeminarDraft(seminar.id, content);
 									}}
 								>
 									Send Seminar Draft
 								</Button>
+
+								<div className="flex items-center text-accent-medium">
+									<h1 className="title3">CONFIRMED</h1>
+								</div>
 							</div>
 						</div>
 					))}
