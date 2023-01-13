@@ -48,6 +48,7 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 		let response = await prisma.room.create({
 			data: {
 				capacity: room.capacity,
+				title: room.title,
 			},
 		});
 

@@ -29,7 +29,12 @@ export default function SectionButton(props: {
 			>
 				<div className="select-none flex gap-2 w-full">
 					<Icon icon={props.icon} className={'bg-accent'} />
-					<div className="button-large justify-center items-center gap-1">
+					<div
+						className={classNames(
+							'button-large justify-center items-center gap-1',
+							props.disabled && 'text-accent-medium'
+						)}
+					>
 						{props.title}
 					</div>
 				</div>

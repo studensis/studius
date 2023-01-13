@@ -14,7 +14,7 @@ export const TextInput = ({
 	placeholder?: string;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	disabled?: boolean;
-	value?: string | null;
+	value?: string | null | any;
 }) => {
 	return (
 		<>
