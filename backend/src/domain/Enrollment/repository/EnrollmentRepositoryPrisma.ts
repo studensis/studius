@@ -105,7 +105,6 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	): Promise<EnrollmentEntity> {
 		let enrollment = await prisma.enrollment.create({
 			data: {
-				id: undefined,
 				userId: enrollmentData.userId,
 				subjectId: enrollmentData.subjectId,
 				enrollmentDate: undefined,

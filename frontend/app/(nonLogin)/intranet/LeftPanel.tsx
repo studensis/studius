@@ -5,7 +5,7 @@ import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export const LeftPanel = () => {
-	const events = trpc.roomTimeEvent.listRoomTimeEvents.useQuery();
+	const events = trpc.event.listAllSchedules.useQuery();
 
 	return (
 		<>

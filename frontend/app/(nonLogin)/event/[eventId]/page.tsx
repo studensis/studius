@@ -134,9 +134,7 @@ const Event = ({
 };
 
 export default function SubjectPage(props: PageProps) {
-	const roomTimeEvent = trpc.roomTimeEvent.getRoomTimeEventById.useQuery(
-		props.params.eventId
-	);
+	const roomTimeEvent = trpc.event.getSchedule.useQuery(props.params.eventId);
 	return (
 		<>
 			{roomTimeEvent.data && (

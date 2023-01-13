@@ -113,6 +113,7 @@ export default t.router({
 			let subject: updateSubjectEntity = { ...input };
 			let updatedSubject = await updateSubjectInteractor(
 				ctx.user.userId,
+				enrollmentRepo,
 				repo,
 				subject
 			);

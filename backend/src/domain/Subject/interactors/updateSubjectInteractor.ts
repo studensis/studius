@@ -1,15 +1,17 @@
 import { TRPCError } from '@trpc/server';
+import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepository';
 import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import { SubjectRepository } from '../repository/SubjectRepository';
 
 export default async function updateSubjectInteractor(
 	userId: string,
+	enrollmentRepository: EnrollmentRepository,
 	subjectRepository: SubjectRepository,
 	subject: updateSubjectEntity
 ) {
 	/* BUSINESS LOGIC */
 
-	let isEditor = await subjectRepository.isUserEditor(userId, subject.id);
+	let isEditor = await enrollmentRepository.isUserEditor(userId, subject.id);
 	if (!isEditor) {
 		throw new TRPCError({
 			code: 'FORBIDDEN',

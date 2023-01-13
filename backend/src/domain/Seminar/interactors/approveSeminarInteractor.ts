@@ -18,7 +18,7 @@ export default async function approveSeminarInteractor(
 	let confirmedSeminar = await seminarRepository.approveSeminar(data.seminarId);
 
 	let event: EventEntity = {
-		id: undefined,
+		id: confirmedSeminar.id,
 		title: confirmedSeminar.title,
 		description: confirmedSeminar.description!,
 		linkedEntity: 'SEMINAR',
@@ -27,7 +27,7 @@ export default async function approveSeminarInteractor(
 	let seminarEvent = await eventRepo.create(event);
 
 	let rte: RoomTimeEventEntity = {
-		id: undefined,
+		id: '',
 		dateStart: data.dateStart,
 		dateEnd: data.dateEnd,
 		eventId: seminarEvent.id!,

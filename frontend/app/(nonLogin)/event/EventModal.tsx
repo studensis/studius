@@ -11,8 +11,8 @@ type formData = {
 };
 
 const EventModal: FC<{ eventId: string }> = ({ eventId }) => {
-	const roomTimeEvents = trpc.roomTimeEvent.listRoomTimeEvents.useQuery();
-	const addRoomTimeEvent = trpc.roomTimeEvent.createRoomTimeEvent.useMutation();
+	const roomTimeEvents = trpc.event.listAllSchedules.useQuery();
+	const addRoomTimeEvent = trpc.event.schedule.useMutation();
 	const rooms = trpc.room.listRooms.useQuery();
 
 	const [formData, setFormData] = useState<formData>({

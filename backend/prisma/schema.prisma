@@ -60,7 +60,7 @@ model Enrollment {
   enrollmentDate DateTime    @default(now())
   roleTitle      SubjectRole
   status         Status      @default(ACTIVE)
-  id             String      @id
+  id             String      @id @default(uuid())
   subject        Subject     @relation(fields: [subjectId], references: [id])
   user           User        @relation(fields: [userId], references: [id])
 }
