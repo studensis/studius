@@ -188,6 +188,7 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 						suggestSeminar(form);
 					}}
 					className=""
+					loading={seminar.isLoading}
 				>
 					Suggest Seminar
 				</Button>
@@ -273,6 +274,7 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 											onClick={() => {
 												confirmDraft(seminar.id);
 											}}
+											loading={approveSeminar.isLoading}
 										>
 											Confirm Draft
 										</Button>

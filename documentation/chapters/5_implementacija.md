@@ -155,3 +155,13 @@ Cilj ovih sastanaka je usklađivanje s mentorima iz raznih zavoda, te iznošenje
 Dijelovi projekta su već započeti, naime Korisničko Putovanje (User Journey), model baze podataka za osnovni set funkcionalnosti, te istraživanje tehnologija koje bismo primjenjivali.
 
 ### 5.6.1 Frontend tijek <a name="5.6.1"> </a>
+
+## 5.7 Upute za puštanje u pogon
+
+### 5.7.1 Lokalno puštanje u pogon
+
+![Konzola](./images/konzola.jpg)
+Slika: Konzola u Visual Studio Code
+
+Najpopularniji paket menadžer je Node Package Manager - NPM, no mi smo koristili Yarn. Smatramo da je brži i jednostavniji za korištenje.
+U konzoli smo imali 4 terminala, za pokretanje backend poslužitelja, frontend poslužitelja, Prisma poslužitelja te za korištenje Gita. Backend i Frontend poslužitelj pokreću se naredbom yarn dev.
