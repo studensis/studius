@@ -23,7 +23,4 @@ export abstract class SubjectRepository {
 	async addContent(id: string, contentId: string[]): Promise<SubjectEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async isUserEditor(subjectId: string, userId: string): Promise<boolean> {
-		throw new Error('Method not implemented.');
-	}
 }

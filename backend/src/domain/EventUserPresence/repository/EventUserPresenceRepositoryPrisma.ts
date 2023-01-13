@@ -79,7 +79,7 @@ export default class EventUserPresenceRepositoryPrisma extends EventUserPresence
 			},
 		}); // ovo je tipa BatchPayload kojeg nema, nez sta je to lmfao budem kasnije
 
-		if (response) return 'success';
+		if (response.count > 0) return 'success';
 		else return 'failure';
 	}
 
