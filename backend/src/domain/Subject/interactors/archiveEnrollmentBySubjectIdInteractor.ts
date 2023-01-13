@@ -1,11 +1,9 @@
-import { SubjectRepository } from '../repository/SubjectRepository';
+import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepository';
 
 export default async function archiveEnrollmentBySubjectIdInteractor(
 	subjectId: string,
-	subjectRepository: SubjectRepository
+	enrollmentRepo: EnrollmentRepository
 ) {
-	let response = await subjectRepository.archiveEnrollmentBySubjectId(
-		subjectId
-	);
+	let response = await enrollmentRepo.archiveEnrollmentBySubjectId(subjectId);
 	return response;
 }

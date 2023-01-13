@@ -1,9 +1,9 @@
-import { UserRepository } from '../repository/UserRepository';
+import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepository';
 
 export default async function listEnrolledSubjectsInteractor(
-    userId: string, 
-    userRepository: UserRepository
+	userId: string,
+	enrollmentRepository: EnrollmentRepository
 ) {
-    let response = await userRepository.getEnrolledSubjects(userId);
-    return response;
+	let response = await enrollmentRepository.getEnrolledSubjects(userId);
+	return response;
 }

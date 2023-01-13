@@ -6,8 +6,8 @@ import {
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
-import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
 import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
 import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
@@ -21,8 +21,7 @@ import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
-let userRepo = new UserRepositoryPrisma();
-// let enrollmentRepo = EnrollmentRepositoryPrisma();
+let enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -62,7 +61,10 @@ export default t.router({
 				enrollmentDate: new Date(Date.now()),
 				status: 'ACTIVE',
 			};
-			let newEnrollment = await enrollUserInteractor(enrollment, userRepo);
+			let newEnrollment = await enrollUserInteractor(
+				enrollment,
+				enrollmentRepo
+			);
 
 			return newSubject;
 		}),
@@ -77,7 +79,10 @@ export default t.router({
 	archiveSubjectById: adminProcedure
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let b = await archiveEnrollmentBySubjectIdInteractor(input, repo);
+			let b = await archiveEnrollmentBySubjectIdInteractor(
+				input,
+				enrollmentRepo
+			);
 			let a = await archiveSubjectInteractor(input, repo);
 			return a;
 		}),
@@ -117,7 +122,10 @@ export default t.router({
 	getEnrolledUsers: publicProcedure
 		.input(z.string())
 		.query(async ({ input }) => {
-			let enrolledUsers = await listEnrolledUsersInteractor(repo, input);
+			let enrolledUsers = await listEnrolledUsersInteractor(
+				enrollmentRepo,
+				input
+			);
 			console.log(enrolledUsers);
 			return enrolledUsers;
 		}),

@@ -1,10 +1,10 @@
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
-import { UserRepository } from '../repository/UserRepository';
+import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepository';
 
 export default async function enrollUserIneractor(
 	enrollmentData: EnrollmentEntity,
-	userRepository: UserRepository
+	enrollmentRepository: EnrollmentRepository
 ) {
-	let response = await userRepository.enrollUser(enrollmentData);
+	let response = await enrollmentRepository.enrollUser(enrollmentData);
 	return response;
 }

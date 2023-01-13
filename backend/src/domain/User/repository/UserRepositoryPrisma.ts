@@ -1,6 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
-import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollment';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import { UserRepository } from './UserRepository';
@@ -80,52 +78,6 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		let rez: UserEntity = response;
 
-		return rez;
-	}
-
-	async enrollUser(
-		enrollmentData: EnrollmentEntity
-	): Promise<EnrollmentEntity> {
-		let enrollment = await prisma.enrollment.create({
-			data: {
-				id: undefined,
-				userId: enrollmentData.userId,
-				subjectId: enrollmentData.subjectId,
-				enrollmentDate: undefined,
-				roleTitle: enrollmentData.roleTitle,
-				status: enrollmentData.status,
-			},
-		});
-		let rez: EnrollmentEntity = enrollment;
-		return rez;
-	}
-
-	async getEnrolledSubjects(userId: string) {
-		let rez = await prisma.enrollment.findMany({
-			where: {
-				userId: userId,
-				status: 'ACTIVE',
-			},
-			include: {
-				subject: true,
-			},
-		});
-
-		return rez;
-	}
-
-	async updateEnrollment(newData: updateEnrollmentEntity) {
-		let updatedData = await prisma.enrollment.update({
-			where: {
-				id: newData.id,
-			},
-			data: {
-				roleTitle: newData.roleTitle,
-				status: newData.status,
-			},
-		});
-
-		let rez: EnrollmentEntity = updatedData;
 		return rez;
 	}
 

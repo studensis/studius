@@ -5,6 +5,7 @@ import {
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
+import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
@@ -19,6 +20,7 @@ import { UserEntity } from '../model/UserEntity';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 let repo = new UserRepositoryPrisma();
+let enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 export default t.router({
 	createUser: adminProcedure
@@ -109,8 +111,10 @@ export default t.router({
 				roleTitle: input.roleTitle,
 				status: input.status,
 			};
-
-			let newEnrollment = await enrollUserInteractor(enrollment, repo);
+			let newEnrollment = await enrollUserInteractor(
+				enrollment,
+				enrollmentRepo
+			);
 			return newEnrollment;
 		}),
 
@@ -118,7 +122,10 @@ export default t.router({
 
 		.input(z.string())
 		.query(async ({ input }) => {
-			let enrollments = await listEnrolledSubjectsInteractor(input, repo);
+			let enrollments = await listEnrolledSubjectsInteractor(
+				input,
+				enrollmentRepo
+			);
 			return enrollments;
 		}),
 
@@ -147,7 +154,7 @@ export default t.router({
 			};
 
 			let updatedEnrollment = await updateEnrollmentInteractor(
-				repo,
+				enrollmentRepo,
 				updateData as EnrollmentEntity
 			);
 			return updatedEnrollment;
