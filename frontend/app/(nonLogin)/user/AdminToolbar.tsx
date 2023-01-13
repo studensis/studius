@@ -17,7 +17,7 @@ export default function AdminToolbar() {
 					setModal(<CreateUserModal />);
 				}}
 			>
-				Create user
+				Create User
 			</Button>
 		);
 	} else {
