@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import createEventInteractor from '../../Event/interactors/createEventInteractor';
 import { EventEntity } from '../../Event/model/EventEntity';
 import { EventRepository } from '../../Event/repository/EventRepository';
@@ -17,6 +18,14 @@ export default async function approveSeminarInteractor(
 	pinnedEvenRepository: SeminarSuggestionRepository,
 	data: approvalData
 ) {
+	let existingSeminar = await seminarRepository.getById(data.seminarId);
+
+	if (existingSeminar.status == 'CONFIRMED') {
+		throw new TRPCError({
+			code: 'BAD_REQUEST',
+			message: 'Seminar already approved',
+		});
+	}
 	let confirmedSeminar = await seminarRepository.approveSeminar(data.seminarId);
 
 	let event: EventEntity = {

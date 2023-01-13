@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { t } from '../../../controllers/trpc';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
@@ -96,17 +97,33 @@ export default t.router({
 		.input(
 			z.object({
 				seminarId: z.string(),
-				dateStart: z.number(),
-				dateEnd: z.number(),
+				dateStart: z.string(),
+				dateEnd: z.string(),
 				roomId: z.string(),
 			})
 		)
 		.mutation(async ({ input }) => {
+			if (
+				!input.dateEnd ||
+				input.dateEnd == '' ||
+				!input.dateStart ||
+				input.dateStart == '' ||
+				!input.roomId ||
+				input.roomId == '' ||
+				input.seminarId == '' ||
+				!input.seminarId
+			) {
+				throw new TRPCError({
+					code: 'BAD_REQUEST',
+					message: 'Wrong input',
+				});
+			}
 			let a = {
 				...input,
-				dateStart: new Date(input.dateStart * 1000),
-				dateEnd: new Date(input.dateEnd * 1000),
+				dateStart: new Date(input.dateStart),
+				dateEnd: new Date(input.dateEnd),
 			};
+
 			let rez = await approveSeminarInteractor(
 				repo,
 				eventRepo,
