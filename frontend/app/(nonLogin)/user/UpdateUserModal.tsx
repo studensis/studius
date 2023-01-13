@@ -51,7 +51,7 @@ export const UpdateUserModal = ({
 		<>
 			<div className="p-6 md:p-10">
 				<PageStack>
-					<h1 className="display3">Create User</h1>
+					<h1 className="display3">Edit User</h1>
 
 					{updateUser.isSuccess && (
 						<Block success>
