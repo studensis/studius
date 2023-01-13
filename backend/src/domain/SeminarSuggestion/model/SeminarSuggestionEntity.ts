@@ -1,5 +1,5 @@
 export type SeminarSuggestionEntity = {
-	id?: string;
+	id: string;
 	subjectId: string; // Subject
 	eventId: string;
 };
