@@ -88,6 +88,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 	): Promise<EnrollmentEntity> {
 		let enrollment = await prisma.enrollment.create({
 			data: {
+				id: undefined,
 				userId: enrollmentData.userId,
 				subjectId: enrollmentData.subjectId,
 				enrollmentDate: undefined,
@@ -116,10 +117,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 	async updateEnrollment(newData: updateEnrollmentEntity) {
 		let updatedData = await prisma.enrollment.update({
 			where: {
-				userId_subjectId: {
-					userId: newData.userId,
-					subjectId: newData.subjectId,
-				},
+				id: newData.id,
 			},
 			data: {
 				roleTitle: newData.roleTitle,
