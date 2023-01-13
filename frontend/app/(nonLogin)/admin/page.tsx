@@ -32,7 +32,7 @@ const Sections = () => {
 					title={'Post Management'}
 					href={'/post'}
 				/>
-				<SectionButton icon={'lessons'} title={'Seminar Management'} disabled />
+				{/* <SectionButton icon={'lessons'} title={'Seminar Management'} disabled /> */}
 			</Stack>
 		</>
 	);
