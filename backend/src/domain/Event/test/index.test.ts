@@ -89,7 +89,7 @@ test('Event schedule (create RoomTimeEvent)', async () => {
 		eventId: eventId,
 		roomId: roomId,
 	});
-	expect(newEvent).not.toBeNull();
+	expect(newRTE).not.toBeNull();
 });
 //
 //
