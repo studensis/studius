@@ -33,4 +33,5 @@
 | 0.7.9    | Prikaz aktivnosti grupe                                           | Cijeli tim                  | 15.12.2022. |
 | 0.7.10   | Korigiranje teksta i provjera dokumentacije                       | Cijeli tim                  | 15.12.2022. |
 | 0.8      | Izmjena raspisa baze, dijagrama baze i klasnog dijagrama podataka | Hary Samardžić              | 13.1.2023.  |
-| 0.8.1    | Dodavanje dijagrama stanja, aktivnosti, razmještanja i komponenti | Cijeli tim                  | 13.1.2023.  |
+| 0.8.1    | Dodavanje dijagrama stanja, aktivnosti, razmještanja              | Cijeli tim                  | 13.1.2023.  |
+| 0.8.2    | Dodavanje dijagrama komponenti                                    | Matija Fućek                | 14.1.2023.  |
