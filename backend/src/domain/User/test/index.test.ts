@@ -3,6 +3,7 @@ import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollmentE
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import { SubjectEntity } from '../../Subject/model/SubjectEntity';
 import createUserInteractor from '../interactors/createUserInteractor';
+import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserIneractor from '../interactors/enrollUserIneractor';
 import getUserByEmailInteractor from '../interactors/getUserByEmailInteractor';
 import getUserInteractor from '../interactors/getUserInteractor';
@@ -108,4 +109,12 @@ test('User mentee list', async () => {
 	id = newUser.id;
 	mentees = await listMenteesInteractor(userRepo, id);
 	expect(mentees).not.toBeNull();
+});
+
+let deletedUser: UserEntity;
+
+test('User delete', async () => {
+	id = newUser.id;
+	deletedUser = await deleteUserInteractor(id, userRepo, enrollmentRepo);
+	expect(deletedUser).not.toBeNull();
 });

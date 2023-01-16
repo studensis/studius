@@ -1,3 +1,4 @@
+import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import createEventInteractor from '../../Event/interactors/createEventInteractor';
 import deleteEventInteractor from '../../Event/interactors/deleteEventInteractor';
 import { EventEntity } from '../../Event/model/EventEntity';
@@ -29,6 +30,7 @@ const RTErepo = new RoomTimeEventRepositoryPrisma();
 const roomRepo = new RoomRepositoryPrisma();
 const userRepo = new UserRepositoryPrisma();
 const EUPrepo = new EventUserPresenceRepositoryPrisma();
+const enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 let testEvent: EventEntity = {
 	id: '',
@@ -183,6 +185,10 @@ test('Room delete', async () => {
 });
 test('User delete', async () => {
 	userId = newUser.id;
-	let deleteUser: UserEntity = await deleteUserInteractor(userId, userRepo);
+	let deleteUser: UserEntity = await deleteUserInteractor(
+		userId,
+		userRepo,
+		enrollmentRepo
+	);
 	expect(deleteUser).not.toBeNull();
 });
