@@ -29,7 +29,11 @@ const RTErepo = new RoomTimeEventRepositoryPrisma();
 const userRepo = new UserRepositoryPrisma();
 const roomRepo = new RoomRepositoryPrisma();
 
-let newEventUserPresence: EventUserPresenceEntity;
+let newEUP: EventUserPresenceEntity;
+let newUser: UserEntity;
+let newRoom: RoomEntity;
+let newEvent: EventEntity;
+let newRTE: RoomTimeEventEntity;
 let EUPID: string;
 let eventId: string;
 let RTEID: string;
@@ -39,7 +43,7 @@ let roomId: string;
 // kreacije entiteta bitnih za CRUD EventUserPresence-a
 
 test('Event create', async () => {
-	let newEvent = await createEventInteractor(eventRepo, {
+	newEvent = await createEventInteractor(eventRepo, {
 		id: '',
 		title: 'test test test test',
 		description: '',
@@ -50,7 +54,7 @@ test('Event create', async () => {
 	expect(newEvent).not.toBeNull();
 });
 test('Room create', async () => {
-	let newRoom = await createRoomInteractor(roomRepo, {
+	newRoom = await createRoomInteractor(roomRepo, {
 		id: '',
 		title: 'test test test',
 		capacity: 20,
@@ -59,7 +63,7 @@ test('Room create', async () => {
 	expect(newRoom).not.toBeNull();
 });
 test('RTE create', async () => {
-	let newRTE = await createRoomTimeEventInteractor(RTErepo, {
+	newRTE = await createRoomTimeEventInteractor(RTErepo, {
 		id: '',
 		eventId: eventId,
 		roomId: roomId,
@@ -71,7 +75,7 @@ test('RTE create', async () => {
 	expect(newRTE).not.toBeNull();
 });
 test('User create', async () => {
-	let newUser = await createUserInteractor(userRepo, {
+	newUser = await createUserInteractor(userRepo, {
 		id: '',
 		password: '123456789',
 		firstname: 'test',
@@ -96,31 +100,33 @@ let testEventUserPresence: EventUserPresenceEntity = {
 	userId: '',
 };
 test('EventUserPresence create', async () => {
-	newEventUserPresence = await createEventUserPresenceInteractor(repo, {
+	RTEID = newRTE.id;
+	userId = newUser.id;
+	newEUP = await createEventUserPresenceInteractor(repo, {
 		...testEventUserPresence,
 		roomTimeEventId: RTEID,
 		userId: userId,
 	});
-	EUPID = newEventUserPresence.id;
-	expect(newEventUserPresence).not.toBeNull();
+	EUPID = newEUP.id;
+	expect(newEUP).not.toBeNull();
 });
 
 test('EventUserPresence update', async () => {
-	EUPID = newEventUserPresence.id;
-	let updateEventUserPresence: updateEventUserPresenceEntity = {
+	EUPID = newEUP.id;
+	let updateEUP: updateEventUserPresenceEntity = {
 		id: EUPID,
 		presenceStatus: false,
 	};
-	newEventUserPresence = await updateEventUserPresenceInteractor(
-		repo,
-		updateEventUserPresence
-	);
-	expect(newEventUserPresence).not.toBeNull();
+	newEUP = await updateEventUserPresenceInteractor(repo, updateEUP);
+	expect(newEUP).not.toBeNull();
 });
 test('EventUserPresence get', async () => {
-	let newEventUserPresence: EventUserPresenceEntity =
-		await getEventUserPresenceInteractor(repo, EUPID);
-	expect(newEventUserPresence).not.toBeNull();
+	EUPID = newEUP.id;
+	let EUP: EventUserPresenceEntity = await getEventUserPresenceInteractor(
+		repo,
+		EUPID
+	);
+	expect(EUP).not.toBeNull();
 });
 
 test('EventUserPresence list', async () => {
@@ -135,26 +141,34 @@ test('EventUserPresence list', async () => {
 //
 // deletion
 test('EventUserPresence delete', async () => {
-	let newEventUserPresence: EventUserPresenceEntity =
+	EUPID = newEUP.id;
+	let deleteEUP: EventUserPresenceEntity =
 		await deleteEventUserPresenceInteractor(EUPID, repo);
-	expect(newEventUserPresence).not.toBeNull();
+	expect(deleteEUP).not.toBeNull();
 });
 test('RTE delete', async () => {
-	let newRTE: RoomTimeEventEntity = await deleteRoomTimeEventInteractor(
+	RTEID = newRTE.id;
+	let deleteRTE: RoomTimeEventEntity = await deleteRoomTimeEventInteractor(
 		RTEID,
 		RTErepo
 	);
-	expect(newRTE).not.toBeNull();
+	expect(deleteRTE).not.toBeNull();
 });
 test('Room delete', async () => {
-	let newRoom: RoomEntity = await deleteRoomInteractor(roomId, roomRepo);
-	expect(newRoom).not.toBeNull();
+	roomId = newRoom.id;
+	let deleteRoom: RoomEntity = await deleteRoomInteractor(roomId, roomRepo);
+	expect(deleteRoom).not.toBeNull();
 });
 test('Event delete', async () => {
-	let newEvent: EventEntity = await deleteEventInteractor(eventId, eventRepo);
-	expect(newEvent).not.toBeNull();
+	eventId = newEvent.id;
+	let deleteEvent: EventEntity = await deleteEventInteractor(
+		eventId,
+		eventRepo
+	);
+	expect(deleteEvent).not.toBeNull();
 });
 test('User delete', async () => {
-	let newUser: UserEntity = await deleteUserInteractor(userId, userRepo);
-	expect(newUser).not.toBeNull();
+	userId = newUser.id;
+	let deleteUser: UserEntity = await deleteUserInteractor(userId, userRepo);
+	expect(deleteUser).not.toBeNull();
 });
