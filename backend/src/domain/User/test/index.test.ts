@@ -1,7 +1,10 @@
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import { updateEnrollmentEntity } from '../../Enrollment/model/updateEnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
+import createSubjectInteractor from '../../Subject/interactors/createSubjectInteractor';
+import deleteSubjectInteractor from '../../Subject/interactors/deleteSubjectInteractor';
 import { SubjectEntity } from '../../Subject/model/SubjectEntity';
+import SubjectRepositoryPrisma from '../../Subject/repository/SubjectRepositoryPrisma';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserIneractor from '../interactors/enrollUserIneractor';
@@ -18,6 +21,7 @@ import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 let userRepo = new UserRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
+let subjectRepo = new SubjectRepositoryPrisma();
 
 let testUser: UserEntity = {
 	id: '',
@@ -26,22 +30,39 @@ let testUser: UserEntity = {
 	password: 'password',
 	jmbag: '0036500000',
 	email: 'testuser@fer.hr',
-	userRole: 'ADMIN',
+	userRole: 'DEFAULT',
 	mentorID: null,
+};
+let testSubject: SubjectEntity = {
+	id: '',
+	title: 'Test',
+	description: 'User',
+	ectsBod: 'password',
+	semester: 'WINTER',
+	status: 'ACTIVE',
+	contentId: [],
 };
 
 let newUser: UserEntity;
-let id: string;
+let newSubject: SubjectEntity;
+let newEnrollment: EnrollmentEntity;
+let userId: string;
+let subjectId: string;
+let enrollmentId: string;
 
 test('User create', async () => {
 	newUser = await createUserInteractor(userRepo, testUser);
 	expect(newUser).not.toBeNull();
 });
+test('Subject create', async () => {
+	newSubject = await createSubjectInteractor(subjectRepo, testSubject);
+	expect(newSubject).not.toBeNull();
+});
 
 test('User update', async () => {
-	id = newUser.id;
+	userId = newUser.id;
 	let updatedUser: updateUserEntity = {
-		id: id,
+		id: userId,
 		lastname: 'Updated User',
 	};
 	newUser = await updateUserInteractor(userRepo, updatedUser);
@@ -49,7 +70,7 @@ test('User update', async () => {
 });
 
 test('User get', async () => {
-	let singleUser: UserEntity | null = await getUserInteractor(userRepo, id);
+	let singleUser: UserEntity | null = await getUserInteractor(userRepo, userId);
 	expect(singleUser).not.toBeNull();
 });
 
@@ -64,14 +85,13 @@ test('User get by email', async () => {
 	expect(result).not.toBeNull();
 });
 
-let newEnrollment: EnrollmentEntity;
-let enrollmentData: EnrollmentEntity;
-
 test('User enroll', async () => {
+	userId = newUser.id;
+	subjectId = newSubject.id;
 	let enrollmentData: EnrollmentEntity = {
 		id: '',
-		userId: newUser.id,
-		subjectId: '7ccba04d-be83-4ae2-84d1-d74ef99a164e',
+		userId: userId,
+		subjectId: subjectId,
 		enrollmentDate: null,
 		roleTitle: 'STUDENT',
 		status: 'ACTIVE',
@@ -98,23 +118,28 @@ test('Enrollment update', async () => {
 let enrollmentList: (EnrollmentEntity & { subject: SubjectEntity })[];
 
 test('User enrollment list', async () => {
-	id = newUser.id;
-	enrollmentList = await listEnrolledSubjectsInteractor(id, enrollmentRepo);
+	userId = newUser.id;
+	enrollmentList = await listEnrolledSubjectsInteractor(userId, enrollmentRepo);
 	expect(enrollmentList).not.toBeNull();
 });
 
 let mentees: UserEntity[] | null;
 
 test('User mentee list', async () => {
-	id = newUser.id;
-	mentees = await listMenteesInteractor(userRepo, id);
+	userId = newUser.id;
+	mentees = await listMenteesInteractor(userRepo, userId);
 	expect(mentees).not.toBeNull();
 });
 
 let deletedUser: UserEntity;
 
 test('User delete', async () => {
-	id = newUser.id;
-	deletedUser = await deleteUserInteractor(id, userRepo, enrollmentRepo);
+	userId = newUser.id;
+	deletedUser = await deleteUserInteractor(userId, userRepo, enrollmentRepo);
 	expect(deletedUser).not.toBeNull();
+});
+test('Subject delete', async () => {
+	subjectId = newSubject.id;
+	let deleteSubject = await deleteSubjectInteractor(subjectId, subjectRepo);
+	expect(deleteSubject).not.toBeNull();
 });
