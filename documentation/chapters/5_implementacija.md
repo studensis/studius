@@ -1,31 +1,61 @@
 ## 5.1 Korištene tehnologije i alati
 
-Development frontenda bi bio baziran na dizajnu izrađenom u **Figmi**. Definiran bi bio kompletan Design System, i svaka nova komponenta bi bila dokumentirana.
+Komunikacija u timu je realizirana primarno aplikacijom _**Slack**_, te po potrebi i _**WhatsAppom**_. Za izradu dokumentacije korišten je jezik _**Markdown**_, ta za izradu UML dijagrama korišteni su programi Figma, _**Visual Paradigm**_, te kasnije i _**PlantUML**_.
 
-Frontend bi bio implementiran koristeći React, posebno **NextJS** uz **Typescript**. Za stilove bi bio korišten **Tailwind** CSS.
+Kao razvojno okruženje korišten je Microsoftov _**Visual Studio Code**_. Kao sustav za upravljanje izvornim kodom korislitli smo _**Git**_. Udaljeni repozitorij projekta je dostupan na web platformi _**GitLab**_.
 
-Backend bi bio pisan u **Nodeu** kroz Typescript, te bismo koristili **Supabase** kao rješenje za pohranu podataka.
+Cijela platforma je pisana jezikom _**Typescript**_, frontend je realiziran uporabom razvojnog okvira _**NextJS**_ koji je nadogradnja okruženja _**React**_, backend uporabom okvira _**ExpressJS**_ unutar okruženja NodeJS, te HTTP komunikacija između klijenta, frontend i backend poslužitelja putem _**TRPC**_ tehnologije (Typescript Remote Procedure Call).
 
-Većina funkcionalnosti na frontu bi bila zamotana kroz **Serverless** APIje, koje nam omogućuje hostanje preko **Vercela** (kreatori NextJS-a)
+Dizajn platforme stvoren je uporabom alata _**Figma**_, te je razvoj izgleda komponenti u sklopu Reacta bio realiziran _**Tailwind CSS**_ bibliotekom.
 
-Komunikacija u time je realizirana korištenjem aplikacija WhatsApp i Slack. Za izradu UML dijagrama korišteni su alati Figma, Visual Paradigm u početku, a kasnije smo se prebacili na PlantUML radi efikasnosti. Kao sustav za upravljanje izvornim kodom Git. Repozitorij projekta je dostupan na web platformi GitLab. Kao razvojno okruzenje korišten je Microsoft Visual Studio - integrirano je razvojno okruzenje (IDE) tvrtke Microsoft. Prvenstveno se koristi za razvoj računalnih programa za operacijski sustav Windows, kao i za web-stranice, web-aplikacije, web-usluge i mobilne aplikacije. Visual Studio za razvoj softvera koristi Microsoftove platforme kao sto su Windows API, Windows Forms, Windows Presentation Foundation, Windows Store i Microsoft Silverlight. Aplikacija je napisana koristeci radni okvir Express, Node.js framework za izradu backenda te Nextjs, Javascript framework za izradu frontenda. Nextjs, je biblioteka u JavaScriptu za izgradnju korisnickih sucelja. Ima sve identično kao React uz još neke nadodane funkcionalnosti. React se najčešćce koristi kao osnova u razvoju web ili mobilnih aplikacija. Složene aplikacije u Reactu obično zahtijevaju korištenje dodatnih biblioteka za interakciju s API-jem. Baza podataka se nalazi na posluzitelju u oblaku Microsoft Azure ˇ
+Backend smo poslužili putem _**Railway**_ servisa, frontend putem _**Vercela**_, pohranu podataka u _**PostgreSQL**_ bazi putem _**Supabase**_ servisa, te komunikaciju između Backenda i Baze podataka putem _**Prisma**_ ORM-a.
 
 ### 5.1.1 Reference <a name="5.1.1"> </a>
 
-1. https://www.whatsapp.com/
-2. https://www.visual-paradigm.com/
-3. https://gitlab.com/
-4. https://visualstudio.microsoft.com/
-5. https://reactjs.org/
-6. https://www.javascript.com/
-7. https://supabase.com/
-8. https://www.w3schools.com/js/
-9. https://nextjs.org/docs
-10. https://next-auth.js.org/
-11. https://www.prisma.io/docs
-12. https://www.postgresql.org/docs/
+1. [https://www.whatsapp.com/](https://www.whatsapp.com/)
+1. [https://www.slack.com/](https://www.slack.com/)
+1. [https://www.markdownguide.org/](https://www.markdownguide.org/)
+1. [https://www.visual-paradigm.com/](https://www.visual-paradigm.com/)
+1. [https://plantuml.com/](https://plantuml.com/)
+1. [https://code.visualstudio.com/](https://code.visualstudio.com/)
+1. [https://git-scm.com/](https://git-scm.com/)
+1. [https://gitlab.com/](https://gitlab.com/)
+1. [https://www.typescriptlang.org/](https://www.typescriptlang.org/)
+1. [https://nextjs.org/](https://nextjs.org/)
+1. [https://reactjs.org/](https://reactjs.org/)
+1. [https://expressjs.com/](https://expressjs.com/)
+1. [https://trpc.io/](https://trpc.io/)
+1. [https://www.figma.com/](https://www.figma.com/)
+1. [https://www.tailwindcss.com/](https://www.tailwindcss.com/)
+1. [https://railway.app/](https://railway.app/)
+1. [https://vercel.com/](https://vercel.com/)
+1. [https://supabase.com/](https://supabase.com/)
+1. [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
+1. [https://www.prisma.io/docs](https://www.prisma.io/docs)
 
 ## 5.2 Ispitivanje programskog rješenja <a name="5.2"> </a>
+
+Svi unit testovi pisani su uporabom biblioteke _**Jest**_. Ispitivanje se radilo po use caseovima koji se temelje na osnovnim funkcijama kreiranja, čitanja, uređivanja i brisanja svakog entiteta u sustavu. (UC6, UC7, UC10, UC19, UC20, UC21, UC22, UC23, UC24, UC26, UC27, te ostale metode manipulacije entiteta u sustavu, brojeći 63 u totalu).
+
+Testovi su se pokazali korisni u koraku prije deploymenta na udaljena računala jer su male promjene u sustavu znale uzrokovat pojavu grešaka u nepovezanom dijelu koji je koristio zajednički dio koda. Temeljito pisanim testovima, ovakve greške su se vrlo brzo identificirale i popravile.
+
+### Automatizirani ispitni slučaj 1: Upis dostupnog kolegija
+
+Ulaz:
+
+1. Stvaranje korisnika
+2. Stvaranje kolegija
+3. Upis korisnika u kolegij
+4. Ponovni upis korisnika u kolegij
+
+Očekivani rezultat:
+
+1. Metoda vraća kreiranog korisnika
+2. Metoda vraća kreiran kolegij
+3. Metoda vraća instancu upisa (Enrollment object)
+4. Metoda vraća pogrešku jer je korisnik već upisan
+
+Rezultat: Očekivani rezultat (4.) nije zadovoljen obzirom da nije vraćena greška već je korisnik dvaput upisan na predmet
 
 ## 5.3 Dijagram razmještaja <a name="5.3"> </a>
 

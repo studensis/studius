@@ -110,17 +110,6 @@
   2.  Pošalje zahtjev za održavanje seminara sa željenom temom
   3.  Čeka profesora da odobri
 
-**UC11 Pregled statistike ispita**
-
-- Glavni sudionik: Profesor
-- cilj: pregledati statistiku ispita
-- sudionici: Baza podataka
-- preduvjet: Korsnik ima svoj račun i ulogiran je u sustav sa statusom doktoranda
-- opis osnovnog tijeka:
-  1.  Profesor klikne na jedan od predmeta na kojima predaje
-  2.  Zatim klikne na "statistika ispita"
-  3.  Prikaže mu se statistika ispita
-
 **UC12 Pregledati popis korisnika na predmetima koje predaje**
 
 - Glavni sudionik: Profesor

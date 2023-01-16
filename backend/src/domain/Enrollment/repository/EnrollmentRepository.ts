@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { SubjectEntity } from '../../Subject/model/SubjectEntity';
 import { UserEntity } from '../../User/model/UserEntity';
 import { EnrollmentEntity } from '../model/EnrollmentEntity';
@@ -41,5 +42,8 @@ export abstract class EnrollmentRepository {
 		enrollmentData: EnrollmentEntity
 	): Promise<EnrollmentEntity> {
 		throw new Error('Method not implemented.');
+	}
+	async deleteUserEnrollments(userId: string): Promise<Prisma.BatchPayload> {
+		throw new Error('Method not implemented');
 	}
 }
