@@ -150,7 +150,7 @@ export default t.router({
 
 	listAllSchedules: t.procedure.query(async () => {
 		let roomTimeEvents = await listRoomTimeEventsInteractor(RTErepo);
-		return roomTimeEvents as RoomTimeEventEntity[];
+		return roomTimeEvents;
 	}),
 
 	listSchedules: t.procedure.input(z.string()).query(async ({ input }) => {

@@ -61,7 +61,10 @@ function SubjectPage(props: PageProps) {
 							<Stack cols={3}>
 								{enrolledUsers.data &&
 									enrolledUsers.data.map((enrolledUser) => (
-										<UserCard user={enrolledUser.user} />
+										<UserCard
+											user={enrolledUser.user}
+											role={enrolledUser.roleTitle}
+										/>
 									))}
 							</Stack>
 						</div>

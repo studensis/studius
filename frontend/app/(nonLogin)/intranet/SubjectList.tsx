@@ -1,8 +1,6 @@
-import Link from 'next/link';
-import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
 import { Spinner } from '../../../components/@studius/Spinner/Spinner';
-import Tag from '../../../components/@studius/Tag/Tag';
+import SubjectCard from '../../../components/Cards/SubjectCard';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
@@ -15,24 +13,10 @@ export default function SubjectList() {
 				{enrolledSubjects.isLoading && <Spinner />}
 				{enrolledSubjects.data &&
 					enrolledSubjects.data.map((enrolledSubject) => (
-						<Link
-							href={`/subject/${enrolledSubject.subject.id}`}
-							key={enrolledSubject.subject.id}
-						>
-							<Block>
-								<div className="p caption text-neutral-strong">
-									{enrolledSubject.subject.id} [
-									{enrolledSubject.subject.ectsBod}]
-								</div>
-								{enrolledSubject.subject.title}
-								{enrolledSubject.roleTitle !== 'STUDENT' && (
-									<>
-										<br />
-										<Tag>{enrolledSubject.roleTitle}</Tag>
-									</>
-								)}
-							</Block>
-						</Link>
+						<SubjectCard
+							subject={enrolledSubject.subject}
+							role={enrolledSubject.roleTitle}
+						/>
 					))}
 			</Stack>
 		</>

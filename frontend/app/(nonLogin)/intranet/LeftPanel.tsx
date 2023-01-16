@@ -18,7 +18,7 @@ export const LeftPanel = () => {
 					<Calendar
 						events={events.data.map((event) => {
 							return {
-								title: event.eventId,
+								title: event.event.title,
 								timeDateUnix: new Date(event.dateStart).getTime(),
 								id: event.id,
 							};

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Button } from '../../../components/@studius/Button/Button';
 import useDialog from '../../../components/@studius/Modal/DialogProvider';
@@ -27,6 +28,8 @@ export default function SubjectList() {
 	}, [deleteUser]);
 
 	const { setModal } = useDialog();
+
+	const router = useRouter();
 
 	return (
 		<>
@@ -95,6 +98,7 @@ export default function SubjectList() {
 								);
 							}}
 							onClick={(user) => {
+								router.push('/user/' + user.id);
 								console.log(user);
 							}}
 						/>

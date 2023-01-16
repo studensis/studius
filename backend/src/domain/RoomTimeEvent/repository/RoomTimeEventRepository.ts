@@ -1,9 +1,10 @@
+import { EventEntity } from '../../Event/model/EventEntity';
 import { EventUserPresenceEntity } from '../../EventUserPresence/model/EventUserPresenceEntity';
 import { RoomTimeEventEntity } from '../model/RoomTimeEventEntity';
 import { updateRoomTimeEventEntity } from '../model/updateRoomTimeEventEntity';
 
 export abstract class RoomTimeEventRepository {
-	async getAll(): Promise<RoomTimeEventEntity[]> {
+	async getAll(): Promise<(RoomTimeEventEntity & { event: EventEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<RoomTimeEventEntity> {

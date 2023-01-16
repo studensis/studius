@@ -43,6 +43,7 @@ const Day = ({
 					}
 				}}
 				className={classNames(
+					'cursor-pointer',
 					'relative w-8 h-8 rounded-xl cursor-default',
 					'hover:bg-accent-weak',
 					day.selected && 'bg-accent text-special-white hover:bg-accent',
@@ -315,7 +316,7 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 			)}
 			{eventsOnSelectedDay.map((event, i) => (
 				<Link key={i} href={`/event/${event.id}`}>
-					<Block>
+					<Block className="hover:opacity-60">
 						<p className="title3">{event.title}</p>
 						<p className="body3 text-neutral-strong">
 							{new Date(event.timeDateUnix).toString()}
