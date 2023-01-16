@@ -9,7 +9,7 @@ const UserCard: FC<{
 }> = ({ user, role }) => {
 	return (
 		<Link href={'/user/' + user.id} key={user.id}>
-			<Block>
+			<Block className="hover:opacity-60">
 				<p className="title1">{user.firstname + ' ' + user.lastname}</p>
 				<p className="text-neutral-strong caption">{user.id}</p>
 				{role && <Tag>{role}</Tag>}

@@ -43,6 +43,7 @@ const Day = ({
 					}
 				}}
 				className={classNames(
+					'cursor-pointer',
 					'relative w-8 h-8 rounded-xl cursor-default',
 					'hover:bg-accent-weak',
 					day.selected && 'bg-accent text-special-white hover:bg-accent',
