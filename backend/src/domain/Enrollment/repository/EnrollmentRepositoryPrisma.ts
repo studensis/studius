@@ -151,4 +151,14 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 
 		return user.length >= 1;
 	}
+
+	async deleteUserEnrollments(userId: string) {
+		let deletedEnrollments = await prisma.enrollment.deleteMany({
+			where: {
+				userId: userId,
+			},
+		});
+
+		return deletedEnrollments;
+	}
 }
