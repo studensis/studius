@@ -316,7 +316,7 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 			)}
 			{eventsOnSelectedDay.map((event, i) => (
 				<Link key={i} href={`/event/${event.id}`}>
-					<Block>
+					<Block className="hover:opacity-60">
 						<p className="title3">{event.title}</p>
 						<p className="body3 text-neutral-strong">
 							{new Date(event.timeDateUnix).toString()}
