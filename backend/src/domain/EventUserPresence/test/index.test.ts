@@ -47,10 +47,14 @@ let roomId: string;
 test('Event create', async () => {
 	newEvent = await createEventInteractor(eventRepo, {
 		id: '',
-		title: 'test test test test',
+		title: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 		description: '',
 		linkedEntity: 'SEMINAR',
-		linkedEntityId: '123',
+		linkedEntityId: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 	});
 	eventId = newEvent.id;
 	expect(newEvent).not.toBeNull();
@@ -65,6 +69,8 @@ test('Room create', async () => {
 	expect(newRoom).not.toBeNull();
 });
 test('RTE create', async () => {
+	eventId = newEvent.id;
+	roomId = newRoom.id;
 	newRTE = await createRoomTimeEventInteractor(RTErepo, {
 		id: '',
 		eventId: eventId,
@@ -82,9 +88,14 @@ test('User create', async () => {
 		password: '123456789',
 		firstname: 'test',
 		lastname: 'testic',
-		email: '1234@fer.hr',
+		email:
+			Buffer.from(Math.random().toString())
+				.toString('base64')
+				.substring(5, 15) + '@fer.hr',
 		userRole: 'DEFAULT',
-		jmbag: '1234567891',
+		jmbag: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 		mentorID: null,
 	});
 	userId = newUser.id;

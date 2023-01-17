@@ -14,7 +14,9 @@ let testContent: ContentEntity = {
 	plainText: 'plainText',
 	date: new Date(Date.parse('04 Dec 1995 00:12:00 GMT')),
 	linkedEntity: 'SEMINAR',
-	linkedEntityId: '123',
+	linkedEntityId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 };
 let newContent: ContentEntity;
 let id: string;

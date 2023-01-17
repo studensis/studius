@@ -10,8 +10,12 @@ import SeminarSuggestionRepositoryPrisma from '../repository/SeminarSuggestionRe
 const repo = new SeminarSuggestionRepositoryPrisma();
 let testSeminarSuggestion: SeminarSuggestionEntity = {
 	id: '',
-	subjectId: '123',
-	eventId: '123',
+	subjectId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
+	eventId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 };
 let newSeminarSuggestion: SeminarSuggestionEntity;
 let id: string;

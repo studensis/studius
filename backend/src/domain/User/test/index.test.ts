@@ -28,16 +28,22 @@ let testUser: UserEntity = {
 	firstname: 'Test',
 	lastname: 'User',
 	password: 'password',
-	jmbag: '0036500000',
-	email: 'testuser@fer.hr',
+	jmbag: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
+	email:
+		Buffer.from(Math.random().toString()).toString('base64').substring(5, 15) +
+		'@fer.hr',
 	userRole: 'DEFAULT',
 	mentorID: null,
 };
 let testSubject: SubjectEntity = {
 	id: '',
-	title: 'Test',
-	description: 'User',
-	ectsBod: 'password',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
+	description: '',
+	ectsBod: '22',
 	semester: 'WINTER',
 	status: 'ACTIVE',
 	contentId: [],
@@ -48,7 +54,6 @@ let newSubject: SubjectEntity;
 let newEnrollment: EnrollmentEntity;
 let userId: string;
 let subjectId: string;
-let enrollmentId: string;
 
 test('User create', async () => {
 	newUser = await createUserInteractor(userRepo, testUser);
