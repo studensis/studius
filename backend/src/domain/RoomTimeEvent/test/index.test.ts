@@ -85,6 +85,8 @@ test('User create', async () => {
 			.toString('base64')
 			.substring(5, 15),
 		mentorID: null,
+		googleUserId: null,
+		avatar: null,
 	});
 	userId = newUser.id;
 	expect(newUser).not.toBeNull();

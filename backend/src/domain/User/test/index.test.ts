@@ -36,6 +36,8 @@ let testUser: UserEntity = {
 		'@fer.hr',
 	userRole: 'DEFAULT',
 	mentorID: null,
+	avatar: null,
+	googleUserId: null,
 };
 let testSubject: SubjectEntity = {
 	id: '',
