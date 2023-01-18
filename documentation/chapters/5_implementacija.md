@@ -206,56 +206,108 @@ Dijelovi projekta su već započeti, naime Korisničko Putovanje (User Journey),
 
 ### 5.7.1 Lokalno puštanje u pogon
 
-![Konzola](./images/konzola.jpg)
-Slika: Konzola u Visual Studio Code
-
-Najpopularniji paket menadžer je Node Package Manager - NPM, no mi smo koristili Yarn. Smatramo da je brži i jednostavniji za korištenje.
-U konzoli smo imali 4 terminala, za pokretanje backend poslužitelja, frontend poslužitelja, Prisma poslužitelja te za korištenje Gita. Backend i Frontend poslužitelj pokreću se naredbom yarn dev.
-
 ### Preuzimanje repozitorija lokalno
 
-TODO
+Odlaskom na Gitlab sjedište projekta Studius moguće je preuzeti lokalno cijeli repozitorij u obliku ZIP datoteke. Nakon preuzimanja, odpakirajte projekt na proizvoljno mjesto na Vašem osobnom računalu te pratite daljnja uputstva za postavljanje i pokretanje platforme.
 
-### Instalacija poslužitelja baze podataka
+### Postavljanje baze podataka
 
-TODO
+Prvi korak u pokretanju platforme je postavljanje baze podataka. Odabir baze podataka je proizvoljan, no obzirom da je odabir ekipa tijekom razvoja bio PostgreSQL, preporučili bismo korištenje istog.
 
-### Konfiguracija poslužitelja baze podataka
+Način posluživanja baze isto je tako proizvoljan, no u slijedećim koracima opisat ćemo kako pokrenuti PostgreSQL bazu putem servisa Supabase, te kako ju povezati na backend putem varijabla okruženja _Environment Variables_
 
-TODO
+**Otvaranja Supabase Računa**
 
-### Konfiguracija baze podataka
+U Vaš pretraživač upišite adresu [https://supabase.com/](https://supabase.com/), te slijedite korake za registraciju.
 
-TODO
+![Supabase 1](./images/supa1.png)
 
-### Punjenje baze podataka
+**Stvaranje projekta**
 
-TODO
+Pritiskom na "New Project" stvorimo novi projekt unutar kojeg ćemo smjestiti bazu.
 
-### Pokretanje poslužitelja baze podataka
+![Supabase 2](./images/supa2.png)
 
-TODO
+Odabir imena je proizvoljan, no imajte na umu da odabir lozinke projekta će se kasnije koristiti pri spajanju na pazu. Odabir regije također je proizvoljan, no preporuča se odabir što bliže lokacije kako bi vrijeme odgovora bilo što kraće.
 
-### Instalacija backend poslužitelja
+![Supabase 3](./images/supa3.png)
 
-TODO
+**Spajanje backenda s bazom**
 
-### Konfiguracija backend poslužitelja
+Nakon što smo uspješno stvorili projekt, i pričekali da se sam projekt automatski inicijalizira, možemo posjetiti Postavke projekta ili "Project Setting" za koje se link nalazi na lijevoj kontrolnoj površini, te pod sekcijom "Database" možemo pronaći "Connection string".
 
-TODO
+Postavljanjem "Connection Stringa" na URI, te izmjenom _[YOUR-PASSWORD]_ dijela niza znakova sa lozinkom kojom smo stvorili projekt, imamo spremnu poveznicu kojom će se backend spajati na bazu.
 
-### Pokretanje backend poslužitelja
+![Supabase 4](./images/supa4.png)
 
-TODO
+### Postavljanje backend i frontend poslužitelja
 
-### Instalacija frontend poslužitelja
+Nakon što je repozitorij preuzet te je postavljana baza podataka, možemo krenuti s postavljanjem samog Backenda.
 
-TODO
+Unutar korijenskog direktorija, potvrdimo da postoje direktoriji backend i frontend. Unutar backend direktorija bi se trebala nalaziti `.env` datoteka, unutar koje se nalaze varijable `DATABASE_URL` i `JWT_SECRET_KEY`. DATABASE_URL je potrebno postaviti na URI koji smo u prethodnoj pod-cjelini izvadili iz Supabasea-a, te JWT_SECRET_KEY je potrebno postaviti na proizvoljan niz nasumičnih znakova (koji se koriste u ovjeravanju JWT tokena pri autentifikaciji).
 
-### Konfiguracija frontend poslužitelja
+Postavljanje za lokalno okruženje je ovim korakom dovršeno, jedino je preostalo preuzeti programsku potporu kako bismo bili spremni pokrenuti platformu.
 
-TODO
+### Postavljanje programske potpore
 
-### Pokretanje frontend poslužitelja
+Prije instalacije programske podrške potrebno je instalirati Node.JS, te menadžer paketa za Node.js okruženje. Krenimo prvo s samim Node.js-om.
 
-TODO
+**Instaliranje Node.js-a i yarna**
+
+Prateći ovu poveznicu: [https://nodejs.org/en/](https://nodejs.org/en/) posjećujemo službeno web sjedište Node organizacije. Ovdje nam se generalno nude dvije opcije _LTS_, te _Current_, bitno je preuzeti Node verziju 18.8 ili višu kako bi se sve komponente sustava uobičajeno ponašale. Naputak: preporučamo instalaciju LST verzije obzirom da je stabilnija te je osigurana višegodišnja podrška.
+
+![Supabase 3](./images/node1.png)
+
+Osim Nodea, potrebno je odabrati i menadžer paketa za Node ekosustav. Danas postoje tri najčešće opcije: NPM, Yarn, te PNPM. Mi smo se odlučili za Yarn zbog prethodnog iskustva rada u istom.
+
+Instalacija Yarna, nakon instalacije Nodea je prilično jednostavna. Potrebno je samo upisati slijedeću naredbu u naredbeni redak.
+
+```
+npm install --global yarn
+```
+
+Kada je Yarn uspješno instaliran, unutar naredbenog retka se treba pozicionirati u korijenski direktorij, te pokrenuti naredbu
+
+```
+yarn
+```
+
+te
+
+```
+yarn rebuild
+```
+
+### Pokretanje platforme
+
+Kada su obje naredbe iz prethodnog koraka završile s obradom, potrebno je stvoriti jednog _SUPERADMIN_ korisnika koji će predstavljati vlasnika platforme s najvišom razinom prava.
+
+Kako bismo ubacili korisnika u bazu dovoljno je napisati naredbu
+
+```
+yarn studio
+```
+
+te unutar korisničkog sučelja navigirati u tablicu _"Users"_
+
+![Pokretanje 1](./images/node2.png)
+
+Zatim stvoriti korisnika s _"userRole"_ stavkom postavljenom na "SUPERADMIN", te s ostalim proizvoljno odabranim podacima. Nakon izmjena, potrebno ih je potvrditi pritiskom na dugme "Save 1 change"
+
+![Pokretanje 2](./images/node3.png)
+![Pokretanje 3](./images/node4.png)
+
+Spremni smo pokrenuti platformu!
+
+Pokretanjem naredbe
+
+```
+yarn dev
+```
+
+u korijenskom direktoriju uspješno je pokrenuta platforma na adresi `http://localhost:3000`, te možemo u naredbenom retku pratiti promet.
+
+![Pokretanje 4](./images/term1.png)
+
+![Pokretanje 4](./images/term2.png)
+![Pokretanje 4](./images/term3.png)
