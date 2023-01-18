@@ -33,6 +33,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 				userRole: newData.userRole ? newData.userRole : undefined,
 				mentorID: newData.mentorID ? newData.mentorID : undefined,
 				googleUserId: newData.googleUserId ? newData.googleUserId : undefined,
+				avatar: newData.avatar ? newData.avatar : undefined,
 			},
 		});
 		let rez: UserEntity = updatedData;
@@ -60,6 +61,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 				jmbag: user.jmbag,
 				userRole: user.userRole,
 				mentorID: user.mentorID,
+				avatar: user.avatar,
 			},
 		});
 

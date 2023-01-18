@@ -10,4 +10,5 @@ export type UserEntity = {
 	userRole: UserRole;
 	mentorID: string | null;
 	googleUserId: string | null;
+	avatar: string | null;
 };

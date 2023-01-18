@@ -3,10 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Button } from '../@studius/Button/Button';
 import Icon, { IconName } from '../@studius/Icon/Icon';
 import useDialog from '../@studius/Modal/DialogProvider';
 import useLogin from '../hooks/LoginContext';
+import { trpc } from '../hooks/TrpcProvider';
 import MainSidebar from '../Sidebars/MainSidebar';
 
 const NavItem = ({
@@ -26,6 +28,31 @@ const NavItem = ({
 					<p className="button-small">{title}</p>
 				</div>
 			</Link>
+		</>
+	);
+};
+
+export const ProfileImage = ({ id }: { id: string }) => {
+	const userInfo = trpc.user.getUserById.useQuery(id);
+
+	const [url, setUrl] = useState(
+		'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'
+	);
+
+	useEffect(() => {
+		if (userInfo.isSuccess) {
+			userInfo.data!.avatar && setUrl(userInfo.data!.avatar);
+		}
+	}, [userInfo]);
+
+	return (
+		<>
+			<img
+				src={url}
+				style={{ objectFit: 'cover', objectPosition: 'center' }}
+				className="absolute top-[50%] -translate-y-[50%]"
+				alt=""
+			/>
 		</>
 	);
 };
@@ -78,12 +105,16 @@ function Header() {
 									setSidebar(<MainSidebar />);
 								}}
 							>
-								<Image
-									src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
-									fill
-									style={{ objectFit: 'cover' }}
-									alt=""
-								/>
+								{user && user.userId ? (
+									<ProfileImage id={user.userId} />
+								) : (
+									<Image
+										src={'https://pbs.twimg.com/media/BgDURSWIQAA-d32.jpg'}
+										fill
+										style={{ objectFit: 'cover' }}
+										alt=""
+									/>
+								)}
 							</div>
 						</div>
 					) : (

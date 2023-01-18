@@ -10,4 +10,5 @@ export type updateUserEntity = {
 	userRole?: UserRole;
 	mentorID?: string | null;
 	googleUserId?: string | null;
+	avatar?: string | null;
 };

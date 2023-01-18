@@ -3,9 +3,11 @@
 import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
+import Icon from '../../../../components/@studius/Icon/Icon';
 import { Block } from '../../../../components/@studius/PageElements/Block';
+import { Section } from '../../../../components/@studius/PageElements/Section';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
 import {
 	PageStack,
@@ -34,12 +36,19 @@ export default function SubjectPage(props: PageProps) {
 		if (deleteUser.status === 'success') {
 			router.push('/user');
 		}
-		console.log(deleteUser.status);
 	}, [deleteUser]);
 
 	const sessionUser = useLogin().user;
 
 	const googleLink = trpc.auth.external.google.link.useMutation();
+
+	useEffect(() => {
+		if (googleLink.isSuccess) {
+			router.refresh();
+		}
+	}, [googleLink]);
+
+	const [box, setBox] = useState(false);
 
 	return (
 		<PageStack>
@@ -76,12 +85,65 @@ export default function SubjectPage(props: PageProps) {
 					)}
 					{user.data && user.data.id == sessionUser?.userId && (
 						<>
-							<GoogleLogin
-								onSuccess={(response) => {
-									response.credential &&
-										googleLink.mutate({ credential: response.credential });
-								}}
-							/>
+							<Section>
+								<Stack>
+									<h3 className="title1">Link with Google Account</h3>
+
+									{user.data.googleUserId && (
+										<Stack cols={2}>
+											<Block info className="h-auto">
+												<div className="flex flex-row gap-1">
+													<p className="body2 text-info">
+														<span>Google account is already linked</span>
+													</p>
+													<Icon icon="checkmark" className="bg-info" />
+												</div>
+											</Block>
+											<Block danger className="h-auto">
+												<p className="body2 text-danger">
+													Warning: Linking with a new Google account will unlink
+													it from the previous account!
+												</p>
+											</Block>
+										</Stack>
+									)}
+									<Stack cols={2}>
+										{user.data.googleUserId && (
+											<Stack>
+												<Button className="w-max bg-red-500">
+													Unlink account
+												</Button>
+											</Stack>
+										)}
+										<Stack>
+											<h3 className="title3">
+												{user.data.googleUserId ? 'Relink' : 'Link'} account{' '}
+											</h3>
+											<GoogleLogin
+												onSuccess={(response) => {
+													if (response.credential) {
+														googleLink.mutate({
+															credential: response.credential,
+															updateImage: box,
+														});
+													}
+												}}
+											/>
+											<div className="flex flex-row gap-1">
+												<input
+													type="checkbox"
+													onChange={(e) => {
+														if (e.currentTarget.checked) {
+															setBox(e.currentTarget.checked);
+														}
+													}}
+												/>
+												<span className="body3">Update profile picture</span>
+											</div>
+										</Stack>
+									</Stack>
+								</Stack>
+							</Section>
 						</>
 					)}
 

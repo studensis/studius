@@ -45,9 +45,15 @@ export const googleRouter = t.router({
 			return 'logged in successfully';
 		}),
 	link: authedProcedure
-		.input(z.object({ credential: z.string() }))
+		.input(
+			z.object({ credential: z.string(), updateImage: z.boolean().optional() })
+		)
 		.mutation(async ({ input, ctx }) => {
 			let googleUserId = decode(input.credential)!.sub as string;
+			// console.log(decode(input.credential));
+			let avatarUrl = (decode(input.credential) as { picture: string }).picture;
+			// console.log(avatarUrl);
+
 			let { userId } = ctx.user;
 			let user = await repo.getById(userId);
 			if (user) {
@@ -55,6 +61,7 @@ export const googleRouter = t.router({
 					...user,
 					id: userId,
 					googleUserId: googleUserId,
+					avatar: avatarUrl,
 				});
 				return updatedUser;
 			} else {
