@@ -40,4 +40,15 @@ h1, h2, h3 {
 
 table {
 	width: 100%;
+	border: 1px solid #000;
+}
+
+code {
+	color: #000000 !important;
+}
+
+pre {
+	padding: 40px;
+	border-radius: 16px;
+	border: none;
 }

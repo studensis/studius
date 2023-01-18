@@ -1,3 +1,4 @@
+import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import createEventInteractor from '../../Event/interactors/createEventInteractor';
 import deleteEventInteractor from '../../Event/interactors/deleteEventInteractor';
 import { EventEntity } from '../../Event/model/EventEntity';
@@ -29,13 +30,18 @@ const RTErepo = new RoomTimeEventRepositoryPrisma();
 const roomRepo = new RoomRepositoryPrisma();
 const userRepo = new UserRepositoryPrisma();
 const EUPrepo = new EventUserPresenceRepositoryPrisma();
+const enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 let testEvent: EventEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	description: '',
 	linkedEntity: 'SEMINAR',
-	linkedEntityId: '123',
+	linkedEntityId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 };
 let newEvent: EventEntity;
 let newRoom: RoomEntity;
@@ -56,7 +62,9 @@ test('Event create', async () => {
 test('Room create', async () => {
 	newRoom = await createRoomInteractor(roomRepo, {
 		id: '',
-		title: 'test test test',
+		title: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 		capacity: 20,
 	});
 	roomId = newRoom.id;
@@ -68,9 +76,14 @@ test('User create', async () => {
 		password: '123456789',
 		firstname: 'test',
 		lastname: 'testic',
-		email: 'testtest@fer.hr',
+		email:
+			Buffer.from(Math.random().toString())
+				.toString('base64')
+				.substring(5, 15) + '@fer.hr',
 		userRole: 'DEFAULT',
-		jmbag: '1234567777',
+		jmbag: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 		mentorID: null,
 	});
 	userId = newUser.id;
@@ -183,6 +196,10 @@ test('Room delete', async () => {
 });
 test('User delete', async () => {
 	userId = newUser.id;
-	let deleteUser: UserEntity = await deleteUserInteractor(userId, userRepo);
+	let deleteUser: UserEntity = await deleteUserInteractor(
+		userId,
+		userRepo,
+		enrollmentRepo
+	);
 	expect(deleteUser).not.toBeNull();
 });

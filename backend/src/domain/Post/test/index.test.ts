@@ -10,11 +10,19 @@ import PostRepositoryPrisma from '../repository/PostRepositoryPrisma';
 const repo = new PostRepositoryPrisma();
 let testPost: PostEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	linkedEntity: 'SEMINAR',
-	linkedEntityId: '123',
-	ownerId: '123',
-	contentId: '123',
+	linkedEntityId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
+	ownerId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
+	contentId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	date: null,
 };
 let newPost: PostEntity;

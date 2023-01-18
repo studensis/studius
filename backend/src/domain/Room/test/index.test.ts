@@ -10,7 +10,9 @@ import RoomRepositoryPrisma from '../repository/RoomRepositoryPrisma';
 const repo = new RoomRepositoryPrisma();
 let testRoom: RoomEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	capacity: 22,
 };
 let newRoom: RoomEntity;

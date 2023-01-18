@@ -50,7 +50,7 @@ export default t.router({
 	deleteUserById: adminProcedure
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let a = await deleteUserInteractor(input, repo);
+			let a = await deleteUserInteractor(input, repo, enrollmentRepo);
 			return a;
 		}),
 

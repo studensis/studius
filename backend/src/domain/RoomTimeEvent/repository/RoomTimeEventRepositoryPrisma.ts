@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { EventEntity } from '../../Event/model/EventEntity';
 import { EventUserPresenceEntity } from '../../EventUserPresence/model/EventUserPresenceEntity';
 import { RoomTimeEventEntity } from '../model/RoomTimeEventEntity';
 import { updateRoomTimeEventEntity } from '../model/updateRoomTimeEventEntity';
@@ -9,12 +10,14 @@ const prisma = new PrismaClient();
 export default class RoomTimeEventRepositoryPrisma extends RoomTimeEventRepository {
 	async getAll() {
 		// prisma RoomTimeEvents
-		let datas = await prisma.roomTimeEvent.findMany();
+		let datas = await prisma.roomTimeEvent.findMany({
+			include: { event: true },
+		});
 
 		// map to RoomTimeEventEntities
-		let roomTimeEvents: RoomTimeEventEntity[] = [];
-		datas.forEach((data: RoomTimeEventEntity) => {
-			let roomTimeEvent: RoomTimeEventEntity = data;
+		let roomTimeEvents: (RoomTimeEventEntity & { event: EventEntity })[] = [];
+		datas.forEach((data) => {
+			let roomTimeEvent = data;
 			roomTimeEvents.push(roomTimeEvent);
 		});
 

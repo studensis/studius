@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { Button } from '../../../components/@studius/Button/Button';
 import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../components/@studius/PageElements/Block';
@@ -8,6 +9,8 @@ import { UpdateSubjectModal } from './UpdateSubjectModal';
 
 export default function SubjectList() {
 	const { setModal } = useDialog();
+
+	const router = useRouter();
 
 	const subjectList = trpc.subject.listSubjects.useQuery();
 	const subjectDelete = trpc.subject.deleteSubjectById.useMutation();
@@ -35,6 +38,9 @@ export default function SubjectList() {
 							title: 'Title',
 							semester: 'Semester',
 							ectsBod: 'ECTS',
+						}}
+						onClick={(subject) => {
+							router.push('/subject/' + subject.id);
 						}}
 						objects={subjectList.data || []}
 						actionRow={(subject) => {

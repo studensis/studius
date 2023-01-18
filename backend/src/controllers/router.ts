@@ -4,6 +4,7 @@ import eventUserPresenceRouter from '../domain/EventUserPresence/eventUserPresen
 import postRouter from '../domain/Post/postRouter';
 import roomRouter from '../domain/Room/roomRouter';
 import SeminarRouter from '../domain/Seminar/SeminarRouter';
+import seminarSuggestionRouter from '../domain/SeminarSuggestion/seminarSuggestionRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
 import authRouter from '../services/authentication/authRouter';
@@ -22,10 +23,10 @@ const appRouter = t.router({
 	event: eventRouter,
 	post: postRouter,
 	seminar: SeminarRouter,
+	seminarSuggestion: seminarSuggestionRouter,
 	content: contentRouter,
-	// roomTimeEvent: roomTimeEventRouter,
+	// roomTimeEvent: roomTimeEventRouter,		// kroz eventove -> schedule
 	eventUserPresence: eventUserPresenceRouter,
 });
 
 export default appRouter;
-	
