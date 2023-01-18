@@ -9,4 +9,6 @@ export type updateUserEntity = {
 	email?: string;
 	userRole?: UserRole;
 	mentorID?: string | null;
+	googleUserId?: string | null;
+	avatar?: string | null;
 };

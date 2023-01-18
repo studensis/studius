@@ -21,4 +21,9 @@ export abstract class SeminarSuggestionRepository {
 	async delete(seminarSuggestionId: string): Promise<SeminarSuggestionEntity> {
 		throw new Error('Method not implemented.');
 	}
+	async listPinnedEventsBySubjectId(
+		subjectId: string
+	): Promise<SeminarSuggestionEntity[]> {
+		throw new Error('Method not implemented.');
+	}
 }

@@ -1,10 +1,10 @@
 import { TRPCError } from '@trpc/server';
 import * as jwt from 'jsonwebtoken';
 import { z } from 'zod';
+import customConfig from '../../../config/default';
 import { publicProcedure } from '../../../controllers/middleware/auth';
 import getUserByEmailInteractor from '../../../domain/User/interactors/getUserByEmailInteractor';
 import UserRepositoryPrisma from '../../../domain/User/repository/UserRepositoryPrisma';
-const secret = '3qtv47890hn689n72cdx3049b*&%a';
 
 const userRepo = new UserRepositoryPrisma();
 export default publicProcedure
@@ -42,7 +42,7 @@ export default publicProcedure
 					userId: user.id,
 					role: user.userRole,
 				},
-				secret,
+				customConfig.secret,
 				{ expiresIn: '1h' }
 			);
 

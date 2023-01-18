@@ -155,19 +155,19 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 	>([]);
 
 	useEffect(() => {
-		console.clear();
-		console.log(selectedYear, selectedMonth, selectedDay);
-		console.log(selectedDate);
-		console.log('-------');
+		// console.clear();
+		// console.log(selectedYear, selectedMonth, selectedDay);
+		// console.log(selectedDate);
+		// console.log('-------');
 
-		console.log(events);
+		// console.log(events);
 
 		let dayOfFilter =
 			Math.floor(selectedDate.getTime() / DAY_IN_MILISECONDS) *
 			DAY_IN_MILISECONDS;
-		console.log(
-			'----------------------------------------------------------------'
-		);
+		// console.log(
+		// 	'----------------------------------------------------------------'
+		// );
 
 		setEventsOnSelectedDay(
 			events
@@ -177,7 +177,7 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 						Math.floor(
 							new Date(event.timeDateUnix).getTime() / DAY_IN_MILISECONDS
 						) * DAY_IN_MILISECONDS;
-					console.log(dayOfEvent, dayOfFilter);
+					// console.log(dayOfEvent, dayOfFilter);
 
 					return dayOfEvent - DAY_IN_MILISECONDS == dayOfFilter;
 				})
@@ -279,7 +279,7 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 																new Date(event.timeDateUnix).getTime() /
 																	DAY_IN_MILISECONDS
 															) * DAY_IN_MILISECONDS;
-														console.log(dayOfEvent, dayOfFilter);
+														// console.log(dayOfEvent, dayOfFilter);
 
 														return (
 															dayOfEvent - DAY_IN_MILISECONDS == dayOfFilter

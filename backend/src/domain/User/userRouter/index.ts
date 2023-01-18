@@ -42,6 +42,8 @@ export default t.router({
 				jmbag: input.jmbag || null,
 				userRole: input.userRole,
 				mentorID: input.mentorID || null,
+				avatar: null,
+				googleUserId: null,
 			};
 			let newUser = await createUserInteractor(repo, user);
 			return newUser;

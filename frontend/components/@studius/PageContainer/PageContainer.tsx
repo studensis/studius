@@ -7,7 +7,7 @@ export default function PageContainer({
 }) {
 	return (
 		<>
-			<div className="mt-20 block w-full max-w-[1170px] mx-auto">
+			<div className="mt-20 block w-full max-w-[1170px] mx-auto overflow-y-hidden pb-20">
 				{children}
 			</div>
 		</>

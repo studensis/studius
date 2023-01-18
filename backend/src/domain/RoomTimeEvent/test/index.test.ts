@@ -34,10 +34,14 @@ const enrollmentRepo = new EnrollmentRepositoryPrisma();
 
 let testEvent: EventEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	description: '',
 	linkedEntity: 'SEMINAR',
-	linkedEntityId: '123',
+	linkedEntityId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 };
 let newEvent: EventEntity;
 let newRoom: RoomEntity;
@@ -58,7 +62,9 @@ test('Event create', async () => {
 test('Room create', async () => {
 	newRoom = await createRoomInteractor(roomRepo, {
 		id: '',
-		title: 'test test test',
+		title: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 		capacity: 20,
 	});
 	roomId = newRoom.id;
@@ -70,10 +76,17 @@ test('User create', async () => {
 		password: '123456789',
 		firstname: 'test',
 		lastname: 'testic',
-		email: 'testtest@fer.hr',
+		email:
+			Buffer.from(Math.random().toString())
+				.toString('base64')
+				.substring(5, 15) + '@fer.hr',
 		userRole: 'DEFAULT',
-		jmbag: '1234567777',
+		jmbag: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 		mentorID: null,
+		googleUserId: null,
+		avatar: null,
 	});
 	userId = newUser.id;
 	expect(newUser).not.toBeNull();

@@ -10,7 +10,9 @@ import SeminarRepositoryPrisma from '../repository/SeminarRepositoryPrisma';
 const repo = new SeminarRepositoryPrisma();
 let testSeminar: SeminarEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	description: '',
 	status: 'DRAFT',
 };

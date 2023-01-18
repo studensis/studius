@@ -2506,9 +2506,9 @@
   dependencies:
     "glob" "7.1.7"
 
-"@next/swc-win32-x64-msvc@13.1.1":
-  "integrity" "sha512-mVF0/3/5QAc5EGVnb8ll31nNvf3BWpPY4pBb84tk+BfQglWLqc5AC9q1Ht/YMWiEgs8ALNKEQ3GQnbY0bJF2Gg=="
-  "resolved" "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.1.1.tgz"
+"@next/swc-darwin-arm64@13.1.1":
+  "integrity" "sha512-9zRJSSIwER5tu9ADDkPw5rIZ+Np44HTXpYMr0rkM656IvssowPxmhK0rTreC1gpUCYwFsRbxarUJnJsTWiutPg=="
+  "resolved" "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.1.1.tgz"
   "version" "13.1.1"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
@@ -2570,6 +2570,11 @@
   "integrity" "sha512-A1Asn2rxZMlLAj1HTyfaCv0VQrLUv034jVay05QlqZg1qiHPeA3/pGTfNMijbsMYCsGVxfWEJuaZZuNxXGMCrA=="
   "resolved" "https://registry.npmjs.org/@prisma/engines/-/engines-4.8.0.tgz"
   "version" "4.8.0"
+
+"@react-oauth/google@^0.6.0":
+  "integrity" "sha512-F+VtUk40C5zjL/E3VW5/nsIfm7gmad4HgpGjW3shHqsL6hopOEIncWIGlEzKs2H/hlZw5mHkyq2ONmw5TI2j/g=="
+  "resolved" "https://registry.npmjs.org/@react-oauth/google/-/google-0.6.0.tgz"
+  "version" "0.6.0"
 
 "@redis/bloom@1.1.0":
   "integrity" "sha512-9QovlxmpRtvxVbN0UBcv8WfdSMudNZZTFqCsnBszcQXqaZb/TVe30ScgGEO7u1EAIacTPAo7/oCYjYAxiHLanQ=="
@@ -3099,9 +3104,9 @@
     "pretty-format" "^27.0.0"
 
 "@types/jest@^29.2.5":
-  "integrity" "sha512-H2cSxkKgVmqNHXP7TC2L/WUorrZu8ZigyRywfVzv6EyBlxj39n4C00hjXYQWsbwqgElaj/CiAeSRmk5GoaKTgw=="
-  "resolved" "https://registry.npmjs.org/@types/jest/-/jest-29.2.5.tgz"
-  "version" "29.2.5"
+  "integrity" "sha512-XEUC/Tgw3uMh6Ho8GkUtQ2lPhY5Fmgyp3TdlkTJs1W9VgNxs+Ow/x3Elh8lHQKqCbZL0AubQuqWjHVT033Hhrw=="
+  "resolved" "https://registry.npmjs.org/@types/jest/-/jest-29.2.6.tgz"
+  "version" "29.2.6"
   dependencies:
     "expect" "^29.0.0"
     "pretty-format" "^29.0.0"
@@ -3302,9 +3307,9 @@
     "@types/yargs-parser" "*"
 
 "@types/yargs@^17.0.8":
-  "integrity" "sha512-cAx3qamwaYX9R0fzOIZAlFpo4A+1uBVCxqpKz9D26uTF4srRXaGTTsikQmaotCtNdbhzyUH7ft6p9ktz9s6UNQ=="
-  "resolved" "https://registry.npmjs.org/@types/yargs/-/yargs-17.0.19.tgz"
-  "version" "17.0.19"
+  "integrity" "sha512-eknWrTHofQuPk2iuqDm1waA7V6xPlbgBoaaXEgYkClhLOnB0TtbW+srJaOToAgawPxPlHQzwypFA2bhZaUGP5A=="
+  "resolved" "https://registry.npmjs.org/@types/yargs/-/yargs-17.0.20.tgz"
+  "version" "17.0.20"
   dependencies:
     "@types/yargs-parser" "*"
 
@@ -6388,6 +6393,11 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
+"fsevents@^2.3.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
+
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -8245,6 +8255,11 @@
   dependencies:
     "jwa" "^1.4.1"
     "safe-buffer" "^5.0.1"
+
+"jwt-decode@^3.1.2":
+  "integrity" "sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A=="
+  "resolved" "https://registry.npmjs.org/jwt-decode/-/jwt-decode-3.1.2.tgz"
+  "version" "3.1.2"
 
 "kareem@2.5.0":
   "integrity" "sha512-rVBUGGwvqg130iwYu8k7lutHuDBFj1yGRdnlE44wEhxAmFBad1zcL66PdWC1raw3tIObY6XWhtv3VL04xQb/cg=="
@@ -11158,7 +11173,7 @@
   "resolved" "https://registry.npmjs.org/strnum/-/strnum-1.0.5.tgz"
   "version" "1.0.5"
 
-"studius-backend@1.0.0", "studius-backend@file:C:\\Users\\harys\\progeh\\studius\\backend":
+"studius-backend@1.0.0", "studius-backend@file:/Users/mfucek/Documents/Studensis/studius/backend":
   "resolved" "file:backend"
   "version" "1.0.0"
   dependencies:
@@ -11178,7 +11193,7 @@
     "redis" "^4.5.1"
     "zod" "^3.20.2"
 
-"studius-frontend@file:C:\\Users\\harys\\progeh\\studius\\frontend":
+"studius-frontend@file:/Users/mfucek/Documents/Studensis/studius/frontend":
   "resolved" "file:frontend"
   "version" "0.1.0"
   dependencies:

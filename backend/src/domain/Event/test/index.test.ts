@@ -23,10 +23,14 @@ const roomRepo = new RoomRepositoryPrisma();
 
 let testEvent: EventEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	description: '',
 	linkedEntity: 'SEMINAR',
-	linkedEntityId: '123',
+	linkedEntityId: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 };
 let newEvent: EventEntity;
 let eventId: string;
@@ -60,7 +64,9 @@ test('Event get', async () => {
 // kreiranje Room-a u svrhu potpunog testiranja Event CRUD-a
 let testRoom: RoomEntity = {
 	id: '',
-	title: 'test test test',
+	title: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	capacity: 20,
 };
 let newRoom: RoomEntity;
