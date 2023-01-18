@@ -50,3 +50,10 @@ Posebno za svaki kolegij određuju se registrirani korisnici koji bi dobili ulog
 Od profila korisnika do sadržaja lekcija unutar kolegija, sustav za sadržaj pobrinuo bi se da se diljem stranice sadržaj organizira na što pregledniji način, te bi olakšavao i pregled i uređivanje, naravno sa širokim mogućnostima proširenja kroz ekstenzije.
 
 ### 2.1.4 Sustav za seminare <a name="2.1.4"> </a>
+
+Nositelju predmeta prikazuju se predmeti na kojima je nositelj te popis studenata koje mentorira, te forma za upis naslova seminara. Odabire predmet, studenta te upisuje naslov pa klikom na gumb kreira ideju za seminar. Ona se prikazuje odabranom studentu uz opciju unosa opisa seminara. Nakon unosa opisa, student pritiskom na gumb šalje predložak mentoru na odobrenje. Mentor na popisu predložaka ima opciju konfirmacije seminara.
+
+![Seminar1](./../images/seminar1.png)
+![Seminar1](./../images/seminar2.png)
+![Seminar1](./../images/seminar3.png)
+![Seminar1](./../images/seminar4.png)

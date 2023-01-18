@@ -81,21 +81,21 @@ Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz 
 **1. Sastanak**
 
 - Datum: 3.10.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek
 - Teme sastanka:
   - Okvirno određivanje projekta
 
 **2. Sastanak**
 
 - Datum: 21.10.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek
 - Teme sastanka:
   - Razgovor o projektu s profesorom
 
 **3. Sastanak**
 
 - Datum:21.10.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka:
   - Podjela rada
   - Dogovor oko materijala za istraživanje
@@ -103,21 +103,21 @@ Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz 
 **4. Sastanak**
 
 - Datum: 27.10.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Matija Fuček
+- Prisustvovali: Marko Supičić, Adrian Aničić, Matija Fućek
 - Teme sastanka:
   - Razgovor s profesorom
 
 **5. Sastanak**
 
 - Datum: 28.10.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić
 - Teme sastanka: - organizacija oko dovršetka MVP
   -Komentiranje nacrta baze
 
 **6. Sastanak**
 
 - Datum: 4.11.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka:
   - problemi sa Supabaseom, prelazak na Postgress
   - problemi s backendom (errori)
@@ -125,7 +125,7 @@ Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz 
 **7. Sastanak**
 
 - Datum: 7.11.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić
 - Teme sastanka:
   - Arhitektura sustava
   - Potencijalno uvođenje mikroservisa
@@ -133,21 +133,21 @@ Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz 
 **8. Sastanak**
 
 - Datum: 9.11.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka:
   - Razgovor s profesorom kako sustav funkcionira
 
 **9. Sastanak**
 
 - Datum: 11.11.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka:
   - Raspodjela poslova oko dokumentacije (obrasci uporabe, sekvencijskih dijagrami i baza)
 
 **10. Sastanak**
 
 - Datum: 8.12.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka:
   - Kritika dokumentacije
   - Mjesta za unaprijeđenje
@@ -155,16 +155,30 @@ Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz 
 **11. Sastanak**
 
 - Datum: 12.12.2022.
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka: - Kritika dokumentacije
   - Mjesta za unaprijeđenje
 
 **12. Sastanak**
 
 - Datum: 15.12.2022
-- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fuček, Hary Samardžić, Luka Čulav
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
 - Teme sastanka:
-  - Još nije održan
+  - Planiranje popisa značajki po prioritetu koje treba implementirati do kraja ciklusa
+
+**13. Sastanak**
+
+- Datum: 18.1.2023
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav
+- Teme sastanka:
+  - Nadopunjivanje dokumentaciji kako bi se upotpunila kvota prisutnih materijala; Raspodjela posla
+
+**14. Sastanak**
+
+- Datum: 31.1.2023
+- Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav, Dominik Kanjuh
+- Teme sastanka:
+  - Predaja projekta R i konzultacije oko nastavka rada na platformi
 
 ### 5.5.3 Tjedni / dvotjedni sastanci <a name="5.5.3"> </a>
 
@@ -187,3 +201,61 @@ Cilj ovih sastanaka je usklađivanje s mentorima iz raznih zavoda, te iznošenje
 Dijelovi projekta su već započeti, naime Korisničko Putovanje (User Journey), model baze podataka za osnovni set funkcionalnosti, te istraživanje tehnologija koje bismo primjenjivali.
 
 ### 5.6.1 Frontend tijek <a name="5.6.1"> </a>
+
+## 5.7 Upute za puštanje u pogon
+
+### 5.7.1 Lokalno puštanje u pogon
+
+![Konzola](./images/konzola.jpg)
+Slika: Konzola u Visual Studio Code
+
+Najpopularniji paket menadžer je Node Package Manager - NPM, no mi smo koristili Yarn. Smatramo da je brži i jednostavniji za korištenje.
+U konzoli smo imali 4 terminala, za pokretanje backend poslužitelja, frontend poslužitelja, Prisma poslužitelja te za korištenje Gita. Backend i Frontend poslužitelj pokreću se naredbom yarn dev.
+
+### Preuzimanje repozitorija lokalno
+
+TODO
+
+### Instalacija poslužitelja baze podataka
+
+TODO
+
+### Konfiguracija poslužitelja baze podataka
+
+TODO
+
+### Konfiguracija baze podataka
+
+TODO
+
+### Punjenje baze podataka
+
+TODO
+
+### Pokretanje poslužitelja baze podataka
+
+TODO
+
+### Instalacija backend poslužitelja
+
+TODO
+
+### Konfiguracija backend poslužitelja
+
+TODO
+
+### Pokretanje backend poslužitelja
+
+TODO
+
+### Instalacija frontend poslužitelja
+
+TODO
+
+### Konfiguracija frontend poslužitelja
+
+TODO
+
+### Pokretanje frontend poslužitelja
+
+TODO
