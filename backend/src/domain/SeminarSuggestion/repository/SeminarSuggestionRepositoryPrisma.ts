@@ -70,4 +70,16 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 
 		return response;
 	}
+
+	async listPinnedEventsBySubjectId(subjectId: string) {
+		let data = await prisma.pinnedEvent.findMany({
+			where: { subjectId: subjectId },
+		});
+		if (data) {
+			let seminarSuggestions: SeminarSuggestionEntity[] = data;
+			return seminarSuggestions;
+		} else {
+			throw new Error('no data');
+		}
+	}
 }

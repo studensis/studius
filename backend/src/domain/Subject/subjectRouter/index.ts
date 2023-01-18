@@ -7,6 +7,7 @@ import {
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
+import SeminarSuggestionRepositoryPrisma from '../../SeminarSuggestion/repository/SeminarSuggestionRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
 import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
 import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
@@ -14,6 +15,7 @@ import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
+import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -22,6 +24,7 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
+let seminarSuggestionRepo = new SeminarSuggestionRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -130,5 +133,16 @@ export default t.router({
 			);
 			console.log(enrolledUsers);
 			return enrolledUsers;
+		}),
+
+	getPinnedEvents: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let pinnedEvents = await listPinnedEventsInteractor(
+				seminarSuggestionRepo,
+				input
+			);
+			console.log(pinnedEvents);
+			return pinnedEvents;
 		}),
 });

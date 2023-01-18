@@ -1,4 +1,12 @@
 {
+<<<<<<< HEAD
   "typescript.tsdk": "../node_modules/typescript/lib",
+=======
+<<<<<<< HEAD
+  "typescript.tsdk": "..\\node_modules\\typescript\\lib",
+=======
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+>>>>>>> 9dff5f16c9b72dd766d379bd995e34791c085991
+>>>>>>> ec537f47c7a1b7a34f9bc49050c0afedb1e8aa6a
   "typescript.enablePromptUseWorkspaceTsdk": true
 }
