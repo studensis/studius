@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { SectionTop } from '../../../components/@studius/PageElements/SectionTop';
-import { PageStack } from '../../../components/@studius/PageElements/Stack';
+import {
+	PageStack,
+	Stack,
+} from '../../../components/@studius/PageElements/Stack';
 import { Spinner } from '../../../components/@studius/Spinner/Spinner';
+import PostCard from '../../../components/Cards/PostCard';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 import SubjectList from './SubjectList';
@@ -18,6 +22,7 @@ const Greeting = () => {
 };
 
 export const RightPanel = () => {
+	const posts = trpc.post.listPosts.useQuery().data;
 	const { user } = useLogin();
 	return (
 		<>
@@ -39,6 +44,13 @@ export const RightPanel = () => {
 						</Link>
 					</SectionTop>
 					<SubjectList />
+					<br />
+					<h1 className="title1">Obavijesti</h1>
+					<Stack cols={3}>
+						{posts?.map((post) => {
+							return <PostCard title={post.title} id={post.id}></PostCard>;
+						})}
+					</Stack>
 				</div>
 			</PageStack>
 		</>
