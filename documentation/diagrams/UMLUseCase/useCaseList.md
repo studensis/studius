@@ -16,7 +16,7 @@
 - Glavni sudionik: Klijent
 - cilj: Pristupiti korisničkom računu
 - sudionici: Baza podataka, Google
-- preduvjet: Klijent ima Studensis račun
+- preduvjet: Klijent ima Studius račun
 - opis osnovnog tijeka:
   1.  Klijent odabire opciju za prijavu putem Google računa
   2.  Ulogira se na Studius

@@ -4,7 +4,7 @@
 		<h3> Ak. god. 2022./2023. </h3>
 	</div>
 	<div class="middle">
-		<h1> Studensis </h1>
+		<h1> Studius </h1>
 		<h3> Dokumentacija </h3>
 	</div>
 	<div class="bottom">
@@ -107,12 +107,6 @@
 ## [7. Tablica aktivnosti](#7)
 
 ## [8. Zaključak i budući rad](#8)
-
-#### [1. hello](#1)
-
-# O timu Studensis
-
-Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi svojim usmjerenjem tako da pokrivamo cjeloukupan stack potreban za razvoj platforme.
 
 # 1. Dnevnik promjena dokumentacije <a name="1"> </a>
 

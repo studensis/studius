@@ -34,5 +34,7 @@
 	},
 
 	"markdown-pdf.styles": ["document.css"],
-	"markdown-pdf.stylesRelativePathFile": true
+	"markdown-pdf.stylesRelativePathFile": true,
+	"jest.jestCommandLine": "test",
+	"jest.rootPath": "backend/src/domain"
 }

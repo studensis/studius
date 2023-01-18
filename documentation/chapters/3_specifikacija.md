@@ -1,4 +1,4 @@
-**Neregistriranom korisniku** prikazuje se naslovna stranica s osnovnim informacijama vezanim za sustav radnog imena Studensis. Isti se može prijaviti u sustav sa svojim korisničkim podacima.
+**Neregistriranom korisniku** prikazuje se naslovna stranica s osnovnim informacijama vezanim za sustav radnog imena "Studius". Isti se može prijaviti u sustav sa svojim korisničkim podacima.
 
 Registracijom u sustav korisnik dobiva razinu prava određenu ulogom u sustavu. Postojat će uloge administratora, fakultetskog osoblja (nositelja kolegija, profesora te asistenata), upisanih studenata, posjetitelja I razvojnog tima.
 

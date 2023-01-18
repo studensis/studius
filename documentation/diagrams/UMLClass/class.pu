@@ -3,9 +3,18 @@
 top to bottom direction
 
 class EventUserPresence {
+    id: String
+    presenceStatus: Boolean
+    roomTimeEventId: String
+    userId: String
     RoomTimeEvent: RoomTimeEvent
     User: User 
-    presenceStatus: presenceStatus
+    createEventUserPresenceInteractor()
+    deleteEventUserPresenceInteractor()
+    getAssociatedRoomTimeEventInteractor()
+    listEventUserPresencesInteractor()
+    updateEventUserPresenceInteractor()
+    
 }
 
 class Content{
@@ -13,31 +22,68 @@ class Content{
     -Markdown_text:String
     -plain_text:String
     -date:Date
+    -LinkedEntity: LinkedEntity
+    -LinkedEntityID: String
+    createContentInteractor()
+    deleteContentInteractor()
+    getContentInteractor()
+    listContentsInteractor()
+    updateContentInteractor()
 }
 
 class Post{
     -id:String
     -title:String 
     -date:Date
+    -ownerId: String
     -owner: User 
     -LinkedEntity:String
     -LinkedEntityID:String
+    -contentId: String
+    createPostInteractor()
+    deletePostInteractor()
+    getPostInteractor()
+    listPostsInteractor()
+    updatePostInteractor()
 
 }
 
 class User {
     -id:String 
+    -password: String
     -firstname:String
     -lastname:String
+    -jmbag: String
+    -userRole: Role
+    -mentorId: String
+    -enrollment: Enrollment
+    -EventUserPresence: EventUserPresence
+    -mentor: User
+    -mentee: User
     -email:String 
-    -status: status
-    -content : Content
+    -content :Content
+    -contentId: String
+    createUserInteractor()
+    deleteUserInteractor()
+    enrollUserInteractor()
+    getUserByEmailInteractor()
+    getUserInteractor()
+    listEnrolledSubjectsInteractor()
+    listMenteeInteractor()
+    listUsersInteractor()
+    updateEnrollmentInteractor()
+    updateUserInteractor()
 }
 
-class SeminarSuggestion { 
+class PinnedEvent { 
     -id:String
-    -seminar: Seminar 
-    -subject: Subject 
+    -subjectId: String
+    -eventId: String
+    createPinnedEventInteractor()
+    deletePinnedEventInteractor()
+    getPinnedEventInteractor()
+    listPinnedEventsInteractor()
+    updatePinnedEventInteractor()
 }
 
 class Event { 
@@ -46,38 +92,74 @@ class Event {
     -description:String 
     -LinkedEntity:LinkedEntity
     -LinkedEntityID: String 
+    -status: Status
+    -RoomTimeEvent: RoomTimeEvent
+    createEventInteractor()
+    deleteEventInteractor()
+    getEventInteractor()
+    listAssociatedRoomTimeEventsInteractor()
+    listEventsInteractor()
+    updateEventInteractor()
 }
 
 class Room { 
     -id:String 
+    -title: String
     -capacity:int 
+    -RoomTimeEvent: RoomTimeEvent
+    createRoomInteractor()
+    deleteRoomInteractor()
+    getRoomInteractor()
+    listRoomsInteractor()
+    updateRoomInteractor()
 }
 
 class RoomTimeEvent {
     -id:String 
     -dateStart: Date
     -dateEnd: Date
+    -status: Status
+    -roomId: String
     -room: Room
+    -eventId: String
     -event: Event 
+    -EventUserPresence: EventUserPresence
+    createRoomTimeEventInteractor()
+    deleteRoomTimeEventInteractor()
+    getRoomTimeEventInteractor()
+    listAssociatedEventUserPresencesInteractors()
+    listRoomTimeEventsInteractor()
+    updateRoomTimeEventInteractor()
 }
 
 class Enrollment { 
+    -id: String
+    -subjectId: String
     -subject: Subject
+    -userId: String
     -user: User
-    -acYear: Date
+    -enrollmentDate: Date
     -status: status
-    -subjectRole: subjectRole
+    -roleTitle: subjectRole
+
 }
 
 class Seminar { 
     -id:String
     -title:String 
     -description:String 
-    -mentor_ID:String 
-    -type: String 
-    -content: Content
-    -subject: Subject
-    -user: User 
+    -userId: String
+    -mentorId:String 
+    -contentId: String
+    -subjectId: String
+    -status: SeminarStatus
+    approveSeminarInteractor()
+    createSeminarInteractor()
+    deleteSeminarInteractor()
+    getSeminarInteractor()
+    listSeminarsInteractor()
+    updateSeminarInteractor()
+
 }
 
 class Subject { 
@@ -85,15 +167,25 @@ class Subject {
     -title: String 
     -description: String 
     -semester: semester
-    -ects: Int 
+    -ectsBod: String 
     -status: status
-    -content: Content 
+    -contentId: String
+    -Enrollment: Enrollment 
+    addContentInteractor()
+    createSubjectInteractor()
+    deleteSubjectInteractor()
+    getSubjectInteractor()
+    listEnrolledUsersInteractor()
+    listSubjectsInteractor()
+    updateSubjectInteractor()
 }
 
 
 enum LinkedEntity { 
     SUBJECT
     SEMINAR
+    USER
+    POST
 }
 
 enum semester { 
@@ -105,23 +197,26 @@ enum status {
     ARCHIVED
 }
 
-enum userType {
+enum SeminarStatus {
+    DRAFT 
+    READY
+    CONFIRMED
+}
+
+enum Role {
     DEFAULT
     ADMIN
     SUPERADMIN
 }
 
-enum presenceStatus {
-    PRESENT 
-    ABSENT 
-}
+
 
 enum subjectRole { 
     PROFESSOR
     STUDENT
     OWNER
     DEMONSTRATOR
-    ASISTENT
+    ASSISTANT
 }
 
 
@@ -133,7 +228,7 @@ Content "1" ---* "1" Seminar
 User "0.." - "1.." Subject
 (User, Subject) .. Enrollment  
 
-Seminar "1" -right- "1.." SeminarSuggestion
+Seminar "1" -right- "1.." PinnedEvent
 Seminar "1" --> "1" Event
 Event "1" --> "*" RoomTimeEvent
 Room "1" --> "*" RoomTimeEvent
@@ -141,7 +236,7 @@ Room "1" --> "*" RoomTimeEvent
 User "1" ----> "*" EventUserPresence
 EventUserPresence "*" -right-> "1" RoomTimeEvent
 
-User -left> userType 
+User -left> Role 
 Subject --> subjectRole
 Subject -right> status
 Subject --> semester

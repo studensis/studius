@@ -1,0 +1,35 @@
+@startuml
+
+left to right direction
+
+package "Studius" {
+	node "<<device>>\nKorisnikPC" {
+		node "Browser" as B {
+			artifact "<<artifact>>\nClient App" as CA
+		}
+	}
+	node "Vercel Edge Network" {
+		node "<<devices>>\nServer Node" {
+			node "NextJS server" as SEN
+		}
+	}
+	node "<<device>>\nRailway" {
+			node "Backend Server" as BS {
+				artifact "<<artifact>>\nExpress Server" as ES
+				artifact "<<artifact>>\nPrisma ORM" as P
+			}
+	}
+	node "<<device>>\nSupabase" {
+		node "DB server" {
+			database "<<database>>\nPostgreSql" as SQL
+		}
+	}
+
+	CA "1" ---- "*" SEN
+	CA "*" - "1" ES
+	SEN "*" - "1" ES
+	P - ES
+	P "1" -- "1" SQL
+}
+
+@enduml

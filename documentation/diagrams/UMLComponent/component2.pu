@@ -1,0 +1,62 @@
+@startuml component
+
+left to right direction
+
+component "Frontend Server" as FS {
+	component "<<library>>\nNextJS Typescript" {
+		component "<<next-router>>\nNextJS Router" {
+	' 		component "User"
+	' 		component "Subject"
+	' 		component "Room"
+	' 		component "Event"
+	' 		component "Seminar"
+	' 		component "Post"
+	' 		component "<<library>>\nTRPC Client"
+		}
+		component "index.ts"
+	}
+
+	port " " as FS_JSON
+	port " " as FS_HTML
+}
+
+
+component "Web Browser" as WB {
+	component "<<React Component>>\nReact" as R
+	component "<<library>>\nTRPC Client " as Tc #aliceblue;line.dotted;
+
+	port "  " as WB_JSON
+	port " " as WB_HTML
+
+	R -.-> WB_HTML : <<delegate>>\nDohvati HTML, CSS i JS datoteke
+	Tc -.-> WB_JSON : <<delegate>>\nDohvati JSON
+}
+
+FS_JSON -0)- WB_JSON
+
+
+component "Backend Server" as BS {
+	' rectangle "Domains" {
+	' 	card "Entity (User, Subject, ...)" {
+	' 		component "TRPC Router" {
+	' 			component "TRPC Procedures"
+	' 		}
+	' 		component "Interactors"
+	' 		component "Repository"
+	' 		component "Model"
+	' 	}
+	' }
+	port " " as BS_SQL
+}
+() [Dohvat Tablica iz Baze]
+BS_SQL
+
+component "PostgreSQL baza podataka" as DB
+
+' FS1 -(0)- "dohvati HTML, CSS i JS datoteke" WB2
+' DB -> pDB
+
+FS -[hidden]> BS
+WB -[hidden]> DB
+
+@enduml
