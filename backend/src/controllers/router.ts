@@ -25,7 +25,7 @@ const appRouter = t.router({
 	seminar: SeminarRouter,
 	seminarSuggestion: seminarSuggestionRouter,
 	content: contentRouter,
-	// roomTimeEvent: roomTimeEventRouter,
+	// roomTimeEvent: roomTimeEventRouter,		// kroz eventove -> schedule
 	eventUserPresence: eventUserPresenceRouter,
 });
 

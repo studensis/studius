@@ -1,4 +1,8 @@
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
+import createSeminarSuggestionInteractor from '../../SeminarSuggestion/interactors/createSeminarSuggestionInteractor';
+import deleteSeminarSuggestionInteractor from '../../SeminarSuggestion/interactors/deleteSeminarSuggestionInteractor';
+import { SeminarSuggestionEntity } from '../../SeminarSuggestion/model/SeminarSuggestionEntity';
+import SeminarSuggestionRepositoryPrisma from '../../SeminarSuggestion/repository/SeminarSuggestionRepositoryPrisma';
 import createUserInteractor from '../../User/interactors/createUserInteractor';
 import deleteUserInteractor from '../../User/interactors/deleteUserInteractor';
 import { UserEntity } from '../../User/model/UserEntity';
@@ -6,6 +10,7 @@ import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
+import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -15,6 +20,7 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 const subjectRepo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
 let userRepo = new UserRepositoryPrisma();
+let seminarSuggestionRepo = new SeminarSuggestionRepositoryPrisma();
 let testSubject: SubjectEntity = {
 	id: '',
 	title: Buffer.from(Math.random().toString())
@@ -30,6 +36,7 @@ let newSubject: SubjectEntity;
 let newUser: UserEntity;
 let subjectId: string;
 let userId: string;
+let seminarSuggestionId: string;
 
 //
 //
@@ -94,6 +101,33 @@ test('Subject list', async () => {
 	let izlaz: SubjectEntity[] = await listSubjectsInteractor(subjectRepo);
 	expect(izlaz).not.toBeNull();
 });
+//
+//
+//
+// kreiranje SeminarSuggestion-a u svrhu testiranja izlistavanja
+let newSeminarSuggestion: SeminarSuggestionEntity;
+test('SeminarSuggestion create', async () => {
+	subjectId = newSubject.id;
+	newSeminarSuggestion = await createSeminarSuggestionInteractor(
+		seminarSuggestionRepo,
+		{
+			id: '',
+			subjectId: subjectId,
+			eventId: Buffer.from(Math.random().toString())
+				.toString('base64')
+				.substring(5, 15),
+		}
+	);
+	expect(newSubject).not.toBeNull();
+});
+test('PinnedEvents get', async () => {
+	subjectId = newSubject.id;
+	let izlaz: SeminarSuggestionEntity[] = await listPinnedEventsInteractor(
+		seminarSuggestionRepo,
+		subjectId
+	);
+	expect(izlaz).not.toBeNull();
+});
 
 //
 //
@@ -115,4 +149,13 @@ test('User delete', async () => {
 		enrollmentRepo
 	);
 	expect(deleteUser).not.toBeNull();
+});
+test('PinnedEvent delete', async () => {
+	seminarSuggestionId = newSeminarSuggestion.id;
+	let deleteSeminarSuggestion: SeminarSuggestionEntity =
+		await deleteSeminarSuggestionInteractor(
+			seminarSuggestionId,
+			seminarSuggestionRepo
+		);
+	expect(deleteSeminarSuggestion).not.toBeNull();
 });
