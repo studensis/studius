@@ -1,5 +1,6 @@
 'use client';
 
+import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -12,6 +13,7 @@ import {
 } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
+import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
@@ -34,6 +36,10 @@ export default function SubjectPage(props: PageProps) {
 		}
 		console.log(deleteUser.status);
 	}, [deleteUser]);
+
+	const sessionUser = useLogin().user;
+
+	const googleLink = trpc.auth.external.google.link.useMutation();
 
 	return (
 		<PageStack>
@@ -62,6 +68,22 @@ export default function SubjectPage(props: PageProps) {
 							Delete me
 						</Button>
 					</div>
+
+					{googleLink.isError && (
+						<pre className="bg-danger-weak p-10 mb-4 rounded-2xl">
+							{googleLink.error.shape?.message}
+						</pre>
+					)}
+					{user.data && user.data.id == sessionUser?.userId && (
+						<>
+							<GoogleLogin
+								onSuccess={(response) => {
+									response.credential &&
+										googleLink.mutate({ credential: response.credential });
+								}}
+							/>
+						</>
+					)}
 
 					{deleteUser.isSuccess && (
 						<Block>

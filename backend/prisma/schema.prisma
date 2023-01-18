@@ -22,6 +22,7 @@ model User {
   eventUserPresence EventUserPresence[]
   mentor            User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
   mentee            User[]              @relation("Mentorstvo")
+  googleUserId      String?             @unique
 }
 
 model Subject {

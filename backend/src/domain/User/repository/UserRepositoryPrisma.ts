@@ -19,7 +19,6 @@ export default class UserRepositoryPrisma extends UserRepository {
 
 		return users;
 	}
-
 	async update(newData: updateUserEntity) {
 		let updatedData = await prisma.user.update({
 			where: {
@@ -33,6 +32,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 				email: newData.email ? newData.email : undefined,
 				userRole: newData.userRole ? newData.userRole : undefined,
 				mentorID: newData.mentorID ? newData.mentorID : undefined,
+				googleUserId: newData.googleUserId ? newData.googleUserId : undefined,
 			},
 		});
 		let rez: UserEntity = updatedData;
@@ -103,5 +103,14 @@ export default class UserRepositoryPrisma extends UserRepository {
 		});
 
 		return mentees;
+	}
+
+	async getByGoogleId(id: string): Promise<UserEntity | null> {
+		let query = await prisma.user.findUnique({
+			where: {
+				googleUserId: id,
+			},
+		});
+		return query;
 	}
 }

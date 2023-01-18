@@ -23,4 +23,7 @@ export abstract class UserRepository {
 	async listMentees(id: string): Promise<UserEntity[] | null> {
 		throw new Error('Method not implemented.');
 	}
+	async getByGoogleId(id: string): Promise<UserEntity | null> {
+		throw new Error('Method not implemented.');
+	}
 }

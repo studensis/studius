@@ -1,3 +1,5 @@
+'use client';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import {
 	Dialog,
 	DialogOverlay,
@@ -20,18 +22,26 @@ export default function RootLayout({
 			<body className="overflow-x-hidden bg-background">
 				<TrpcProvider>
 					<LoginProvider>
-						<ThemeProvider>
-							<DialogProvider>
-								<div
-									className={'relative min-h-screen w-screen overflow-x-hidden'}
-								>
-									{children}
-									<TailwindCache />
-									<DialogOverlay />
-									<Dialog />
-								</div>
-							</DialogProvider>
-						</ThemeProvider>
+						<GoogleOAuthProvider
+							clientId={
+								'1040571623043-990cbggsohncdbc6trbtgnppenpb7274.apps.googleusercontent.com'
+							}
+						>
+							<ThemeProvider>
+								<DialogProvider>
+									<div
+										className={
+											'relative min-h-screen w-screen overflow-x-hidden'
+										}
+									>
+										{children}
+										<TailwindCache />
+										<DialogOverlay />
+										<Dialog />
+									</div>
+								</DialogProvider>
+							</ThemeProvider>
+						</GoogleOAuthProvider>
 					</LoginProvider>
 				</TrpcProvider>
 			</body>

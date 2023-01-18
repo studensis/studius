@@ -9,4 +9,5 @@ export type UserEntity = {
 	email: string;
 	userRole: UserRole;
 	mentorID: string | null;
+	googleUserId: string | null;
 };

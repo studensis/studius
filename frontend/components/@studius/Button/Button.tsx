@@ -49,11 +49,11 @@ const Button: FC<ButtonProps> = ({
 					className={(children
 						? outline == true
 							? disabled == true
-								? 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong w-max h-[40px] rounded-2xl opacity-40 border-2'
-								: 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong border-2 w-max h-[40px] rounded-2xl hover:opacity-80 hover:bg-accent-weak hover:border-accent-strong active:opacity-50 active:bg-accent-strong active:text-section '
+								? 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong w-maxx h-[40px] rounded-2xl opacity-40 border-2'
+								: 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong border-2 w-maxx h-[40px] rounded-2xl hover:opacity-80 hover:bg-accent-weak hover:border-accent-strong active:opacity-50 active:bg-accent-strong active:text-section '
 							: disabled == true
-							? 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-max h-[40px] rounded-2xl opacity-20'
-							: 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-max h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
+							? 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-maxx h-[40px] rounded-2xl opacity-20'
+							: 'flex justify-center items-center py-2 px-4 bg-accent-strong text-section w-maxx h-[40px] rounded-2xl hover:opacity-80 active:opacity-50'
 						: outline == true
 						? disabled == true
 							? 'flex justify-center items-center py-2 px-4 bg-section text-accent-strong w-[40px] h-[40px] rounded-2xl opacity-40 border-2'
