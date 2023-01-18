@@ -53,7 +53,7 @@ Od profila korisnika do sadržaja lekcija unutar kolegija, sustav za sadržaj po
 
 Nositelju predmeta prikazuju se predmeti na kojima je nositelj te popis studenata koje mentorira, te forma za upis naslova seminara. Odabire predmet, studenta te upisuje naslov pa klikom na gumb kreira ideju za seminar. Ona se prikazuje odabranom studentu uz opciju unosa opisa seminara. Nakon unosa opisa, student pritiskom na gumb šalje predložak mentoru na odobrenje. Mentor na popisu predložaka ima opciju konfirmacije seminara.
 
-![Seminar1](./../images/seminar1.png)
-![Seminar1](./../images/seminar2.png)
-![Seminar1](./../images/seminar3.png)
-![Seminar1](./../images/seminar4.png)
+![Seminar1](./images/seminar1.png)
+![Seminar1](./images/seminar2.png)
+![Seminar1](./images/seminar3.png)
+![Seminar1](./images/seminar4.png)

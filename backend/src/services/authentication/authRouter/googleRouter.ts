@@ -2,13 +2,13 @@ import { TRPCError } from '@trpc/server';
 import * as jwt from 'jsonwebtoken';
 import { decode } from 'jsonwebtoken';
 import { z } from 'zod';
+import customConfig from '../../../config/default';
 import {
 	authedProcedure,
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import UserRepositoryPrisma from '../../../domain/User/repository/UserRepositoryPrisma';
-const secret = '3qtv47890hn689n72cdx3049b*&%a';
 
 const repo = new UserRepositoryPrisma();
 
@@ -30,7 +30,7 @@ export const googleRouter = t.router({
 					userId: user.id,
 					role: user.userRole,
 				},
-				secret,
+				customConfig.secret,
 				{ expiresIn: '1h' }
 			);
 

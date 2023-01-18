@@ -2,8 +2,7 @@ import { inferAsyncReturnType, initTRPC } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
 
 import * as jwt from 'jsonwebtoken';
-
-const secret = '3qtv47890hn689n72cdx3049b*&%a';
+import customConfig from '../config/default';
 
 export const createContext = async ({
 	req,
@@ -15,7 +14,7 @@ export const createContext = async ({
 			return null;
 		}
 		try {
-			const user = jwt.verify(token, secret) as {
+			const user = jwt.verify(token, customConfig.secret) as {
 				userId: string;
 				role: string;
 			};
