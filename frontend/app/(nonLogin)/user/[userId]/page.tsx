@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
 import Icon from '../../../../components/@studius/Icon/Icon';
+import useDialog from '../../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../../components/@studius/PageElements/Block';
 import { Section } from '../../../../components/@studius/PageElements/Section';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
@@ -17,6 +18,7 @@ import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
+import { UpdateUserModal } from '../UpdateUserModal';
 
 type PageProps = {
 	params: {
@@ -26,11 +28,19 @@ type PageProps = {
 
 export default function SubjectPage(props: PageProps) {
 	const router = useRouter();
-	const user = trpc.user.getUserById.useQuery(props.params.userId);
+	const user = trpc.user.getUserById.useQuery(props.params.userId, {
+		refetchInterval: 10000,
+	});
 	const deleteUser = trpc.user.deleteUserById.useMutation();
+	const updateUser = trpc.user.updateUserById.useMutation();
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(
 		props.params.userId
 	);
+	const { refetch } = useLogin();
+
+	const userWithoutPassword = user.data
+		? (({ password, ...o }) => o)(user.data)
+		: null;
 
 	useEffect(() => {
 		if (deleteUser.status === 'success') {
@@ -43,12 +53,22 @@ export default function SubjectPage(props: PageProps) {
 	const googleLink = trpc.auth.external.google.link.useMutation();
 
 	useEffect(() => {
+		if (updateUser.isSuccess) {
+			// console.log('a');
+			// user.refe
+			refetch();
+		}
+	}, [updateUser]);
+	useEffect(() => {
 		if (googleLink.isSuccess) {
-			router.refresh();
+			// router.refresh();
+			refetch();
 		}
 	}, [googleLink]);
 
 	const [box, setBox] = useState(false);
+
+	const { setModal } = useDialog();
 
 	return (
 		<PageStack>
@@ -64,28 +84,52 @@ export default function SubjectPage(props: PageProps) {
 								? user.data?.firstname + ' ' + user.data?.lastname
 								: 'Subject'
 						}
+						actionRow={
+							<>
+								<div className="flex flex-row gap-2">
+									{sessionUser?.role !== 'DEFAULT' && (
+										<Button
+											onClick={() => {
+												deleteUser.mutate(props.params.userId);
+											}}
+										>
+											Delete me
+										</Button>
+									)}
+									{user.data && user.data.id == sessionUser?.userId && (
+										<>
+											<Button
+												onClick={() => {
+													setModal(
+														user.data ? (
+															<UpdateUserModal user={user.data} />
+														) : null
+													);
+												}}
+											>
+												Edit Profile
+											</Button>
+										</>
+									)}
+								</div>
+							</>
+						}
 					/>
-					<div className="flex gap-2">
+					{/* <div className="flex gap-2">
 						<Link href={'/user'}>
 							<Button leftIcon="chevronLeft">Back to Users</Button>
 						</Link>
-						<Button
-							onClick={() => {
-								deleteUser.mutate(props.params.userId);
-							}}
-						>
-							Delete me
-						</Button>
-					</div>
+					</div> */}
 
-					{googleLink.isError && (
-						<pre className="bg-danger-weak p-10 mb-4 rounded-2xl">
-							{googleLink.error.shape?.message}
-						</pre>
-					)}
+					{/* Profile Section */}
 					{user.data && user.data.id == sessionUser?.userId && (
 						<>
 							<Section>
+								{googleLink.isError && (
+									<pre className="bg-danger-weak p-10 mb-4 rounded-2xl">
+										{googleLink.error.shape?.message}
+									</pre>
+								)}
 								<Stack>
 									<h3 className="title1">Link with Google Account</h3>
 
@@ -110,7 +154,16 @@ export default function SubjectPage(props: PageProps) {
 									<Stack cols={2}>
 										{user.data.googleUserId && (
 											<Stack>
-												<Button className="w-max bg-red-500">
+												<Button
+													className="w-max bg-danger"
+													onClick={() => {
+														updateUser.mutate({
+															id: sessionUser.userId,
+															googleUserId: null,
+														});
+													}}
+													loading={updateUser.isLoading}
+												>
 													Unlink account
 												</Button>
 											</Stack>
@@ -161,7 +214,7 @@ export default function SubjectPage(props: PageProps) {
 					)}
 
 					<Block>
-						<pre>{JSON.stringify(user.data, null, 2)}</pre>
+						<pre>{JSON.stringify(userWithoutPassword, null, 2)}</pre>
 					</Block>
 					<div>
 						<SectionTop>

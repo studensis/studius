@@ -78,6 +78,8 @@ export default t.router({
 				email: z.string().optional(),
 				userRole: z.enum(['DEFAULT', 'ADMIN', 'SUPERADMIN']).optional(),
 				mentorID: z.string().optional(),
+				avatar: z.string().optional(),
+				googleUserId: z.string().nullable().optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
