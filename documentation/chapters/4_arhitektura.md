@@ -92,7 +92,7 @@ Prisma pri pokretanju određenog skupa naredbi generira SQL kod putem kojeg komu
 Naša shema opisana je u slijedećem dijagramu baze.
 
 ![baza_podataka](./images/skica_bp.png)
-slika baze podataka <a name = "4.1 slika1"> </a>
+slika baze podataka <a name = "4.1-slika1"> </a>
 
 ### User
 
@@ -256,7 +256,7 @@ Dvorane su opisane razredom Room. Seminar mora imati doktoranda koji ga izvodi (
 Razred Post predstavlja objavu, sadrži svoj Content. Koji može među ostalim tematski pripadati predmetu ili seminaru, što se vidi u enumeraciji "LinkedEntity".
 
 :[class](../diagrams/UMLClass/class.pu)
-slika dijagrama razreda <a name = "4.2 slika1"> </a>
+slika dijagrama razreda <a name = "4.2-slika1"> </a>
 
 ## 4.3 Dijagram stanja <a name = "4.3"> </a>
 
@@ -266,7 +266,7 @@ Bitno je naglasiti da se iz bilo kojeg stanja može doći na bilo koje od većih
 "Events" dodatno prikazuje vlastiti kalendar i nadolazeće eventove, "Seminars" prikazuje listu nadolazećih seminara, klik na sliku profila nudi "log out", paljenje i gašenje dark mode, i "view profile" vraća podatke o korisniku, upisane predmete i mogućnost brisanja računa. "Workspace tools" kao najkompleksnije stanje ima mogućnost ćitanja, unosa, brisanja i uređivanja baze.
 
 ![class](./diagrams/UMLState/DijagramStanja.vpd.svg)
-slika dijagrama stanja <a name = "4.3 slika1"> </a>
+slika dijagrama stanja <a name = "4.3-slika1"> </a>
 
 ## 4.4 Dijagram aktivnosti <a name="4.4"> </a>
 
@@ -277,7 +277,7 @@ na kojima predaje i jednog studenta na tom predmetu. Zatim predloži temu semina
 preda sadržaj seminara. Na posljetku mentor odobri taj seminar.
 
 ![class](./diagrams/UMLActivity/DijagramAktivnosti.vpd.svg)
-slika dijagrama aktivnosti <a name = "4.4 slika1"> </a>
+slika dijagrama aktivnosti <a name = "4.4-slika1"> </a>
 
 ## 4.5 Dijagram komponenti <a name="4.5"> </a>
 
@@ -312,4 +312,4 @@ Inicijalni i svaki idući zahtjev dostavlja HTML ljusku Web browseru (sa zapeče
 Obzirom da svaki zahtjev podatcima ovisi o samom korisniku i njegovu računu, TRPC klijent koji se nalazi u Web browseru, pomoću session kolačića direknto komunicira s Backendom i tamo se dalje gleda koji podatci i akcije su omogućene korisniku.
 
 ![class](./diagrams/UMLComponent/cmp.svg)
-slika dijagrama komponenti <a name = "4.5 slika1"> </a>
+slika dijagrama komponenti <a name = "4.5-slika1"> </a>

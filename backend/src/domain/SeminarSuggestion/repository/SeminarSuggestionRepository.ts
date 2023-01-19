@@ -1,3 +1,4 @@
+import { EventEntity } from '../../Event/model/EventEntity';
 import { SeminarSuggestionEntity } from '../model/SeminarSuggestionEntity';
 import { updateSeminarSuggestionEntity } from '../model/updateSeminarSuggestionEntity';
 
@@ -23,7 +24,7 @@ export abstract class SeminarSuggestionRepository {
 	}
 	async listPinnedEventsBySubjectId(
 		subjectId: string
-	): Promise<SeminarSuggestionEntity[]> {
+	): Promise<(SeminarSuggestionEntity & { event: EventEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 }

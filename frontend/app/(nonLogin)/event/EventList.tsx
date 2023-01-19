@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+import { Button } from '../../../components/@studius/Button/Button';
 import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
@@ -9,6 +11,7 @@ import EventModal from './EventModal';
 const EventList = () => {
 	const events = trpc.event.listEvents.useQuery();
 	const { setModal } = useDialog();
+	const router = useRouter();
 
 	return (
 		<div>
@@ -30,8 +33,20 @@ const EventList = () => {
 									linkedEntity: 'Linked Entity',
 								}}
 								objects={events.data}
+								actionRow={(event) => {
+									return (
+										<>
+											<Button
+												leftIcon={'edit'}
+												onClick={() => {
+													setModal(<EventModal eventId={event.id} />);
+												}}
+											></Button>
+										</>
+									);
+								}}
 								onClick={(event) => {
-									setModal(<EventModal eventId={event.id} />);
+									router.push('/event/' + event.id);
 								}}
 							></Table>
 						</Block>

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { EventEntity } from '../../Event/model/EventEntity';
 import { SeminarSuggestionEntity } from '../model/SeminarSuggestionEntity';
 import { updateSeminarSuggestionEntity } from '../model/updateSeminarSuggestionEntity';
 import { SeminarSuggestionRepository } from './SeminarSuggestionRepository';
@@ -74,9 +75,12 @@ export default class SeminarSuggestionRepositoryPrisma extends SeminarSuggestion
 	async listPinnedEventsBySubjectId(subjectId: string) {
 		let data = await prisma.pinnedEvent.findMany({
 			where: { subjectId: subjectId },
+			include: { event: true },
 		});
 		if (data) {
-			let seminarSuggestions: SeminarSuggestionEntity[] = data;
+			let seminarSuggestions: (SeminarSuggestionEntity & {
+				event: EventEntity;
+			})[] = data;
 			return seminarSuggestions;
 		} else {
 			throw new Error('no data');

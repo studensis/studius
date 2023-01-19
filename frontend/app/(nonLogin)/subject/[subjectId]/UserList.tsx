@@ -21,32 +21,34 @@ const UserList: FC<PageProps> = ({ subjectId, roleTitle }) => {
 				{enrolledUsers.data &&
 					enrolledUsers.data.map((enrolledUser) => {
 						return (
-							<div key={enrolledUser.userId} className="flex items-center">
+							<>
 								{enrolledUser.roleTitle == roleTitle ? (
-									<div className="w-full">
-										<UserCard
-											user={enrolledUser.user}
-											role={enrolledUser.roleTitle}
-										/>
-										<Button
-											onClick={() => {
-												enroll.mutate({
-													id: enrolledUser.id!,
-													// userId: enrolledUser.userId,
-													// subjectId: subjectId,
-													status: 'ARCHIVED',
-												});
-											}}
-											active={true}
-											className="title1 m-4"
-										>
-											Remove from subject
-										</Button>
+									<div key={enrolledUser.userId} className="flex items-center">
+										<div className="w-full">
+											<UserCard
+												user={enrolledUser.user}
+												role={enrolledUser.roleTitle}
+											/>
+											<Button
+												onClick={() => {
+													enroll.mutate({
+														id: enrolledUser.id!,
+														// userId: enrolledUser.userId,
+														// subjectId: subjectId,
+														status: 'ARCHIVED',
+													});
+												}}
+												active={true}
+												className="title1 m-4"
+											>
+												Remove from subject
+											</Button>
+										</div>
 									</div>
 								) : (
 									<></>
 								)}
-							</div>
+							</>
 						);
 					})}
 			</Stack>

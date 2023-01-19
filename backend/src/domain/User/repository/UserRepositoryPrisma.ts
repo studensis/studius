@@ -32,8 +32,9 @@ export default class UserRepositoryPrisma extends UserRepository {
 				email: newData.email ? newData.email : undefined,
 				userRole: newData.userRole ? newData.userRole : undefined,
 				mentorID: newData.mentorID ? newData.mentorID : undefined,
-				googleUserId: newData.googleUserId ? newData.googleUserId : undefined,
-				avatar: newData.avatar ? newData.avatar : undefined,
+				googleUserId:
+					newData.googleUserId !== undefined ? newData.googleUserId : undefined,
+				avatar: newData.avatar !== undefined ? newData.avatar : undefined,
 			},
 		});
 		let rez: UserEntity = updatedData;

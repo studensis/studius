@@ -8,8 +8,10 @@ import { SectionTop } from '../../../../components/@studius/PageElements/Section
 import { PageStack } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
+import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 import EnrollSection from './EnrollSection';
+import { PinnedEvents } from './PinnedEvents';
 import UserList from './UserList';
 
 type PageProps = {
@@ -43,6 +45,8 @@ function SubjectPage(props: PageProps) {
 	);
 	const router = useRouter();
 
+	const { user } = useLogin();
+
 	const [enrollmentPage, setEnrollmentPage] = useState(false);
 
 	const enroll = trpc.user.updateEnrollment.useMutation();
@@ -59,26 +63,33 @@ function SubjectPage(props: PageProps) {
 						<PageHeader
 							title={subject.data?.title || 'Subject'}
 							description={subject.data?.description}
+							actionRow={
+								<>
+									{user?.role !== 'DEFAULT' && (
+										<Button
+											onClick={() => {
+												setEnrollmentPage(!enrollmentPage);
+											}}
+											className="m-5 mb-8"
+										>
+											Enroll Users
+										</Button>
+									)}
+								</>
+							}
 						/>
 
+						{enrollmentPage && (
+							<EnrollSection
+								enrollmentPage={enrollmentPage}
+								setEnrollmentPage={setEnrollmentPage}
+								subjectId={props.params.subjectId}
+							/>
+						)}
+
+						<PinnedEvents subjectId={props.params.subjectId} />
+
 						<div>
-							<Button
-								onClick={() => {
-									setEnrollmentPage(!enrollmentPage);
-								}}
-								className="m-5 mb-8"
-							>
-								Enroll Users
-							</Button>
-
-							{enrollmentPage && (
-								<EnrollSection
-									enrollmentPage={enrollmentPage}
-									setEnrollmentPage={setEnrollmentPage}
-									subjectId={props.params.subjectId}
-								/>
-							)}
-
 							<SectionTop>
 								<h3 className="title2">List of enrolled Users:</h3>
 							</SectionTop>

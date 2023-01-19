@@ -28,8 +28,19 @@ const Event = ({
 		dateEnd: string;
 	};
 }) => {
-	const event = trpc.event.getEventById.useQuery(roomTimeEvent.eventId);
-	const room = trpc.room.getRoomById.useQuery(roomTimeEvent.roomId);
+	// const event = trpc.event.getEventById.useQuery(roomTimeEvent.eventId);
+	const event = {
+		data: {
+			description: 'Description',
+			title: 'Title',
+		},
+	};
+	// const room = trpc.room.getRoomById.useQuery(roomTimeEvent.roomId);
+	const room = {
+		data: {
+			title: 'Room Title',
+		},
+	};
 	return (
 		<>
 			<PageStack>

@@ -102,7 +102,7 @@
 
 #### [5.6.1. Frontend tijek](#5.6.1)
 
-## [6. Indeks slika i dijagrama](#6)
+## [6. Indeks-slika i dijagrama](#6)
 
 ## [7. Tablica aktivnosti](#7)
 
@@ -128,7 +128,7 @@
 
 :[Implementacija.md](./chapters/5_implementacija.md)
 
-# 6. Indeks slika i dijagrama <a name="6"> </a>
+# 6. Indeks-slika i dijagrama <a name="6"> </a>
 
 :[Implementacija.md](./chapters/6_indeks.md)
 
