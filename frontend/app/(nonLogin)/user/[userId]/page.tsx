@@ -158,7 +158,7 @@ export default function SubjectPage(props: PageProps) {
 													className="w-max bg-danger"
 													onClick={() => {
 														updateUser.mutate({
-															id: sessionUser.userId,
+															id: sessionUser!.userId,
 															googleUserId: null,
 														});
 													}}

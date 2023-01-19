@@ -26,14 +26,15 @@ model User {
 }
 
 model Subject {
-  id          String       @id @default(uuid())
-  title       String       @unique
+  id          String        @id @default(uuid())
+  title       String        @unique
   description String
   ectsBod     String
   semester    Semester
   status      Status
   contentId   String[]
   Enrollment  Enrollment[]
+  PinnedEvent PinnedEvent[]
 }
 
 model Content {
@@ -85,12 +86,15 @@ model Event {
   linkedEntityId String
   status         Status          @default(ACTIVE)
   RoomTimeEvent  RoomTimeEvent[]
+  PinnedEvent    PinnedEvent[]
 }
 
 model PinnedEvent {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id])
   eventId   String
+  event     Event   @relation(fields: [eventId], references: [id])
 }
 
 model Room {
