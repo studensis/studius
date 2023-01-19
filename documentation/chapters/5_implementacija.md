@@ -1,4 +1,4 @@
-## 5.1 Korištene tehnologije i alati
+## 5.1 Korištene tehnologije i alati <a name = "5.1"> <\a>
 
 Komunikacija u timu je realizirana primarno aplikacijom _**Slack**_, te po potrebi i _**WhatsAppom**_. Za izradu dokumentacije korišten je jezik _**Markdown**_, ta za izradu UML dijagrama korišteni su programi Figma, _**Visual Paradigm**_, te kasnije i _**PlantUML**_.
 
@@ -39,7 +39,7 @@ Svi unit testovi pisani su uporabom biblioteke _**Jest**_. Ispitivanje se radilo
 
 Testovi su se pokazali korisni u koraku prije deploymenta na udaljena računala jer su male promjene u sustavu znale uzrokovat pojavu grešaka u nepovezanom dijelu koji je koristio zajednički dio koda. Temeljito pisanim testovima, ovakve greške su se vrlo brzo identificirale i popravile.
 
-### Automatizirani ispitni slučaj 1: Upis dostupnog kolegija
+### 5.2.1 Automatizirani ispitni slučaj 1: Upis dostupnog kolegija <a name = "2.0"> <\a>
 
 Ulaz:
 
@@ -60,6 +60,7 @@ Rezultat: Očekivani rezultat (4.) nije zadovoljen obzirom da nije vraćena gre�
 ## 5.3 Dijagram razmještaja <a name="5.3"> </a>
 
 :[class](../diagrams/UMLComponent/component.pu)
+slika dijagrama razmještaja <a name = "5.3 slika1"> </a>
 
 ## 5.4 Upute za puštanje u pogon <a name="5.4"> </a>
 
@@ -68,7 +69,9 @@ Rezultat: Očekivani rezultat (4.) nije zadovoljen obzirom da nije vraćena gre�
 U dogovoru s cijelom ekipom koja je radila na projektu (i pripadnim mentorima), radili bismo prateći tjedne sprintove uz prilagođen oblik SCRUM-a u alatu Notion
 
 ![Notion glavna stranica](./images/notion1.png)
+slika alata Notion <a name = "5.5 slika1"> </a>
 ![Notion stranica sa zadacima](./images/notion2.png)
+slika alata Notion <a name = "5.5 slika2"> </a>
 
 Način organizacije koji smo odlučili koristiti kao razvojni tim je SCRUM.
 
@@ -188,11 +191,11 @@ Kraj svakog sprinta obilježen je ovakvim sastankom, gdje gledamo koliko su uspj
 
 Bilješke ovakvih sastanaka vodimo kroz alat **Notion** te na temelju tih zapisnika na mjesečnoj bazi stvaramo dokument koji proslijeđujemo svim mentorima vezanim uz projekt.
 
-### 5.5.6 Dnevni sastanci <a name="5.5.6"> </a>
+### 5.5.4 Dnevni sastanci <a name="5.5.4"> </a>
 
 Dnevni bi sastanci trebali trajati manje od 10 minuta svaki dan i nisu obavezni. Cilj je uskladiti zadatke koje svaki član rješava.
 
-### 5.5.7 Mjesečni sastanci <a name="5.5.7"> </a>
+### 5.5.5 Mjesečni sastanci <a name="5.5.5"> </a>
 
 Cilj ovih sastanaka je usklađivanje s mentorima iz raznih zavoda, te iznošenje i skupno razmišljanje o napretku te idućim koracima.
 
@@ -202,15 +205,13 @@ Dijelovi projekta su već započeti, naime Korisničko Putovanje (User Journey),
 
 ### 5.6.1 Frontend tijek <a name="5.6.1"> </a>
 
-## 5.7 Upute za puštanje u pogon
+## 5.7 Upute za puštanje u pogon <a name = "5.7"> <\a>
 
-### 5.7.1 Lokalno puštanje u pogon
-
-### Preuzimanje repozitorija lokalno
+### 5.7.1 Preuzimanje repozitorija lokalno <a name = "5.7.1"> <\a>
 
 Odlaskom na Gitlab sjedište projekta Studius moguće je preuzeti lokalno cijeli repozitorij u obliku ZIP datoteke. Nakon preuzimanja, odpakirajte projekt na proizvoljno mjesto na Vašem osobnom računalu te pratite daljnja uputstva za postavljanje i pokretanje platforme.
 
-### Postavljanje baze podataka
+### 5.7.2 Postavljanje baze podataka <a name = "5.7.2"> <\a>
 
 Prvi korak u pokretanju platforme je postavljanje baze podataka. Odabir baze podataka je proizvoljan, no obzirom da je odabir ekipa tijekom razvoja bio PostgreSQL, preporučili bismo korištenje istog.
 
@@ -221,16 +222,19 @@ Način posluživanja baze isto je tako proizvoljan, no u slijedećim koracima op
 U Vaš pretraživač upišite adresu [https://supabase.com/](https://supabase.com/), te slijedite korake za registraciju.
 
 ![Supabase 1](./images/supa1.png)
+slika otvaranja Supabase računa <a name = "5.7.2 slika1"> </a>
 
 **Stvaranje projekta**
 
 Pritiskom na "New Project" stvorimo novi projekt unutar kojeg ćemo smjestiti bazu.
 
 ![Supabase 2](./images/supa2.png)
+slika1 stvaranja projekta u Supabase-u <a name = "5.7.2 slika2"> </a>
 
 Odabir imena je proizvoljan, no imajte na umu da odabir lozinke projekta će se kasnije koristiti pri spajanju na pazu. Odabir regije također je proizvoljan, no preporuča se odabir što bliže lokacije kako bi vrijeme odgovora bilo što kraće.
 
 ![Supabase 3](./images/supa3.png)
+slika1 stvaranja projekta u Supabase-u <a name = "5.7.2 slika3"> </a>
 
 **Spajanje backenda s bazom**
 
@@ -239,8 +243,9 @@ Nakon što smo uspješno stvorili projekt, i pričekali da se sam projekt automa
 Postavljanjem "Connection Stringa" na URI, te izmjenom _[YOUR-PASSWORD]_ dijela niza znakova sa lozinkom kojom smo stvorili projekt, imamo spremnu poveznicu kojom će se backend spajati na bazu.
 
 ![Supabase 4](./images/supa4.png)
+slika spajanja backenda s bazom <a name = "5.7.2 slika4"> </a>
 
-### Postavljanje backend i frontend poslužitelja
+### 5.7.3 Postavljanje backend i frontend poslužitelja <a name = "5.7.3"> <\a>
 
 Nakon što je repozitorij preuzet te je postavljana baza podataka, možemo krenuti s postavljanjem samog Backenda.
 
@@ -248,15 +253,16 @@ Unutar korijenskog direktorija, potvrdimo da postoje direktoriji backend i front
 
 Postavljanje za lokalno okruženje je ovim korakom dovršeno, jedino je preostalo preuzeti programsku potporu kako bismo bili spremni pokrenuti platformu.
 
-### Postavljanje programske potpore
+### 5.7.4 Postavljanje programske potpore <a name = "5.7.4"> <\a>
 
 Prije instalacije programske podrške potrebno je instalirati Node.JS, te menadžer paketa za Node.js okruženje. Krenimo prvo s samim Node.js-om.
 
-**Instaliranje Node.js-a i yarna**
+**Instaliranje Node.js-a i Yarna**
 
 Prateći ovu poveznicu: [https://nodejs.org/en/](https://nodejs.org/en/) posjećujemo službeno web sjedište Node organizacije. Ovdje nam se generalno nude dvije opcije _LTS_, te _Current_, bitno je preuzeti Node verziju 18.8 ili višu kako bi se sve komponente sustava uobičajeno ponašale. Naputak: preporučamo instalaciju LST verzije obzirom da je stabilnija te je osigurana višegodišnja podrška.
 
 ![Supabase 3](./images/node1.png)
+slika instalacije Node.js-a <a name = "5.7.4 slika1"> 
 
 Osim Nodea, potrebno je odabrati i menadžer paketa za Node ekosustav. Danas postoje tri najčešće opcije: NPM, Yarn, te PNPM. Mi smo se odlučili za Yarn zbog prethodnog iskustva rada u istom.
 
@@ -278,7 +284,7 @@ te
 yarn rebuild
 ```
 
-### Pokretanje platforme
+### 5.7.5 Pokretanje platforme <a name = "5.7.5"> <\a>
 
 Kada su obje naredbe iz prethodnog koraka završile s obradom, potrebno je stvoriti jednog _SUPERADMIN_ korisnika koji će predstavljati vlasnika platforme s najvišom razinom prava.
 
@@ -291,11 +297,13 @@ yarn studio
 te unutar korisničkog sučelja navigirati u tablicu _"Users"_
 
 ![Pokretanje 1](./images/node2.png)
+slika popisa modela u bazi <a name = "5.7.5 slika1"> </a>
 
 Zatim stvoriti korisnika s _"userRole"_ stavkom postavljenom na "SUPERADMIN", te s ostalim proizvoljno odabranim podacima. Nakon izmjena, potrebno ih je potvrditi pritiskom na dugme "Save 1 change"
 
 ![Pokretanje 2](./images/node3.png)
 ![Pokretanje 3](./images/node4.png)
+slika prikaza Usera u bazi <a name = "5.7.5 slika2"> </a>
 
 Spremni smo pokrenuti platformu!
 
@@ -308,6 +316,9 @@ yarn dev
 u korijenskom direktoriju uspješno je pokrenuta platforma na adresi `http://localhost:3000`, te možemo u naredbenom retku pratiti promet.
 
 ![Pokretanje 4](./images/term1.png)
+slika pokretanje backenda naredbom yarn <a name = "5.7.5 slika3"> </a>
 
 ![Pokretanje 4](./images/term2.png)
+slika stranice za prijavu <a name = "5.7.5 slika4"> </a>
 ![Pokretanje 4](./images/term3.png)
+slika početne stranice <a name = "5.7.5 slika5"> </a>

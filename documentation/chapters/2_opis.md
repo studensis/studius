@@ -2,7 +2,7 @@
 
 Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi svojim usmjerenjem tako da pokrivamo cjeloukupan stack potreban za razvoj platforme.
 
-## 2.0 Opis projektnog zadatka
+## 2.0 Opis projektnog zadatka <a name = "2.0"> <\a>
 
 Projekt “Studius” je osmišljen kao platforma koja objedinjuje set alata potrebnih za rad proizvoljne obrazovne ustanove, prvenstveno fakulteta, na velikom broju studenata, kolegija i posebnih programa. Cilj projekta je kontribuirati boljem iskustvu svakog studenta i profesora diljem Sveučilišta. Posebno smo motivirani da omogućimo fakultetima pored FER-a kvalitetnije rješenje za upravljanje kolegijima i pružimo bolje načine komunikacije profesora i studenata. S obzirom da je to iznimno težak u dugotrajan proces u sklopu kolegija "programsko inženjerstvo" implementirat ćemo samo dio tog većeg projekta. Što ćemo i kako ćemo to implementirati opisano je u nastavku.
 
@@ -54,6 +54,10 @@ Od profila korisnika do sadržaja lekcija unutar kolegija, sustav za sadržaj po
 Nositelju predmeta prikazuju se predmeti na kojima je nositelj te popis studenata koje mentorira, te forma za upis naslova seminara. Odabire predmet, studenta te upisuje naslov pa klikom na gumb kreira ideju za seminar. Ona se prikazuje odabranom studentu uz opciju unosa opisa seminara. Nakon unosa opisa, student pritiskom na gumb šalje predložak mentoru na odobrenje. Mentor na popisu predložaka ima opciju konfirmacije seminara.
 
 ![Seminar1](./images/seminar1.png)
+slika predlaganja teme za seminar <a name = "2.1.4 slika1"> </a>
 ![Seminar1](./images/seminar2.png)
+slika predavanja nacrta seminara <a name = "2.1.4 slika2"> </a>
 ![Seminar1](./images/seminar3.png)
 ![Seminar1](./images/seminar4.png)
+slika izlistanih seminara <a name = "2.1.4 slika3"> </a>
+
