@@ -266,7 +266,7 @@ Bitno je naglasiti da se iz bilo kojeg stanja može doći na bilo koje od većih
 "Events" dodatno prikazuje vlastiti kalendar i nadolazeće eventove, "Seminars" prikazuje listu nadolazećih seminara, klik na sliku profila nudi "log out", paljenje i gašenje dark mode, i "view profile" vraća podatke o korisniku, upisane predmete i mogućnost brisanja računa. "Workspace tools" kao najkompleksnije stanje ima mogućnost ćitanja, unosa, brisanja i uređivanja baze.
 
 ![class](./diagrams/UMLState/DijagramStanja.vpd.svg)
-slika dijagrama stanja <a name = "4.3"> </a>
+slika dijagrama stanja <a name = "4.3 slika1"> </a>
 
 ## 4.4 Dijagram aktivnosti <a name="4.4"> </a>
 

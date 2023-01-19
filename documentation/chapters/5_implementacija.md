@@ -297,11 +297,13 @@ yarn studio
 te unutar korisničkog sučelja navigirati u tablicu _"Users"_
 
 ![Pokretanje 1](./images/node2.png)
+slika popisa modela u bazi <a name = "5.7.5 slika1"> </a>
 
 Zatim stvoriti korisnika s _"userRole"_ stavkom postavljenom na "SUPERADMIN", te s ostalim proizvoljno odabranim podacima. Nakon izmjena, potrebno ih je potvrditi pritiskom na dugme "Save 1 change"
 
 ![Pokretanje 2](./images/node3.png)
 ![Pokretanje 3](./images/node4.png)
+slika prikaza Usera u bazi <a name = "5.7.5 slika2"> </a>
 
 Spremni smo pokrenuti platformu!
 
@@ -314,6 +316,9 @@ yarn dev
 u korijenskom direktoriju uspješno je pokrenuta platforma na adresi `http://localhost:3000`, te možemo u naredbenom retku pratiti promet.
 
 ![Pokretanje 4](./images/term1.png)
+slika pokretanje backenda naredbom yarn <a name = "5.7.5 slika3"> </a>
 
 ![Pokretanje 4](./images/term2.png)
+slika stranice za prijavu <a name = "5.7.5 slika4"> </a>
 ![Pokretanje 4](./images/term3.png)
+slika početne stranice <a name = "5.7.5 slika5"> </a>
