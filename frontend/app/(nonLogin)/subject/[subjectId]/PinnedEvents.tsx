@@ -26,7 +26,7 @@ export const PinnedEvents = ({ subjectId }: { subjectId: string }) => {
 						<Stack cols={3}>
 							{events.data.map((event) => (
 								<>
-									<Link href={`/event/${event.event.id}`}>
+									<Link href={`/event/${event.eventId}`}>
 										<Block className="hover:opacity-60">
 											<p className="title3">{event.event.title}</p>
 											<p className="body3 text-neutral-strong">{event.id}</p>
