@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
 import { Block } from '../../../../components/@studius/PageElements/Block';
@@ -39,17 +38,8 @@ const Content = ({ contentId }: { contentId: string }) => {
 
 function SubjectPage(props: PageProps) {
 	const subject = trpc.subject.getSubjectById.useQuery(props.params.subjectId);
-
-	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(
-		props.params.subjectId
-	);
-	const router = useRouter();
-
 	const { user } = useLogin();
-
 	const [enrollmentPage, setEnrollmentPage] = useState(false);
-
-	const enroll = trpc.user.updateEnrollment.useMutation();
 
 	return (
 		<>

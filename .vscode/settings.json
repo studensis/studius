@@ -35,6 +35,9 @@
 
 	"markdown-pdf.styles": ["document.css"],
 	"markdown-pdf.stylesRelativePathFile": true,
+	"markdown-pdf.headerTemplate": "<div>LOL</div>",
+	"markdown-pdf.quality": 50,
+
 	"jest.jestCommandLine": "test",
 	"jest.rootPath": "backend/src/domain"
 }

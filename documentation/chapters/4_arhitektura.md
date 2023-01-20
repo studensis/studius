@@ -7,7 +7,7 @@ Arhitektura se može podijeliti na tri glavne cjeline:
 3. Backend poslužitelj (API gateway)
 4. Baza podataka
 
-## Frontend
+## 4.1 Frontend <a name="4.1"> </a>
 
 Klijentski poslužitelj je program koji korisniku poslužuje Klijentsku aplikaciju koja obavlja velik dio logike na samom računalu korisnika.
 
@@ -21,7 +21,7 @@ Sama klijentka aplikacija je dizajnirana po vizualnim načelima dobrog UX i UI d
 
 Cijeli kod je pisan sa velikom pažnjom na integritet tipova podataka, pa je tako putem biblioteke **TRPC** (više o tome kasnije) realizirana sama komunikacija između frontenda i backenda.
 
-## Backend
+## 4.2 Backend <a name="4.2"> </a>
 
 Backend je pisan u tehnologiji Node.JS, te su korištene i slijedeće biblioteke:
 
@@ -81,7 +81,7 @@ src/
 └── index.ts
 ```
 
-## 4.1 Baza podataka <a name="4.1"> </a>
+## 4.3 Baza podataka <a name="4.3"> </a>
 
 Za potrbe našeg projekta smo koristili biblioteku zvanu Prisma, te Postgres bazu podataka.
 
@@ -92,7 +92,7 @@ Prisma pri pokretanju određenog skupa naredbi generira SQL kod putem kojeg komu
 Naša shema opisana je u slijedećem dijagramu baze.
 
 ![baza_podataka](./images/skica_bp.png)
-slika baze podataka <a name = "4.1-slika1"> </a>
+_[slika 4.1] slika baze podataka_ <a name = "s4.1"> </a>
 
 ### User
 
@@ -237,7 +237,7 @@ slika baze podataka <a name = "4.1-slika1"> </a>
 | ContentId      | VARCHAR      | Content.id                                                     |
 | OwnerId        | VARCHAR      | User.id korisnika koji je napravio Post                        |
 
-## 4.2 Dijagram razreda <a name="4.2"> </a>
+## 4.4 Dijagram razreda <a name="4.4"> </a>
 
 Razred Content predstavlja vidljiv sadržaj u aplikaciji (opise, slike...). Razred subject predstavlja kolegij na fakultetu, ima enumeraciju "semester" koja sadrži zimski i ljetni semestar.
 
@@ -256,9 +256,9 @@ Dvorane su opisane razredom Room. Seminar mora imati doktoranda koji ga izvodi (
 Razred Post predstavlja objavu, sadrži svoj Content. Koji može među ostalim tematski pripadati predmetu ili seminaru, što se vidi u enumeraciji "LinkedEntity".
 
 :[class](../diagrams/UMLClass/class.pu)
-slika dijagrama razreda <a name = "4.2-slika1"> </a>
+_[slika 4.2] slika dijagrama razreda_ <a name = "s4.2"> </a>
 
-## 4.3 Dijagram stanja <a name = "4.3"> </a>
+## 4.5 Dijagram stanja <a name = "4.5"> </a>
 
 Dijagram stanja prikazuje stanja objekta te prijelaze iz jednog stanja u drugo temeljene na dogadajima. Na slici je prikazan dijagram stanja za superadmina.
 Nakon prijave, superadminu se prikazuje početna stranica na kojoj može pregledati nadolazeće eventove, podatke o korisnicima i popis svih predmeta.
@@ -266,9 +266,9 @@ Bitno je naglasiti da se iz bilo kojeg stanja može doći na bilo koje od većih
 "Events" dodatno prikazuje vlastiti kalendar i nadolazeće eventove, "Seminars" prikazuje listu nadolazećih seminara, klik na sliku profila nudi "log out", paljenje i gašenje dark mode, i "view profile" vraća podatke o korisniku, upisane predmete i mogućnost brisanja računa. "Workspace tools" kao najkompleksnije stanje ima mogućnost ćitanja, unosa, brisanja i uređivanja baze.
 
 ![class](./diagrams/UMLState/DijagramStanja.vpd.svg)
-slika dijagrama stanja <a name = "4.3-slika1"> </a>
+_[slika 4.3] slika dijagrama stanja_ <a name = "s4.3"> </a>
 
-## 4.4 Dijagram aktivnosti <a name="4.4"> </a>
+## 4.6 Dijagram aktivnosti <a name="4.6"> </a>
 
 Dijagram aktivnosti primjenjuje se za opis modela toka upravljanja ili toka podataka. U
 modeliranju toka upravljanja svaki novi korak poduzima se nakon zavrsenog prethodnog, a naglasak je na jednostavnosti.
@@ -277,13 +277,13 @@ na kojima predaje i jednog studenta na tom predmetu. Zatim predloži temu semina
 preda sadržaj seminara. Na posljetku mentor odobri taj seminar.
 
 ![class](./diagrams/UMLActivity/DijagramAktivnosti.vpd.svg)
-slika dijagrama aktivnosti <a name = "4.4-slika1"> </a>
+_[slika 4.4] slika dijagrama aktivnosti_ <a name = "s4.4"> </a>
 
-## 4.5 Dijagram komponenti <a name="4.5"> </a>
+## 4.7 Dijagram komponenti <a name="4.7"> </a>
 
 Dijagram komponenti prikazan na slici opisuje organizaciju i ovisnost pojedinih komponenti. Sustav je podijeljen na 4 cjeline: Baza podataka, Backend server, Frontend server, i dio aplikacije koji se vrti na računalu korisnika.
 
-### Backend server
+### 4.7.1 Backend server <a name="4.7.1"> </a>
 
 Backend server se isključivo bavi dodjeljivanjem pristupa određenim podatcima ovisno o ulozi korisnika. Podatci su definirani kroz domenu sustava koja predstavlja skup entiteta: User, Subject, Event, ... Svaki od navedenih entiteta ima definirana četiri sloja koji ima svoju ulogu.
 
@@ -297,13 +297,13 @@ Posljednji dio svakog entiteta je **TRPC Procedures** koji je u biti riječnik k
 
 TRPC router svakog entiteta je povezan u glavni AppRouter (TRPC Router) koji je povezan s Express.JS bibliotekom putem koje se ostvaruje HTTP komunikacija.
 
-### Frontend server
+### 4.7.2 Frontend server <a name="4.7.2"> </a>
 
 Frontend server je zadužen za dostavljanje svih resursa Web Browseru. Skup svih stranica dostupnih korisniku je ovdje definiran unutar NextJS-ovog routera.
 
 Također je unutar Frontend servera sadržan i TRPC klijent. Razlog zašto postoji TRPC klijent i na frontend serveru i u Web browseru je kako bi sam Frontend server mogao prikupljati podatke s backenda periodično i spremati "zapečene" stranice kako bi bile korisniku puno brže dostupne. Više o ovoj tehnologiji možete pročitati ovdje: [https://nextjs.org/docs/advanced-features/automatic-static-optimization](https://nextjs.org/docs/advanced-features/automatic-static-optimization)
 
-### Web browser
+### 4.7.3 Web browser <a name="4.7.3"> </a>
 
 Inicijalnim zahtjevom korisnika za pristup Frontend serveru se učitava Javascript bundle koji se na računalo sprema u memoriji te sadrži React kako bi navigacija stranicom bila dinamičnija i brža.
 
@@ -312,4 +312,4 @@ Inicijalni i svaki idući zahtjev dostavlja HTML ljusku Web browseru (sa zapeče
 Obzirom da svaki zahtjev podatcima ovisi o samom korisniku i njegovu računu, TRPC klijent koji se nalazi u Web browseru, pomoću session kolačića direknto komunicira s Backendom i tamo se dalje gleda koji podatci i akcije su omogućene korisniku.
 
 ![class](./diagrams/UMLComponent/cmp.svg)
-slika dijagrama komponenti <a name = "4.5-slika1"> </a>
+_[slika 4.5] slika dijagrama komponenti_ <a name = "s4.5"> </a>

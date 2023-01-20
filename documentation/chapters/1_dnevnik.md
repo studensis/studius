@@ -37,3 +37,4 @@
 | 0.8.2    | Dodavanje dijagrama komponenti                                                        | Matija Fućek                             | 14.1.2023.  |
 | 0.8.3    | Dodavanje opisa i primjera ispitivanja programskog rješenja; Stilistička optimizacija | Matija Fućek                             | 16.1.2023.  |
 | 0.8.4    | Upute za puštanje u pogon                                                             | Matija Fućek, Adrijan Aničić, Luka Čulav | 18.1.2023.  |
+| 0.8.5    | Uređivanje dokumentacije i popravljanje nedostataka                                   | Matija Fućek, Luka Čulav                 | 20.1.2023.  |

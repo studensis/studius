@@ -1,55 +1,59 @@
-## [2.1.4. Predlaganje teme za seminar](#2.1.4-slika2)
+<div class="dotted">
 
-## [2.1.4. Predlaganje nacrta seminara](#2.1.4-slika3)
+<tocRow class="ml-0"> [[slika 2.1] Predlaganje teme za seminar](#s2.1) <dots></dots> 8 </tocRow>
 
-## [2.1.4. Izlistani seminari](#2.1.4-slika1)
+<tocRow class="ml-0"> [[slika 2.2] Predlaganje nacrta seminara](#s2.2) <dots></dots> 8 </tocRow>
 
-## [3.3 Obrasci uporabe kolegija](#3.3-slika1)
+<tocRow class="ml-0"> [[slika 2.3] Izlistani seminari](#s2.3) <dots></dots> 9 </tocRow>
 
-## [3.3 Obrazac uporabe kolegija](#3.3-slika2)
+<tocRow class="ml-0"> [[slika 3.1] Obrasci uporabe kolegija](#s3.1) <dots></dots> 11 </tocRow>
 
-## [3.3 Obrazac uporabe obavijesti](#3.3-slika3)
+<tocRow class="ml-0"> [[slika 3.2] Obrazac uporabe kolegija](#s3.2) <dots></dots> 12 </tocRow>
 
-## [3.3 Sbrazac uporabe seminara](#3.3-slika4)
+<tocRow class="ml-0"> [[slika 3.3] Obrazac uporabe obavijesti](#s3.3) <dots></dots> 13 </tocRow>
 
-## [3.4.1 Sekvencijski dijagram prijave korisničkim podacima](#3.4.1-slika1)
+<tocRow class="ml-0"> [[slika 3.4] Obrazac uporabe seminara](#s3.4) <dots></dots> 14 </tocRow>
 
-## [3.4.2 Sekvenccijski dijagram kreiranja računa](#3.4.2-slika1)
+<tocRow class="ml-0"> [[slika 3.5] Sekvencijski dijagram prijave korisničkim podacima](#s3.5) <dots></dots> 20 </tocRow>
 
-## [3.4.4 Sekvencijski dijagram izrade seinara](#3.4.4-slika1)
+<tocRow class="ml-0"> [[slika 3.6] Sekvencijski dijagram izrade računa](#s3.6) <dots></dots> 22 </tocRow>
 
-## [4.1 Baza podataka](#4.1-slika1)
+<tocRow class="ml-0"> [[slika 3.7] Sekvencijski dijagram predlaganja seminara](#s3.7) <dots></dots> 22 </tocRow>
 
-## [4.2 Dijagram razreda](#4.2-slika1)
+<tocRow class="ml-0"> [[slika 4.1] Baza podataka](#s4.1) <dots></dots> 27 </tocRow>
 
-## [4.3 Dijagram stanja](#4.3-slika1)
+<tocRow class="ml-0"> [[slika 4.2] Dijagram razreda](#s4.2) <dots></dots> 32 </tocRow>
 
-## [4.4 Dijagram aktivnosti](#4.4-slika1)
+<tocRow class="ml-0"> [[slika 4.3] Dijagram stanja](#s4.3) <dots></dots> 33 </tocRow>
 
-## [4.5 Dijagram komponenti](#4.5-slika1)
+<tocRow class="ml-0"> [[slika 4.4] Dijagram aktivnosti](#s4.4) <dots></dots> 34 </tocRow>
 
-## [5.3 Dijagram razmještaja](#5.3-slika1)
+<tocRow class="ml-0"> [[slika 4.5] Dijagram komponenti](#s4.5) <dots></dots> 36 </tocRow>
 
-## [5.5 Notion](#5.5-slika1)
+<tocRow class="ml-0"> [[slika 5.1] Dijagram razmještaja](#s5.1) <dots></dots> 38 </tocRow>
 
-## [5.5 Notion](#5.5-slika2)
+<tocRow class="ml-0"> [[slika 5.2] Notion](#s5.2) <dots></dots> 40 </tocRow>
 
-## [5.7.2 Otvaranje Supabase računa](#5.7.2-slika1)
+<tocRow class="ml-0"> [[slika 5.3] Notion](#s5.3) <dots></dots> 40 </tocRow>
 
-## [5.7.2 Stvara je projekta u Supabase-u](#5.7.2-slika2)
+<tocRow class="ml-0"> [[slika 5.4] Otvaranje Supabase računa](#s5.4) <dots></dots> 44 </tocRow>
 
-## [5.7.2 Stvaranje projekta u Supabase-u](#5.7.2-slika3)
+<tocRow class="ml-0"> [[slika 5.5] Stvara je projekta u Supabase-u](#s5.5) <dots></dots> 44 </tocRow>
 
-## [5.7.2 Spajanje backenda s bazom](#5.7.2-slika4)
+<tocRow class="ml-0"> [[slika 5.6] Stvaranje projekta u Supabase-u](#s5.6) <dots></dots> 45 </tocRow>
 
-## [5.7.4 Instalacija Node.js-a](#5.7.4-slika1)
+<tocRow class="ml-0"> [[slika 5.7] Spajanje backenda s bazom](#s5.7) <dots></dots> 45 </tocRow>
 
-## [5.7.5 Popis modela u bazi](#5.7.5-slika1)
+<tocRow class="ml-0"> [[slika 5.8] Instalacija Node.js-a](#s5.8) <dots></dots> 46 </tocRow>
 
-## [5.7.5 Prikaz Usera u bazi](#5.7.5-slika2)
+<tocRow class="ml-0"> [[slika 5.9] Popis modela u bazi](#s5.9) <dots></dots> 47 </tocRow>
 
-## [5.7.5 Pokretanje backenda naredbom yarn](#5.7.5-slika3)
+<tocRow class="ml-0"> [[slika 5.10] Prikaz Usera u bazi](#s5.10) <dots></dots> 48 </tocRow>
 
-## [5.7.5 Stranica za prijavu](#5.7.5-slika4)
+<tocRow class="ml-0"> [[slika 5.11] Pokretanje backenda naredbom yarn](#s5.11) <dots></dots> 49 </tocRow>
 
-## [5.7.5 Početna stranica](##5.7.5-slika5)
+<tocRow class="ml-0"> [[slika 5.12] Stranica za prijavu](#s5.12) <dots></dots> 49 </tocRow>
+
+<tocRow class="ml-0"> [[slika 5.13] Početna stranica](#s5.13) <dots></dots> 50 </tocRow>
+
+</div>
