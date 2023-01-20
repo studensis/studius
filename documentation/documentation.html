@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/mfucek/Documents/Studensis/studius/documentation/document.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div class="cover">
+	<div class="top">
+		<h2> Programsko Inženjerstvo </h2>
+		<h3> Ak. god. 2022./2023. </h3>
+	</div>
+	<div class="middle">
+		<h1> Studius </h1>
+		<h3> Dokumentacija </h3>
+	</div>
+	<div class="bottom">
+		Grupa: <i> Studensis </i>
+		<br/>
+		Voditelj: <i> Matija Fućek </i>
+		<br/>
+		<br/>
+		Datum predaje: <i> 12.12.2022. </i>
+		<br/>
+		<br/>
+		Nastavnik: <i> Vlado Sruk </i>
+	</div>
+</div>
+<h1 id="sadr%C5%BEaj">Sadržaj</h1>
+<!-- <table style="">
+	<tr><td> 1
+	</td><td style="text-align: right"> 2
+	</td></tr>
+</table> -->
+<div class="dotted">
+<div> [1. Dnevnik promjena dokumentacije](#1) <dots></dots> 12 </div>
+<p><tocRow> <a href="#2">2. Opis projektnog zadatka</a> <dots></dots> 12 </tocRow></p>
+<h2 id="2-opis-projektnog-zadatka-dotsdots-12"><a href="#2">2. Opis projektnog zadatka</a> <dots></dots> <em>12</em></h2>
+<h3 id="21-komponente-sustava-12"><a href="#2.1">2.1. Komponente sustava</a> <em>12</em></h3>
+<h4 id="211-alat-za-upravljanje-korisnicima-12"><a href="#2.1.1">2.1.1. Alat za upravljanje korisnicima</a> <em>12</em></h4>
+<h4 id="212-alat-za-upravljanje-kolegijima-12"><a href="#2.1.2">2.1.2. Alat za upravljanje kolegijima</a> <em>12</em></h4>
+<h4 id="213-sustav-za-sadr%C5%BEaj-12"><a href="#2.1.3">2.1.3. Sustav za sadržaj</a> <em>12</em></h4>
+<h4 id="214-sustav-za-seminare-12"><a href="#2.1.4">2.1.4. Sustav za seminare</a> <em>12</em></h4>
+<h2 id="3-specifikacija-programske-potpore-12"><a href="#3">3. Specifikacija programske potpore</a> <em>12</em></h2>
+<h3 id="31-funkcionalni-zahtjevi-12"><a href="#3.1">3.1. Funkcionalni zahtjevi</a> <em>12</em></h3>
+<h3 id="32-ostali-zahtjevi-12"><a href="#3.2">3.2. Ostali zahtjevi</a> <em>12</em></h3>
+<h3 id="33-obrasci-uporabe-12"><a href="#3.3">3.3. Obrasci uporabe</a> <em>12</em></h3>
+<h3 id="34-sekvencijski-dijagrami-12"><a href="#3.4">3.4. Sekvencijski dijagrami</a> <em>12</em></h3>
+<h4 id="341-prijava-korisni%C4%8Dkim-podacima-12"><a href="#3.4.1">3.4.1. Prijava korisničkim podacima</a> <em>12</em></h4>
+<h4 id="342-kreiranje-ra%C4%8Duna-12"><a href="#3.4.2">3.4.2. Kreiranje računa</a> <em>12</em></h4>
+<h4 id="343-prijava-putem-google-ra%C4%8Duna-12"><a href="#3.4.3">3.4.3. Prijava putem Google računa</a> <em>12</em></h4>
+<h4 id="344-prijava-seminara-12"><a href="#3.4.4">3.4.4. Prijava seminara</a> <em>12</em></h4>
+<h3 id="35-dionici-12"><a href="#3.5">3.5. Dionici</a> <em>12</em></h3>
+<h3 id="36-aktori-i-njihovi-funkcionalni-zahtjevi-12"><a href="#3.6">3.6. Aktori i njihovi funkcionalni zahtjevi</a> <em>12</em></h3>
+<h2 id="4-arhitektura-i-dizajn-sustava-12"><a href="#4">4. Arhitektura i dizajn sustava</a> <em>12</em></h2>
+<h3 id="41-frontend-12"><a href="#4.1">4.1. Frontend</a> <em>12</em></h3>
+<h3 id="42-backend-12"><a href="#4.2">4.2. Backend</a> <em>12</em></h3>
+<h3 id="43-baza-podataka-12"><a href="#4.3">4.3. Baza podataka</a> <em>12</em></h3>
+<h3 id="44-dijagram-razreda-12"><a href="#4.4">4.4. Dijagram razreda</a> <em>12</em></h3>
+<h3 id="45-dijagram-stanja-12"><a href="#4.5">4.5. Dijagram stanja</a> <em>12</em></h3>
+<h3 id="46-dijagram-aktivnosti-12"><a href="#4.6">4.6 Dijagram aktivnosti</a> <em>12</em></h3>
+<h3 id="47-dijagram-komponenti-12"><a href="#4.7">4.7 Dijagram komponenti</a> <em>12</em></h3>
+<h4 id="471-backend-server-12"><a href="#4.7.1">4.7.1. Backend server</a> <em>12</em></h4>
+<h4 id="472-frontend-server-12"><a href="#4.7.2">4.7.2. Frontend server</a> <em>12</em></h4>
+<h4 id="473-web-browser-12"><a href="#4.7.3">4.7.3. Web browser</a> <em>12</em></h4>
+<h2 id="5-implementacija-i-korisni%C4%8Dko-su%C4%8Delje-12"><a href="#5">5. Implementacija i korisničko sučelje</a> <em>12</em></h2>
+<h4 id="511-reference-12"><a href="#5.1.1">5.1.1. Reference</a> <em>12</em></h4>
+<h3 id="52-ispitivanje-programskog-rje%C5%A1enja-12"><a href="#5.2">5.2. Ispitivanje programskog rješenja</a> <em>12</em></h3>
+<h4 id="521-automatizirani-ispitni-slu%C4%8Daj-1-upis-dostupnog-kolegija-12"><a href="#5.2.1">5.2.1. Automatizirani ispitni slučaj 1: Upis dostupnog kolegija</a> <em>12</em></h4>
+<h3 id="53-dijagram-razmje%C5%A1taja-12"><a href="#5.3">5.3. Dijagram razmještaja</a> <em>12</em></h3>
+<h4 id="531-razmje%C5%A1taj-baze-podataka-12"><a href="#5.3.1">5.3.1. Razmještaj baze podataka</a> <em>12</em></h4>
+<h4 id="532-razmje%C5%A1taj-backenda-12"><a href="#5.3.2">5.3.2. Razmještaj backenda</a> <em>12</em></h4>
+<h4 id="533-razmje%C5%A1taj-frontenda-12"><a href="#5.3.3">5.3.3. Razmještaj frontenda</a> <em>12</em></h4>
+<h4 id="534-me%C4%91ukomunikacija-svih-podsustava-12"><a href="#5.3.4">5.3.4. Međukomunikacija svih podsustava</a> <em>12</em></h4>
+<h3 id="54-izvo%C4%91enje-razvoja-12"><a href="#5.4">5.4. Izvođenje razvoja</a> <em>12</em></h3>
+<h4 id="541-sprintovi-12"><a href="#5.4.1">5.4.1. Sprintovi</a> <em>12</em></h4>
+<h4 id="542-dnevnik-sastanaka-12"><a href="#5.4.2">5.4.2. Dnevnik sastanaka</a> <em>12</em></h4>
+<h4 id="543-tjedni--dvotjedni-sastanci-12"><a href="#5.4.3">5.4.3. Tjedni / dvotjedni sastanci</a> <em>12</em></h4>
+<h4 id="544-dnevni-sastanci-12"><a href="#5.4.4">5.4.4. Dnevni sastanci</a> <em>12</em></h4>
+<h4 id="545-mjese%C4%8Dni-sastanci-12"><a href="#5.4.5">5.4.5. Mjesečni sastanci</a> <em>12</em></h4>
+<h3 id="55-upute-za-pu%C5%A1tanje-u-pogon-12"><a href="#5.5">5.5. Upute za puštanje u pogon</a> <em>12</em></h3>
+<h4 id="551-preuzimanje-repozitorija-lokalno-12"><a href="#5.5.1">5.5.1. Preuzimanje repozitorija lokalno</a> <em>12</em></h4>
+<h4 id="552-postavljanje-baze-podataka-12"><a href="#5.5.2">5.5.2. Postavljanje baze podataka</a> <em>12</em></h4>
+<h4 id="553-postavljanje-backend-i-frontend-poslu%C5%BEitelja-12"><a href="#5.5.3">5.5.3. Postavljanje backend i frontend poslužitelja</a> <em>12</em></h4>
+<h4 id="554-postavljanje-programske-potpore-12"><a href="#5.5.4">5.5.4. Postavljanje programske potpore</a> <em>12</em></h4>
+<h4 id="555-pokretanje-platforme-12"><a href="#5.5.5">5.5.5. Pokretanje platforme</a> <em>12</em></h4>
+<h2 id="6-indeks-slika-i-dijagrama-12"><a href="#6">6. Indeks-slika i dijagrama</a> <em>12</em></h2>
+<h2 id="7-tablica-aktivnosti-12"><a href="#7">7. Tablica aktivnosti</a> <em>12</em></h2>
+<h2 id="8-zaklju%C4%8Dak-i-budu%C4%87i-rad-12"><a href="#8">8. Zaključak i budući rad</a> <em>12</em></h2>
+</div>
+<h1 id="1-dnevnik-promjena-dokumentacije-a-name%221%22-a">1. Dnevnik promjena dokumentacije <a name="1"> </a></h1>
+<table>
+<thead>
+<tr>
+<th>Revizija</th>
+<th>Opis promjene/dodatak</th>
+<th>Autori</th>
+<th>Datum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1</td>
+<td>Napravljen predložak</td>
+<td>Matija Fućek</td>
+<td>1.10.2022.</td>
+</tr>
+<tr>
+<td>0.1.1</td>
+<td>Dodan opis projektnog zadatka</td>
+<td>Matija Fućek</td>
+<td>22.10.2022.</td>
+</tr>
+<tr>
+<td>0.1.2</td>
+<td>Dodani funkcionalni zahtjevi</td>
+<td>Marko Supičić</td>
+<td>24.10.2022.</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td>Napravljen predložak za bazu podataka</td>
+<td>Marko Supičić</td>
+<td>28.10.2022.</td>
+</tr>
+<tr>
+<td>0.2.1</td>
+<td>Početna arhitektura i dizajn sustava</td>
+<td>Marko Supičić, Matija Fuček</td>
+<td>29.10.2022.</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>Izmjena predloška baze</td>
+<td>Cijeli tim</td>
+<td>4.11.2022</td>
+</tr>
+<tr>
+<td>0.3.1</td>
+<td>Izrada obrazaca uporabe</td>
+<td>Marko Supičić</td>
+<td>5.11.2022.</td>
+</tr>
+<tr>
+<td>0.3.2</td>
+<td>Dodani ostali zahtjevi</td>
+<td>Hary Samardžić</td>
+<td>5.11.2022.</td>
+</tr>
+<tr>
+<td>0.3.3</td>
+<td>Izrada baze podataka</td>
+<td>Matija Fuček</td>
+<td>7.11.2022.</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td>Izrada 1 sekvencijskog dijagrama</td>
+<td>Marko Supičić</td>
+<td>11.11.2022.</td>
+</tr>
+<tr>
+<td>0.4.1</td>
+<td>Dodani opisi obrazaca uporabe</td>
+<td>Marko Supičić</td>
+<td>11.11.2022.</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>Odbačen stari sekvencijski dijagram i dodana 2 nova</td>
+<td>Adrian Aničić</td>
+<td>6.12.2022.</td>
+</tr>
+<tr>
+<td>0.5.1</td>
+<td>Dodana 2 nova sekvencijska dijagrama</td>
+<td>Franko Budimir</td>
+<td>6.12.2022.</td>
+</tr>
+<tr>
+<td>0.5.2</td>
+<td>Izrada dijagrama razreda</td>
+<td>Luka Čulav, Hary Samardžić</td>
+<td>6.12.2022.</td>
+</tr>
+<tr>
+<td>0.5.3</td>
+<td>Prepravljena arhitektura i dizajn sustava</td>
+<td>Matija Fuček</td>
+<td>6.12.2022.</td>
+</tr>
+<tr>
+<td>0.5.4</td>
+<td>Izmjena dijagrama obrazaca uporabe</td>
+<td>Adrian Aničić</td>
+<td>6.12.2022.</td>
+</tr>
+<tr>
+<td>0.5.5</td>
+<td>Prepravljena baza podataka</td>
+<td>Hary Samardžić</td>
+<td>6.12.2022.</td>
+</tr>
+<tr>
+<td>0.5.6</td>
+<td>Prepravljen opis obrazaca uporabe</td>
+<td>Marko Supičić</td>
+<td>7.12.2022.</td>
+</tr>
+<tr>
+<td>0.6</td>
+<td>Prepravljena 2 sekvencijska dijagrama</td>
+<td>Adrian Aničić</td>
+<td>9.12.2022.</td>
+</tr>
+<tr>
+<td>0.6.1</td>
+<td>Prepravljena 2 sekvencijska dijagrama</td>
+<td>Franko Budimir</td>
+<td>9.12.2022.</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>Prepravljen dijagram razreda</td>
+<td>Luka Čulav, Hary Samardžić</td>
+<td>12.12.2022.</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>Opis dijagrama razreda</td>
+<td>Luka Čulav, Hary Samardžić</td>
+<td>12.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.1</td>
+<td>Odbačen 1 stari i dodan 1 novi dijagram razreda</td>
+<td>Franko Budimir</td>
+<td>14.12.2022</td>
+</tr>
+<tr>
+<td>0.7.2</td>
+<td>dodan opis 1 sekvencijskog dijagrama</td>
+<td>Adrian Aničić</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.3</td>
+<td>dodan opis 3 sekvencijska dijagrama</td>
+<td>Franko Budimir</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.4</td>
+<td>Dnevnik izmjena projekta</td>
+<td>Marko Supičić</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.5</td>
+<td>opis projektnog zadatka</td>
+<td>Marko Supičić</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.6</td>
+<td>Zaključak i ostale sitnice</td>
+<td>Marko Supičić</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.7</td>
+<td>Korištene tehnologije i alati</td>
+<td>Matija Fuček</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.8</td>
+<td>Upute za puštanje u pogon</td>
+<td>Matija Fuček</td>
+<td>14.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.9</td>
+<td>Prikaz aktivnosti grupe</td>
+<td>Cijeli tim</td>
+<td>15.12.2022.</td>
+</tr>
+<tr>
+<td>0.7.10</td>
+<td>Korigiranje teksta i provjera dokumentacije</td>
+<td>Cijeli tim</td>
+<td>15.12.2022.</td>
+</tr>
+<tr>
+<td>0.8</td>
+<td>Izmjena raspisa baze, dijagrama baze i klasnog dijagrama podataka</td>
+<td>Hary Samardžić</td>
+<td>13.1.2023.</td>
+</tr>
+<tr>
+<td>0.8.1</td>
+<td>Dodavanje dijagrama stanja, aktivnosti, razmještanja</td>
+<td>Cijeli tim</td>
+<td>13.1.2023.</td>
+</tr>
+<tr>
+<td>0.8.2</td>
+<td>Dodavanje dijagrama komponenti</td>
+<td>Matija Fućek</td>
+<td>14.1.2023.</td>
+</tr>
+<tr>
+<td>0.8.3</td>
+<td>Dodavanje opisa i primjera ispitivanja programskog rješenja; Stilistička optimizacija</td>
+<td>Matija Fućek</td>
+<td>16.1.2023.</td>
+</tr>
+<tr>
+<td>0.8.4</td>
+<td>Upute za puštanje u pogon</td>
+<td>Matija Fućek, Adrijan Aničić, Luka Čulav</td>
+<td>18.1.2023.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-opis-projektnog-zadatka-a-name%222%22-a">2. Opis projektnog zadatka <a name="2"> </a></h1>
+<h3 id="o-timu-studius">O timu Studius</h3>
+<p>Okupljena je ekipa od sedmero visoko motivirana člana, od kojih svaki doprinosi svojim usmjerenjem tako da pokrivamo cjeloukupan stack potreban za razvoj platforme.</p>
+<h3 id="opis-projektnog-zadatka-a-name--%2220%22-a">Opis projektnog zadatka <a name = "2.0"> </a></h3>
+<p>Projekt “Studius” je osmišljen kao platforma koja objedinjuje set alata potrebnih za rad proizvoljne obrazovne ustanove, prvenstveno fakulteta, na velikom broju studenata, kolegija i posebnih programa. Cilj projekta je kontribuirati boljem iskustvu svakog studenta i profesora diljem Sveučilišta. Posebno smo motivirani da omogućimo fakultetima pored FER-a kvalitetnije rješenje za upravljanje kolegijima i pružimo bolje načine komunikacije profesora i studenata. S obzirom da je to iznimno težak u dugotrajan proces u sklopu kolegija &quot;programsko inženjerstvo&quot; implementirat ćemo samo dio tog većeg projekta. Što ćemo i kako ćemo to implementirati opisano je u nastavku.</p>
+<p>Naš sustav ima više uloga, početna uloga od koje sve kreće je klijent Prilikom pokretanja sustava klijentu prikazuju se log in forma s kojom se može prijaviti u sustav. Može se prijaviti putem korisničkih podataka uz korisničko ime i lozinku ili pomoću Google accounta. Ako se klijent želi prijaviti putem Google accounta on mora već biti registriran putem korisničkih podataka. Ova mjera služi kako se nebi svatko mogao registrirati u Studius i kako bi se korisnicima Studiusa ubrzala prijava. Pored log in forme ponuđena je tražilica za kolegije gdje se može pronaći određene kolegije. Na temelju korisnikovog upita sustav generira kolegije. Kad korisnik pronađe kolegij za koji je zainteresiran može kliknuti na njega i prikazat će mu se javni detalji o tom kolegiju. Na sličan način mogu se pretraživati i studenti, doktorandi i djelatnici fakulteta. Takodžer postoje mogućnosti odabira za globalne obavijesti, dakle obavijesti relevantne za cijeli fakultet. Uz to, moguć je i pregled nadolazećih seminara. Seminare su radovi o nekoj istraživačkoj temi i njih održavaju doktorandi. S obzirom da su ti radovi javni, svaki klijent može prisustvovati na njima ako želi. Na dalje, osim klijenta postoje uloge</p>
+<ul>
+<li>Student</li>
+<li>Doktorand</li>
+<li>Profesor</li>
+<li>Nositelj</li>
+<li>Studentska služba</li>
+<li>Administrator sustava</li>
+</ul>
+<p>Svaka od tih uloga ima iste mogućnosti kao i klijent uz još neke nadodane.</p>
+<p>Na primjer, <strong>student</strong> može upisati dostupni kolegij uz dopuštenje studentske službe ili nositelja predmeta. Jednom kad upiše predmet može pregledati detaljnije obavijesti vezane uz kolegije na koje je upisan koje običan klijent ne može vidjeti. Takodžer mu se nudi i pregled detalja o kolegiju kojima bez prijave u sustav nebi imao pristup. Nakon studenta slijedi doktorand koji ima još neke mogućnosti koje student nema.</p>
+<p><strong>Doktorand</strong> kako bi uspješno položio neke predmete treba odrađivati seminare. Neke mora napraviti i održati sam, a na nekima mora samo prisustvovati. Teme za one koje planira održati može samoinicijativno smisliti i prijaviti pa ju kasnije mentor odobri ili odbije ovisno o tome je li relevantna za njegov predmet. Alternativno, može uzeti neku od tema koja je već predložena na tom predmetu od strane nositelja jer je relevantna za taj predmet.</p>
+<p>S druge strane imamo fakultetsko osoblje koje čine: <strong>profesor</strong>, <strong>nositelj</strong>, <strong>studentska služba</strong>, <strong>administrator sustava</strong>. Profesor. može pregledati popis studenata i/ili doktoranada na predmetima kojima predaje, takodžer i njihove statistike ispita. Doktoranadima koje mentorira je zadužen za bilježenje evidencije dolaska, jer je svakom doktorandu propisan broj obaveznih dolaska na seminare drugih doktoranada. Osim toga zadužen je i za odobravanje tema seminara tim doktorandima ovisno o tome je li tema relevantna za njegov predmet</p>
+<p><strong>Nositelj</strong> na svojim predmetima postavlja je li kolegij dostupan za upisivanje. Na tim predmetima može i uređivati opis kolegija, posebno ako dođe do promjena kolegija. S obzirom da je glavni na predmetu zadužen je i za predlaganje tema seminara doktorandima na tom predmetu</p>
+<p><strong>Studentska služba</strong> ima pravo upravljati bazom, tu spada čitanje iz baze, pisanje u bazu, brisanje podataka u bazi i ažuriranje baze svih tablica osim mijenjanja uloge Uz to studentska služba je zadužena za kreiranje računa studentima, doktorandima, i zaposlenicima fakulteta. U aplikaciji nemamo registraciju jer se ona obavlja preko studentske službe, a podaci za prijavu moraju biti doneseni uživo. Prilikom izrade računa dužna je obavijestiti novoizrađenog korisnika mailom. Osim toga ima pravo i na kreiranje kolegija. Kad profesorsko vijeće osmisli novi predmet Studentska služba je ta koja će staviti podatke na stranicu fakulteta sa svim traženim podacima.</p>
+<p>Administrator sustava
+Studentska služba ima skoro sve, ali zbog potreba sigurnosti treba rola jača od nje a to je administrator sustava. Samo jedan korisnik može imati ulogu administratora.
+Ta uloga ima sve mogućnosti kao i studentska služba uz dodatnu mogućnost promjene role korisnicima.</p>
+<h2 id="21-komponente-sustava-a-name%2221%22-a">2.1 Komponente sustava <a name="2.1"> </a></h2>
+<h3 id="211-alat-za-upravljanje-korisnicima-a-name%22211%22-a">2.1.1 Alat za upravljanje korisnicima <a name="2.1.1"> </a></h3>
+<p>Poseban alat koji bi pretežno djelovao automatski, ali i uz mogućnost ručnih izmjena je alat za upravljanje korisnicima na razini samog sustava.</p>
+<h3 id="212-alat-za-upravljanje-kolegijima-a-name%22212%22-a">2.1.2 Alat za upravljanje kolegijima <a name="2.1.2"> </a></h3>
+<p>Neregistrirani korisnici bi imali uvid u javne informacije za svaki kolegij kao sto su opis predmeta, način bodovanja, popis profesora, asistenata i ostalih službenih sudionika.</p>
+<p>Registrirani korisnici, kojima su dodijeljena prava dubljeg pregleda u kolegij, bi mogli prolaziti kroz sam sadržaj kolegija u obliku lekcija, materijala, te kvizova i zadataka za vježbu.</p>
+<p>Posebno za svaki kolegij određuju se registrirani korisnici koji bi dobili ulogu Editora. Svaki editor bi mogao mijenjati javno dostupne stranice, te sam sadržaj lekcija unutar kolegija. Pored sadržaja, editori (ili potencijalno još neka visa rola) bi mogli mijenjati i samu listu registriranih korisnika kojima je dano pravo dubljeg pregleda.</p>
+<h3 id="213-sustav-za-sadr%C5%BEaj-a-name%22213%22-a">2.1.3 Sustav za sadržaj <a name="2.1.3"> </a></h3>
+<p>Od profila korisnika do sadržaja lekcija unutar kolegija, sustav za sadržaj pobrinuo bi se da se diljem stranice sadržaj organizira na što pregledniji način, te bi olakšavao i pregled i uređivanje, naravno sa širokim mogućnostima proširenja kroz ekstenzije.</p>
+<h3 id="214-sustav-za-seminare-a-name%22214%22-a">2.1.4 Sustav za seminare <a name="2.1.4"> </a></h3>
+<p>Nositelju predmeta prikazuju se predmeti na kojima je nositelj te popis studenata koje mentorira, te forma za upis naslova seminara. Odabire predmet, studenta te upisuje naslov pa klikom na gumb kreira ideju za seminar. Ona se prikazuje odabranom studentu uz opciju unosa opisa seminara. Nakon unosa opisa, student pritiskom na gumb šalje predložak mentoru na odobrenje. Mentor na popisu predložaka ima opciju konfirmacije seminara.</p>
+<p><img src="./images/seminar1.png" alt="Seminar1">
+<em>[slika 2.1] slika predlaganja teme za seminar</em> <a name = "s2.1"> </a></p>
+<p><img src="./images/seminar2.png" alt="Seminar1">
+<em>[slika 2.2] slika predavanja nacrta seminara</em> <a name = "s2.2"> </a></p>
+<p><img src="./images/seminar3.png" alt="Seminar1">
+<img src="./images/seminar4.png" alt="Seminar1">
+<em>[slika 2.3] slika izlistanih seminara</em> <a name = "s2.3"> </a></p>
+<h1 id="3-specifikacija-programske-potpore-a-name%223%22-a">3. Specifikacija programske potpore <a name="3"> </a></h1>
+<p><strong>Neregistriranom korisniku</strong> prikazuje se naslovna stranica s osnovnim informacijama vezanim za sustav radnog imena &quot;Studius&quot;. Isti se može prijaviti u sustav sa svojim korisničkim podacima.</p>
+<p>Registracijom u sustav korisnik dobiva razinu prava određenu ulogom u sustavu. Postojat će uloge administratora, fakultetskog osoblja (nositelja kolegija, profesora te asistenata), upisanih studenata, posjetitelja I razvojnog tima.</p>
+<p>Svaka od ovih uloga daje pristup određenim funkcionalnostima I informacijama na sustavu.</p>
+<p><strong>Student</strong> prijavom u sustav dobiva prikaz glavne stranice. Na njoj su mu vidljivi njegovi predmeti za koje za svaki piše skupljeni broj bodova. Piše i lista položenih predmeta te prosjek ocjena koji je student ostvario u obrazovnoj ustanovi. Nadalje ima kratki prikaz nadolazećih obaveza, a klikom na tu sekciju, otvara se stranica sa svim obavezama, koje također imaju svaka svoju stranicu. Također ima vidljiv jedan manji kalendar, koje mu je inicijalno stanje da prikazuje dnevni kalendar, ali postoji mogućnost podešavanja na veće vremensko razdoblje. Klikom na kalendar otvara se zasebna stranica s kalendarom, s inicijalnim stanjem pregleda trenutnog tjedna. Također moguće su opcije podešavanja na veće i manje razdoblje. U kalendaru su vidljive sve nadolazeće obaveze, koje nude i daljnje informacije. Student također ima mogućnost dodavanja vlastitih zapisa u kalendar. Nadalje, na glavnoj stranici ispod manje verzije kalendara, vidljiv je popis upisanih predmeta. Klikom na neki od njih, otvara se stranica predmeta. Student ovdje može vidjeti osnovne informacije o predmetu te ima pristup materijalima i svojim rezultatima na predmetu. Dostupni materijali su mu prenesene prezentacije, videi i sl. Također na našoj platformi omogućili bismo pristup interaktivnim lekcijama. Njih kreirea profesor i to omogućuje studentima bolje usavršavanje gradiva, a profesorima opciju da temeljem rezultata daje određeni broj bodova. Slično, ali ne isto, napravili bismo odjeljak s funkcionalnostima sličnim aplikaciji Kahoot koja bi se mogla koristiti na predavanjima uživo, sa svrhom sličnom interaktivnim lekcijama. Studentu su vidljive obaveze vezane za otvoreni predmet. Na glavnoj stranici, ispod popisa predmeta, nalaze se najnovije novosti i obavijesti o fakultetu. Također će student imati pristup detaljnijim obavijestima koje može filtirati ili se na njih pretplaćivati.</p>
+<p>Fakultetsko osoblje dijeli se na <strong>nositelje</strong> predmeta, <strong>asistente</strong> te <strong>demonstratore</strong> koji imaju ovisno o tome manja ili veća prava. Prijavom u sustav, osoblje također dobiva prikaz glavne stranice, drugačije od one kakvu vidi student. Vidljiv im je dnevni kalendar, kojem, kao i studenti, mogu podesiti vremenski interval na veći. U njemu su vidljive nadolazeće obavee. Klikom na kalendar otvara se zasebna stranica s većim, ali također podesivim, prikazom. Ovdje osoblje ima mogućnost unosa svojih zapisa, ali također i zapisa kojima mogu podesiti vidljivost. Recimo, žele održati konzultacije u određeno vrijeme za određenu grupu studentata. Na glavnoj stranici, ispod kalendara, nalazi se popis predmeta na kojima sudjeluju. Na njima imaju različite uloge. Za svaki predmet, postoji zasebna stranica. Na njoj imaju pristup listi studenata upisanih na odabrani predmet.</p>
+<p>Daje im se mogućnost unosa bodova. Na ovoj stranici nalazit će se QR kod, koji će studenti moći skenirati te se na taj način može evidentirati dolaznost na predavanja. Naravno, imat će mogućnost i oduzimanja bodova za prisutnost u slučaju da primjete da je student napustio predavanje.</p>
+<p>Za svaki predmet, postojat će repozitorij materijala, koji se mogu dodavati, brisati te uređivati. Daljim razvojem servisa, omogućili bismo neke funkcionalnosti inspirirane alatom Notion. Nudili bismo prijepis materijala na način da ga profesor može uređivati, a studenti mogu na svaki odlomak ostavljati komentare, te na taj način dobivati povratne informacije od profesora ili od drugih studenata. Time bismo omogućili bolju i lakšu komunikaciju, a time i usvajanje gradiva. Osim materijala, postojao bi pristup kreaciji, brisanju i uređivanju interaktivnih lekcija te ranije navedenim funkcionalnostima sličnim Kahootu. Osoblje ima pristup popisu održavanih provjera na predmetu, te unos bodova za svaku od njih. Nadalje, mogu slati obavijesti vezane za predmet. Ispod popisa predmeta na glavnoj stranici, osoblju se prikazuju obavijesti, slično kao i studentima.</p>
+<p>Ulogu posjetitelja dobivaju studenti upisani na fakultet, ali oni koji nisu upisani na određeni predmet. Njima se na stranici tog predmeta prikazuju osnovne informacije o predmetu.</p>
+<p>Administrator ima najviša prava, te ih dodjeljuje drugim ulogama.</p>
+<h2 id="31-funkcionalni-zahtjevi-a-name%2231%22-a">3.1 Funkcionalni zahtjevi <a name="3.1"> </a></h2>
+<h2 id="32-ostali-zahtjevi-a-name%2232%22-a">3.2 Ostali zahtjevi <a name="3.2"> </a></h2>
+<ul>
+<li>Sustav treba omoguciti rad više korisnika u stvarnom vremenu</li>
+<li>Korisnicko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i</li>
+<li>prikazu tekstualnog sadrzaja</li>
+<li>Izvršavanje dijela programa u kojem se pristupa bazi podataka ne smije trajati duže od nekoliko sekundi</li>
+<li>Sustav treba biti implementiran kao web aplikacija koristeci objektno-orijentirane jezike</li>
+<li>Neispravno korištenje korisničkog sučelja ne smije narušiti funkcionalnost i rad sustava</li>
+<li>Sustav treba biti jednostavan za korištenje</li>
+<li>Nadogradnja sustava ne smije narušavati postojeće funkcionalnosti sustava</li>
+<li>Veza s bazom podataka mora biti otporna na vanjske greške</li>
+<li>Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS.</li>
+</ul>
+<h2 id="33-obrasci-uporabe-a-name%2233%22-a">3.3 Obrasci uporabe <a name="3.3"> </a></h2>
+<p><img src="./diagrams/UMLUseCase/Kolegiji.svg" alt="usecases">
+<em>[slika 3.1] slika obrazaca uporabe kolegija</em> <a name = "s3.1"> </a></p>
+<p><img src="./diagrams/UMLUseCase/Korisnici.svg" alt="usecases">
+<em>[slika 3.2] slika obrazaca uporabe korisnika</em> <a name = "s3.2"> </a></p>
+<p><img src="./diagrams/UMLUseCase/Obavijesti.svg" alt="usecases">
+<em>[slika 3.3] slika obrazaca uporabe obavijesti</em> <a name = "s3.3"> </a></p>
+<p><img src="./diagrams/UMLUseCase/Seminari.svg" alt="usecases">
+<em>[slika 3.4] slika obrazaca uporabe seminara</em> <a name = "s3.4"> </a></p>
+<p><strong>UC1 Prijava korisničkim podacima</strong></p>
+<ul>
+<li>Glavni sudionik: Klijent</li>
+<li>cilj: Pristupiti korisničkom računu</li>
+<li>sudionici: Baza podataka, Google</li>
+<li>preduvjet: -</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Klijent odabire opciju za prijavu korisničkim podacima</li>
+<li>Unese svoje korisničko ime i lozinku</li>
+<li>Prijavi se na Studius</li>
+</ol>
+</li>
+<li>opis mogućih odstupanja:
+<ol>
+<li>Uneseni podaci ne postoje u bazi</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC2 Prijava putem Google računa</strong></p>
+<ul>
+<li>Glavni sudionik: Klijent</li>
+<li>cilj: Pristupiti korisničkom računu</li>
+<li>sudionici: Baza podataka, Google</li>
+<li>preduvjet: Klijent ima Studius račun</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Klijent odabire opciju za prijavu putem Google računa</li>
+<li>Prijavi se na Studius</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC3 Pregledati javne detalje o kolegiju</strong></p>
+<ul>
+<li>Glavni sudionik: Klijent</li>
+<li>cilj: Pregledati javne podatke o željenom kolegiju</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: -</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Klijent zatraži jedan od kolegija</li>
+<li>Klikne na taj kolegij</li>
+<li>Prikažu mu se puno ime kolegija, njegov opis i što se ukratko uči na kolegiju</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC4 Pregledati globalne obavijesti</strong></p>
+<ul>
+<li>Glavni sudionik: Klijent</li>
+<li>cilj: Pregledati globalne obavijesti</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: -</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Klijent odabire opciju obavijesti</li>
+<li>Prikaže mu se lista obavijesti (od najnovijih prema starijima)</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC5 Pregledati popis oglasa svih nadolazecih seminara po predmetu</strong></p>
+<ul>
+<li>Glavni sudionik: Klijent</li>
+<li>cilj: Pregledati oglase nadolazećih seminara po predmetu</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: -</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Klijent klikne na predmet</li>
+<li>Prikaže mu se lista nadolazećih seminara za odabrani predmet</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC6 Provjeriti javne detalje o korisnicima</strong></p>
+<ul>
+<li>Glavni sudionik: Klijent</li>
+<li>cilj: Provjeriti javne detalje o korisnicima</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: -</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Klijent klikne na tražilicu</li>
+<li>Pretražuje željeno ime i prezime</li>
+<li>Sustav mu prikaže sve registrirane korisnike koji zadovoljavaju zahtjev</li>
+<li>Klijent klikne na jednog od njih</li>
+<li>Sustav mu prikaže stranicu s njegovim javnim podacima</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC7 Upisati korisnika na kolegij s određenom ulogom</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska Služba i CIP</li>
+<li>cilj: Upisati korisnike na predmete s određenom ulogom</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik ima svoj račun</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Studentska služba otvori stranicu predmeta</li>
+<li>Odabere opciju &quot;Dodaj korisnika&quot;</li>
+<li>Dobije listu svih korisnika koji nisu vezani za taj predmet</li>
+<li>Odabere za nekog korisnika ulogu na predmetu</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC8 Detalji o kolegiju</strong></p>
+<ul>
+<li>Glavni sudionik: Student</li>
+<li>cilj: Pregledati detalje o kolegiju</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik ima svoj račun i prijavljen je u sustav</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Student kad je prijavljen vidi listu aktivnih predmeta</li>
+<li>Odabere željeni predmet</li>
+<li>Vidi neke podatke o predmetu</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC9 Prijedlog seminara</strong></p>
+<ul>
+<li>Glavni sudionik: Mentor</li>
+<li>cilj: Predložiti temu seminara</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik ima svoj račun i prijavljen je u sustav te je nositelj na nekom predmetu</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Korisnik odabire predmet te studenta kojemu je mentor</li>
+<li>Upisuje temu seminara</li>
+<li>Šalje prijedlog studentu</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC10 Popunjavanje seminara</strong></p>
+<ul>
+<li>Glavni sudionik: Student</li>
+<li>cilj: Popuniti sadržaj seminara i poslati mentoru na odobravanje</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik ima svoj račun i prijavljen je u sustav</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Korisnik otvara stranicu seminara</li>
+<li>Prikazuje mu se lista seminara koji su mu predloženi</li>
+<li>Ispunjava sadržaj</li>
+<li>Klikne na gumb &quot;Send draft&quot;</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC11 Pregledati popis korisnika na predmetima</strong></p>
+<ul>
+<li>Glavni sudionik: Profesor</li>
+<li>cilj: Pregledati sve korisnike na predmetu</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik ima svoj račun i prijavljen je u sustav</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Korisnik odabere jedan od predmeta</li>
+<li>Dobije pregled svih korisnika upisanih na predmet</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC12 Odobravanje prijavljenog seminara</strong></p>
+<ul>
+<li>Glavni sudionik: Profesor</li>
+<li>cilj: Odobriti prijavljeni seminar ovisno je li relevantan za upisan predmet</li>
+<li>sudionici: Baza podataka, Mentor</li>
+<li>preduvjet: Korsnik ima svoj račun i nositelj je na nekom predmetu</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Korisnik otvori stranicu seminara</li>
+<li>Odobri ili odbije ovisno je li seminar relevantan za taj predmet</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC13 Uređivati opis kolegija</strong></p>
+<ul>
+<li>Glavni sudionik: Nositelj</li>
+<li>cilj: Urediti opis predmeta na kojima je nositelj</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik ima svoj račun i prijavljen je u sustav sa statusom nositelja</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Profesor odabere jedan predmet s liste na kojima ima nositeljska prava</li>
+<li>Uredi opis ako želi</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC14 Kreacija eventa vezanog za seminar</strong></p>
+<ul>
+<li>Glavni sudionik: Program</li>
+<li>cilj: izrada evenata za seminare</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Mentor je odobrio draft seminara</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Program kreira event vezan za seminar i prikazuje ga u kalendaru</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC15 Čitanje iz baze</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Pregledati podatke iz baze</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korisnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe odabere opciju upravljanje bazom</li>
+<li>Pregleda željene podatke iz baze</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC16 Pisanje u bazu</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Zapisati potadke u bazu</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe odabere opciju upravljanje bazom</li>
+<li>Zapiše željene podatke u bazu</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC17 Izmjena u bazi</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Izmjeniti podatke u bazi</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe odabere opciju upravljanje bazom</li>
+<li>Izmjeni željene podatke u bazi</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC18 Brisanje u bazi</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba</li>
+<li>cilj: Izbrisati podatke iz baze</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe odabere opciju upravljanje bazom</li>
+<li>Izbriše željene podatke iz baze</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC19 kreiranje računa za korisnika</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Kreirati račun</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prija kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe odabere opciju za kreiranje računa</li>
+<li>Ukuca željeno ime, prezime, jmbag, email, lozinku</li>
+<li>Spremi račun u bazu</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC20 Kreirati kolegij</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Kreirati kolegij</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe klikne na opciju za izradu kolegija</li>
+<li>Kreira željeni kolegij</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC21 Postavljanje globalnih obavijesti</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Postavljanje globalnih obavijesti</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Član studentske službe klikne na opciju za postavljanje globalnih obavijesti</li>
+<li>Postavi željeni sadržaj ako je relevantan za cijeli fakultet</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC22 Promjena prava pristupa</strong></p>
+<ul>
+<li>Glavni sudionik: Studentska služba ili CIP</li>
+<li>cilj: Promjeniti prava pristupa</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen kao admin ili superadmin</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Administrator sustava odabere opciju za promjenu prava pristupa</li>
+<li>Administrator sustava mijenja role po potrebi (npr iz studenta u doktoranda, iz doktoranda u asistenta itd.)</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC23 Promjena teme na tamnu i obrnuto</strong></p>
+<ul>
+<li>Glavni sudionik: Registrirani korisnik</li>
+<li>cilj: Promjeniti prava pristupa</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Korisnik otvara izbornik za navigaciju</li>
+<li>Klik na gumb za promjenu teme</li>
+</ol>
+</li>
+</ul>
+<p><strong>UC24 Odjava iz sustava</strong></p>
+<ul>
+<li>Glavni sudionik: Registrirani korisnik</li>
+<li>cilj: Promjeniti prava pristupa</li>
+<li>sudionici: Baza podataka</li>
+<li>preduvjet: Korsnik je prijavljen</li>
+<li>opis osnovnog tijeka:
+<ol>
+<li>Korisnik otvara izbornik za navigaciju</li>
+<li>Klik na gumb za odjavu</li>
+</ol>
+</li>
+</ul>
+<h2 id="34-sekvencijski-dijagrami-a-name%2234%22-a">3.4 Sekvencijski dijagrami <a name="3.4"> </a></h2>
+<h3 id="341-prijava-korisni%C4%8Dkim-podacima-a-name%22341%22-a">3.4.1 Prijava korisničkim podacima <a name="3.4.1"> </a></h3>
+<img src="http://www.plantuml.com/plantuml/svg/ZPC_Rzim4CNdybCyk7EC56qM3K4a4UdG8GNIea2tiyGcj6IUG58U37_udgb6Vn8Xg1O2ntUyttiYxq8a7_j3gnHLaJqstzZRu6op0GNagfDjMzcENCJcbzaXxrhRK6Ntb1J5Kb7GQQYNo_fNvgVMf1sTHjaZHOCS7w-lR_JzlL8vhcvHPFYqnMzwZdjpn8dGUHbqvCFKKemj1Qwa9S_mtGlH2TnTgAQkNjLcQbFgV3uhQYCU1jqWChAQXl67_S4aoKZoKDFE-bNTVz0auVimBNE7cXjqN4kYS3RqY5mvkmJvlCLFnm7smb2JiBz7SOiomvUjSF1nRpobqoCrX1uxEjcfhHpRoWGlet9HXyXx-oAUKPUJnqSJWcM77zmOj-BCk7fOss3MyzOqU8HyBpu5UZNpuV9GqdvOCNsf9-FwbKGl91gB7rIBqRvpzXbF1x8jgFOcq0IaCzoCG3E9cGxJsPHo-8S9wgDnSNWZSd57iHXyxAjAaXiePwdfoSARS5zhPmdFWy-LkfEQlEI_" alt="loginSequence">
+<p><em>[slika 3.5] slika sekvencijskog dijagrama prijave korisničkim podacima</em> <a name = "s3.5"> </a></p>
+<p>Korisnik na početnoj stranici odabire opciju “Prijava”. Web aplikacija mu otvara stranicu prijave, koja ima dvije opcije, prijavu korisničkim podacima te prijavu Google računom. Odabirom opcije “Prijava korisničkim podacima”, otvara mu se forma u koju unosi svoje korisničke podatke. Predajom forme, aplikacija u bazi provjerava ispravnost podataka. U slučaju netočnih podataka, korisnik dobiva error. U slučaju ispravnih podataka, korisnik dobiva token I redirektiran je na početnu stranicu. Odabirom opcije “Prijava putem Google računa”, korisniku Google prikazuje dostupne gmail adrese. Korisnik odabire jednu, odvija se provjera s Google-om te korisnik dobiva token I redirektiran je na početnu stranicu.</p>
+<h3 id="342-kreiranje-ra%C4%8Duna-a-name%22342%22-a">3.4.2 Kreiranje računa <a name="3.4.2"> </a></h3>
+<p><img src="./diagrams/UMLSequence/Registracija.png" alt="sek2">
+<em>[slika 3.5] slika sekvencijkog dijagrama kreiranja računa</em> <a name = "s3.5"> </a></p>
+<p>Studentski službenik otvara formu za registraciju studenta u koju upisuje sve potrebne podatke. Forma traži ponovni upis ukoliko je jedan ili više podataka neispravno te ispisuje razlog neispravnosti pojedinog podatka. Prilikom pravilno ispunjene forme, web aplikacija šalje podatke u bazu podataka te ih veže uz novoizrađenog studenta. Uspjeh o izradi studenta se šalje natrag studentskom službeniku, a mail s podatcima za prijavu se šalje korisniku kojemu pripadaju.</p>
+<h3 id="343-prijava-putem-google-ra%C4%8Duna-a-name%22343%22-a">3.4.3 Prijava putem Google računa <a name="3.4.3"> </a></h3>
+<p>Unaprijed prijavljeni student, pritiskom na, za to predodređen, gumb, zahtjeva web aplikaciju da mu dohvati Google-ovu formu kojom se prijavljuje u svoj postojeći Google račun. Nakon što se uspješno prijavi u svoj Google račun, uspjeh u prijavi se dojavljuje web aplikaciji i studentu. Web aplikacija potom sprema podatke o Google poveznici i dojavljuje studentu uspjeh u povezivanju Google računa nakon čega se web aplikacija vraća na prijašnju stranicu.</p>
+<h3 id="344-prijava-seminara-a-name%22344%22-a">3.4.4 Prijava seminara <a name="3.4.4"> </a></h3>
+<p><img src="./diagrams/UMLSequence/sdIzradaSeminara.png" alt="sek3">
+<em>[slika 3.6] slika sekvencijskog dijagrama izrade seminara</em> <a name = "s3.6"></p>
+<p><img src="./diagrams/UMLSequence/sdPredlaganjeSeminara.png" alt="sek4">
+<em>[slika 3.7] slika sekvencijskog dijagrama predlaganja seminara</em> <a name = "s3.7"></p>
+<p>Doktorand, pritiskom na, za to predodređen, gumb, zahtjeva web aplikaciju da mu dohvati formu za prijavu seminara. Dok ideja nije prihvaćena sa strane doktorandovog mentora, doktorand, preko web aplikacije, šalje mentoru nacrt seminara na koju mentor može odgovoriti odobrenjem. Nakon što mentor prihvati nacrt seminara, preko web aplikacije najavljuje predaju istog seminara nakon čega web aplikacija pohranjuje nacrt i datum predaje u bazu podataka. Predaja seminara mora biti najavljena najmanje 7 dana prije same predaje. Prilikom najave predaje seminara, web aplikacija izrađuje oglas seminara na stranici predmeta povezanog s mentorom koji se potom arhivira u bazu podataka. Oglas je vidljiv sve do same predaje seminara. Nositelj predmeta, koji ne mora nužno biti povezan sa seminarom, odluči predložiti seminar na stranici svojeg predmeta te web aplikaciji šalje zahtjev kojom ona hvata oglas. Predlaganje seminara također se pohranjuje u bazu podataka. Prilikom predavanja seminara, mentor predavača boduje seminar preko web aplikacije. Podatci o predaji i bodovanju seminara se pohranjuju u bazu podataka i oglas za isti seminar se briše.</p>
+<h2 id="35-dionici-a-name%2235%22-a">3.5 Dionici <a name="3.5"> </a></h2>
+<ol>
+<li>Klijent</li>
+<li>Registrirani korisnik</li>
+<li>Student</li>
+<li>Profesor</li>
+<li>Nositelj</li>
+<li>Doktorand</li>
+<li>Studentska služba</li>
+<li>Administrator sustava</li>
+</ol>
+<h2 id="36-aktori-i-njihovi-funkcionalni-zahtjevi-a-name%2236%22-a">3.6 Aktori i njihovi funkcionalni zahtjevi <a name="3.6"> </a></h2>
+<ol>
+<li>Klijent
+<ul>
+<li>Prijava korisničkim podacima</li>
+<li>Prijava putem Google računa</li>
+<li>Pregledati javne detalje o kolegiju</li>
+<li>Pregledati globalne obavijesti</li>
+<li>Pregledati popis oglasa svih nadolazecih predlozenih Seminara</li>
+<li>Provjeriti javne detalje o korisnicima</li>
+</ul>
+</li>
+<li>Student
+<ul>
+<li>Upisati dostupni kolegij</li>
+<li>Detalji o kolegiju</li>
+<li>Pregledati obavijesti vezanih uz kolegije na koje je povezan</li>
+</ul>
+</li>
+<li>Doktorand
+<ul>
+<li>Prijava seminara</li>
+<li>Predlaganje seminara na svojem predmetu</li>
+</ul>
+</li>
+<li>Profesor
+<ul>
+<li>Pregled statistike ispita</li>
+<li>Pregledati popis korisnika na predmetima koje predaje</li>
+<li>Evidencija dolaska doktoranda</li>
+<li>Odobravanje prijavljenog seminara</li>
+<li>Pregled statistike ispita</li>
+</ul>
+</li>
+<li>Nositelj
+<ul>
+<li>Postaviti je li kolegij dostupan za upisivanje</li>
+<li>Uređivati opis kolegija na kojima ima nositeljska prava</li>
+<li>Predlaganje seminara na svojem predmetu</li>
+</ul>
+</li>
+<li>Studentska služba
+<ul>
+<li>Čitanje iz baze</li>
+<li>Pisanje u bazu</li>
+<li>Izmjena u bazi</li>
+<li>Brisanje u bazi</li>
+<li>Kreiranje računa</li>
+<li>Kreirati kolegij</li>
+<li>Slanje aktivacijskog maila korisniku</li>
+<li>Postavljanje globalnih obavijesti</li>
+</ul>
+</li>
+<li>Administrator sustava
+<ul>
+<li>Promjena prava pristupa</li>
+</ul>
+</li>
+<li>Baza podataka</li>
+</ol>
+<h1 id="4-arhitektura-i-dizajn-sustava-a-name%224%22-a">4. Arhitektura i dizajn sustava <a name="4"> </a></h1>
+<p>Repozitorij Studiusa organiziran je kao <code>monorepo</code> što znači da su nam Frontend i Backend smješteni u poddirektorjima.</p>
+<p>Arhitektura se može podijeliti na tri glavne cjeline:</p>
+<ol>
+<li>Klijentska aplikacija</li>
+<li>Frontend poslužitelj</li>
+<li>Backend poslužitelj (API gateway)</li>
+<li>Baza podataka</li>
+</ol>
+<h2 id="41-frontend-a-name%2241%22-a">4.1 Frontend <a name="4.1"> </a></h2>
+<p>Klijentski poslužitelj je program koji korisniku poslužuje Klijentsku aplikaciju koja obavlja velik dio logike na samom računalu korisnika.</p>
+<p>Klijentska aplikacija je načinjena od statički generirane HTML ljuske te uz poslani Javascript paket koji hidrira ljusku dobivena stranica poprima cijelu funkcionalnost. Dobivena stranica na klijentu pruža sučelje za komunikaciju s ostatkom sustava.</p>
+<p>Frontend servis, zahvaljujući na korištenju NextJS-a kao radnog okvira, je optimizirana za što veće performanse i minimalno kašnjenje kroz uporabu caching metoda (Incremental Static Regeneration), Reactovim server-renderiranim komponentama, i mnoštvu drugih naprednih metoda.</p>
+<p>Sam Next.JS je nadogradnja okruženja React koje omogućuje pisanje komponenti korištenjem specifičnog jezika koji se zove JSX. JSX omogućava pisanje kôda kao što je HTML, no može se kombinirati s JavaScriptom. React će pretvoriti kôd u virtualni DOM te na kraju isporučiti HTML za korisnika.</p>
+<p>Sama klijentka aplikacija je dizajnirana po vizualnim načelima dobrog UX i UI dizajna kako bi korisnik imao što manje trenja u realizaciji svojih ideja. Stiliranje u frontendu olakšano je korištenjem <strong>Tailwind</strong> biblioteke za dinamičku uporabu CSS jezika.</p>
+<p>Cijeli kod je pisan sa velikom pažnjom na integritet tipova podataka, pa je tako putem biblioteke <strong>TRPC</strong> (više o tome kasnije) realizirana sama komunikacija između frontenda i backenda.</p>
+<h2 id="42-backend-a-name%2242%22-a">4.2 Backend <a name="4.2"> </a></h2>
+<p>Backend je pisan u tehnologiji Node.JS, te su korištene i slijedeće biblioteke:</p>
+<ul>
+<li>Express.JS
+<ul>
+<li>Pomoću ove biblioteke je ostvarena sama HTTP komunikacija</li>
+</ul>
+</li>
+<li>TRPC (Typescript Remote Procedure Call)
+<ul>
+<li>Kada se u frontendu stvara poziv na backend tradicionalna metoda podrazumijeva pozivanje HTTP zahtjeva na URL, pa ručno tumačenje dobevenog rezultata. Takav proces bi bio vremenski intenzivan i podložan greškama</li>
+<li>Korištenjem ove biblioteke u frontendu importamo Typescript tipove svake metode na backendu, osiguravajući autmatsko tipiranje svakog metode zajedno s njenim parametrima i mogućim povratnim podacima</li>
+</ul>
+</li>
+<li>Prisma (Object Relational Mapping Library)
+<ul>
+<li>Putem ove biblioteke backend komunicira s proizvoljnom bazom putem svojeg jezika.</li>
+<li>Kroz Prismu je pisana shema baze, te smo odabrali Postgres kao bazu u kojoj je spomenuta shema realizirana</li>
+</ul>
+</li>
+</ul>
+<p>Struktura backenda je osmišljena na slijedeći način:</p>
+<ul>
+<li>unutar <code>src</code> direktorjia se nalazi cijeli kod</li>
+<li>unutar <code>controllers</code> direktorij se nalazi globalna logika, nepovezana uz neki pojedini entitet u sustavu</li>
+<li>unutar <code>domain</code> direktorija se nalazi svaki Entitet u sustavu
+<ul>
+<li>za primjer ovakvog entiteta uzmimo <strong>Usera</strong></li>
+<li>Userov direktorij sadrži poddirektorije <code>interactors</code>, <code>model</code>, <code>repository</code>, <code>tests</code>, <code>userRouter</code></li>
+<li><strong>Interactors</strong> direktorij sadrži sve use caseove za usera, npr. &quot;Stvori Usera&quot; koji principom &quot;dependency injectiona&quot; poprima repozitorij, te na njega djeluje po nekoj &quot;business logici&quot; koja je sadržana u svakoj interactor datoteci.</li>
+<li><strong>model</strong> direktorij sadrži definiciju entiteta User i njegove članske varijable</li>
+<li><strong>repository</strong> direktorij sadrži datoteku s apstraktnim sučeljem za repozitorij, te njegovu implementaciju u proizvoljnoj tehnologiji (većinom putem Prisma biblioteke)</li>
+<li><strong>tests</strong> direktorij sadrži jedinične testove za svaki interaktor</li>
+<li><strong>userRouter</strong> direktorij sadrži uputstva za TRPC o metodama koje su definirane za User entitet</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>src/
+├── config/
+├── controllers/
+│   ├── middleware/
+│   ├── auth.ts
+│   ├── router.ts
+│   └── trpc.ts
+├── services/
+│   ├── authentication/
+│   │   └── authRouter/
+│   │   │   ├── index.ts
+│   │   │   ├── loginRoutine.ts
+│   │   │   ├── logoutRoutine.ts
+│   │   │   └── meRoutine.ts
+├── domain/
+│   ├── User/
+│   │   ├── interactors/
+│   │   │   └── createUserInteractor.ts
+│   │   ├── model/
+│   │   │   └── UserEntity.ts
+│   │   ├── repository/
+│   │   │   └── UserRepository.ts
+│   │   │   └── UserRepositoryPrisma.ts
+│   │   ├── tests/
+│   │   │   └── index.ts
+│   │   └── userRouter/
+│   │   │   └── index.ts
+│   └── &lt;EntityName&gt;/
+│       └── ...
+├── utils/
+└── index.ts
+</div></code></pre>
+<h2 id="43-baza-podataka-a-name%2243%22-a">4.3 Baza podataka <a name="4.3"> </a></h2>
+<p>Za potrbe našeg projekta smo koristili biblioteku zvanu Prisma, te Postgres bazu podataka.</p>
+<p>Za rad sa prismom potreban je <code>prisma.schema</code> datoteka unutar koje su popisani svi entiteti u bazi, te njihovi atributi zajedno s tipom podatka te defaultnom vrijednosti.</p>
+<p>Prisma pri pokretanju određenog skupa naredbi generira SQL kod putem kojeg komunicira s bazom koja je poslužena na proizvoljnom URL-u.</p>
+<p>Naša shema opisana je u slijedećem dijagramu baze.</p>
+<p><img src="./images/skica_bp.png" alt="baza_podataka">
+<em>[slika 4.1] slika baze podataka</em> <a name = "s4.1"> </a></p>
+<h3 id="user">User</h3>
+<p><strong>User</strong> entitet sadrži važne informacije o korisnicima sustava. Vezom One-to-many vezano je za entitet Content, te je refleksivno vezan One-to-Many vezan za User entitet (Mentor – Mentee veza).</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski string korisnika, uuid()</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>VARCHAR</td>
+<td>Lozinka korisnika</td>
+</tr>
+<tr>
+<td>Firstname</td>
+<td>VARCHAR</td>
+<td>Ime korisnika</td>
+</tr>
+<tr>
+<td>Lastname</td>
+<td>VARCHAR</td>
+<td>Prezime korisnika</td>
+</tr>
+<tr>
+<td>Jmbag</td>
+<td>VARCHAR</td>
+<td>Za sve korisnike osim studenata ima vrijednost NULL</td>
+</tr>
+<tr>
+<td>ContentId</td>
+<td>VARCHAR</td>
+<td>Content.id</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>VARCHAR</td>
+<td>e-mail korisnika</td>
+</tr>
+<tr>
+<td>userRole</td>
+<td>Role</td>
+<td>Korisnikova uloga na sustavu</td>
+</tr>
+<tr>
+<td>mentorId</td>
+<td>VARCHAR</td>
+<td>ID mentora koji može biti dodijeljen studentu(user.id)</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td>VARCHAR</td>
+<td>URI profilne slike koju korisnik koristi</td>
+</tr>
+</tbody>
+</table>
+<h3 id="subject">Subject</h3>
+<p><strong>Subject</strong> entitet sadržava bitne informacije o kolegijima na fakultetu. Vezom One-to-many vezan je za entitet Content</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski string kolegija, uuid()</td>
+</tr>
+<tr>
+<td>title</td>
+<td>VARCHAR</td>
+<td>Naziv kolegija</td>
+</tr>
+<tr>
+<td>description</td>
+<td>VARCHAR</td>
+<td>Kratki opis kolegija</td>
+</tr>
+<tr>
+<td>ectsBod</td>
+<td>VARCHAR</td>
+<td>ects opterecenje kolegija</td>
+</tr>
+<tr>
+<td>Semester</td>
+<td>Semester</td>
+<td>Kojem semestru pripada kolegij (SUMMER,WINTER)</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>VARCHAR</td>
+<td>Status kolegija, da li ga je moguće upisati ili se više ne predaje</td>
+</tr>
+<tr>
+<td>contentId</td>
+<td>VARCHAR</td>
+<td>Content.id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enrollment">Enrollment</h3>
+<p><strong>Enrollment</strong> entitet predstavlja instancu upisa na određeni kolegij. Povezan je sa Many-to-one vezama za User I Subject entitete.</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski string enrollmenta, uuid()</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>VARCHAR</td>
+<td>User.ID</td>
+</tr>
+<tr>
+<td>subjectId</td>
+<td>VARCHAR</td>
+<td>Subject.Id</td>
+</tr>
+<tr>
+<td>roleTitle</td>
+<td>SubjectRole</td>
+<td>Uloga koju upisani korisnik ima na kolegiju</td>
+</tr>
+<tr>
+<td>Enrollment_date</td>
+<td>DATETIME</td>
+<td>Datum ostvarenja upisa</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>VARCHAR</td>
+<td>Označava status pojedinog upisa (aktivan, arhiviran)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="seminar">Seminar</h3>
+<p><strong>Seminar</strong> entitet sadrži važne informacije o seminarima koji doktorandi predaju na sustav. Povezan je One-to-one vezom sa entitetom Content, Many-to-one vezom sa entitetom Subject, te Many-to-One sa Userom</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski string seminara, uuid()</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>VARCHAR</td>
+<td>Naslov seminara</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>VARCHAR</td>
+<td>Kratki opis seminara</td>
+</tr>
+<tr>
+<td>mentorId</td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski broj mentora (user.mentorId)</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>SeminarStatus</td>
+<td>Status seminara</td>
+</tr>
+<tr>
+<td>contentId</td>
+<td>VARCHAR</td>
+<td>Content seminara (content.id)</td>
+</tr>
+<tr>
+<td>subjectId</td>
+<td>VARCHAR</td>
+<td>Subject.id</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>VARCHAR</td>
+<td>User.id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event">Event</h3>
+<p><strong>Event</strong> entitet sadrzi vazne informacije o događajima na fakultetu (seminari, predavanje, talkovi,…).</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski string eventa, uuid()</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>VARCHAR</td>
+<td>Ime eventa</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>VARCHAR</td>
+<td>Kratki opis eventa</td>
+</tr>
+<tr>
+<td>LinkedEntity</td>
+<td>LinkedEntity</td>
+<td>Entitet za koji je Event vezan</td>
+</tr>
+<tr>
+<td>LinkedEntityId</td>
+<td>VARCHAR</td>
+<td>Id entiteta za koji je Event vezan</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Status</td>
+<td>Status eventa</td>
+</tr>
+</tbody>
+</table>
+<h3 id="room">Room</h3>
+<p><strong>Room</strong> entitet sadrži važne informacije o dvoranama I prostorijama na fakultetu. One-to-Many vezom je spojen sa entitetom RoomTimeEvent.</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski broj prostorije, uuid()</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>VARCHAR</td>
+<td>Naziv prostorije</td>
+</tr>
+<tr>
+<td>Capacity</td>
+<td>INT</td>
+<td>Kapacitet prostorije</td>
+</tr>
+</tbody>
+</table>
+<h3 id="roomtimeevent">RoomTimeEvent</h3>
+<p><strong>RoomTimeEvent</strong> entitet sadrži važne informacije o održavanju događaja na fakultetu. Spaja događaj sa prostorom I vremenom održavanja. Many-to-one vezama je spojen sa entitetima Room I Event.</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski string održavanja događaja, uuid()</td>
+</tr>
+<tr>
+<td>dateStart</td>
+<td>DATETIME</td>
+<td>Vrijeme početka događaja</td>
+</tr>
+<tr>
+<td>dateEnd</td>
+<td>DATETIME</td>
+<td>Vrijeme završetka događaja</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Status</td>
+<td>Status RoomTimeEventa</td>
+</tr>
+<tr>
+<td>Event_ID</td>
+<td>INT</td>
+<td>Event.event_ID</td>
+</tr>
+<tr>
+<td>Room_ID</td>
+<td>INT</td>
+<td>Room.room_ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pinnedevent">PinnedEvent</h3>
+<p><strong>PinnedEvent</strong> entitet koji sadržava bitne informacije o seminaru koji nositelji odabiru kao prijedlog za studente svojeg predmeta. Vezom One-to-one vezan je za entitete Seminar I Subject</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Jedinstveni identifikacijski broj oglasa eventa, uuid()</td>
+</tr>
+<tr>
+<td>subjectId</td>
+<td>VARCHAR</td>
+<td>Seminar.id</td>
+</tr>
+<tr>
+<td>eventId</td>
+<td>VARCHAR</td>
+<td>Event.id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eventuserpresence">EventUserPresence</h3>
+<p><strong>EventUserPresence</strong> entitet sadrži bitne informacije o prisutnosti studenata na događajima gdje se njihova prisutnost očekuje. Many-to-one vezom je spojena sa User entitetom te Many-to-One vezom je spojena na RoomTimeEvent entitet.</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Identifikacijski broj evidencije, uuid()</td>
+</tr>
+<tr>
+<td>presenceStatus</td>
+<td>BOOL</td>
+<td>True/False, je li student bio prisutan</td>
+</tr>
+<tr>
+<td>RoomTimeEventId</td>
+<td>VARCHAR</td>
+<td>RoomTimeEvent.id</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>VARCHAR</td>
+<td>User.id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="content">Content</h3>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Identifikacijski string sadržaja, uuid()</td>
+</tr>
+<tr>
+<td>Markdown_text</td>
+<td>VARCHAR</td>
+<td>Sadržaj obavijesti ili informacije o predmetu zapisane u Markdown alatu za formatiranje teksta</td>
+</tr>
+<tr>
+<td>plainText</td>
+<td>VARCHAR</td>
+<td>Zapis sadržaja u običnom text formatu</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>DATETIME</td>
+<td>Datum stvaranja sadržaja</td>
+</tr>
+<tr>
+<td>LinkedEntity</td>
+<td>LinkedEntity</td>
+<td>Za koji od entiteta (Subject, Seminar, User) je content vezan</td>
+</tr>
+<tr>
+<td>LinkedEntityId</td>
+<td>VARCHAR</td>
+<td>Id entiteta za koji je content vezan</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Content</strong> entitet sadržava relevantne podatke o sadržaju, te sam sadržaj obavijesti te informacija o kolegijima I seminarima.</p>
+<h3 id="post">Post</h3>
+<p><strong>Post</strong> entitet sadrži sve relevantne podatke o obavijestima unutar sustava. Povezan je One-to-One vezom sa entitetom Content, te Many-to-one vezom sa entitetom User.</p>
+<table>
+<thead>
+<tr>
+<th>Naziv polja</th>
+<th>Tip podatka</th>
+<th>Opis polja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id</strong></td>
+<td>VARCHAR</td>
+<td>Identifikacijski string objave, uuid()</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>VARCHAR</td>
+<td>Naslov objave</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>DATETIME</td>
+<td>Datum stvaranja objave</td>
+</tr>
+<tr>
+<td>LinkedEntity</td>
+<td>LinkedEntity</td>
+<td>Za koji od entiteta (Subject, Seminar, User) je objava vezana</td>
+</tr>
+<tr>
+<td>LinkedEntityID</td>
+<td>VARCHAR</td>
+<td>Identifikacijski broj (uuid) entiteta za koji je objava vezana</td>
+</tr>
+<tr>
+<td>ContentId</td>
+<td>VARCHAR</td>
+<td>Content.id</td>
+</tr>
+<tr>
+<td>OwnerId</td>
+<td>VARCHAR</td>
+<td>User.id korisnika koji je napravio Post</td>
+</tr>
+</tbody>
+</table>
+<h2 id="44-dijagram-razreda-a-name%2244%22-a">4.4 Dijagram razreda <a name="4.4"> </a></h2>
+<p>Razred Content predstavlja vidljiv sadržaj u aplikaciji (opise, slike...). Razred subject predstavlja kolegij na fakultetu, ima enumeraciju &quot;semester&quot; koja sadrži zimski i ljetni semestar.</p>
+<p>Razred status predstavlja predaje li se taj predmet trenutno ili je npr. iz starog programa.</p>
+<p>Razred Enrollment predstavlja vezu između predmeta i korisnika, ima enumeraciju &quot;subjectRole&quot; koja definira koju ulogu korisnik ima s predmetom, dali je student, demonstrator, asistent, profesor ili nositelj.</p>
+<p>Razred User predstavlja korisnika, ima enumeraciju &quot;userType&quot; koja sadrži stavke default(primjerice studenti i profesori), admin(primjerice članovi studentske službe) te superadmin(programeri koji su odgovorni za uzdržavanje sustava).</p>
+<p>Razred Seminar predstavlja seminare koji se izvode na nekom predmetu, može ih biti proizvoljan broj na jednom predmetu, povezan je s prijedlogom za seminar (razred SeminarSuggestion).</p>
+<p>Seminar je povezan 1:1 vezom s Razredom Event koji predstavlja događaj. Event je povezan s Razredom RoomTimeEvent koji opisuje koji se događaj izvodi u koje vrijeme u kojoj dvorani.</p>
+<p>Dvorane su opisane razredom Room. Seminar mora imati doktoranda koji ga izvodi (Razred Doktorand), on mora imati mentora.</p>
+<p>Razred Post predstavlja objavu, sadrži svoj Content. Koji može među ostalim tematski pripadati predmetu ili seminaru, što se vidi u enumeraciji &quot;LinkedEntity&quot;.</p>
+<img src="http://www.plantuml.com/plantuml/svg/bLZVRvmu47xdhx3or5QtKUyLdQAINQBRK_U7W5nrJoS2RaeBU8MzwLLL__UpFGPixDaaUKZmVEDXvflnZCa7Bif1dBisYWGx4S780nE2TQHk1bg9XlLHLBKbvoHzehsuvtGu3fJJlgBaPqJaJrF791T3qp_gvScWkIZ5cSVabh6Mbht61iQwekceDhLrzvsbvOKeizLZTwaLb3Un_atqkXfeAQZdwBONT2WhmOOtRxLUJLlw4hr7AXBEMTL8gxNpUa-rRRZm379FxNogN-HXz6kaVSqarWlWUYN91e8WuDMk7BxLx7l_hw3_YTZYRdLgooOWLg-FD_8NB3ys_JTQfxren8-Os2iVtswSx03PnZs4OWoLn6AG8j9W67sXhHDVHyOzic0fOsYfIz-23KcaLuGWjAlC9SrMNR1bGvNnkGvmg5n620n2ahsWN56d08mtRzFCceuEgR6JLFZEXWKjdvk1Yxxig1EcDEOBltOFvQExMvtsJ3O6TQfRmtud-M4U_RGVMDjskWEaqpDWtZcA_IvbsuOipX9ARGdjogPrGpTP8x4fkUTpgSmXkGn245uGacbMyjiVgN8CWyETI5kbTNv--2gxE0ygxJG3GKWPHflNb0H4mVDgFfjDtylpeL94VfBW8UNWiLS5J-ZXcMrYP-Y2XZfA5s1zecOSFLY8YL_ExFH39dXZehmQcfEQloxWz9wNzckpbvkH3ACPPC_EM6kcNfgZ8MPnJf6fol6nUd6KXabNff_XtAcngZoLbQAraRbw5JjAZf0JX2GtGRcALW5OiDuc9zR9CwoHAnEvkkx5P9vvSAHhMnIg4tLrMnvA9GDIy4CAGjENoIlRzimkVl6QQSPr3D-NRszpJLwwn_55gYxKxfopy8ldxZ1rLBjSoGlQeX5B8JpCmtMfUPwkoikngl8UoZvtij_I0awCUQKUstC8EUsQlXomhlwQ3XVoVheQXARpzeLSZLKDhbh5NPvE0tkY1l3o25M8eL1_62eh3uDK1HaCgvtGLejpY3DGCw4U5w1zCHreHxbGLJ8-cKgHzuTRLYEpnAuI91zfy0O7TigwnZu43EqccGZj2AfeHo3xUXI-vkZ4O1SdavY0SPcNYFRdplcA6fEJtz_-bQuBU4vtstsImHTidiB3yP0NoeIsC2PWthtRfHc1nQVjlf0BgGowEW6ZPh8kjd-dy9Yj_vJFcycgK_XcHcoovAw0hLcQRFxHJ-l3_cwRxQojwhIFEzAxvFuZH99iP2J6msEQmLBnO5oRMyNetp4xtALvVe2Wy-9-a-x1rk7Jtb2nINU7VLvaIM7KaZpVvaMormH5fbx8rUzNPBLQlTCFwjF6GgwlDQQXiJK6z-c664GCMr6aFusktckJnlHeyet2VXkNRydrjLtW98h6jgWj3ytZ5p6QiAwChjRgHly51ARc97ztjRY2w2iE3XlV8IoZuKzQ_nyxIi-u2zw4pAvQ-bdSG6b4OozIRx4dn2JNrcx6Tk6eZzt6_SyH-MCLy5NbcUXOdBilyBIKHXzeNv-xzdy0" alt="UMLclass">
+<p><em>[slika 4.2] slika dijagrama razreda</em> <a name = "s4.2"> </a></p>
+<h2 id="45-dijagram-stanja-a-name--%2245%22-a">4.5 Dijagram stanja <a name = "4.5"> </a></h2>
+<p>Dijagram stanja prikazuje stanja objekta te prijelaze iz jednog stanja u drugo temeljene na dogadajima. Na slici je prikazan dijagram stanja za superadmina.
+Nakon prijave, superadminu se prikazuje početna stranica na kojoj može pregledati nadolazeće eventove, podatke o korisnicima i popis svih predmeta.
+Bitno je naglasiti da se iz bilo kojeg stanja može doći na bilo koje od većih stanja kao što su: &quot;Homepage&quot;, &quot;Events&quot;, &quot;Seminars&quot;, &quot;Workspace tools&quot; te sliku profila.
+&quot;Events&quot; dodatno prikazuje vlastiti kalendar i nadolazeće eventove, &quot;Seminars&quot; prikazuje listu nadolazećih seminara, klik na sliku profila nudi &quot;log out&quot;, paljenje i gašenje dark mode, i &quot;view profile&quot; vraća podatke o korisniku, upisane predmete i mogućnost brisanja računa. &quot;Workspace tools&quot; kao najkompleksnije stanje ima mogućnost ćitanja, unosa, brisanja i uređivanja baze.</p>
+<p><img src="./diagrams/UMLState/DijagramStanja.vpd.svg" alt="class">
+<em>[slika 4.3] slika dijagrama stanja</em> <a name = "s4.3"> </a></p>
+<h2 id="46-dijagram-aktivnosti-a-name%2246%22-a">4.6 Dijagram aktivnosti <a name="4.6"> </a></h2>
+<p>Dijagram aktivnosti primjenjuje se za opis modela toka upravljanja ili toka podataka. U
+modeliranju toka upravljanja svaki novi korak poduzima se nakon zavrsenog prethodnog, a naglasak je na jednostavnosti.
+Na dijagramu aktivnosti je prikazan proces dogovaranja seminara. Mentor se prijavi u sustav, odabere jedan od predmeta
+na kojima predaje i jednog studenta na tom predmetu. Zatim predloži temu seminara koji će student odraditi. Nakon toga se student ulogira i za temu koju mu je profesor predložio
+preda sadržaj seminara. Na posljetku mentor odobri taj seminar.</p>
+<p><img src="./diagrams/UMLActivity/DijagramAktivnosti.vpd.svg" alt="class">
+<em>[slika 4.4] slika dijagrama aktivnosti</em> <a name = "s4.4"> </a></p>
+<h2 id="47-dijagram-komponenti-a-name%2247%22-a">4.7 Dijagram komponenti <a name="4.7"> </a></h2>
+<p>Dijagram komponenti prikazan na slici opisuje organizaciju i ovisnost pojedinih komponenti. Sustav je podijeljen na 4 cjeline: Baza podataka, Backend server, Frontend server, i dio aplikacije koji se vrti na računalu korisnika.</p>
+<h3 id="471-backend-server-a-name%22471%22-a">4.7.1 Backend server <a name="4.7.1"> </a></h3>
+<p>Backend server se isključivo bavi dodjeljivanjem pristupa određenim podatcima ovisno o ulozi korisnika. Podatci su definirani kroz domenu sustava koja predstavlja skup entiteta: User, Subject, Event, ... Svaki od navedenih entiteta ima definirana četiri sloja koji ima svoju ulogu.</p>
+<p><strong>Model</strong> entiteta je definiran pomoću Prisma biblioteke automatski temeljeno na shemi baze podataka, te se koristi u slijedećim slojevima.</p>
+<p><strong>Interactor</strong> entiteta, preuzima ulogu tradicionalnog &quot;Controllera&quot; te je u njemu definirana &quot;business logika&quot; putem koje se određuje koje su akcije dopuštene ovisno o primjerice ulozi korisnika koji ju pokušava obaviti. Interactori su definirani putem svakog Use Casea spomenutog u prethodnim poglavljima.</p>
+<p><strong>Repository</strong> entiteta je sučelje putem kojeg se u proizvoljnom Interactoru pristupa bazi podataka. Sam Repository nasljeđuje sučelje definirano za svaki model (UserRepository), te je implementirano da ili koristi prismu kao način pristupa bazi pod imenom npr. (UserRepositoryPrisma) ili ako pristupa simulaciji baze u memoriji bi bilo pod imenom UserRepositoryInMemory, što se pokazalo korisno u pokretanju testova.</p>
+<p>Posljednji dio svakog entiteta je <strong>TRPC Procedures</strong> koji je u biti riječnik koji sadrži svaku metodu za dan entity pod imenom koje bi se koristilo pri zvanju metode. Primjerice <code>domena.com/user.getAllUsers</code></p>
+<p>TRPC router svakog entiteta je povezan u glavni AppRouter (TRPC Router) koji je povezan s Express.JS bibliotekom putem koje se ostvaruje HTTP komunikacija.</p>
+<h3 id="472-frontend-server-a-name%22472%22-a">4.7.2 Frontend server <a name="4.7.2"> </a></h3>
+<p>Frontend server je zadužen za dostavljanje svih resursa Web Browseru. Skup svih stranica dostupnih korisniku je ovdje definiran unutar NextJS-ovog routera.</p>
+<p>Također je unutar Frontend servera sadržan i TRPC klijent. Razlog zašto postoji TRPC klijent i na frontend serveru i u Web browseru je kako bi sam Frontend server mogao prikupljati podatke s backenda periodično i spremati &quot;zapečene&quot; stranice kako bi bile korisniku puno brže dostupne. Više o ovoj tehnologiji možete pročitati ovdje: <a href="https://nextjs.org/docs/advanced-features/automatic-static-optimization">https://nextjs.org/docs/advanced-features/automatic-static-optimization</a></p>
+<h3 id="473-web-browser-a-name%22473%22-a">4.7.3 Web browser <a name="4.7.3"> </a></h3>
+<p>Inicijalnim zahtjevom korisnika za pristup Frontend serveru se učitava Javascript bundle koji se na računalo sprema u memoriji te sadrži React kako bi navigacija stranicom bila dinamičnija i brža.</p>
+<p>Inicijalni i svaki idući zahtjev dostavlja HTML ljusku Web browseru (sa zapečenim dijelovima kao što su popis svih Predmenta), te se naknadno dobiva i novi Javascript bundle putem kojeg se HTML ljuska hidrira i podatci se mogu obnoviti.</p>
+<p>Obzirom da svaki zahtjev podatcima ovisi o samom korisniku i njegovu računu, TRPC klijent koji se nalazi u Web browseru, pomoću session kolačića direknto komunicira s Backendom i tamo se dalje gleda koji podatci i akcije su omogućene korisniku.</p>
+<p><img src="./diagrams/UMLComponent/cmp.svg" alt="class">
+<em>[slika 4.5] slika dijagrama komponenti</em> <a name = "s4.5"> </a></p>
+<h1 id="5-implementacija-i-korisni%C4%8Dko-su%C4%8Delje-a-name%225%22-a">5. Implementacija i korisničko sučelje <a name="5"> </a></h1>
+<h2 id="51-kori%C5%A1tene-tehnologije-i-alati-a-name--%2251%22-a">5.1 Korištene tehnologije i alati <a name = "5.1"> </a></h2>
+<p>Komunikacija u timu je realizirana primarno aplikacijom <em><strong>Slack</strong></em>, te po potrebi i <em><strong>WhatsAppom</strong></em>. Za izradu dokumentacije korišten je jezik <em><strong>Markdown</strong></em>, ta za izradu UML dijagrama korišteni su programi Figma, <em><strong>Visual Paradigm</strong></em>, te kasnije i <em><strong>PlantUML</strong></em>.</p>
+<p>Kao razvojno okruženje korišten je Microsoftov <em><strong>Visual Studio Code</strong></em>. Kao sustav za upravljanje izvornim kodom korislitli smo <em><strong>Git</strong></em>. Udaljeni repozitorij projekta je dostupan na web platformi <em><strong>GitLab</strong></em>.</p>
+<p>Cijela platforma je pisana jezikom <em><strong>Typescript</strong></em>, frontend je realiziran uporabom razvojnog okvira <em><strong>NextJS</strong></em> koji je nadogradnja okruženja <em><strong>React</strong></em>, backend uporabom okvira <em><strong>ExpressJS</strong></em> unutar okruženja NodeJS, te HTTP komunikacija između klijenta, frontend i backend poslužitelja putem <em><strong>TRPC</strong></em> tehnologije (Typescript Remote Procedure Call).</p>
+<p>Dizajn platforme stvoren je uporabom alata <em><strong>Figma</strong></em>, te je razvoj izgleda komponenti u sklopu Reacta bio realiziran <em><strong>Tailwind CSS</strong></em> bibliotekom.</p>
+<p>Backend smo poslužili putem <em><strong>Railway</strong></em> servisa, frontend putem <em><strong>Vercela</strong></em>, pohranu podataka u <em><strong>PostgreSQL</strong></em> bazi putem <em><strong>Supabase</strong></em> servisa, te komunikaciju između Backenda i Baze podataka putem <em><strong>Prisma</strong></em> ORM-a.</p>
+<h3 id="511-reference-a-name%22511%22-a">5.1.1 Reference <a name="5.1.1"> </a></h3>
+<ol>
+<li><a href="https://www.whatsapp.com/">https://www.whatsapp.com/</a></li>
+<li><a href="https://www.slack.com/">https://www.slack.com/</a></li>
+<li><a href="https://www.markdownguide.org/">https://www.markdownguide.org/</a></li>
+<li><a href="https://www.visual-paradigm.com/">https://www.visual-paradigm.com/</a></li>
+<li><a href="https://plantuml.com/">https://plantuml.com/</a></li>
+<li><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+<li><a href="https://git-scm.com/">https://git-scm.com/</a></li>
+<li><a href="https://gitlab.com/">https://gitlab.com/</a></li>
+<li><a href="https://www.typescriptlang.org/">https://www.typescriptlang.org/</a></li>
+<li><a href="https://nextjs.org/">https://nextjs.org/</a></li>
+<li><a href="https://reactjs.org/">https://reactjs.org/</a></li>
+<li><a href="https://expressjs.com/">https://expressjs.com/</a></li>
+<li><a href="https://trpc.io/">https://trpc.io/</a></li>
+<li><a href="https://www.figma.com/">https://www.figma.com/</a></li>
+<li><a href="https://www.tailwindcss.com/">https://www.tailwindcss.com/</a></li>
+<li><a href="https://railway.app/">https://railway.app/</a></li>
+<li><a href="https://vercel.com/">https://vercel.com/</a></li>
+<li><a href="https://supabase.com/">https://supabase.com/</a></li>
+<li><a href="https://www.postgresql.org/docs/">https://www.postgresql.org/docs/</a></li>
+<li><a href="https://www.prisma.io/docs">https://www.prisma.io/docs</a></li>
+</ol>
+<h2 id="52-ispitivanje-programskog-rje%C5%A1enja-a-name%2252%22-a">5.2 Ispitivanje programskog rješenja <a name="5.2"> </a></h2>
+<p>Svi unit testovi pisani su uporabom biblioteke <em><strong>Jest</strong></em>. Ispitivanje se radilo po use caseovima koji se temelje na osnovnim funkcijama kreiranja, čitanja, uređivanja i brisanja svakog entiteta u sustavu. (UC6, UC7, UC10, UC19, UC20, UC21, UC22, UC23, UC24, UC26, UC27, te ostale metode manipulacije entiteta u sustavu, brojeći 63 u totalu).</p>
+<p>Testovi su se pokazali korisni u koraku prije deploymenta na udaljena računala jer su male promjene u sustavu znale uzrokovat pojavu grešaka u nepovezanom dijelu koji je koristio zajednički dio koda. Temeljito pisanim testovima, ovakve greške su se vrlo brzo identificirale i popravile.</p>
+<h3 id="521-automatizirani-ispitni-slu%C4%8Daj-1-upis-dostupnog-kolegija-a-name--%2220%22-a">5.2.1 Automatizirani ispitni slučaj 1: Upis dostupnog kolegija <a name = "2.0"> </a></h3>
+<p>Ulaz:</p>
+<ol>
+<li>Stvaranje korisnika</li>
+<li>Stvaranje kolegija</li>
+<li>Upis korisnika u kolegij</li>
+<li>Ponovni upis korisnika u kolegij</li>
+</ol>
+<p>Očekivani rezultat:</p>
+<ol>
+<li>Metoda vraća kreiranog korisnika</li>
+<li>Metoda vraća kreiran kolegij</li>
+<li>Metoda vraća instancu upisa (Enrollment object)</li>
+<li>Metoda vraća pogrešku jer je korisnik već upisan</li>
+</ol>
+<p>Rezultat: Očekivani rezultat (4.) nije zadovoljen obzirom da nije vraćena greška već je korisnik dvaput upisan na predmet</p>
+<h2 id="53-dijagram-razmje%C5%A1taja-a-name%2253%22-a">5.3 Dijagram razmještaja <a name="5.3"> </a></h2>
+<p>Obzirom da nismo imali svoja računala za pokretanje poslužitelja, morali smo pronaći odgovarajuća rješenja u oblaku. Kako sama platforma sadrži Backend poslužitelj, Frontend poslužitelj, te Poslužitelj baze podataka, svaki dio zahtjeva određenu okolinu kako bi mogla nesmetano operirati.</p>
+<img src="http://www.plantuml.com/plantuml/svg/VL9DJyCm33qllyBA4Ma7xjEqjVJ2HocBn8bBQBmHhMjAacv3YF-EatHG9eqeKYpxlMVxAGldfVNzhc6imRK7Ry3gpPi7fItMNfkMiKxMMxb1uCBtIlUEmoURj4PHPZPJkDSrpkSlxPsnshLwM-KHC20oQmuEBGVf88lv2JNKQrdxG3_5GI1lDBOUbbqNqVcIm5yit2JrZBR61Wf5ivJe3yPknvrEixYW9T3kqK99bOGPG2KU_Qq05yknZIZAipxZfLPIDmVvyKSZ8p-mLI1-HJAH01TtAuwTHUV6d4ByowZ8pPs4nzL3H5S1V6bAqNVoLJeSst6J_MmPHrFIHqna3d7iOvpVM1JlJRBZwVva1vlaI-3N7APqW5_nv5L8KZoDfR04PSyo5SNfJVJu16KINP1rzD--0G00" alt="uml diagram">
+<p><em>[slika 5.1] slika dijagrama razmještaja</em> <a name = "s5.1"> </a></p>
+<h3 id="531-razmje%C5%A1taj-baze-podataka">5.3.1 Razmještaj baze podataka</h3>
+<p>U samom početku razvoja nismo imali potrebu za razmještenje ni frontend ni backend poslužitelja na udaljena računala obzirom da smo sustav pokretali isključivo lokalno u svrhu razvoja.</p>
+<p>Kako bismo lakše surađivali i mogli raditi na istim značajkama paralelno, odlučili smo upogoniti udaljenu bazu podataka. Na internetu smo naišli na Supabase koji nam se za našu veličinu platforme u trenutnoj fazi činio prikladan obzirom na manjak naplate.</p>
+<h3 id="532-razmje%C5%A1taj-backenda">5.3.2 Razmještaj backenda</h3>
+<p>Idući nam je korak bio, kako je platforma postajala sve kompleksnija, poslužiti i sam backend na udaljenom računalu. Nismo imali vlastito računalo na kojem je mogao poslužitelj raditi 24h dnevno. Ponovo smo se konzultirali s internetom, te naišli na servis pod imenom Railway.</p>
+<p>Slično kao Supabase, Railway je pružao osnovne funkcionalnosti besplatno, pa smo tamo otvorili račun, spojili ga s Gitlabom putem Gitlab CI/CD pipelinea, i imali smo udaljen backend server koji je nesmetano radio i odazivao se na naredbe.</p>
+<p>Pri svakom commitu na <code>main</code> branch, promjene bi propagirale i do Railwaya.</p>
+<h3 id="533-razmje%C5%A1taj-frontenda">5.3.3 Razmještaj frontenda</h3>
+<p>Pred kraj projekta, morali smo i frontend poslužiti udaljeno. Frontend se od backenda razlikuje po tom što smo od samog početka znali servis na koji bismo ga poslužili, te je sama aplikacija bila pisana specifično na način da se posluži na Vercelovu serverless mrežu.</p>
+<p>Tvorci razvojnog okruženja - Next.js - u kojem je pisan frontend, upravo je Vercel, time smo osigurali prvoklasnu potporu za upravljanje udaljenim poslužiteljem, što uključuje i motrenje prometa, inačicu za svaki commit, i još mnoštvo značajki. Najvažnija prednost je upravo i statička generacija HTML ljuski, što ubrzava pristup korisnika frontendu.</p>
+<h3 id="534-me%C4%91ukomunikacija-svih-podsustava">5.3.4 Međukomunikacija svih podsustava</h3>
+<p>U konačnici, sa svim podsustavima postavljenim na svoje okruženje imali smo funkcionirajuću platformu na koju se može pristupiti diljem svijeta.</p>
+<p>Kada korisnik pristupi domeni definiranoj Vercelovim servisom, u radnu memoriju njegovog web preglednika se sprema React aplikacija, koja ima mogućnosti direktne komunikacije s backendom, koji pak služi kao posrednik između klijenta (ili frontend poslužitelja) i baze podataka.</p>
+<h2 id="54-izvo%C4%91enje-razvoja-a-name%2254%22-a">5.4 Izvođenje razvoja <a name="5.4"> </a></h2>
+<p>U dogovoru s cijelom ekipom koja je radila na projektu (i pripadnim mentorima), radili bismo prateći tjedne sprintove uz prilagođen oblik SCRUM-a u alatu Notion</p>
+<p><img src="./images/notion1.png" alt="Notion glavna stranica">
+<em>[slika 5.2] slika alata Notion</em> <a name = "s5.2"> </a></p>
+<p><img src="./images/notion2.png" alt="Notion stranica sa zadacima">
+<em>[slika 5.3] slika alata Notion</em> <a name = "s5.3"> </a></p>
+<p>Način organizacije koji smo odlučili koristiti kao razvojni tim je SCRUM.</p>
+<h3 id="541-sprintovi-a-name%22541%22-a">5.4.1 Sprintovi <a name="5.4.1"> </a></h3>
+<p>Sprintovi su tjedna ili dvotjedna razdoblja na čijem se početku određuje niz zadataka i tema na koje se fokusira većina razvojnog procesa.</p>
+<h3 id="542-dnevnik-sastanaka-a-name%22542%22-a">5.4.2 Dnevnik sastanaka <a name="5.4.2"> </a></h3>
+<p><strong>1. Sastanak</strong></p>
+<ul>
+<li>Datum: 3.10.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek</li>
+<li>Teme sastanka:
+<ul>
+<li>Okvirno određivanje projekta</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. Sastanak</strong></p>
+<ul>
+<li>Datum: 21.10.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek</li>
+<li>Teme sastanka:
+<ul>
+<li>Razgovor o projektu s profesorom</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Sastanak</strong></p>
+<ul>
+<li>Datum:21.10.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Podjela rada</li>
+<li>Dogovor oko materijala za istraživanje</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. Sastanak</strong></p>
+<ul>
+<li>Datum: 27.10.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Matija Fućek</li>
+<li>Teme sastanka:
+<ul>
+<li>Razgovor s profesorom</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. Sastanak</strong></p>
+<ul>
+<li>Datum: 28.10.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić</li>
+<li>Teme sastanka: - organizacija oko dovršetka MVP
+-Komentiranje nacrta baze</li>
+</ul>
+<p><strong>6. Sastanak</strong></p>
+<ul>
+<li>Datum: 4.11.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>problemi sa Supabaseom, prelazak na Postgress</li>
+<li>problemi s backendom (errori)</li>
+</ul>
+</li>
+</ul>
+<p><strong>7. Sastanak</strong></p>
+<ul>
+<li>Datum: 7.11.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić</li>
+<li>Teme sastanka:
+<ul>
+<li>Arhitektura sustava</li>
+<li>Potencijalno uvođenje mikroservisa</li>
+</ul>
+</li>
+</ul>
+<p><strong>8. Sastanak</strong></p>
+<ul>
+<li>Datum: 9.11.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Razgovor s profesorom kako sustav funkcionira</li>
+</ul>
+</li>
+</ul>
+<p><strong>9. Sastanak</strong></p>
+<ul>
+<li>Datum: 11.11.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Raspodjela poslova oko dokumentacije (obrasci uporabe, sekvencijskih dijagrami i baza)</li>
+</ul>
+</li>
+</ul>
+<p><strong>10. Sastanak</strong></p>
+<ul>
+<li>Datum: 8.12.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Kritika dokumentacije</li>
+<li>Mjesta za unaprijeđenje</li>
+</ul>
+</li>
+</ul>
+<p><strong>11. Sastanak</strong></p>
+<ul>
+<li>Datum: 12.12.2022.</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka: - Kritika dokumentacije
+<ul>
+<li>Mjesta za unaprijeđenje</li>
+</ul>
+</li>
+</ul>
+<p><strong>12. Sastanak</strong></p>
+<ul>
+<li>Datum: 15.12.2022</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Planiranje popisa značajki po prioritetu koje treba implementirati do kraja ciklusa</li>
+</ul>
+</li>
+</ul>
+<p><strong>13. Sastanak</strong></p>
+<ul>
+<li>Datum: 18.1.2023</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Nadopunjivanje dokumentacije kako bi se upotpunila kvota prisutnih materijala; Raspodjela posla</li>
+</ul>
+</li>
+</ul>
+<p><strong>14. Sastanak</strong></p>
+<ul>
+<li>Datum: 19.1.2023</li>
+<li>Prisustvovali: Marko Supičić, Adrian Aničić, Franko Budimir, Matija Fućek, Hary Samardžić, Luka Čulav</li>
+<li>Teme sastanka:
+<ul>
+<li>Predaja projekta i konzultacije oko nastavka rada na platformi</li>
+</ul>
+</li>
+</ul>
+<h3 id="543-tjedni--dvotjedni-sastanci-a-name%22543%22-a">5.4.3 Tjedni / dvotjedni sastanci <a name="5.4.3"> </a></h3>
+<p>Obično traju oko sat vremena. Cilj je imati viši pregled nad onime što je dovršeno u prethodnom sprintu te koji će zadaci ući u sljedeći sprint.</p>
+<p>Kraj svakog sprinta obilježen je ovakvim sastankom, gdje gledamo koliko su uspješno bili postavljeni zadaci, koji su sve ciljevi postignuti te se reflektiramo na sam proces (što bi moglo biti bolje)</p>
+<p>Bilješke ovakvih sastanaka vodimo kroz alat <strong>Notion</strong> te na temelju tih zapisnika na mjesečnoj bazi stvaramo dokument koji proslijeđujemo svim mentorima vezanim uz projekt.</p>
+<h3 id="544-dnevni-sastanci-a-name%22544%22-a">5.4.4 Dnevni sastanci <a name="5.4.4"> </a></h3>
+<p>Dnevni bi sastanci trebali trajati manje od 10 minuta svaki dan i nisu obavezni. Cilj je uskladiti zadatke koje svaki član rješava.</p>
+<h3 id="545-mjese%C4%8Dni-sastanci-a-name%22545%22-a">5.4.5 Mjesečni sastanci <a name="5.4.5"> </a></h3>
+<p>Cilj ovih sastanaka je usklađivanje s mentorima iz raznih zavoda, te iznošenje i skupno razmišljanje o napretku te idućim koracima.</p>
+<h2 id="55-upute-za-pu%C5%A1tanje-u-pogon-a-name--%2255%22-a">5.5 Upute za puštanje u pogon <a name = "5.5"> </a></h2>
+<h3 id="551-preuzimanje-repozitorija-lokalno-a-name--%22551%22-a">5.5.1 Preuzimanje repozitorija lokalno <a name = "5.5.1"> </a></h3>
+<p>Odlaskom na Gitlab sjedište projekta Studius moguće je preuzeti lokalno cijeli repozitorij u obliku ZIP datoteke. Nakon preuzimanja, odpakirajte projekt na proizvoljno mjesto na Vašem osobnom računalu te pratite daljnja uputstva za postavljanje i pokretanje platforme.</p>
+<h3 id="552-postavljanje-baze-podataka-a-name--%22552%22-a">5.5.2 Postavljanje baze podataka <a name = "5.5.2"> </a></h3>
+<p>Prvi korak u pokretanju platforme je postavljanje baze podataka. Odabir baze podataka je proizvoljan, no obzirom da je odabir ekipa tijekom razvoja bio PostgreSQL, preporučili bismo korištenje istog.</p>
+<p>Način posluživanja baze isto je tako proizvoljan, no u slijedećim koracima opisat ćemo kako pokrenuti PostgreSQL bazu putem servisa Supabase, te kako ju povezati na backend putem varijabla okruženja <em>Environment Variables</em></p>
+<p><strong>Otvaranja Supabase Računa</strong></p>
+<p>U Vaš pretraživač upišite adresu <a href="https://supabase.com/">https://supabase.com/</a>, te slijedite korake za registraciju.</p>
+<p><img src="./images/supa1.png" alt="Supabase 1">
+<em>[slika 5.4] slika otvaranja Supabase računa</em> <a name = "s5.4"> </a></p>
+<p><strong>Stvaranje projekta</strong></p>
+<p>Pritiskom na &quot;New Project&quot; stvorimo novi projekt unutar kojeg ćemo smjestiti bazu.</p>
+<p><img src="./images/supa2.png" alt="Supabase 2">
+<em>[slika 5.4] slika1 stvaranja projekta u Supabase-u</em> <a name = "s5.4"> </a></p>
+<p>Odabir imena je proizvoljan, no imajte na umu da odabir lozinke projekta će se kasnije koristiti pri spajanju na pazu. Odabir regije također je proizvoljan, no preporuča se odabir što bliže lokacije kako bi vrijeme odgovora bilo što kraće.</p>
+<p><img src="./images/supa3.png" alt="Supabase 3">
+<em>[slika 5.6] slika1 stvaranja projekta u Supabase-u</em> <a name = "s5.6"> </a></p>
+<p><strong>Spajanje backenda s bazom</strong></p>
+<p>Nakon što smo uspješno stvorili projekt, i pričekali da se sam projekt automatski inicijalizira, možemo posjetiti Postavke projekta ili &quot;Project Setting&quot; za koje se link nalazi na lijevoj kontrolnoj površini, te pod sekcijom &quot;Database&quot; možemo pronaći &quot;Connection string&quot;.</p>
+<p>Postavljanjem &quot;Connection Stringa&quot; na URI, te izmjenom <em>[YOUR-PASSWORD]</em> dijela niza znakova sa lozinkom kojom smo stvorili projekt, imamo spremnu poveznicu kojom će se backend spajati na bazu.</p>
+<p><img src="./images/supa4.png" alt="Supabase 4">
+<em>[slika 5.5] slika spajanja backenda s bazom</em> <a name = "s5.5"> </a></p>
+<h3 id="553-postavljanje-backend-i-frontend-poslu%C5%BEitelja-a-name--%22553%22-a">5.5.3 Postavljanje backend i frontend poslužitelja <a name = "5.5.3"> </a></h3>
+<p>Nakon što je repozitorij preuzet te je postavljana baza podataka, možemo krenuti s postavljanjem samog Backenda.</p>
+<p>Unutar korijenskog direktorija, potvrdimo da postoje direktoriji backend i frontend. Unutar backend direktorija bi se trebala nalaziti <code>.env</code> datoteka, unutar koje se nalaze varijable <code>DATABASE_URL</code> i <code>JWT_SECRET_KEY</code>. DATABASE_URL je potrebno postaviti na URI koji smo u prethodnoj pod-cjelini izvadili iz Supabasea-a, te JWT_SECRET_KEY je potrebno postaviti na proizvoljan niz nasumičnih znakova (koji se koriste u ovjeravanju JWT tokena pri autentifikaciji).</p>
+<p>Postavljanje za lokalno okruženje je ovim korakom dovršeno, jedino je preostalo preuzeti programsku potporu kako bismo bili spremni pokrenuti platformu.</p>
+<h3 id="554-postavljanje-programske-potpore-a-name--%22554%22-a">5.5.4 Postavljanje programske potpore <a name = "5.5.4"> </a></h3>
+<p>Prije instalacije programske podrške potrebno je instalirati Node.JS, te menadžer paketa za Node.js okruženje. Krenimo prvo s samim Node.js-om.</p>
+<p><strong>Instaliranje Node.js-a i Yarna</strong></p>
+<p>Prateći ovu poveznicu: <a href="https://nodejs.org/en/">https://nodejs.org/en/</a> posjećujemo službeno web sjedište Node organizacije. Ovdje nam se generalno nude dvije opcije <em>LTS</em>, te <em>Current</em>, bitno je preuzeti Node verziju 18.8 ili višu kako bi se sve komponente sustava uobičajeno ponašale. Naputak: preporučamo instalaciju LST verzije obzirom da je stabilnija te je osigurana višegodišnja podrška.</p>
+<p><img src="./images/node1.png" alt="Supabase 3">
+<em>[slika 5.8] slika instalacije Node.js-a</em> <a name = "s5.8"></p>
+<p>Osim Nodea, potrebno je odabrati i menadžer paketa za Node ekosustav. Danas postoje tri najčešće opcije: NPM, Yarn, te PNPM. Mi smo se odlučili za Yarn zbog prethodnog iskustva rada u istom.</p>
+<p>Instalacija Yarna, nakon instalacije Nodea je prilično jednostavna. Potrebno je samo upisati slijedeću naredbu u naredbeni redak.</p>
+<pre class="hljs"><code><div>npm install --global yarn
+</div></code></pre>
+<p>Kada je Yarn uspješno instaliran, unutar naredbenog retka se treba pozicionirati u korijenski direktorij, te pokrenuti naredbu</p>
+<pre class="hljs"><code><div>yarn
+</div></code></pre>
+<p>te</p>
+<pre class="hljs"><code><div>yarn rebuild
+</div></code></pre>
+<h3 id="555-pokretanje-platforme-a-name--%22555%22-a">5.5.5 Pokretanje platforme <a name = "5.5.5"> </a></h3>
+<p>Kada su obje naredbe iz prethodnog koraka završile s obradom, potrebno je stvoriti jednog <em>SUPERADMIN</em> korisnika koji će predstavljati vlasnika platforme s najvišom razinom prava.</p>
+<p>Kako bismo ubacili korisnika u bazu dovoljno je napisati naredbu</p>
+<pre class="hljs"><code><div>yarn studio
+</div></code></pre>
+<p>te unutar korisničkog sučelja navigirati u tablicu <em>&quot;Users&quot;</em></p>
+<p><img src="./images/node2.png" alt="Pokretanje 1">
+<em>[slika 5.9] slika popisa modela u bazi</em> <a name = "s5.9"> </a></p>
+<p>Zatim stvoriti korisnika s <em>&quot;userRole&quot;</em> stavkom postavljenom na &quot;SUPERADMIN&quot;, te s ostalim proizvoljno odabranim podacima. Nakon izmjena, potrebno ih je potvrditi pritiskom na dugme &quot;Save 1 change&quot;</p>
+<p><img src="./images/node3.png" alt="Pokretanje 2">
+<img src="./images/node4.png" alt="Pokretanje 3">
+<em>[slika 5.10] slika prikaza Usera u bazi</em> <a name = "s5.10"> </a></p>
+<p>Spremni smo pokrenuti platformu!</p>
+<p>Pokretanjem naredbe</p>
+<pre class="hljs"><code><div>yarn dev
+</div></code></pre>
+<p>u korijenskom direktoriju uspješno je pokrenuta platforma na adresi <code>http://localhost:3000</code>, te možemo u naredbenom retku pratiti promet.</p>
+<p><img src="./images/term1.png" alt="Pokretanje 4">
+<em>[slika 5.11] slika pokretanje backenda naredbom yarn</em> <a name = "s5.11"> </a></p>
+<p><img src="./images/term2.png" alt="Pokretanje 4">
+<em>[slika 5.12] slika stranice za prijavu</em> <a name = "s5.12"> </a>
+<img src="./images/term3.png" alt="Pokretanje 4">
+<em>[slika 5.13] slika početne stranice</em> <a name = "s5.13"> </a></p>
+<h1 id="6-indeks-slika-i-dijagrama-a-name%226%22-a">6. Indeks-slika i dijagrama <a name="6"> </a></h1>
+<h2 id="21-predlaganje-teme-za-seminar"><a href="#s2.1">2.1. Predlaganje teme za seminar</a></h2>
+<h2 id="22-predlaganje-nacrta-seminara"><a href="#s2.2">2.2. Predlaganje nacrta seminara</a></h2>
+<h2 id="23-izlistani-seminari"><a href="#s2.3">2.3. Izlistani seminari</a></h2>
+<h2 id="31-obrasci-uporabe-kolegija"><a href="#s3.1">3.1. Obrasci uporabe kolegija</a></h2>
+<h2 id="32-obrazac-uporabe-kolegija"><a href="#s3.2">3.2. Obrazac uporabe kolegija</a></h2>
+<h2 id="33-obrazac-uporabe-obavijesti"><a href="#s3.3">3.3. Obrazac uporabe obavijesti</a></h2>
+<h2 id="34-sbrazac-uporabe-seminara"><a href="#s3.4">3.4. Sbrazac uporabe seminara</a></h2>
+<h2 id="35-sekvencijski-dijagram-prijave-korisni%C4%8Dkim-podacima"><a href="#s3.5">3.5. Sekvencijski dijagram prijave korisničkim podacima</a></h2>
+<h2 id="36-sekvenccijski-dijagram-kreiranja-ra%C4%8Duna"><a href="#s3.6">3.6. Sekvenccijski dijagram kreiranja računa</a></h2>
+<h2 id="37-sekvencijski-dijagram-izrade-seinara"><a href="#s3.7">3.7. Sekvencijski dijagram izrade seinara</a></h2>
+<h2 id="41-baza-podataka"><a href="#s4.1">4.1. Baza podataka</a></h2>
+<h2 id="42-dijagram-razreda"><a href="#s4.2">4.2. Dijagram razreda</a></h2>
+<h2 id="43-dijagram-stanja"><a href="#s4.3">4.3. Dijagram stanja</a></h2>
+<h2 id="44-dijagram-aktivnosti"><a href="#s4.4">4.4. Dijagram aktivnosti</a></h2>
+<h2 id="45-dijagram-komponenti"><a href="#s4.5">4.5. Dijagram komponenti</a></h2>
+<h2 id="51-dijagram-razmje%C5%A1taja"><a href="#s5.1">5.1. Dijagram razmještaja</a></h2>
+<h2 id="52-notion"><a href="#s5.2">5.2. Notion</a></h2>
+<h2 id="53-notion"><a href="#s5.3">5.3. Notion</a></h2>
+<h2 id="54-otvaranje-supabase-ra%C4%8Duna"><a href="#s5.4">5.4. Otvaranje Supabase računa</a></h2>
+<h2 id="55-stvara-je-projekta-u-supabase-u"><a href="#s5.5">5.5. Stvara je projekta u Supabase-u</a></h2>
+<h2 id="56-stvaranje-projekta-u-supabase-u"><a href="#s5.6">5.6. Stvaranje projekta u Supabase-u</a></h2>
+<h2 id="57-spajanje-backenda-s-bazom"><a href="#s5.7">5.7. Spajanje backenda s bazom</a></h2>
+<h2 id="58-instalacija-nodejs-a"><a href="#s5.8">5.8. Instalacija Node.js-a</a></h2>
+<h2 id="59-popis-modela-u-bazi"><a href="#s5.9">5.9. Popis modela u bazi</a></h2>
+<h2 id="510-prikaz-usera-u-bazi"><a href="#s5.10">5.10. Prikaz Usera u bazi</a></h2>
+<h2 id="511-pokretanje-backenda-naredbom-yarn"><a href="#s5.11">5.11. Pokretanje backenda naredbom yarn</a></h2>
+<h2 id="512-stranica-za-prijavu"><a href="#s5.12">5.12. Stranica za prijavu</a></h2>
+<h2 id="513-po%C4%8Detna-stranica"><a href="#s5.13">5.13. Početna stranica</a></h2>
+<h1 id="7-tablica-aktivnosti-a-name%227%22-a">7. Tablica aktivnosti <a name="7"> </a></h1>
+<table>
+<thead>
+<tr>
+<th>Segment</th>
+<th>Marko</th>
+<th>Matija</th>
+<th>Adrian</th>
+<th>Franko</th>
+<th>Hary</th>
+<th>Luka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upravljanje projektom</td>
+<td>10</td>
+<td>10</td>
+<td>3</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Opis projektnog zadatka</td>
+<td>3</td>
+<td>6</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Opis funkcionalnih zahtjeva</td>
+<td>10</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Dijagram obrazaca</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Opis pojedinih obrazaca</td>
+<td>8</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Sekvencijski dijagrami</td>
+<td>2</td>
+<td></td>
+<td>5</td>
+<td>6</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Opis ostalih zahtjeva</td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Svrha, opci prioriteti i skica sustava</td>
+<td>15</td>
+<td>15</td>
+<td>8</td>
+<td>6</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Baza podataka</td>
+<td>6</td>
+<td>11</td>
+<td>2</td>
+<td>2</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Dijagram razreda</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>20</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Dijagram stanja</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dijagram aktivnosti</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dijagram komponenti</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Koristene tehnologije i alati ˇ</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Ispitivanje programskog rjesenja ˇ</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Upute za instalaciju</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Plan rada</td>
+<td>5</td>
+<td>8</td>
+<td>8</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Dnevnik sastajanja</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Zakljucak i budući rad</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>Popis literature</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Izrada pocetne stranice</td>
+<td>3</td>
+<td>17</td>
+<td>40</td>
+<td>10</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Izrada baze podataka</td>
+<td></td>
+<td>6</td>
+<td></td>
+<td>11</td>
+<td>19</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Spajanje s bazom podataka</td>
+<td></td>
+<td>4</td>
+<td>10</td>
+<td>32</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td></td>
+<td>10</td>
+<td>15</td>
+<td>19</td>
+<td>12</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Suma</td>
+<td>78</td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+<td>85</td>
+<td>56</td>
+</tr>
+</tbody>
+</table>
+<h1 id="8-zaklju%C4%8Dak-i-budu%C4%87i-rad-a-name%228%22-a">8. Zaključak i budući rad <a name="8"> </a></h1>
+<p>Zadatak naše grupe bio je stvaranje najosnovnijih funkcionalnosti obrazovne platforme. Inspirirala nas je trenutna FER-ova platforma. Kako nam je cilj nastavak izrade ove platforme i nakon polaganja predmeta, najteži zadatak bio nam je odrediti funkcionalnosti koje će biti implementirane u sklopu predmeta. To je izazvalo prepreke u izradi dokumentacije, ali smo se s njima uspješno izborili. U početnim fazama rada na projektu događale su se promjene u korištenim alatima, što nas je vraćalo unazad. Kad smo uspješno napravili dokumentaciju te odredili korištene alate, daljnji razvoj je bio jednostavniji. Kako je teklo vrijeme, dolazilo je do definiranja uloga u razvoju programske potpore. U početku smo svi radili na svemu, a na kraju se vidjela jasna razlika frontend i backend timova. Komunikacija je postala jasnija, a rad brži. Ovo iskustvo je posebno korisno jer smo sazrijeli kao razvojni tim, što će nam omogućiti lakši daljnji rad na ovom, a i drugim projektima. Kroz intenzivnih nekoliko tjedana rada iskusili smo zajednički rad na projektu. Takoder, osjetili smo važnost dobre organiziranosti i dobre komunikacije među članovima tima. Zadovoljni smo postignutim rezultatima, a u budućnosti, nakon polaganja predmeta, planiramo nastaviti raditi na ovom projektu.</p>
+
+</body>
+</html>

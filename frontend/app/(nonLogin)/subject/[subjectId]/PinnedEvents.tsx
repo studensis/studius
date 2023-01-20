@@ -9,7 +9,7 @@ import { Stack } from '../../../../components/@studius/PageElements/Stack';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 export const PinnedEvents = ({ subjectId }: { subjectId: string }) => {
-	const events = trpc.subject.getPinnedEvents.useQuery(subjectId);
+	const events = trpc.subject.getPinnedSchedules.useQuery(subjectId);
 	useEffect(() => {
 		console.log(events.data);
 	}, [events]);
