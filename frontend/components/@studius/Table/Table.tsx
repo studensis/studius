@@ -87,19 +87,7 @@ export const Table = <T extends { [key: string]: any }>({
 	const [filter, setFilter] = useState<String>('');
 
 	useEffect(() => {
-		setObjectsPage(
-			sliceIntoChunks(
-				objects.filter((object) => {
-					return (
-						object.firstname
-							.toLowerCase()
-							.includes(filter.toLocaleLowerCase()) ||
-						object.lastname.toLowerCase().includes(filter.toLocaleLowerCase())
-					);
-				}),
-				objectsPerPage
-			)[index]
-		);
+		setObjectsPage(sliceIntoChunks(objects, objectsPerPage)[index]);
 	}, [objectsPerPage, index, filter]);
 
 	return (
