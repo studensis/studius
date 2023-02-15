@@ -139,6 +139,6 @@ test('delete RTE created in test', async () => {
 	expect(deletedRTE).not.toBeNull();
 });
 test('Event delete', async () => {
-	let newEvent: EventEntity = await deleteEventInteractor(eventId, repo);
-	expect(newEvent).not.toBeNull();
+	let deleteEvent: EventEntity = await deleteEventInteractor(eventId, repo);
+	expect(deleteEvent).not.toBeNull();
 });
