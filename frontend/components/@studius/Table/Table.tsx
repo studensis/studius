@@ -92,6 +92,7 @@ export const Table = <T extends { [key: string]: any }>({
 
 	return (
 		<>
+			<h1 className="hidden">Ovo vidi Vid</h1>
 			<div className="w-full rounded-xl border border-accent-medium shadow-xl overflow-hidden border-collapse overflow-x-scroll">
 				<div className="p-4 flex justify-between items-center">
 					<div className="flex justify-center items-center">
