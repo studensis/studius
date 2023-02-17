@@ -1,8 +1,10 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
 import createRoomInteractor from '../interactors/createRoomInteractor';
 import deleteRoomInteractor from '../interactors/deleteRoomInteractor';
+import deleteScheduleByRoomIdInteractor from '../interactors/deleteScheduleByRoomId';
 import getRoomInteractor from '../interactors/getRoomInteractor';
 import listRoomsInteractor from '../interactors/listRoomsInteractor';
 import updateRoomInteractor from '../interactors/updateRoomInteractor';
@@ -10,6 +12,7 @@ import { RoomEntity } from '../model/RoomEntity';
 import RoomRepositoryPrisma from '../repository/RoomRepositoryPrisma';
 
 let repo = new RoomRepositoryPrisma();
+let ScheduleRepo = new ScheduleRepositoryPrisma();
 
 export default t.router({
 	createRoom: t.procedure
@@ -33,6 +36,7 @@ export default t.router({
 		.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
+			let b = await deleteScheduleByRoomIdInteractor(input, ScheduleRepo);
 			let a = await deleteRoomInteractor(input, repo);
 			return a;
 		}),

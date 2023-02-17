@@ -1,12 +1,12 @@
+import AssignmentRouter from '../domain/Assignment/assignmentRouter';
 import contentRouter from '../domain/Content/contentRouter';
 import eventRouter from '../domain/Event/eventRouter';
-import eventUserPresenceRouter from '../domain/EventUserPresence/eventUserPresenceRouter';
+import pinnedEventRouter from '../domain/PinnedEvent/pinnedEventRouter';
 import postRouter from '../domain/Post/postRouter';
 import roomRouter from '../domain/Room/roomRouter';
-import SeminarRouter from '../domain/Seminar/SeminarRouter';
-import seminarSuggestionRouter from '../domain/SeminarSuggestion/seminarSuggestionRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
 import userRouter from '../domain/User/userRouter';
+import userPresenceRouter from '../domain/UserPresence/userPresenceRouter';
 import authRouter from '../services/authentication/authRouter';
 import { t } from './trpc';
 
@@ -22,11 +22,11 @@ const appRouter = t.router({
 	room: roomRouter,
 	event: eventRouter,
 	post: postRouter,
-	seminar: SeminarRouter,
-	seminarSuggestion: seminarSuggestionRouter,
+	assignment: AssignmentRouter,
+	pinnedEvent: pinnedEventRouter,
 	content: contentRouter,
-	// roomTimeEvent: roomTimeEventRouter,		// kroz eventove -> schedule
-	eventUserPresence: eventUserPresenceRouter,
+	// schedule: scheduleRouter,		// kroz eventove -> schedule
+	userPresence: userPresenceRouter,
 });
 
 export default appRouter;

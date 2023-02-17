@@ -3,7 +3,7 @@
 		"_postman_id": "2a9347e6-aa06-4101-8a18-da5b3fcfa3a2",
 		"name": "DBEntityTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24356078"
+		"_exposcheduler_id": "24356078"
 	},
 	"item": [
 		{
@@ -16,13 +16,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/user.listUsers",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.listUsers"
-							]
+							"path": ["user.listUsers"]
 						}
 					},
 					"response": []
@@ -34,13 +30,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/user.getUserById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.getUserById"
-							],
+							"path": ["user.getUserById"],
 							"query": [
 								{
 									"key": "input",
@@ -67,13 +59,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/user.createUser",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.createUser"
-							]
+							"path": ["user.createUser"]
 						}
 					},
 					"response": []
@@ -94,13 +82,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/user.updateUserById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.updateUserById"
-							]
+							"path": ["user.updateUserById"]
 						}
 					},
 					"response": []
@@ -121,13 +105,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/user.deleteUserById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.deleteUserById"
-							]
+							"path": ["user.deleteUserById"]
 						}
 					},
 					"response": []
@@ -148,13 +128,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/user.enrollUser",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.enrollUser"
-							]
+							"path": ["user.enrollUser"]
 						}
 					},
 					"response": []
@@ -175,13 +151,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/user.updateEnrollment",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.updateEnrollment"
-							]
+							"path": ["user.updateEnrollment"]
 						}
 					},
 					"response": []
@@ -205,13 +177,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/user.getEnrolledSubjects?input=\"4\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"user.getEnrolledSubjects"
-							],
+							"path": ["user.getEnrolledSubjects"],
 							"query": [
 								{
 									"key": "input",
@@ -234,13 +202,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/subject.listSubjects",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"subject.listSubjects"
-							]
+							"path": ["subject.listSubjects"]
 						}
 					},
 					"response": []
@@ -252,13 +216,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/subject.getSubjectById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"subject.getSubjectById"
-							],
+							"path": ["subject.getSubjectById"],
 							"query": [
 								{
 									"key": "input",
@@ -276,13 +236,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/subject.getEnrolledUsers?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"subject.getEnrolledUsers"
-							],
+							"path": ["subject.getEnrolledUsers"],
 							"query": [
 								{
 									"key": "input",
@@ -309,13 +265,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/subject.createSubject",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"subject.createSubject"
-							]
+							"path": ["subject.createSubject"]
 						}
 					},
 					"response": []
@@ -336,13 +288,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/subject.updateSubjectById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"subject.updateSubjectById"
-							]
+							"path": ["subject.updateSubjectById"]
 						}
 					},
 					"response": []
@@ -363,13 +311,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/subject.deleteSubjectById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"subject.deleteSubjectById"
-							]
+							"path": ["subject.deleteSubjectById"]
 						}
 					},
 					"response": []
@@ -386,13 +330,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/content.listContents",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"content.listContents"
-							]
+							"path": ["content.listContents"]
 						}
 					},
 					"response": []
@@ -404,13 +344,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/content.getContentById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"content.getContentById"
-							],
+							"path": ["content.getContentById"],
 							"query": [
 								{
 									"key": "input",
@@ -437,13 +373,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/content.createContent",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"content.createContent"
-							]
+							"path": ["content.createContent"]
 						}
 					},
 					"response": []
@@ -464,13 +396,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/content.updateContentById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"content.updateContentById"
-							]
+							"path": ["content.updateContentById"]
 						}
 					},
 					"response": []
@@ -491,13 +419,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/content.deleteContentById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"content.deleteContentById"
-							]
+							"path": ["content.deleteContentById"]
 						}
 					},
 					"response": []
@@ -505,7 +429,7 @@
 			]
 		},
 		{
-			"name": "EventUserPresence",
+			"name": "UserPresence",
 			"item": [
 				{
 					"name": "all",
@@ -514,13 +438,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/content.listContents",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"content.listContents"
-							]
+							"path": ["content.listContents"]
 						}
 					},
 					"response": []
@@ -531,14 +451,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/eventUserPresence.getEventUserPresenceById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/userPresence.getUserPresenceById?input=\"1\"",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"eventUserPresence.getEventUserPresenceById"
-							],
+							"path": ["userPresence.getUserPresenceById"],
 							"query": [
 								{
 									"key": "input",
@@ -564,14 +480,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/eventUserPresence.createEventUserPresence",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/userPresence.createUserPresence",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"eventUserPresence.createEventUserPresence"
-							]
+							"path": ["userPresence.createUserPresence"]
 						}
 					},
 					"response": []
@@ -591,14 +503,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/eventUserPresence.updateEventUserPresenceById",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/userPresence.updateUserPresenceById",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"eventUserPresence.updateEventUserPresenceById"
-							]
+							"path": ["userPresence.updateUserPresenceById"]
 						}
 					},
 					"response": []
@@ -618,14 +526,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/eventUserPresence.deleteEventUserPresenceById",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/userPresence.deleteUserPresenceById",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"eventUserPresence.deleteEventUserPresenceById"
-							]
+							"path": ["userPresence.deleteUserPresenceById"]
 						}
 					},
 					"response": []
@@ -633,7 +537,7 @@
 			]
 		},
 		{
-			"name": "RoomTimeEvent",
+			"name": "Schedule",
 			"item": [
 				{
 					"name": "all",
@@ -641,14 +545,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/roomTimeEvent.listRoomTimeEvents",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/schedule.listSchedules",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"roomTimeEvent.listRoomTimeEvents"
-							]
+							"path": ["schedule.listSchedules"]
 						}
 					},
 					"response": []
@@ -659,14 +559,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/roomTimeEvent.getRoomTimeEventById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/schedule.getScheduleById?input=\"1\"",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"roomTimeEvent.getRoomTimeEventById"
-							],
+							"path": ["schedule.getScheduleById"],
 							"query": [
 								{
 									"key": "input",
@@ -692,14 +588,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/roomTimeEvent.createRoomTimeEvent",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/schedule.createSchedule",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"roomTimeEvent.createRoomTimeEvent"
-							]
+							"path": ["schedule.createSchedule"]
 						}
 					},
 					"response": []
@@ -719,14 +611,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/roomTimeEvent.updateRoomTimeEventById",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/schedule.updateScheduleById",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"roomTimeEvent.updateRoomTimeEventById"
-							]
+							"path": ["schedule.updateScheduleById"]
 						}
 					},
 					"response": []
@@ -746,14 +634,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/roomTimeEvent.deleteRoomTimeEventById",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/schedule.deleteScheduleById",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"roomTimeEvent.deleteRoomTimeEventById"
-							]
+							"path": ["schedule.deleteScheduleById"]
 						}
 					},
 					"response": []
@@ -770,13 +654,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/event.listEvents",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"event.listEvents"
-							]
+							"path": ["event.listEvents"]
 						}
 					},
 					"response": []
@@ -788,13 +668,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/event.getEventById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"event.getEventById"
-							],
+							"path": ["event.getEventById"],
 							"query": [
 								{
 									"key": "input",
@@ -821,13 +697,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/event.createEvent",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"event.createEvent"
-							]
+							"path": ["event.createEvent"]
 						}
 					},
 					"response": []
@@ -848,13 +720,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/event.updateEventById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"event.updateEventById"
-							]
+							"path": ["event.updateEventById"]
 						}
 					},
 					"response": []
@@ -875,13 +743,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/event.deleteEventById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"event.deleteEventById"
-							]
+							"path": ["event.deleteEventById"]
 						}
 					},
 					"response": []
@@ -898,13 +762,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/post.listPosts",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"post.listPosts"
-							]
+							"path": ["post.listPosts"]
 						}
 					},
 					"response": []
@@ -916,13 +776,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/post.getPostById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"post.getPostById"
-							],
+							"path": ["post.getPostById"],
 							"query": [
 								{
 									"key": "input",
@@ -949,13 +805,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/post.createPost",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"post.createPost"
-							]
+							"path": ["post.createPost"]
 						}
 					},
 					"response": []
@@ -976,13 +828,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/post.updatePostById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"post.updatePostById"
-							]
+							"path": ["post.updatePostById"]
 						}
 					},
 					"response": []
@@ -1003,13 +851,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/post.deletePostById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"post.deletePostById"
-							]
+							"path": ["post.deletePostById"]
 						}
 					},
 					"response": []
@@ -1026,13 +870,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/room.listRooms",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"room.listRooms"
-							]
+							"path": ["room.listRooms"]
 						}
 					},
 					"response": []
@@ -1044,13 +884,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:4000/room.getRoomById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"room.getRoomById"
-							],
+							"path": ["room.getRoomById"],
 							"query": [
 								{
 									"key": "input",
@@ -1077,13 +913,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/room.createRoom",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"room.createRoom"
-							]
+							"path": ["room.createRoom"]
 						}
 					},
 					"response": []
@@ -1104,13 +936,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/room.updateRoomById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"room.updateRoomById"
-							]
+							"path": ["room.updateRoomById"]
 						}
 					},
 					"response": []
@@ -1131,13 +959,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/room.deleteRoomById",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"room.deleteRoomById"
-							]
+							"path": ["room.deleteRoomById"]
 						}
 					},
 					"response": []
@@ -1145,7 +969,7 @@
 			]
 		},
 		{
-			"name": "SeminarSuggestion",
+			"name": "PinnedEvent",
 			"item": [
 				{
 					"name": "all",
@@ -1153,14 +977,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/seminarSuggestion.listSeminarSuggestions",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/pinnedEvent.listPinnedEvents",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"seminarSuggestion.listSeminarSuggestions"
-							]
+							"path": ["pinnedEvent.listPinnedEvents"]
 						}
 					},
 					"response": []
@@ -1171,14 +991,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/seminarSuggestion.getSeminarSuggestionById?input=\"1\"",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/pinnedEvent.getPinnedEventById?input=\"1\"",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"seminarSuggestion.getSeminarSuggestionById"
-							],
+							"path": ["pinnedEvent.getPinnedEventById"],
 							"query": [
 								{
 									"key": "input",
@@ -1204,14 +1020,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/seminarSuggestion.createSeminarSuggestion",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/pinnedEvent.createPinnedEvent",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"seminarSuggestion.createSeminarSuggestion"
-							]
+							"path": ["pinnedEvent.createPinnedEvent"]
 						}
 					},
 					"response": []
@@ -1223,7 +1035,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"1\",\r\n    \"seminarId\":\"apdejtano\"\r\n}",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"assignmentId\":\"apdejtano\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1231,14 +1043,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/seminarSuggestion.updateSeminarSuggestionById",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/pinnedEvent.updatePinnedEventById",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"seminarSuggestion.updateSeminarSuggestionById"
-							]
+							"path": ["pinnedEvent.updatePinnedEventById"]
 						}
 					},
 					"response": []
@@ -1258,14 +1066,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/seminarSuggestion.deleteSeminarSuggestionById",
-							"host": [
-								"localhost"
-							],
+							"raw": "localhost:4000/pinnedEvent.deletePinnedEventById",
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"seminarSuggestion.deleteSeminarSuggestionById"
-							]
+							"path": ["pinnedEvent.deletePinnedEventById"]
 						}
 					},
 					"response": []
@@ -1291,13 +1095,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/auth.login",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"auth.login"
-							]
+							"path": ["auth.login"]
 						}
 					},
 					"response": []
@@ -1318,13 +1118,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/auth.logout",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"auth.logout"
-							]
+							"path": ["auth.logout"]
 						}
 					},
 					"response": []
@@ -1348,13 +1144,9 @@
 						},
 						"url": {
 							"raw": "localhost:4000/auth.me",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "4000",
-							"path": [
-								"auth.me"
-							]
+							"path": ["auth.me"]
 						}
 					},
 					"response": []

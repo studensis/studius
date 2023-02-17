@@ -1,16 +1,16 @@
 import createRoomInteractor from '../../Room/interactors/createRoomInteractor';
 import { RoomEntity } from '../../Room/model/RoomEntity';
 import RoomRepositoryPrisma from '../../Room/repository/RoomRepositoryPrisma';
-import createRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/createRoomTimeEventInteractor';
-import deleteRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/deleteRoomTimeEventInteractor';
-import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
-import RoomTimeEventRepositoryPrisma from '../../RoomTimeEvent/repository/RoomTimeEventRepositoryPrisma';
+import createScheduleInteractor from '../../Schedule/interactors/createScheduleInteractor';
+import deleteScheduleInteractor from '../../Schedule/interactors/deleteScheduleInteractor';
+import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
+import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
 import archiveEventInteractor from '../interactors/archiveEventInteractor';
-import archiveRTEByEventIdInteractor from '../interactors/archiveRTEByEventIdInteractor';
+import archiveScheduleByEventIdInteractor from '../interactors/archiveScheduleByEventIdInteractor';
 import createEventInteractor from '../interactors/createEventInteractor';
 import deleteEventInteractor from '../interactors/deleteEventInteractor';
 import getEventInteractor from '../interactors/getEventInteractor';
-import listAssociatedRoomTimeEventsInteractor from '../interactors/listAssociatedRoomTimeEventsInteractor';
+import listAssociatedSchedulesInteractor from '../interactors/listAssociatedSchedulesInteractor';
 import listEventsInteractor from '../interactors/listEventsInteractor';
 import updateEventInteractor from '../interactors/updateEventInteractor';
 import { EventEntity } from '../model/EventEntity';
@@ -18,7 +18,7 @@ import { updateEventEntity } from '../model/updateEventEntity';
 import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 
 const repo = new EventRepositoryPrisma();
-const RTErepo = new RoomTimeEventRepositoryPrisma();
+const Schedulerepo = new ScheduleRepositoryPrisma();
 const roomRepo = new RoomRepositoryPrisma();
 
 let testEvent: EventEntity = {
@@ -35,7 +35,7 @@ let testEvent: EventEntity = {
 let newEvent: EventEntity;
 let eventId: string;
 let roomId: string;
-let RTEID: string;
+let ScheduleID: string;
 
 //
 //
@@ -78,8 +78,8 @@ test('Room create', async () => {
 //
 //
 //
-// kreiranje RoomTimeEvent-a u svrhu potpunog testiranja Event CRUD-a
-let testRTE: RoomTimeEventEntity = {
+// kreiranje Schedule-a u svrhu potpunog testiranja Event CRUD-a
+let testSchedule: ScheduleEntity = {
 	id: '',
 	eventId: '',
 	roomId: '',
@@ -87,15 +87,15 @@ let testRTE: RoomTimeEventEntity = {
 	dateEnd: new Date(Date.parse('04 Dec 1995 00:12:00 GMT')),
 	status: 'ACTIVE',
 };
-let newRTE: RoomTimeEventEntity;
-test('Event schedule (create RoomTimeEvent)', async () => {
+let newSchedule: ScheduleEntity;
+test('Event schedule (create Schedule)', async () => {
 	roomId = newRoom.id;
-	newRTE = await createRoomTimeEventInteractor(RTErepo, {
-		...testRTE,
+	newSchedule = await createScheduleInteractor(Schedulerepo, {
+		...testSchedule,
 		eventId: eventId,
 		roomId: roomId,
 	});
-	expect(newRTE).not.toBeNull();
+	expect(newSchedule).not.toBeNull();
 });
 //
 //
@@ -105,21 +105,23 @@ test('Event list', async () => {
 	let izlaz: EventEntity[] = await listEventsInteractor(repo);
 	expect(izlaz).not.toBeNull();
 });
-test('Event list associated RoomTimeEvents', async () => {
-	let izlaz: RoomTimeEventEntity[] =
-		await listAssociatedRoomTimeEventsInteractor(repo, eventId);
+test('Event list associated Schedules', async () => {
+	let izlaz: ScheduleEntity[] = await listAssociatedSchedulesInteractor(
+		repo,
+		eventId
+	);
 	expect(izlaz).not.toBeNull();
 });
 //
 //
 //
 // arhiviranje
-test('RTE archiving before associated Event archiving', async () => {
-	let RTEarchiving: string = await archiveRTEByEventIdInteractor(
+test('Schedule archiving before associated Event archiving', async () => {
+	let Schedulearchiving: string = await archiveScheduleByEventIdInteractor(
 		eventId,
-		RTErepo
+		Schedulerepo
 	);
-	expect(RTEarchiving).not.toBeNull();
+	expect(Schedulearchiving).not.toBeNull();
 });
 test('Event archive', async () => {
 	let newEvent: EventEntity = await archiveEventInteractor(eventId, repo);
@@ -129,14 +131,14 @@ test('Event archive', async () => {
 //
 //
 // brisanje
-// potrebno popravit jer se nemre obrisat Event ako ima RTE, a taj RTE ako ima EUP itd itd, trenutno je potrebno rucno brisat RTE-jeve povezane s Eventom kako bi se mogao izbrisati sami Event
-test('delete RTE created in test', async () => {
-	RTEID = newRTE.id;
-	let deletedRTE: RoomTimeEventEntity = await deleteRoomTimeEventInteractor(
-		RTEID,
-		RTErepo
+// potrebno popravit jer se nemre obrisat Event ako ima Schedule, a taj Schedule ako ima EUP itd itd, trenutno je potrebno rucno brisat Schedule-jeve povezane s Eventom kako bi se mogao izbrisati sami Event
+test('delete Schedule created in test', async () => {
+	ScheduleID = newSchedule.id;
+	let deletedSchedule: ScheduleEntity = await deleteScheduleInteractor(
+		ScheduleID,
+		Schedulerepo
 	);
-	expect(deletedRTE).not.toBeNull();
+	expect(deletedSchedule).not.toBeNull();
 });
 test('Event delete', async () => {
 	let deleteEvent: EventEntity = await deleteEventInteractor(eventId, repo);

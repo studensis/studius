@@ -19,7 +19,7 @@ model User {
   mentorID          String?
   avatar            String?
   enrollment        Enrollment[]
-  eventUserPresence EventUserPresence[]
+  userPresence UserPresence[]
   mentor            User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
   mentee            User[]              @relation("Mentorstvo")
   googleUserId      String?             @unique
@@ -67,7 +67,7 @@ model Enrollment {
   user           User        @relation(fields: [userId], references: [id])
 }
 
-model Seminar {
+model Assignment {
   id          String        @id @default(uuid())
   title       String        @unique
   description String?
@@ -75,7 +75,7 @@ model Seminar {
   contentId   String?
   subjectId   String?
   userId      String?
-  status      SeminarStatus @default(DRAFT)
+  status      AssignmentStatus @default(DRAFT)
 }
 
 model Event {
@@ -85,7 +85,7 @@ model Event {
   linkedEntity   LinkedEntity
   linkedEntityId String
   status         Status          @default(ACTIVE)
-  RoomTimeEvent  RoomTimeEvent[]
+  Schedule  Schedule[]
   PinnedEvent    PinnedEvent[]
 }
 
@@ -101,27 +101,27 @@ model Room {
   id            String          @id @default(uuid())
   title         String          @default("")
   capacity      Int
-  RoomTimeEvent RoomTimeEvent[]
+  Schedule Schedule[]
 }
 
-model RoomTimeEvent {
+model Schedule {
   id                String              @id @default(uuid())
   dateStart         DateTime
   dateEnd           DateTime
   eventId           String
   roomId            String
   status            Status              @default(ACTIVE)
-  EventUserPresence EventUserPresence[]
+  UserPresence UserPresence[]
   event             Event               @relation(fields: [eventId], references: [id])
   room              Room                @relation(fields: [roomId], references: [id])
 }
 
-model EventUserPresence {
+model UserPresence {
   id              String        @id @default(uuid())
   presenceStatus  Boolean
-  roomTimeEventId String
+  scheduleId String
   userId          String
-  roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
   user            User          @relation(fields: [userId], references: [id])
 }
 
@@ -149,7 +149,7 @@ enum Status {
   ARCHIVED
 }
 
-enum SeminarStatus {
+enum AssignmentStatus {
   DRAFT
   CONFIRMED
   READY

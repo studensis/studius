@@ -1,24 +1,27 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import EventUserPresenceRepositoryPrisma from '../../EventUserPresence/repository/EventUserPresenceRepositoryPrisma';
-import archiveRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/archiveRoomTimeEventInteractor';
-import createRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/createRoomTimeEventInteractor';
-import deleteEventUserPresenceByRTEIDInteractor from '../../RoomTimeEvent/interactors/deleteEventUserPresenceByRTEIDInteractor';
-import deleteRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/deleteRoomTimeEventInteractor';
-import getRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/getRoomTimeEventInteractor';
-import listAssociatedEventUserPresencesInteractor from '../../RoomTimeEvent/interactors/listAssociatedEventUserPresencesInteractor';
-import listRoomTimeEventsInteractor from '../../RoomTimeEvent/interactors/listRoomTimeEventsInteractor';
-import updateRoomTimeEventInteractor from '../../RoomTimeEvent/interactors/updateRoomTimeEventInteractor';
-import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
-import { updateRoomTimeEventEntity } from '../../RoomTimeEvent/model/updateRoomTimeEventEntity';
-import RoomTimeEventRepositoryPrisma from '../../RoomTimeEvent/repository/RoomTimeEventRepositoryPrisma';
+import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
+import archiveScheduleInteractor from '../../Schedule/interactors/archiveScheduleInteractor';
+import createScheduleInteractor from '../../Schedule/interactors/createScheduleInteractor';
+import deleteScheduleInteractor from '../../Schedule/interactors/deleteScheduleInteractor';
+import deleteUserPresenceByScheduleIDInteractor from '../../Schedule/interactors/deleteUserPresenceByScheduleIdInteractor';
+import getScheduleInteractor from '../../Schedule/interactors/getScheduleInteractor';
+import listAssociatedUserPresencesInteractor from '../../Schedule/interactors/listAssociatedUserPresencesInteractor';
+import listSchedulesInteractor from '../../Schedule/interactors/listSchedulesInteractor';
+import updateScheduleInteractor from '../../Schedule/interactors/updateScheduleInteractor';
+import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
+import { updateScheduleEntity } from '../../Schedule/model/updateScheduleEntity';
+import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
+import UserPresenceRepositoryPrisma from '../../UserPresence/repository/UserPresenceRepositoryPrisma';
 import archiveEventInteractor from '../interactors/archiveEventInteractor';
-import archiveRTEByEventIdInteractor from '../interactors/archiveRTEByEventIdInteractor';
+import archiveScheduleByEventIdInteractor from '../interactors/archiveScheduleByEventIdInteractor';
 import createEventInteractor from '../interactors/createEventInteractor';
 import deleteEventInteractor from '../interactors/deleteEventInteractor';
+import deletePinnedEventByEventIdInteractor from '../interactors/deletePinnedEventByEventIdInteractor';
+import deleteScheduleByEventIdInteractor from '../interactors/deleteScheduleByEventIdInteractor';
 import getEventInteractor from '../interactors/getEventInteractor';
-import listAssociatedRoomTimeEventsInteractor from '../interactors/listAssociatedRoomTimeEventsInteractor';
+import listAssociatedSchedulesInteractor from '../interactors/listAssociatedSchedulesInteractor';
 import listEventsInteractor from '../interactors/listEventsInteractor';
 import updateEventInteractor from '../interactors/updateEventInteractor';
 import { EventEntity } from '../model/EventEntity';
@@ -26,8 +29,9 @@ import { updateEventEntity } from '../model/updateEventEntity';
 import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 
 let repo = new EventRepositoryPrisma();
-let RTErepo = new RoomTimeEventRepositoryPrisma();
-let EUPrepo = new EventUserPresenceRepositoryPrisma();
+let Schedulerepo = new ScheduleRepositoryPrisma();
+let EUPrepo = new UserPresenceRepositoryPrisma();
+let pinnedEventRepo = new PinnedEventRepositoryPrisma();
 
 export default t.router({
 	createEvent: t.procedure
@@ -54,6 +58,11 @@ export default t.router({
 		.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
+			let b = await deleteScheduleByEventIdInteractor(input, Schedulerepo);
+			let c = await deletePinnedEventByEventIdInteractor(
+				input,
+				pinnedEventRepo
+			);
 			let a = await deleteEventInteractor(input, repo);
 			return a;
 		}),
@@ -87,14 +96,14 @@ export default t.router({
 		.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let b = await archiveRTEByEventIdInteractor(input, RTErepo);
+			let b = await archiveScheduleByEventIdInteractor(input, Schedulerepo);
 			let a = await archiveEventInteractor(input, repo);
 			return a;
 		}),
 	//
 	//
 	//
-	//	RoomTimeEvent CRUD
+	//	Schedule CRUD
 	//
 	//
 	//
@@ -110,7 +119,7 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let roomTimeEvent: RoomTimeEventEntity = {
+			let schedule: ScheduleEntity = {
 				...input,
 				id: '',
 				dateStart: new Date(Date.parse(input.dateStart)),
@@ -119,19 +128,16 @@ export default t.router({
 				roomId: input.roomId,
 				status: input.status,
 			};
-			let newRoomTimeEvent = await createRoomTimeEventInteractor(
-				RTErepo,
-				roomTimeEvent
-			);
-			return newRoomTimeEvent;
+			let newSchedule = await createScheduleInteractor(Schedulerepo, schedule);
+			return newSchedule;
 		}),
 
 	deleteSchedule: t.procedure
 		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let b = await deleteEventUserPresenceByRTEIDInteractor(input, EUPrepo);
-			let a = await deleteRoomTimeEventInteractor(input, RTErepo);
+			let b = await deleteUserPresenceByScheduleIDInteractor(input, EUPrepo);
+			let a = await deleteScheduleInteractor(input, Schedulerepo);
 			return a;
 		}),
 
@@ -139,26 +145,23 @@ export default t.router({
 		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let a = await archiveRoomTimeEventInteractor(input, RTErepo);
+			let a = await archiveScheduleInteractor(input, Schedulerepo);
 			return a;
 		}),
 
 	getSchedule: t.procedure.input(z.string()).query(async ({ input }) => {
-		let roomTimeEvent = await getRoomTimeEventInteractor(RTErepo, input);
-		return roomTimeEvent;
+		let schedule = await getScheduleInteractor(Schedulerepo, input);
+		return schedule;
 	}),
 
 	listAllSchedules: t.procedure.query(async () => {
-		let roomTimeEvents = await listRoomTimeEventsInteractor(RTErepo);
-		return roomTimeEvents;
+		let schedules = await listSchedulesInteractor(Schedulerepo);
+		return schedules;
 	}),
 
 	listSchedules: t.procedure.input(z.string()).query(async ({ input }) => {
-		let roomTimeEvent = await listAssociatedRoomTimeEventsInteractor(
-			repo,
-			input
-		);
-		return roomTimeEvent;
+		let schedule = await listAssociatedSchedulesInteractor(repo, input);
+		return schedule;
 	}),
 
 	updateSchedule: t.procedure
@@ -173,7 +176,7 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let roomTimeEvent: updateRoomTimeEventEntity = {
+			let schedule: updateScheduleEntity = {
 				...input,
 				dateStart: input.dateStart
 					? new Date(Date.parse(input.dateStart))
@@ -185,20 +188,20 @@ export default t.router({
 				roomId: input.roomId,
 				status: input.status,
 			};
-			let updatedRoomTimeEvent = await updateRoomTimeEventInteractor(
-				RTErepo,
-				roomTimeEvent
+			let updatedSchedule = await updateScheduleInteractor(
+				Schedulerepo,
+				schedule
 			);
-			return updatedRoomTimeEvent;
+			return updatedSchedule;
 		}),
 
-	listAssociatedEventUserPresences: t.procedure
+	listAssociatedUserPresences: t.procedure
 		.input(z.string())
 		.query(async ({ input }) => {
-			let eventUserPresences = await listAssociatedEventUserPresencesInteractor(
-				RTErepo,
+			let userPresences = await listAssociatedUserPresencesInteractor(
+				Schedulerepo,
 				input
 			);
-			return eventUserPresences;
+			return userPresences;
 		}),
 });

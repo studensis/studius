@@ -46,9 +46,7 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 		if (data) {
 			let subject: SubjectEntity = data;
 			return subject;
-		} else {
-			return null;
-		}
+		} else throw Error('no data');
 	}
 
 	async create(subject: SubjectEntity) {
