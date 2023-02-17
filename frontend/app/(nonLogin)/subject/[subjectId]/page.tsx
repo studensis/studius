@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
+import useDialog from '../../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../../components/@studius/PageElements/Block';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
 import { PageStack } from '../../../../components/@studius/PageElements/Stack';
@@ -10,6 +11,7 @@ import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 import EnrollSection from './EnrollSection';
+import { EnrollUsersModal } from './EnrollUsersModal';
 import { PinnedEvents } from './PinnedEvents';
 import UserList from './UserList';
 
@@ -41,6 +43,8 @@ function SubjectPage(props: PageProps) {
 	const { user } = useLogin();
 	const [enrollmentPage, setEnrollmentPage] = useState(false);
 
+	const { setModal } = useDialog();
+
 	return (
 		<>
 			<PageStack>
@@ -58,7 +62,13 @@ function SubjectPage(props: PageProps) {
 									{user?.role !== 'DEFAULT' && (
 										<Button
 											onClick={() => {
-												setEnrollmentPage(!enrollmentPage);
+												setModal(
+													<EnrollUsersModal
+														enrollmentPage={enrollmentPage}
+														setEnrollmentPage={setEnrollmentPage}
+														subjectId={props.params.subjectId}
+													/>
+												);
 											}}
 											className="m-5 mb-8"
 										>
