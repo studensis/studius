@@ -5,7 +5,5 @@ export default async function listAssociatedSchedulesInteractor(
 	subjectId: string
 ) {
 	let pinnedEvents = await pinnedEventRepo.getBySubjectId(subjectId);
-	if (pinnedEvents) {
-		return pinnedEvents;
-	} else throw new Error('no data');
+	return pinnedEvents;
 }

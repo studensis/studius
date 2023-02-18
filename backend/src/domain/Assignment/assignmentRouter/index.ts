@@ -75,7 +75,7 @@ export default t.router({
 				userId: input.userId,
 				status: input.status,
 			};
-			let response = await updateAssignmentInteractor(repo, input);
+			let response = await updateAssignmentInteractor(repo, updatedAssignment);
 			return response;
 		}),
 
