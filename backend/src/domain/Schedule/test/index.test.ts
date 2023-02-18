@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import createEventInteractor from '../../Event/interactors/createEventInteractor';
 import deleteEventInteractor from '../../Event/interactors/deleteEventInteractor';
@@ -17,7 +18,7 @@ import UserPresenceRepositoryPrisma from '../../UserPresence/repository/UserPres
 import archiveScheduleInteractor from '../interactors/archiveScheduleInteractor';
 import createScheduleInteractor from '../interactors/createScheduleInteractor';
 import deleteScheduleInteractor from '../interactors/deleteScheduleInteractor';
-import deleteUserPresenceByScheduleIDInteractor from '../interactors/deleteUserPresenceByScheduleIDInteractor';
+import deleteUserPresenceByScheduleIdInteractor from '../interactors/deleteUserPresenceByScheduleIdInteractor';
 import getScheduleInteractor from '../interactors/getScheduleInteractor';
 import listAssociatedUserPresencesInteractor from '../interactors/listAssociatedUserPresencesInteractor';
 import updateScheduleInteractor from '../interactors/updateScheduleInteractor';
@@ -167,10 +168,8 @@ test('Schedule list associated UserPresences', async () => {
 // interaktor ispod obicno koristen automatski prije brisanja bilokojeg Schedule-a
 test('delete UserPresences associated to tested Schedule', async () => {
 	ScheduleID = newSchedule.id;
-	let EUPs: string = await deleteUserPresenceByScheduleIDInteractor(
-		ScheduleID,
-		EUPrepo
-	);
+	let EUPs: Prisma.BatchPayload =
+		await deleteUserPresenceByScheduleIdInteractor(ScheduleID, EUPrepo);
 	expect(EUPs).not.toBeNull();
 });
 //

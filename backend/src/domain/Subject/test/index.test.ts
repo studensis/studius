@@ -14,7 +14,7 @@ import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
-import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
+import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -139,7 +139,7 @@ test('PinnedEvent create', async () => {
 });
 test('PinnedEvents get', async () => {
 	subjectId = newSubject.id;
-	let izlaz: PinnedEventEntity[] = await listPinnedEventsInteractor(
+	let izlaz: PinnedEventEntity[] = await listPinnedEventsBySubjectIdInteractor(
 		pinnedEventRepo,
 		subjectId
 	);
