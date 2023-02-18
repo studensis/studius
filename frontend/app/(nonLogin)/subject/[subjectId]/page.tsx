@@ -87,10 +87,12 @@ function SubjectPage(props: PageProps) {
 								roleTitle="PROFESSOR"
 								subjectId={props.params.subjectId}
 							/>
-							<UserList
-								roleTitle="STUDENT"
-								subjectId={props.params.subjectId}
-							/>
+							{user?.role !== 'DEFAULT' && (
+								<UserList
+									roleTitle="STUDENT"
+									subjectId={props.params.subjectId}
+								/>
+							)}
 							<UserList
 								roleTitle="ASSISTANT"
 								subjectId={props.params.subjectId}
