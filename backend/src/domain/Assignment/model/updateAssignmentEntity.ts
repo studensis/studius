@@ -3,7 +3,7 @@ import { AssignmentStatus, AssignmentType, Status } from '@prisma/client';
 export type updateAssignmentEntity = {
 	id: string;
 	title?: string;
-	description: string;
+	description?: string;
 	mentorId?: string; // Number ????
 	type?: AssignmentType;
 	deadline?: Date | null;

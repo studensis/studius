@@ -14,7 +14,9 @@ let testAssignment: AssignmentEntity = {
 		.toString('base64')
 		.substring(5, 15),
 	description: '',
-	status: 'DRAFT',
+	assignmentStatus: 'DRAFT',
+	type: 'SEMINAR',
+	status: 'ACTIVE',
 };
 let newAssignment: AssignmentEntity;
 let id: string;
