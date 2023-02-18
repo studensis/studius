@@ -1,11 +1,14 @@
-import { AssignmentStatus } from '@prisma/client';
+import { AssignmentStatus, AssignmentType, Status } from '@prisma/client';
 export type AssignmentEntity = {
 	id: string;
 	title: string;
-	description?: string | null;
+	description: string;
 	mentorId?: string | null; // Number ????
 	contentId?: string | null; // Content
 	subjectId?: string | null; // Subject
+	deadline?: Date | null;
+	type: AssignmentType;
 	userId?: string | null;
-	status?: AssignmentStatus;
+	assignmentStatus?: AssignmentStatus;
+	status: Status;
 };

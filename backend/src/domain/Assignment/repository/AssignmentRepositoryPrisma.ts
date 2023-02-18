@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { approvedAssignmentEntity } from '../model/approvedAssignmentEntity';
 import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 import { AssignmentRepository } from './AssignmentRepository';
@@ -46,8 +45,12 @@ export default class AssignmentRepositoryPrisma extends AssignmentRepository {
 		if (assignmentData.userId)
 			updatedAssignment['userId'] = assignmentData.userId;
 		if (assignmentData.status)
+			updatedAssignment['assignmentStatus'] = assignmentData.assignmentStatus;
+		if (assignmentData.status)
 			updatedAssignment['status'] = assignmentData.status;
-
+		if (assignmentData.type) updatedAssignment['type'] = assignmentData.type;
+		if (assignmentData.deadline)
+			updatedAssignment['deadline'] = assignmentData.deadline;
 		let updatedData = await prisma.assignment.update({
 			where: {
 				id: assignmentData.id,
@@ -59,7 +62,10 @@ export default class AssignmentRepositoryPrisma extends AssignmentRepository {
 				contentId: updatedAssignment.contentId,
 				subjectId: updatedAssignment.subjectId,
 				userId: updatedAssignment.userId,
+				assignmentStatus: updatedAssignment.assignmentStatus,
 				status: updatedAssignment.status,
+				type: updatedAssignment.type,
+				deadline: updatedAssignment.deadline,
 			},
 		});
 		let rez: AssignmentEntity = updatedData;
@@ -77,6 +83,9 @@ export default class AssignmentRepositoryPrisma extends AssignmentRepository {
 				contentId: assignment.contentId,
 				subjectId: assignment.subjectId,
 				userId: assignment.userId,
+				type: assignment.type,
+				status: assignment.status,
+				deadline: assignment.deadline,
 			},
 		});
 
@@ -102,11 +111,11 @@ export default class AssignmentRepositoryPrisma extends AssignmentRepository {
 				id: id,
 			},
 			data: {
-				status: 'CONFIRMED',
+				assignmentStatus: 'CONFIRMED',
 			},
 		});
 
-		let rez: approvedAssignmentEntity = change;
+		let rez: AssignmentEntity = change;
 		return rez;
 	}
 }

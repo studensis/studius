@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { t } from '../../../controllers/trpc';
 import approveAssignmentInteractor from '../interactors/approveAssignmentInteractor';
+import approveSeminarInteractor from '../interactors/approveSeminarInteractor';
 import createAssignmentInteractor from '../interactors/createAssignmentInteractor';
 import deleteAssignmentInteractor from '../interactors/deleteAssignmentInteractor';
 import getAssignmentInteractor from '../interactors/getAssignmentInteractor';
@@ -18,12 +19,15 @@ export default t.router({
 		.input(
 			z.object({
 				title: z.string(),
-				description: z.string().optional(),
+				description: z.string(),
 				mentorId: z.string().optional(),
 				contentId: z.string().optional(),
 				subjectId: z.string().optional(),
 				userId: z.string().optional(),
-				status: z.enum(['DRAFT', 'CONFIRMED']).optional(),
+				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']),
+				assignmentStatus: z.enum(['DRAFT', 'READY', 'CONFIRMED']).optional(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']),
+				deadline: z.string(),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -36,7 +40,10 @@ export default t.router({
 				contentId: input.contentId,
 				subjectId: input.subjectId,
 				userId: input.userId,
+				assignmentStatus: input.assignmentStatus,
 				status: input.status,
+				type: input.type,
+				deadline: new Date(input.deadline),
 			};
 
 			let newAssignment = await createAssignmentInteractor(repo, assignment);
@@ -55,12 +62,15 @@ export default t.router({
 			z.object({
 				id: z.string(),
 				title: z.string().optional(),
-				description: z.string().optional(),
+				description: z.string(),
 				mentorId: z.string().optional(),
 				contentId: z.string().optional(),
 				subjectId: z.string().optional(),
 				userId: z.string().optional(),
-				status: z.enum(['DRAFT', 'CONFIRMED', 'READY']).optional(),
+				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']),
+				assignmentStatus: z.enum(['DRAFT', 'CONFIRMED', 'READY']).optional(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']),
+				deadline: z.string(),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -74,8 +84,9 @@ export default t.router({
 				subjectId: input.subjectId,
 				userId: input.userId,
 				status: input.status,
+				deadline: new Date(input.deadline),
 			};
-			let response = await updateAssignmentInteractor(repo, input);
+			let response = await updateAssignmentInteractor(repo, updatedAssignment);
 			return response;
 		}),
 
@@ -101,7 +112,7 @@ export default t.router({
 		return response;
 	}),
 
-	approveAssignment: t.procedure
+	approveSeminar: t.procedure
 		.input(
 			z.object({
 				assignmentId: z.string(),
@@ -116,7 +127,14 @@ export default t.router({
 				dateStart: new Date(input.dateStart),
 				dateEnd: new Date(input.dateEnd),
 			};
-			let rez = await approveAssignmentInteractor(repo, a);
+			let rez = await approveSeminarInteractor(repo, a);
+			return rez;
+		}),
+
+	approveAssignment: t.procedure
+		.input(z.string())
+		.mutation(async ({ input }) => {
+			let rez = await approveAssignmentInteractor(repo, input);
 			return rez;
 		}),
 });

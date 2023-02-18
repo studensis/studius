@@ -6,7 +6,7 @@ export default async function createAssignmentInteractor(
 	assignmentRepository: AssignmentRepository,
 	assignment: AssignmentEntity
 ) {
-	if (!assignment.title || !assignment.description || assignment.mentorId) {
+	if (!assignment.title || !assignment.description || !assignment.type) {
 		throw new TRPCError({
 			code: 'BAD_REQUEST',
 			message: 'Nepotpuni podaci',
