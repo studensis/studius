@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import createRoomInteractor from '../../Room/interactors/createRoomInteractor';
 import { RoomEntity } from '../../Room/model/RoomEntity';
 import RoomRepositoryPrisma from '../../Room/repository/RoomRepositoryPrisma';
@@ -117,10 +118,8 @@ test('Event list associated Schedules', async () => {
 //
 // arhiviranje
 test('Schedule archiving before associated Event archiving', async () => {
-	let Schedulearchiving: string = await archiveScheduleByEventIdInteractor(
-		eventId,
-		Schedulerepo
-	);
+	let Schedulearchiving: Prisma.BatchPayload =
+		await archiveScheduleByEventIdInteractor(eventId, Schedulerepo);
 	expect(Schedulearchiving).not.toBeNull();
 });
 test('Event archive', async () => {

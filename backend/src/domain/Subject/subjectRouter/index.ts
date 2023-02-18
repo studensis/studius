@@ -16,9 +16,9 @@ import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteEnrollmentBySubjectIdInteractor from '../interactors/deleteEnrollmentBySubjectIdInteractor';
 import deletePinnedEventBySubjectIdInteractor from '../interactors/deletePinnedEventBySubjectIdInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
-import getPinnedEventBySubjectIdInteractor from '../interactors/getPinnedEventBySubjectIdInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
+import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -149,7 +149,7 @@ export default t.router({
 	getPinnedEvents: publicProcedure
 		.input(z.string())
 		.query(async ({ input }) => {
-			let pinnedEvents = await getPinnedEventBySubjectIdInteractor(
+			let pinnedEvents = await listPinnedEventsBySubjectIdInteractor(
 				pinnedEventRepo,
 				input
 			);
