@@ -1,7 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../../components/@studius/PageElements/Block';
@@ -14,6 +13,7 @@ import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 import { UpdateSubjectModal } from '../UpdateSubjectModal';
 import EnrollSection from './EnrollSection';
+import { EnrollUsersModal } from './EnrollUsersModal';
 import { PinnedEvents } from './PinnedEvents';
 import UserList from './UserList';
 
@@ -46,25 +46,8 @@ function SubjectPage(props: PageProps) {
 	});
 	const [enrollmentPage, setEnrollmentPage] = useState(false);
 
-	const deleteSubject = trpc.subject.deleteSubjectById.useMutation();
-	const updateSubject = trpc.subject.updateSubjectById.useMutation();
-
-	const { user } = useLogin();
-	const router = useRouter();
-	const { refetch } = useLogin();
 	const { setModal } = useDialog();
-
-	useEffect(() => {
-		if (deleteSubject.status === 'success') {
-			router.push('/subject');
-		}
-	}, [deleteSubject]);
-
-	useEffect(() => {
-		if (updateSubject.status === 'success') {
-			refetch();
-		}
-	}, [updateSubject]);
+	const { user } = useLogin();
 
 	return (
 		<>
@@ -118,24 +101,20 @@ function SubjectPage(props: PageProps) {
 									)}
 
 									{user?.role !== 'DEFAULT' && (
-										<>
-											<Button
-												onClick={() => {
-													setEnrollmentPage(!enrollmentPage);
-												}}
-												className="m-5 mb-8"
-											>
-												Enroll Users
-											</Button>
-											<Button
-												onClick={() => {
-													deleteSubject.mutate(props.params.subjectId);
-												}}
-												className="m-5 mb-8"
-											>
-												Delete Subject
-											</Button>
-										</>
+										<Button
+											onClick={() => {
+												setModal(
+													<EnrollUsersModal
+														enrollmentPage={enrollmentPage}
+														setEnrollmentPage={setEnrollmentPage}
+														subjectId={props.params.subjectId}
+													/>
+												);
+											}}
+											className="m-5 mb-8"
+										>
+											Enroll Users
+										</Button>
 									)}
 								</div>
 							}
@@ -149,7 +128,7 @@ function SubjectPage(props: PageProps) {
 							/>
 						)}
 
-						{deleteSubject.isSuccess && (
+						{/* {deleteSubject.isSuccess && (
 							<Block>
 								<pre>{JSON.stringify(deleteSubject.data)}</pre>
 							</Block>
@@ -160,7 +139,7 @@ function SubjectPage(props: PageProps) {
 									{JSON.stringify(deleteSubject.error.shape?.message, null, 2)}
 								</pre>
 							</Block>
-						)}
+						)} */}
 
 						<PinnedEvents subjectId={props.params.subjectId} />
 
