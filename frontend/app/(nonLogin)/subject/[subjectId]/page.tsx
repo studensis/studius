@@ -100,7 +100,7 @@ function SubjectPage(props: PageProps) {
 										</>
 									)}
 
-									{user?.role !== 'DEFAULT' && (
+									{(user?.role == 'ADMIN' || user?.role == 'SUPERADMIN') && (
 										<Button
 											onClick={() => {
 												setModal(

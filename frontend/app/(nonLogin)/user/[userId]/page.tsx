@@ -87,7 +87,8 @@ export default function UserPage(props: PageProps) {
 						actionRow={
 							<>
 								<div className="flex flex-row gap-2">
-									{sessionUser?.role !== 'DEFAULT' && (
+									{(sessionUser?.role == 'ADMIN' ||
+										sessionUser?.role == 'SUPERADMIN') && (
 										<Button
 											onClick={() => {
 												deleteUser.mutate(props.params.userId);
