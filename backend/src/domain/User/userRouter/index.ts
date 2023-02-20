@@ -10,6 +10,7 @@ import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
 import getUserInteractor from '../interactors/getUserInteractor';
+import isUserEnrolledInteractor from '../interactors/isUserEnrolledInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
 import listMenteesInteractor from '../interactors/listMenteeInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
@@ -106,20 +107,32 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let enrollment: EnrollmentEntity = {
-				...input,
-				id: undefined,
-				userId: input.userId,
-				subjectId: input.subjectId,
-				enrollmentDate: input.enrollmentDate || null,
-				roleTitle: input.roleTitle,
-				status: input.status,
-			};
-			let newEnrollment = await enrollUserInteractor(
-				enrollment,
-				enrollmentRepo
+			let enrollmentExists: boolean = await isUserEnrolledInteractor(
+				enrollmentRepo,
+				input.userId,
+				input.subjectId
 			);
-			return newEnrollment;
+
+			if (enrollmentExists)
+				throw new Error(
+					'This User already has an ACTIVE Enrollment with this Subject'
+				);
+			else {
+				let enrollment: EnrollmentEntity = {
+					...input,
+					id: undefined,
+					userId: input.userId,
+					subjectId: input.subjectId,
+					enrollmentDate: input.enrollmentDate || null,
+					roleTitle: input.roleTitle,
+					status: input.status,
+				};
+				let newEnrollment = await enrollUserInteractor(
+					enrollment,
+					enrollmentRepo
+				);
+				return newEnrollment;
+			}
 		}),
 
 	getEnrolledSubjects: publicProcedure
