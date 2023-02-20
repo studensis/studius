@@ -161,4 +161,14 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 
 		return deletedEnrollments;
 	}
+
+	async deleteSubjectEnrollments(subjectId: string) {
+		let deletedEnrollments = await prisma.enrollment.deleteMany({
+			where: {
+				subjectId: subjectId,
+			},
+		});
+
+		return deletedEnrollments;
+	}
 }

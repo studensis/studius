@@ -191,7 +191,7 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 	}, [selectedYear, selectedMonth, selectedDay]);
 
 	return (
-		<>
+		<div>
 			<Block>
 				<div className="flex justify-between items-center mb-2">
 					<span className="title1">
@@ -324,6 +324,6 @@ export const Calendar = ({ events }: { events: CalendarEvent[] }) => {
 					</Block>
 				</Link>
 			))}
-		</>
+		</div>
 	);
 };

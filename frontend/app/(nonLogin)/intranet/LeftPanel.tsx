@@ -19,6 +19,7 @@ export const LeftPanel = () => {
 						events={events.data.map((event) => {
 							return {
 								title: event.event.title,
+
 								timeDateUnix: new Date(event.dateStart).getTime(),
 								id: event.id,
 							};

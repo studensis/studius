@@ -74,7 +74,7 @@ CREATE TABLE "Enrollment" (
 );
 
 -- CreateTable
-CREATE TABLE "Seminar" (
+CREATE TABLE "Assignment" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE "Seminar" (
     "subjectId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
 
-    CONSTRAINT "Seminar_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Assignment_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -99,12 +99,12 @@ CREATE TABLE "Event" (
 );
 
 -- CreateTable
-CREATE TABLE "SeminarSuggestion" (
+CREATE TABLE "PinnedEvent" (
     "id" TEXT NOT NULL,
-    "seminarId" TEXT NOT NULL,
+    "assignmentId" TEXT NOT NULL,
     "subjectId" TEXT NOT NULL,
 
-    CONSTRAINT "SeminarSuggestion_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PinnedEvent_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -116,24 +116,24 @@ CREATE TABLE "Room" (
 );
 
 -- CreateTable
-CREATE TABLE "RoomTimeEvent" (
+CREATE TABLE "Schedule" (
     "id" TEXT NOT NULL,
     "dateStart" TIMESTAMP(3) NOT NULL,
     "dateEnd" TIMESTAMP(3) NOT NULL,
     "eventId" TEXT NOT NULL,
     "roomId" TEXT NOT NULL,
 
-    CONSTRAINT "RoomTimeEvent_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Schedule_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "EventUserPresence" (
+CREATE TABLE "UserPresence" (
     "id" TEXT NOT NULL,
     "presenceStatus" BOOLEAN NOT NULL,
-    "roomTimeEventId" TEXT NOT NULL,
+    "scheduleId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
 
-    CONSTRAINT "EventUserPresence_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "UserPresence_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -158,7 +158,7 @@ ALTER TABLE "Enrollment" ADD CONSTRAINT "Enrollment_userId_fkey" FOREIGN KEY ("u
 ALTER TABLE "Enrollment" ADD CONSTRAINT "Enrollment_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "EventUserPresence" ADD CONSTRAINT "EventUserPresence_roomTimeEventId_fkey" FOREIGN KEY ("roomTimeEventId") REFERENCES "RoomTimeEvent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserPresence" ADD CONSTRAINT "UserPresence_scheduleId_fkey" FOREIGN KEY ("scheduleId") REFERENCES "Schedule"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "EventUserPresence" ADD CONSTRAINT "EventUserPresence_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserPresence" ADD CONSTRAINT "UserPresence_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -9,20 +9,20 @@ datasource db {
 }
 
 model User {
-  id                String              @id @default(uuid())
-  password          String
-  firstname         String
-  lastname          String
-  jmbag             String?             @unique
-  email             String              @unique
-  userRole          Role
-  mentorID          String?
-  avatar            String?
-  enrollment        Enrollment[]
-  eventUserPresence EventUserPresence[]
-  mentor            User?               @relation("Mentorstvo", fields: [mentorID], references: [id])
-  mentee            User[]              @relation("Mentorstvo")
-  googleUserId      String?             @unique
+  id           String         @id @default(uuid())
+  password     String
+  firstname    String
+  lastname     String
+  jmbag        String?        @unique
+  email        String         @unique
+  userRole     Role
+  mentorID     String?
+  avatar       String?
+  enrollment   Enrollment[]
+  userPresence UserPresence[]
+  mentor       User?          @relation("Mentorstvo", fields: [mentorID], references: [id])
+  mentee       User[]         @relation("Mentorstvo")
+  googleUserId String?        @unique
 }
 
 model Subject {
@@ -67,25 +67,28 @@ model Enrollment {
   user           User        @relation(fields: [userId], references: [id])
 }
 
-model Seminar {
-  id          String        @id @default(uuid())
-  title       String        @unique
-  description String?
-  mentorId    String?
-  contentId   String?
-  subjectId   String?
-  userId      String?
-  status      SeminarStatus @default(DRAFT)
+model Assignment {
+  id               String           @id @default(uuid())
+  title            String           @unique
+  description      String
+  mentorId         String?
+  contentId        String?
+  subjectId        String?
+  userId           String?
+  deadline         DateTime?
+  type             AssignmentType   @default(HOMEWORK)
+  assignmentStatus AssignmentStatus @default(DRAFT)
+  status           Status           @default(ACTIVE)
 }
 
 model Event {
-  id             String          @id @default(uuid())
+  id             String        @id @default(uuid())
   title          String
   description    String
   linkedEntity   LinkedEntity
   linkedEntityId String
-  status         Status          @default(ACTIVE)
-  RoomTimeEvent  RoomTimeEvent[]
+  status         Status        @default(ACTIVE)
+  Schedule       Schedule[]
   PinnedEvent    PinnedEvent[]
 }
 
@@ -98,31 +101,31 @@ model PinnedEvent {
 }
 
 model Room {
-  id            String          @id @default(uuid())
-  title         String          @default("")
-  capacity      Int
-  RoomTimeEvent RoomTimeEvent[]
+  id       String     @id @default(uuid())
+  title    String     @default("")
+  capacity Int
+  Schedule Schedule[]
 }
 
-model RoomTimeEvent {
-  id                String              @id @default(uuid())
-  dateStart         DateTime
-  dateEnd           DateTime
-  eventId           String
-  roomId            String
-  status            Status              @default(ACTIVE)
-  EventUserPresence EventUserPresence[]
-  event             Event               @relation(fields: [eventId], references: [id])
-  room              Room                @relation(fields: [roomId], references: [id])
+model Schedule {
+  id           String         @id @default(uuid())
+  dateStart    DateTime
+  dateEnd      DateTime
+  eventId      String
+  roomId       String
+  status       Status         @default(ACTIVE)
+  UserPresence UserPresence[]
+  event        Event          @relation(fields: [eventId], references: [id])
+  room         Room           @relation(fields: [roomId], references: [id])
 }
 
-model EventUserPresence {
-  id              String        @id @default(uuid())
-  presenceStatus  Boolean
-  roomTimeEventId String
-  userId          String
-  roomTimeEvent   RoomTimeEvent @relation(fields: [roomTimeEventId], references: [id])
-  user            User          @relation(fields: [userId], references: [id])
+model UserPresence {
+  id             String   @id @default(uuid())
+  presenceStatus Boolean
+  scheduleId     String
+  userId         String
+  schedule       Schedule @relation(fields: [scheduleId], references: [id])
+  user           User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
@@ -149,7 +152,7 @@ enum Status {
   ARCHIVED
 }
 
-enum SeminarStatus {
+enum AssignmentStatus {
   DRAFT
   CONFIRMED
   READY
@@ -160,4 +163,10 @@ enum LinkedEntity {
   SUBJECT
   SEMINAR
   POST
+}
+
+enum AssignmentType {
+  SEMINAR
+  HOMEWORK
+  PRACTICAL
 }

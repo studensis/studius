@@ -26,7 +26,7 @@ type PageProps = {
 	};
 };
 
-export default function SubjectPage(props: PageProps) {
+export default function UserPage(props: PageProps) {
 	const router = useRouter();
 	const user = trpc.user.getUserById.useQuery(props.params.userId, {
 		refetchInterval: 10000,

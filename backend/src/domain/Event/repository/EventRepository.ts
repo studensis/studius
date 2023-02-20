@@ -1,4 +1,4 @@
-import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
+import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
 
@@ -21,9 +21,7 @@ export abstract class EventRepository {
 	async archive(eventId: string): Promise<EventEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async listAssociatedRoomTimeEvents(
-		id: string
-	): Promise<RoomTimeEventEntity[]> {
+	async listAssociatedSchedules(id: string): Promise<ScheduleEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 }

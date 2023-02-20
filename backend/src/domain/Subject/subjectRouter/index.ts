@@ -7,19 +7,18 @@ import {
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
-import listAssociatedRoomTimeEventsInteractor from '../../Event/interactors/listAssociatedRoomTimeEventsInteractor';
-import { EventEntity } from '../../Event/model/EventEntity';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
-import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
-import SeminarSuggestionRepositoryPrisma from '../../SeminarSuggestion/repository/SeminarSuggestionRepositoryPrisma';
+import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
 import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
 import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
+import deleteEnrollmentBySubjectIdInteractor from '../interactors/deleteEnrollmentBySubjectIdInteractor';
+import deletePinnedEventBySubjectIdInteractor from '../interactors/deletePinnedEventBySubjectIdInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
-import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
+import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -28,7 +27,7 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
-let seminarSuggestionRepo = new SeminarSuggestionRepositoryPrisma();
+let pinnedEventRepo = new PinnedEventRepositoryPrisma();
 let eventRepo = new EventRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
@@ -80,6 +79,14 @@ export default t.router({
 	deleteSubjectById: adminProcedure
 		.input(z.string())
 		.mutation(async ({ input }) => {
+			let b = await deleteEnrollmentBySubjectIdInteractor(
+				input,
+				enrollmentRepo
+			);
+			let c = await deletePinnedEventBySubjectIdInteractor(
+				input,
+				pinnedEventRepo
+			);
 			let a = await deleteSubjectInteractor(input, repo);
 			return a;
 		}),
@@ -136,40 +143,16 @@ export default t.router({
 				enrollmentRepo,
 				input
 			);
-			// console.log(enrolledUsers);
 			return enrolledUsers;
 		}),
 
-	getPinnedSchedules: publicProcedure
+	getPinnedEvents: publicProcedure
 		.input(z.string())
 		.query(async ({ input }) => {
-			console.log('pinnedEvents');
-			let pinnedEvents = await listPinnedEventsInteractor(
-				seminarSuggestionRepo,
+			let pinnedEvents = await listPinnedEventsBySubjectIdInteractor(
+				pinnedEventRepo,
 				input
 			);
-			console.log(pinnedEvents);
-
-			let pinnedEventSchedules: (RoomTimeEventEntity & {
-				event: EventEntity;
-			})[] = [];
-
-			await Promise.all(
-				pinnedEvents.map(async (pinnedEvent) => {
-					let eventSchedules = await listAssociatedRoomTimeEventsInteractor(
-						eventRepo,
-						pinnedEvent.eventId
-					);
-					console.log(pinnedEvent.eventId);
-					console.log(eventSchedules);
-					eventSchedules.forEach((eventSchedule) => {
-						pinnedEventSchedules.push({
-							...eventSchedule,
-							event: pinnedEvent.event,
-						});
-					});
-				})
-			);
-			return pinnedEventSchedules;
+			return pinnedEvents;
 		}),
 });

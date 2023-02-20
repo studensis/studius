@@ -70,6 +70,7 @@ export default function MainSidebar() {
 						onClick={() => {
 							logout();
 							setSidebar(null);
+							router.push('/login');
 						}}
 					/>
 				</>

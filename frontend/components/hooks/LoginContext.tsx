@@ -11,6 +11,7 @@ type User = {
 interface ILoginContext {
 	loggedIn: boolean;
 	user: User | null;
+	enrollments: { subjectId: string; roleTitle: string }[];
 	login: (input: { email: string; password: string }) => void;
 	logout: () => void;
 	refetch: () => void;
@@ -20,6 +21,7 @@ interface ILoginContext {
 const LoginContext = createContext<ILoginContext>({
 	loggedIn: false,
 	user: null,
+	enrollments: [],
 	login: (input: { email: string; password: string }) => {},
 	logout: () => {},
 	refetch: () => {},
@@ -46,6 +48,11 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 	const login = trpc.auth.login.useMutation();
 	const logout = trpc.auth.logout.useMutation();
 
+	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(
+		user ? user.userId : '',
+		{ enabled: !!(user && user.userId) }
+	);
+
 	useEffect(() => {
 		me.refetch();
 	}, [login, logout]);
@@ -56,6 +63,12 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 				value={{
 					loggedIn: loginState,
 					user: user,
+					enrollments: enrolledSubjects.data
+						? enrolledSubjects.data.map((es) => ({
+								roleTitle: es.roleTitle,
+								subjectId: es.subjectId,
+						  }))
+						: [],
 					login: (input) => {
 						login.mutate(input);
 					},

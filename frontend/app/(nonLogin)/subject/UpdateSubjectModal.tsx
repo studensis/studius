@@ -128,7 +128,7 @@ export const UpdateSubjectModal = ({
 										// router.refresh();
 									}}
 								>
-									Update User
+									Update Subject
 								</Button>
 							</div>
 						</Stack>

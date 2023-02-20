@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { RoomTimeEventEntity } from '../../RoomTimeEvent/model/RoomTimeEventEntity';
+import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
 import { EventRepository } from './EventRepository';
@@ -91,19 +91,19 @@ export default class EventRepositoryPrisma extends EventRepository {
 		return response;
 	}
 
-	async listAssociatedRoomTimeEvents(id: string) {
+	async listAssociatedSchedules(id: string) {
 		let data = await prisma.event.findUnique({
 			where: { id: id },
 			select: {
-				RoomTimeEvent: true,
+				Schedule: true,
 			},
 		});
 
 		if (data) {
-			let datas: RoomTimeEventEntity[] = [];
-			data.RoomTimeEvent.forEach((data: RoomTimeEventEntity) => {
-				let eventUserPresence: RoomTimeEventEntity = data;
-				datas.push(eventUserPresence);
+			let datas: ScheduleEntity[] = [];
+			data.Schedule.forEach((data: ScheduleEntity) => {
+				let userPresence: ScheduleEntity = data;
+				datas.push(userPresence);
 			});
 
 			return datas;

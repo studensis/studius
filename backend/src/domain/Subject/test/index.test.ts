@@ -1,8 +1,12 @@
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
-import createSeminarSuggestionInteractor from '../../SeminarSuggestion/interactors/createSeminarSuggestionInteractor';
-import deleteSeminarSuggestionInteractor from '../../SeminarSuggestion/interactors/deleteSeminarSuggestionInteractor';
-import { SeminarSuggestionEntity } from '../../SeminarSuggestion/model/SeminarSuggestionEntity';
-import SeminarSuggestionRepositoryPrisma from '../../SeminarSuggestion/repository/SeminarSuggestionRepositoryPrisma';
+import createEventInteractor from '../../Event/interactors/createEventInteractor';
+import deleteEventInteractor from '../../Event/interactors/deleteEventInteractor';
+import { EventEntity } from '../../Event/model/EventEntity';
+import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
+import createPinnedEventInteractor from '../../PinnedEvent/interactors/createPinnedEventInteractor';
+import deletePinnedEventInteractor from '../../PinnedEvent/interactors/deletePinnedEventInteractor';
+import { PinnedEventEntity } from '../../PinnedEvent/model/PinnedEventEntity';
+import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
 import createUserInteractor from '../../User/interactors/createUserInteractor';
 import deleteUserInteractor from '../../User/interactors/deleteUserInteractor';
 import { UserEntity } from '../../User/model/UserEntity';
@@ -10,7 +14,7 @@ import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
-import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
+import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -20,7 +24,8 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 const subjectRepo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
 let userRepo = new UserRepositoryPrisma();
-let seminarSuggestionRepo = new SeminarSuggestionRepositoryPrisma();
+let pinnedEventRepo = new PinnedEventRepositoryPrisma();
+let eventRepo = new EventRepositoryPrisma();
 let testSubject: SubjectEntity = {
 	id: '',
 	title: Buffer.from(Math.random().toString())
@@ -36,7 +41,8 @@ let newSubject: SubjectEntity;
 let newUser: UserEntity;
 let subjectId: string;
 let userId: string;
-let seminarSuggestionId: string;
+let pinnedEventId: string;
+let eventId: string;
 
 //
 //
@@ -79,7 +85,9 @@ test('Subject update', async () => {
 	userId = newUser.id;
 	let updateSubject: updateSubjectEntity = {
 		id: subjectId,
-		title: 'updated',
+		title: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 	};
 	newSubject = await updateSubjectInteractor(
 		userId,
@@ -106,26 +114,33 @@ test('Subject list', async () => {
 //
 //
 //
-// kreiranje SeminarSuggestion-a u svrhu testiranja izlistavanja
-let newSeminarSuggestion: SeminarSuggestionEntity;
-test('SeminarSuggestion create', async () => {
+// kreiranje PinnedEvent-a (i zato Event-a) u svrhu testiranja izlistavanja
+let newEvent: EventEntity;
+test('Event create', async () => {
+	newEvent = await createEventInteractor(eventRepo, {
+		id: '',
+		title: 'test',
+		description: 'test',
+		linkedEntity: 'SUBJECT',
+		linkedEntityId: 'test',
+	});
+	expect(newEvent).not.toBeNull();
+});
+let newPinnedEvent: PinnedEventEntity;
+test('PinnedEvent create', async () => {
 	subjectId = newSubject.id;
-	newSeminarSuggestion = await createSeminarSuggestionInteractor(
-		seminarSuggestionRepo,
-		{
-			id: '',
-			subjectId: subjectId,
-			eventId: Buffer.from(Math.random().toString())
-				.toString('base64')
-				.substring(5, 15),
-		}
-	);
+	eventId = newEvent.id;
+	newPinnedEvent = await createPinnedEventInteractor(pinnedEventRepo, {
+		id: '',
+		subjectId: subjectId,
+		eventId: eventId,
+	});
 	expect(newSubject).not.toBeNull();
 });
 test('PinnedEvents get', async () => {
 	subjectId = newSubject.id;
-	let izlaz: SeminarSuggestionEntity[] = await listPinnedEventsInteractor(
-		seminarSuggestionRepo,
+	let izlaz: PinnedEventEntity[] = await listPinnedEventsBySubjectIdInteractor(
+		pinnedEventRepo,
 		subjectId
 	);
 	expect(izlaz).not.toBeNull();
@@ -135,6 +150,14 @@ test('PinnedEvents get', async () => {
 //
 //
 // brisanje
+test('PinnedEvent delete', async () => {
+	pinnedEventId = newPinnedEvent.id;
+	let deletePinnedEvent: PinnedEventEntity = await deletePinnedEventInteractor(
+		pinnedEventId,
+		pinnedEventRepo
+	);
+	expect(deletePinnedEvent).not.toBeNull();
+});
 test('Subject delete', async () => {
 	subjectId = newSubject.id;
 	let deleteSubject: SubjectEntity = await deleteSubjectInteractor(
@@ -152,12 +175,10 @@ test('User delete', async () => {
 	);
 	expect(deleteUser).not.toBeNull();
 });
-test('PinnedEvent delete', async () => {
-	seminarSuggestionId = newSeminarSuggestion.id;
-	let deleteSeminarSuggestion: SeminarSuggestionEntity =
-		await deleteSeminarSuggestionInteractor(
-			seminarSuggestionId,
-			seminarSuggestionRepo
-		);
-	expect(deleteSeminarSuggestion).not.toBeNull();
+test('Event delete', async () => {
+	let deleteEvent: EventEntity = await deleteEventInteractor(
+		eventId,
+		eventRepo
+	);
+	expect(deleteEvent).not.toBeNull();
 });

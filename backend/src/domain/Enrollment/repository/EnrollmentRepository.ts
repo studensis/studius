@@ -46,4 +46,9 @@ export abstract class EnrollmentRepository {
 	async deleteUserEnrollments(userId: string): Promise<Prisma.BatchPayload> {
 		throw new Error('Method not implemented');
 	}
+	async deleteSubjectEnrollments(
+		subjectId: string
+	): Promise<Prisma.BatchPayload> {
+		throw new Error('Method not implemented');
+	}
 }
