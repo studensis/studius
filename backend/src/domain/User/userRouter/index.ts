@@ -16,6 +16,7 @@ import listMenteesInteractor from '../interactors/listMenteeInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
+import wasUserEnrolledInteractor from '../interactors/wasUserEnrolledInteractor';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
@@ -135,8 +136,39 @@ export default t.router({
 			}
 		}),
 
-	getEnrolledSubjects: publicProcedure
+	isUserEnrolled: publicProcedure
+		.input(
+			z.object({
+				userId: z.string(),
+				subjectId: z.string(),
+			})
+		)
+		.query(async ({ input }) => {
+			let isEnrolled = await isUserEnrolledInteractor(
+				enrollmentRepo,
+				input.userId,
+				input.subjectId
+			);
+			return isEnrolled;
+		}),
 
+	wasUserEnrolled: publicProcedure
+		.input(
+			z.object({
+				userId: z.string(),
+				subjectId: z.string(),
+			})
+		)
+		.query(async ({ input }) => {
+			let wasEnrolled = await wasUserEnrolledInteractor(
+				enrollmentRepo,
+				input.userId,
+				input.subjectId
+			);
+			return wasEnrolled;
+		}),
+
+	getEnrolledSubjects: publicProcedure
 		.input(z.string())
 		.query(async ({ input }) => {
 			let enrollments = await listEnrolledSubjectsInteractor(

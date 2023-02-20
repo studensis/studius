@@ -185,4 +185,18 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 
 		return enrollmentsData.length > 0;
 	}
+
+	async wasUserEnrolled(userId: string, subjectId: string) {
+		let enrollments = await prisma.enrollment.findMany({
+			where: {
+				subjectId: subjectId,
+				userId: userId,
+				status: 'ARCHIVED',
+			},
+		});
+
+		let enrollmentsData: EnrollmentEntity[] = enrollments;
+
+		return enrollmentsData.length > 0;
+	}
 }
