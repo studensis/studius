@@ -8,17 +8,16 @@ export default function SubjectList() {
 	const { user } = useLogin();
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(user!.userId);
 	return (
-		<>
-			<Stack cols={2}>
-				{enrolledSubjects.isLoading && <Spinner />}
-				{enrolledSubjects.data &&
-					enrolledSubjects.data.map((enrolledSubject) => (
-						<SubjectCard
-							subject={enrolledSubject.subject}
-							role={enrolledSubject.roleTitle}
-						/>
-					))}
-			</Stack>
-		</>
+		<Stack cols={2}>
+			{enrolledSubjects.isLoading && <Spinner />}
+			{enrolledSubjects.data &&
+				enrolledSubjects.data.map((enrolledSubject) => (
+					<SubjectCard
+						key={enrolledSubject.id}
+						subject={enrolledSubject.subject}
+						role={enrolledSubject.roleTitle}
+					/>
+				))}
+		</Stack>
 	);
 }

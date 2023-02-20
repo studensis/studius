@@ -8,6 +8,7 @@ import { Block } from '../../../../components/@studius/PageElements/Block';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
 import { PageStack } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
+import Protected from '../../../../components/@studius/Protected/Protected';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
@@ -81,31 +82,38 @@ function SubjectPage(props: PageProps) {
 								<div className="flex flex-row">
 									{user?.userId && (
 										<>
-											<Button
-												onClick={() => {
-													setModal(
-														<UpdateSubjectModal
-															subject={{
-																id: subject.data ? subject.data.id : '',
-																title: subject.data ? subject.data.title : '',
-																description: subject.data
-																	? subject.data.description
-																	: '',
-																ECTS: subject.data ? subject.data.ectsBod : '',
-																semester: subject.data
-																	? subject.data.semester
-																	: 'WINTER',
-																status: subject.data
-																	? subject.data.status
-																	: 'ACTIVE',
-															}}
-														/>
-													);
-												}}
-												className="m-5 mb-8"
+											<Protected
+												minSubjectRole="OWNER"
+												subjectId={subject.data?.id}
 											>
-												Edit Subject
-											</Button>
+												<Button
+													onClick={() => {
+														setModal(
+															<UpdateSubjectModal
+																subject={{
+																	id: subject.data ? subject.data.id : '',
+																	title: subject.data ? subject.data.title : '',
+																	description: subject.data
+																		? subject.data.description
+																		: '',
+																	ECTS: subject.data
+																		? subject.data.ectsBod
+																		: '',
+																	semester: subject.data
+																		? subject.data.semester
+																		: 'WINTER',
+																	status: subject.data
+																		? subject.data.status
+																		: 'ACTIVE',
+																}}
+															/>
+														);
+													}}
+													className="m-5 mb-8"
+												>
+													Edit Subject
+												</Button>
+											</Protected>
 										</>
 									)}
 

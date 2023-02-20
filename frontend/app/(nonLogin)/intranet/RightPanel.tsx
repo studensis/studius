@@ -49,7 +49,13 @@ export const RightPanel = () => {
 					<h1 className="title1">Obavijesti</h1>
 					<Stack cols={3}>
 						{posts?.map((post) => {
-							return <PostCard title={post.title} id={post.id}></PostCard>;
+							return (
+								<PostCard
+									title={post.title}
+									id={post.id}
+									key={post.id}
+								></PostCard>
+							);
 						})}
 					</Stack>
 				</div>
