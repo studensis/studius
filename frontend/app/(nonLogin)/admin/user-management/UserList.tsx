@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { UserEntity } from 'studius-backend/src/domain/User/model/UserEntity';
 import { Button } from '../../../../components/@studius/Button/Button';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../../components/@studius/PageElements/Block';
@@ -15,6 +16,29 @@ export default function SubjectList() {
 	const users = trpc.user.listUsers.useQuery();
 	const deleteUser = trpc.user.deleteUserById.useMutation();
 	const updateUser = trpc.user.updateUserById.useMutation();
+	const { setModal } = useDialog();
+	const router = useRouter();
+
+	const [filteredUsers, setFilteredUsers] = useState<UserEntity[]>();
+	const [filterBy, setFilterBy] = useState<String>('');
+
+	useEffect(() => {
+		setFilteredUsers(
+			users.data?.filter((user) => {
+				if (filterBy == '') {
+					return true;
+				}
+				if (filterBy) {
+					return (
+						user.firstname
+							.toLowerCase()
+							.includes(filterBy.toLocaleLowerCase()) ||
+						user.lastname.toLowerCase().includes(filterBy.toLocaleLowerCase())
+					);
+				}
+			})
+		);
+	}, [filterBy]);
 
 	useEffect(() => {
 		if (updateUser.isSuccess) {
@@ -26,10 +50,6 @@ export default function SubjectList() {
 			users.refetch();
 		}
 	}, [deleteUser]);
-
-	const { setModal } = useDialog();
-
-	const router = useRouter();
 
 	return (
 		<>
@@ -51,6 +71,16 @@ export default function SubjectList() {
 						>
 							Refetch
 						</Button>
+						<div className="m-4  ">
+							<p className="title1 m-2">Filter:</p>
+							<input
+								className="rounded-xl w-full border-accent border-2 p-4 outline-none "
+								type="text"
+								onChange={(e) => {
+									setFilterBy(e.target.value);
+								}}
+							/>
+						</div>
 						<Table
 							titles={{
 								id: 'ID',
@@ -58,7 +88,7 @@ export default function SubjectList() {
 								lastname: 'Last name',
 								userRole: 'Role',
 							}}
-							objects={users.data || []}
+							objects={filteredUsers ? filteredUsers : users.data || []}
 							actionRow={(user) => {
 								return (
 									<>
