@@ -1,5 +1,7 @@
+import { notFound } from 'next/navigation';
+
 const page = () => {
-	return <div>page</div>;
+	return notFound();
 };
 
 export default page;

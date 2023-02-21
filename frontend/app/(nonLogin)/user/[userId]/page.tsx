@@ -18,7 +18,7 @@ import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
-import { UpdateUserModal } from '../../admin/user/UpdateUserModal';
+import { UpdateUserModal } from '../../admin/user-management/UpdateUserModal';
 
 type PageProps = {
 	params: {

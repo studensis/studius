@@ -197,21 +197,25 @@ const Seminar2: FC<{ userId: string }> = ({ userId }) => {
 				<Block>
 					<Block className="rounded-xl border-accent-medium border-2 mb-4 ">
 						<h1 className="title1 mb-5">List of Drafts</h1>
-						<Table
-							objects={
-								seminarList.data?.filter(
-									(seminar) => seminar.status === 'DRAFT'
-								) || []
-							}
-							titles={{
-								title: 'Title',
-								id: 'User ID:',
-								description: 'Description',
-							}}
-							actionRow={(seminar) => {
-								return <></>;
-							}}
-						/>
+						{seminarList.length >= 1 ? (
+							<Table
+								objects={
+									seminarList.data?.filter(
+										(seminar) => seminar.status === 'DRAFT'
+									) || []
+								}
+								titles={{
+									title: 'Title',
+									id: 'User ID:',
+									description: 'Description',
+								}}
+								actionRow={(seminar) => {
+									return <></>;
+								}}
+							/>
+						) : (
+							<p>You have no seminars.</p>
+						)}
 					</Block>
 					<Block className="rounded-xl border-accent-medium border-2 mb-4 ">
 						<h1 className="title1 mb-5">List of sent Suggestions</h1>
