@@ -1,8 +1,9 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 
 export abstract class UserRepository {
-	async getAll(): Promise<UserEntity[]> {
+	async getAll(paginationInfo: paginationType): Promise<UserEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<UserEntity | null> {

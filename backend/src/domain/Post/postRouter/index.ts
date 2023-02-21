@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import createPostInteractor from '../interactors/createPostInteractor';
 import deletePostInteractor from '../interactors/deletePostInteractor';
 import getPostInteractor from '../interactors/getPostInteractor';
@@ -48,8 +49,8 @@ export default t.router({
 		return post;
 	}),
 
-	listPosts: t.procedure.query(async () => {
-		let posts = await listPostsInteractor(repo);
+	listPosts: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let posts = await listPostsInteractor(repo, input);
 		return posts as PostEntity[];
 	}),
 

@@ -2,8 +2,12 @@ import { PinnedEventRepository } from '../../PinnedEvent/repository/PinnedEventR
 
 export default async function getPinnedEventBySubjectIdInteractor(
 	pinnedEventRepo: PinnedEventRepository,
-	subjectId: string
+	input: {
+		pageNumber: number;
+		objectsPerPage: number;
+		subjectId: string;
+	}
 ) {
-	let pinnedEvents = await pinnedEventRepo.getBySubjectId(subjectId);
+	let pinnedEvents = await pinnedEventRepo.getBySubjectId(input);
 	return pinnedEvents;
 }

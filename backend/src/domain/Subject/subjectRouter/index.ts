@@ -8,6 +8,7 @@ import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
+import { paginationObj } from '../../pagination/paginationObj';
 import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
 import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
@@ -107,10 +108,12 @@ export default t.router({
 		return subject;
 	}),
 
-	listSubjects: publicProcedure.query(async () => {
-		let subjects = await listSubjectsInteractor(repo);
-		return subjects;
-	}),
+	listSubjects: publicProcedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let subjects = await listSubjectsInteractor(repo, input);
+			return subjects;
+		}),
 
 	updateSubjectById: authedProcedure
 		.input(
@@ -137,7 +140,7 @@ export default t.router({
 		}),
 
 	getEnrolledUsers: publicProcedure
-		.input(z.string())
+		.input(paginationObj.extend({ subjectId: z.string() }))
 		.query(async ({ input }) => {
 			let enrolledUsers = await listEnrolledUsersInteractor(
 				enrollmentRepo,
@@ -147,7 +150,7 @@ export default t.router({
 		}),
 
 	getPinnedEvents: publicProcedure
-		.input(z.string())
+		.input(paginationObj.extend({ subjectId: z.string() }))
 		.query(async ({ input }) => {
 			let pinnedEvents = await listPinnedEventsBySubjectIdInteractor(
 				pinnedEventRepo,

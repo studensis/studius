@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import createPinnedEventInteractor from '../interactors/createPinnedEventInteractor';
 import deletePinnedEventInteractor from '../interactors/deletePinnedEventInteractor';
 import getPinnedEventInteractor from '../interactors/getPinnedEventInteractor';
@@ -42,10 +43,12 @@ export default t.router({
 		return pinnedEvent;
 	}),
 
-	listPinnedEvents: t.procedure.query(async () => {
-		let pinnedEvents = await listPinnedEventsInteractor(repo);
-		return pinnedEvents as PinnedEventEntity[];
-	}),
+	listPinnedEvents: t.procedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let pinnedEvents = await listPinnedEventsInteractor(repo, input);
+			return pinnedEvents as PinnedEventEntity[];
+		}),
 
 	updatePinnedEventById: t.procedure
 		.input(

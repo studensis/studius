@@ -1,21 +1,31 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { AssignmentRepository } from '../repository/AssignmentRepository';
 
-export default async function listUserAssignments(
+export default async function listUserAssignmentsInteractor(
 	assignmentRepository: AssignmentRepository,
 	input: {
+		pageNumber: number;
+		objectsPerPage: number;
+		options: {
+			isMentor: boolean;
+			isStudent: boolean;
+		};
 		id: string;
-		options: { isMentor: boolean; isStudent: boolean };
 	}
 ) {
+	let paginationInfo: paginationType = {
+		pageNumber: input.pageNumber,
+		objectsPerPage: input.objectsPerPage,
+	};
 	if (input.options.isMentor) {
 		let assignments = await (
-			await assignmentRepository.getAll()
+			await assignmentRepository.getAll(paginationInfo)
 		).filter((assignment) => assignment.mentorId == input.id);
 		return assignments;
 	}
 	if (input.options.isStudent) {
 		let assignments = await (
-			await assignmentRepository.getAll()
+			await assignmentRepository.getAll(paginationInfo)
 		).filter((assignment) => assignment.userId == input.id);
 		return assignments;
 	}

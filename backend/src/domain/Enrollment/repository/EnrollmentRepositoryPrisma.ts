@@ -70,10 +70,16 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	}
 
 	// gets all enrollments connected to same User
-	async getEnrolledSubjects(userId: string) {
+	async getEnrolledSubjects(info: {
+		pageNumber: number;
+		objectsPerPage: number;
+		userId: string;
+	}) {
 		let rez = await prisma.enrollment.findMany({
+			skip: info.objectsPerPage * info.pageNumber,
+			take: info.objectsPerPage,
 			where: {
-				userId: userId,
+				userId: info.userId,
 				status: 'ACTIVE',
 			},
 			include: {
@@ -85,10 +91,16 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	}
 
 	// gets all enrollments connected to same Subject
-	async getEnrolledUsers(subjectId: string) {
+	async getEnrolledUsers(input: {
+		pageNumber: number;
+		objectsPerPage: number;
+		subjectId: string;
+	}) {
 		let users = await prisma.enrollment.findMany({
+			skip: input.objectsPerPage * input.pageNumber,
+			take: input.objectsPerPage,
 			where: {
-				subjectId: subjectId,
+				subjectId: input.subjectId,
 				status: 'ACTIVE',
 			},
 			include: {
