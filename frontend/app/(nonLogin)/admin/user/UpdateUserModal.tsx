@@ -8,6 +8,7 @@ import {
 	PageStack,
 	Stack,
 } from '../../../../components/@studius/PageElements/Stack';
+import Protected from '../../../../components/@studius/Protected/Protected';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 export const UpdateUserModal = ({
@@ -128,19 +129,35 @@ export const UpdateUserModal = ({
 									});
 								}}
 							/>
-							<TextInput
-								placeholder={'userRole'}
-								value={user.userRole}
-								onChange={(e) => {
-									setFormData({
-										...formData,
-										userRole: e.currentTarget.value as
-											| 'DEFAULT'
-											| 'ADMIN'
-											| 'SUPERADMIN',
-									});
-								}}
-							/>
+							<Protected minRole="SUPERADMIN">
+								<select
+									className="flex items-center outline-none text-neutral rounded-xl bg-neutral-weak p-4 overflow-hidden "
+									onChange={(e) => {
+										setFormData({
+											...formData,
+											userRole: e.target.value as
+												| 'DEFAULT'
+												| 'ADMIN'
+												| 'SUPERADMIN',
+										});
+									}}
+									multiple
+								>
+									<option className="m-2 p-2 text-neutral-400 " value="DEFAULT">
+										DEFAULT
+									</option>
+									<option className="m-2 p-2 text-neutral-400" value="ADMIN">
+										ADMIN
+									</option>
+									<option
+										className="m-2 p-2 text-neutral-400"
+										value="SUPERADMIN"
+									>
+										SUPERADMIN
+									</option>
+								</select>
+							</Protected>
+
 							<div className="sticky bottom-0 left-0">
 								<Button
 									onClick={() => {

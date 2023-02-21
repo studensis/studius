@@ -96,9 +96,7 @@ const Protected = ({
 									{userRole >= inputRole ? (
 										<>{children}</>
 									) : (
-										<>
-											<AccessDenied />
-										</>
+										<>{displayMessage ? <AccessDenied /> : <></>}</>
 									)}
 								</>
 							) : (

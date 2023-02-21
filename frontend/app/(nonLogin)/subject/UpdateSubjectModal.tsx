@@ -94,7 +94,7 @@ export const UpdateSubjectModal = ({
 								/>
 							</Stack>
 							<select
-								className="flex items-center outline-none text-neutral rounded-xl bg-neutral-weak p-4 "
+								className="flex items-center outline-none text-neutral rounded-xl bg-neutral-weak p-4 overflow-hidden"
 								onChange={(e) => {
 									e.target.value == 'SUMMER'
 										? setFormData({ ...formData, semester: 'SUMMER' })
