@@ -93,7 +93,7 @@ const Protected = ({
 						<>
 							{userRole !== roleEnum.UNDEFINED ? (
 								<>
-									{userRole > inputRole ? (
+									{userRole >= inputRole ? (
 										<>{children}</>
 									) : (
 										<>

@@ -15,7 +15,7 @@ const Sections = () => {
 			<Stack cols={3} mobileCols={2}>
 				<SectionButton
 					icon={'users'}
-					href={'/user'}
+					href={'/admin/user'}
 					title={'User Management'}
 				/>
 				<SectionButton

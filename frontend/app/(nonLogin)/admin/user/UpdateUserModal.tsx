@@ -1,66 +1,73 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button } from '../../../components/@studius/Button/Button';
-import { TextInput } from '../../../components/@studius/Input/TextInput';
-import { Block } from '../../../components/@studius/PageElements/Block';
+import { Button } from '../../../../components/@studius/Button/Button';
+import { TextInput } from '../../../../components/@studius/Input/TextInput';
+import useDialog from '../../../../components/@studius/Modal/DialogProvider';
+import { Block } from '../../../../components/@studius/PageElements/Block';
 import {
 	PageStack,
 	Stack,
-} from '../../../components/@studius/PageElements/Stack';
-import { trpc } from '../../../components/hooks/TrpcProvider';
+} from '../../../../components/@studius/PageElements/Stack';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 
-export const CreateUserModal = () => {
-	const createUser = trpc.user.createUser.useMutation();
-
-	const [formData, setFormData] = useState<{
-		id: undefined;
+export const UpdateUserModal = ({
+	user,
+}: {
+	user: {
+		id: string;
 		password: string;
 		firstname: string;
 		lastname: string;
-		jmbag: string;
+		jmbag: string | null;
 		email: string;
-		mentorID: string;
-		userRole: 'DEFAULT';
-	}>({
-		id: undefined,
-		password: '',
-		firstname: '',
-		lastname: '',
-		jmbag: '',
-		email: '',
-		mentorID: '',
-		userRole: 'DEFAULT',
-	});
+		mentorID: string | null;
+		userRole: 'DEFAULT' | 'ADMIN' | 'SUPERADMIN';
+	};
+}) => {
+	const updateUser = trpc.user.updateUserById.useMutation();
+
+	const [formData, setFormData] = useState<{
+		id: string;
+		password: string;
+		firstname: string;
+		lastname: string;
+		jmbag: string | null;
+		email: string;
+		mentorID: string | null;
+		userRole: 'DEFAULT' | 'ADMIN' | 'SUPERADMIN';
+	}>(user);
 
 	const router = useRouter();
+	const { setModal } = useDialog();
 
 	useEffect(() => {
-		if (createUser.status === 'success') {
-			router.push('/user');
+		if (updateUser.isSuccess) {
+			setModal(null);
 		}
-		console.log(createUser.status);
-	}, [createUser]);
+		console.log(updateUser.status);
+	}, [updateUser]);
 
 	return (
 		<>
 			<div className="p-6 md:p-10">
 				<PageStack>
-					<h1 className="display3">Create User</h1>
+					<h1 className="display3">Edit User</h1>
 
-					{createUser.isSuccess && (
+					{updateUser.isSuccess && (
 						<Block success>
-							<pre>{JSON.stringify(createUser.data)}</pre>
+							<pre>{JSON.stringify(updateUser.data)}</pre>
 						</Block>
 					)}
-					{createUser.isError && createUser.error.shape && (
+					{updateUser.isError && updateUser.error.shape && (
 						<Block danger>
-							<pre>{createUser.error.shape.message}</pre>
+							<pre>{updateUser.error.shape.message}</pre>
 						</Block>
 					)}
 					<form>
 						<Stack>
 							<TextInput
 								placeholder={'password'}
+								value={user.password}
 								onChange={(e) => {
 									setFormData({
 										...formData,
@@ -71,6 +78,7 @@ export const CreateUserModal = () => {
 							<Stack cols={2}>
 								<TextInput
 									placeholder={'firstname'}
+									value={user.firstname}
 									onChange={(e) => {
 										setFormData({
 											...formData,
@@ -80,6 +88,7 @@ export const CreateUserModal = () => {
 								/>
 								<TextInput
 									placeholder={'lastname'}
+									value={user.lastname}
 									onChange={(e) => {
 										setFormData({
 											...formData,
@@ -90,6 +99,8 @@ export const CreateUserModal = () => {
 							</Stack>
 							<TextInput
 								placeholder={'jmbag'}
+								value={user.jmbag}
+								disabled
 								onChange={(e) => {
 									setFormData({
 										...formData,
@@ -99,6 +110,7 @@ export const CreateUserModal = () => {
 							/>
 							<TextInput
 								placeholder={'email'}
+								value={user.email}
 								onChange={(e) => {
 									setFormData({
 										...formData,
@@ -108,6 +120,7 @@ export const CreateUserModal = () => {
 							/>
 							<TextInput
 								placeholder={'mentorID'}
+								value={user.mentorID}
 								onChange={(e) => {
 									setFormData({
 										...formData,
@@ -115,13 +128,26 @@ export const CreateUserModal = () => {
 									});
 								}}
 							/>
-							<TextInput placeholder={'DEFAULT'} disabled />
+							<TextInput
+								placeholder={'userRole'}
+								value={user.userRole}
+								onChange={(e) => {
+									setFormData({
+										...formData,
+										userRole: e.currentTarget.value as
+											| 'DEFAULT'
+											| 'ADMIN'
+											| 'SUPERADMIN',
+									});
+								}}
+							/>
 							<div className="sticky bottom-0 left-0">
 								<Button
 									onClick={() => {
 										console.log(formData);
 
-										createUser.mutate({
+										updateUser.mutate({
+											id: formData.id,
 											email: formData.email,
 											firstname: formData.firstname,
 											lastname: formData.lastname,
@@ -130,11 +156,11 @@ export const CreateUserModal = () => {
 											...(formData.mentorID
 												? { mentorID: formData.mentorID }
 												: {}),
-											userRole: 'DEFAULT',
+											userRole: formData.userRole,
 										});
 									}}
 								>
-									Create User
+									Update User
 								</Button>
 							</div>
 						</Stack>

@@ -16,14 +16,19 @@ export const LeftPanel = () => {
 				</SectionTop>
 				{events.data ? (
 					<Calendar
-						events={events.data.map((event) => {
-							return {
-								title: event.event.title,
-
-								timeDateUnix: new Date(event.dateStart).getTime(),
-								id: event.id,
-							};
-						})}
+						events={events.data.map(
+							(event: {
+								event: { title: any };
+								dateStart: string | number | Date;
+								id: any;
+							}) => {
+								return {
+									title: event.event.title,
+									timeDateUnix: new Date(event.dateStart).getTime(),
+									id: event.id,
+								};
+							}
+						)}
 					/>
 				) : (
 					<Spinner />

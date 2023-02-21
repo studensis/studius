@@ -1,6 +1,6 @@
 'use client';
 
-import { GoogleLogin } from '@react-oauth/google';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -18,7 +18,7 @@ import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
-import { UpdateUserModal } from '../../admin/user/UpdateUserModal';
+import { UpdateUserModal } from '../user/UpdateUserModal';
 
 type PageProps = {
 	params: {
@@ -87,8 +87,7 @@ export default function UserPage(props: PageProps) {
 						actionRow={
 							<>
 								<div className="flex flex-row gap-2">
-									{(sessionUser?.role == 'ADMIN' ||
-										sessionUser?.role == 'SUPERADMIN') && (
+									{sessionUser?.role !== 'DEFAULT' && (
 										<Button
 											onClick={() => {
 												deleteUser.mutate(props.params.userId);
@@ -174,7 +173,7 @@ export default function UserPage(props: PageProps) {
 												{user.data.googleUserId ? 'Relink' : 'Link'} account{' '}
 											</h3>
 											<GoogleLogin
-												onSuccess={(response) => {
+												onSuccess={(response: CredentialResponse) => {
 													if (response.credential) {
 														googleLink.mutate({
 															credential: response.credential,

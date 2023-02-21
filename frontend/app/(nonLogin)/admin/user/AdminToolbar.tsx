@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '../../../components/@studius/Button/Button';
-import useDialog from '../../../components/@studius/Modal/DialogProvider';
-import { trpc } from '../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../components/@studius/Button/Button';
+import useDialog from '../../../../components/@studius/Modal/DialogProvider';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 import { CreateUserModal } from './CreateUserModal';
 
 export default function AdminToolbar() {

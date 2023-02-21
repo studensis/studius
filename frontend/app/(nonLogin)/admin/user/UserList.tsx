@@ -2,13 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Button } from '../../../components/@studius/Button/Button';
-import useDialog from '../../../components/@studius/Modal/DialogProvider';
-import { Block } from '../../../components/@studius/PageElements/Block';
-import { Stack } from '../../../components/@studius/PageElements/Stack';
-import { Spinner } from '../../../components/@studius/Spinner/Spinner';
-import { Table } from '../../../components/@studius/Table/Table';
-import { trpc } from '../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../components/@studius/Button/Button';
+import useDialog from '../../../../components/@studius/Modal/DialogProvider';
+import { Block } from '../../../../components/@studius/PageElements/Block';
+import { Stack } from '../../../../components/@studius/PageElements/Stack';
+import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
+import { Table } from '../../../../components/@studius/Table/Table';
+import { trpc } from '../../../../components/hooks/TrpcProvider';
 import { UpdateUserModal } from './UpdateUserModal';
 
 export default function SubjectList() {
