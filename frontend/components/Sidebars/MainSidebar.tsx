@@ -45,7 +45,7 @@ export default function MainSidebar() {
 						text="View Profile"
 						icon="user"
 						onClick={() => {
-							router.push('/user/' + user!.userId);
+							router.push('/profile');
 						}}
 					/>
 					<ListItems.Action

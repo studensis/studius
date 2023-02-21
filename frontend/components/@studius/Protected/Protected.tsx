@@ -87,7 +87,8 @@ const Protected = ({
 	return (
 		<>
 			{/* Ako se gleda globalna rola */}
-			{minRole ? (
+			{!loggedIn && displayMessage ? <AccessDenied /> : <></>}
+			{loggedIn && minRole ? (
 				<>
 					{loggedIn ? (
 						<>

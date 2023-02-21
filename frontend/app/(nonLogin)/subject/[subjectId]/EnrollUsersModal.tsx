@@ -59,6 +59,7 @@ export const EnrollUsersModal = (props: PageProps) => {
 		setSuccess('Updated');
 		await delay(1500);
 		setSuccess('');
+		enrolledUsers.refetch();
 	}
 
 	return (
@@ -74,11 +75,13 @@ export const EnrollUsersModal = (props: PageProps) => {
 							userRole: 'Role',
 						}}
 						objects={
-							users.data?.map((user) => ({
-								name: user.firstname + ' ' + user.lastname,
-								userRole: user.userRole,
-								id: user.id,
-							})) || []
+							users.data
+								?.filter((user) => !ids.includes(user.id))
+								.map((user) => ({
+									name: user.firstname + ' ' + user.lastname,
+									userRole: user.userRole,
+									id: user.id,
+								})) || []
 						}
 						actionRow={(user) => {
 							return (
