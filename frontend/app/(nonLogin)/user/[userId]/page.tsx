@@ -1,20 +1,18 @@
 'use client';
 
-import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '../../../../components/@studius/Button/Button';
-import Icon from '../../../../components/@studius/Icon/Icon';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../../components/@studius/PageElements/Block';
-import { Section } from '../../../../components/@studius/PageElements/Section';
 import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
 import {
 	PageStack,
 	Stack,
 } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
+import Protected from '../../../../components/@studius/Protected/Protected';
 import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import useLogin from '../../../../components/hooks/LoginContext';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
@@ -87,31 +85,32 @@ export default function UserPage(props: PageProps) {
 						actionRow={
 							<>
 								<div className="flex flex-row gap-2">
-									{(sessionUser?.role == 'ADMIN' ||
-										sessionUser?.role == 'SUPERADMIN') && (
+									<Button>Send Message</Button>
+									<Protected minRole="ADMIN">
 										<Button
 											onClick={() => {
 												deleteUser.mutate(props.params.userId);
 											}}
 										>
-											Delete me
+											Delete user
 										</Button>
-									)}
-									{user.data && user.data.id == sessionUser?.userId && (
-										<>
-											<Button
-												onClick={() => {
-													setModal(
-														user.data ? (
-															<UpdateUserModal user={user.data} />
-														) : null
-													);
-												}}
-											>
-												Edit Profile
-											</Button>
-										</>
-									)}
+
+										{user.data && user.data.id == sessionUser?.userId && (
+											<>
+												<Button
+													onClick={() => {
+														setModal(
+															user.data ? (
+																<UpdateUserModal user={user.data} />
+															) : null
+														);
+													}}
+												>
+													Edit Profile
+												</Button>
+											</>
+										)}
+									</Protected>
 								</div>
 							</>
 						}
@@ -122,86 +121,7 @@ export default function UserPage(props: PageProps) {
 						</Link>
 					</div> */}
 
-					{/* Profile Section */}
-					{user.data && user.data.id == sessionUser?.userId && (
-						<>
-							<Section>
-								{googleLink.isError && (
-									<pre className="bg-danger-weak p-10 mb-4 rounded-2xl">
-										{googleLink.error.shape?.message}
-									</pre>
-								)}
-								<Stack>
-									<h3 className="title1">Link with Google Account</h3>
-
-									{user.data.googleUserId && (
-										<Stack cols={2}>
-											<Block info className="h-auto">
-												<div className="flex flex-row gap-1">
-													<p className="body2 text-info">
-														<span>Google account is already linked</span>
-													</p>
-													<Icon icon="checkmark" className="bg-info" />
-												</div>
-											</Block>
-											<Block danger className="h-auto">
-												<p className="body2 text-danger">
-													Warning: Linking with a new Google account will unlink
-													it from the previous account!
-												</p>
-											</Block>
-										</Stack>
-									)}
-									<Stack cols={2}>
-										{user.data.googleUserId && (
-											<Stack>
-												<Button
-													className="w-max bg-danger"
-													onClick={() => {
-														updateUser.mutate({
-															id: sessionUser!.userId,
-															googleUserId: null,
-														});
-													}}
-													loading={updateUser.isLoading}
-												>
-													Unlink account
-												</Button>
-											</Stack>
-										)}
-										<Stack>
-											<h3 className="title3">
-												{user.data.googleUserId ? 'Relink' : 'Link'} account{' '}
-											</h3>
-											<GoogleLogin
-												onSuccess={(response) => {
-													if (response.credential) {
-														googleLink.mutate({
-															credential: response.credential,
-															updateImage: box,
-														});
-													}
-												}}
-											/>
-											<div className="flex flex-row gap-1">
-												<input
-													type="checkbox"
-													onChange={(e) => {
-														if (e.currentTarget.checked) {
-															setBox(e.currentTarget.checked);
-														}
-													}}
-												/>
-												<span className="body3">Update profile picture</span>
-											</div>
-										</Stack>
-									</Stack>
-								</Stack>
-							</Section>
-						</>
-					)}
-
-					{deleteUser.isSuccess && (
+					{/* {deleteUser.isSuccess && (
 						<Block>
 							<pre>{JSON.stringify(deleteUser.data)}</pre>
 						</Block>
@@ -212,12 +132,9 @@ export default function UserPage(props: PageProps) {
 								{JSON.stringify(deleteUser.error.shape?.message, null, 2)}
 							</pre>
 						</Block>
-					)}
+					)} */}
 
-					<Block>
-						<pre>{JSON.stringify(userWithoutPassword, null, 2)}</pre>
-					</Block>
-					<div>
+					<Protected minRole="ADMIN">
 						<SectionTop>
 							<h3 className="title2"> Enrolled subjects </h3>
 						</SectionTop>
@@ -237,11 +154,7 @@ export default function UserPage(props: PageProps) {
 									</Link>
 								))}
 						</Stack>
-					</div>
-
-					<Block>
-						<pre>{JSON.stringify(enrolledSubjects.data, null, 2)}</pre>
-					</Block>
+					</Protected>
 				</>
 			)}
 		</PageStack>
