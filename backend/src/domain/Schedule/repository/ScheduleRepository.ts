@@ -1,11 +1,14 @@
 import { Prisma } from '@prisma/client';
 import { EventEntity } from '../../Event/model/EventEntity';
+import { paginationType } from '../../pagination/paginationObj';
 import { UserPresenceEntity } from '../../UserPresence/model/UserPresenceEntity';
 import { ScheduleEntity } from '../model/ScheduleEntity';
 import { updateScheduleEntity } from '../model/updateScheduleEntity';
 
 export abstract class ScheduleRepository {
-	async getAll(): Promise<(ScheduleEntity & { event: EventEntity })[]> {
+	async getAll(
+		paginationInfo: paginationType
+	): Promise<(ScheduleEntity & { event: EventEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<ScheduleEntity> {

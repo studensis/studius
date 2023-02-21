@@ -2,8 +2,8 @@ import { EventRepository } from '../repository/EventRepository';
 
 export default async function listAssociatedSchedulesInteractor(
 	eventRepository: EventRepository,
-	id: string
+	eventId: string
 ) {
-	let schedules = await eventRepository.listAssociatedSchedules(id);
+	let schedules = await eventRepository.listAssociatedSchedules(eventId);
 	return schedules;
 }
