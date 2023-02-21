@@ -87,8 +87,8 @@ const Protected = ({
 							{userRole !== roleEnum.UNDEFINED ||
 							userSubjectRole !== subjectRoleEnum.UNDEFINED ? (
 								<>
-									{userRole >= inputRole ||
-									userSubjectRole >= inputSubjectRole ? (
+									{(minRole && userRole >= inputRole) ||
+									(minSubjectRole && userSubjectRole >= inputSubjectRole) ? (
 										<>{children}</>
 									) : (
 										<>{displayMessage ? <AccessDenied /> : <></>}</>
