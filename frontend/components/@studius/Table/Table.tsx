@@ -72,7 +72,7 @@ export const Table = <T extends { [key: string]: any }>({
 
 	return (
 		<>
-			<div className="w-full rounded-xl border border-background overflow-hidden border-collapse overflow-x-scroll">
+			<div className="w-full rounded-xl border border-background overflow-hidden border-collapse overflow-x-scroll md:overflow-hidden">
 				<table className="w-full mt-[-1px]">
 					<thead>
 						<TableRow header>
