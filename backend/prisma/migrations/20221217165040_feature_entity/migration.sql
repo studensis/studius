@@ -99,12 +99,12 @@ CREATE TABLE "Event" (
 );
 
 -- CreateTable
-CREATE TABLE "PinnedEvent" (
+CREATE TABLE "PinnedSchedule" (
     "id" TEXT NOT NULL,
     "assignmentId" TEXT NOT NULL,
     "subjectId" TEXT NOT NULL,
 
-    CONSTRAINT "PinnedEvent_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PinnedSchedule_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

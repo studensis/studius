@@ -3,10 +3,18 @@ import createEventInteractor from '../../Event/interactors/createEventInteractor
 import deleteEventInteractor from '../../Event/interactors/deleteEventInteractor';
 import { EventEntity } from '../../Event/model/EventEntity';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
-import createPinnedEventInteractor from '../../PinnedEvent/interactors/createPinnedEventInteractor';
-import deletePinnedEventInteractor from '../../PinnedEvent/interactors/deletePinnedEventInteractor';
-import { PinnedEventEntity } from '../../PinnedEvent/model/PinnedEventEntity';
-import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
+import createPinnedScheduleInteractor from '../../PinnedSchedule/interactors/createPinnedScheduleInteractor';
+import deletePinnedScheduleInteractor from '../../PinnedSchedule/interactors/deletePinnedScheduleInteractor';
+import { PinnedScheduleEntity } from '../../PinnedSchedule/model/PinnedScheduleEntity';
+import PinnedScheduleRepositoryPrisma from '../../PinnedSchedule/repository/PinnedScheduleRepositoryPrisma';
+import createRoomInteractor from '../../Room/interactors/createRoomInteractor';
+import deleteRoomInteractor from '../../Room/interactors/deleteRoomInteractor';
+import { RoomEntity } from '../../Room/model/RoomEntity';
+import RoomRepositoryPrisma from '../../Room/repository/RoomRepositoryPrisma';
+import createScheduleInteractor from '../../Schedule/interactors/createScheduleInteractor';
+import deleteScheduleInteractor from '../../Schedule/interactors/deleteScheduleInteractor';
+import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
+import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
 import createUserInteractor from '../../User/interactors/createUserInteractor';
 import deleteUserInteractor from '../../User/interactors/deleteUserInteractor';
 import { UserEntity } from '../../User/model/UserEntity';
@@ -14,7 +22,7 @@ import UserRepositoryPrisma from '../../User/repository/UserRepositoryPrisma';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
-import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
+import listPinnedSchedulesBySubjectIdInteractor from '../interactors/listPinnedSchedulesBySubjectIdInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -24,8 +32,11 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 const subjectRepo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
 let userRepo = new UserRepositoryPrisma();
-let pinnedEventRepo = new PinnedEventRepositoryPrisma();
+let pinnedScheduleRepo = new PinnedScheduleRepositoryPrisma();
 let eventRepo = new EventRepositoryPrisma();
+let roomRepo = new RoomRepositoryPrisma();
+let scheduleRepo = new ScheduleRepositoryPrisma();
+
 let testSubject: SubjectEntity = {
 	id: '',
 	title: Buffer.from(Math.random().toString())
@@ -41,8 +52,10 @@ let newSubject: SubjectEntity;
 let newUser: UserEntity;
 let subjectId: string;
 let userId: string;
-let pinnedEventId: string;
+let pinnedScheduleId: string;
 let eventId: string;
+let roomId: string;
+let scheduleId: string;
 
 //
 //
@@ -114,35 +127,65 @@ test('Subject list', async () => {
 //
 //
 //
-// kreiranje PinnedEvent-a (i zato Event-a) u svrhu testiranja izlistavanja
+// kreiranje entiteta u svrhu testiranja izlistavanja
 let newEvent: EventEntity;
 test('Event create', async () => {
 	newEvent = await createEventInteractor(eventRepo, {
 		id: '',
-		title: 'test',
-		description: 'test',
-		linkedEntity: 'SUBJECT',
-		linkedEntityId: 'test',
+		title: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
+		description: '',
+		linkedEntity: 'SEMINAR',
+		linkedEntityId: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
 	});
 	expect(newEvent).not.toBeNull();
 });
-let newPinnedEvent: PinnedEventEntity;
-test('PinnedEvent create', async () => {
-	subjectId = newSubject.id;
+let newRoom: RoomEntity;
+test('Room create', async () => {
+	newRoom = await createRoomInteractor(roomRepo, {
+		id: '',
+		title: Buffer.from(Math.random().toString())
+			.toString('base64')
+			.substring(5, 15),
+		capacity: 22,
+	});
+	expect(newRoom).not.toBeNull();
+});
+let newSchedule: ScheduleEntity;
+test('Schedule create', async () => {
 	eventId = newEvent.id;
-	newPinnedEvent = await createPinnedEventInteractor(pinnedEventRepo, {
+	roomId = newRoom.id;
+	newSchedule = await createScheduleInteractor(scheduleRepo, {
+		id: '',
+		dateStart: new Date(Date.now()),
+		dateEnd: new Date(Date.now()),
+		status: 'ACTIVE',
+		eventId: eventId,
+		roomId: roomId,
+	});
+	expect(newSchedule).not.toBeNull();
+});
+let newPinnedSchedule: PinnedScheduleEntity;
+test('PinnedSchedule create', async () => {
+	subjectId = newSubject.id;
+	scheduleId = newSchedule.id;
+	newPinnedSchedule = await createPinnedScheduleInteractor(pinnedScheduleRepo, {
 		id: '',
 		subjectId: subjectId,
-		eventId: eventId,
+		scheduleId: scheduleId,
 	});
-	expect(newSubject).not.toBeNull();
+	expect(newPinnedSchedule).not.toBeNull();
 });
-test('PinnedEvents get', async () => {
+test('PinnedSchedules get', async () => {
 	subjectId = newSubject.id;
-	let izlaz: PinnedEventEntity[] = await listPinnedEventsBySubjectIdInteractor(
-		pinnedEventRepo,
-		subjectId
-	);
+	let izlaz: PinnedScheduleEntity[] =
+		await listPinnedSchedulesBySubjectIdInteractor(
+			pinnedScheduleRepo,
+			subjectId
+		);
 	expect(izlaz).not.toBeNull();
 });
 
@@ -150,13 +193,11 @@ test('PinnedEvents get', async () => {
 //
 //
 // brisanje
-test('PinnedEvent delete', async () => {
-	pinnedEventId = newPinnedEvent.id;
-	let deletePinnedEvent: PinnedEventEntity = await deletePinnedEventInteractor(
-		pinnedEventId,
-		pinnedEventRepo
-	);
-	expect(deletePinnedEvent).not.toBeNull();
+test('PinnedSchedule delete', async () => {
+	pinnedScheduleId = newPinnedSchedule.id;
+	let deletePinnedSchedule: PinnedScheduleEntity =
+		await deletePinnedScheduleInteractor(pinnedScheduleId, pinnedScheduleRepo);
+	expect(deletePinnedSchedule).not.toBeNull();
 });
 test('Subject delete', async () => {
 	subjectId = newSubject.id;
@@ -181,4 +222,24 @@ test('Event delete', async () => {
 		eventRepo
 	);
 	expect(deleteEvent).not.toBeNull();
+});
+test('Event delete', async () => {
+	eventId = newEvent.id;
+	let deleteEvent: EventEntity = await deleteEventInteractor(
+		eventId,
+		eventRepo
+	);
+	expect(deleteEvent).not.toBeNull();
+});
+test('Room delete', async () => {
+	roomId = newRoom.id;
+	let deleteRoom: RoomEntity = await deleteRoomInteractor(roomId, roomRepo);
+	expect(deleteRoom).not.toBeNull();
+});
+test('Schedule delete', async () => {
+	let deleteSchedule: ScheduleEntity = await deleteScheduleInteractor(
+		scheduleId,
+		scheduleRepo
+	);
+	expect(deleteSchedule).not.toBeNull();
 });

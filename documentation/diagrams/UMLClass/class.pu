@@ -75,15 +75,15 @@ class User {
     updateUserInteractor()
 }
 
-class PinnedEvent { 
+class PinnedSchedule { 
     -id:String
     -subjectId: String
     -eventId: String
-    createPinnedEventInteractor()
-    deletePinnedEventInteractor()
-    getPinnedEventInteractor()
-    listPinnedEventsInteractor()
-    updatePinnedEventInteractor()
+    createPinnedScheduleInteractor()
+    deletePinnedScheduleInteractor()
+    getPinnedScheduleInteractor()
+    listPinnedSchedulesInteractor()
+    updatePinnedScheduleInteractor()
 }
 
 class Event { 
@@ -228,7 +228,7 @@ Content "1" ---* "1" Seminar
 User "0.." - "1.." Subject
 (User, Subject) .. Enrollment  
 
-Seminar "1" -right- "1.." PinnedEvent
+Seminar "1" -right- "1.." PinnedSchedule
 Seminar "1" --> "1" Event
 Event "1" --> "*" RoomTimeEvent
 Room "1" --> "*" RoomTimeEvent

@@ -1,7 +1,7 @@
 import { EventEntity } from '../../Event/model/EventEntity';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
-import { PinnedEventEntity } from '../../PinnedEvent/model/PinnedEventEntity';
-import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
+import { PinnedScheduleEntity } from '../../PinnedSchedule/model/PinnedScheduleEntity';
+import PinnedScheduleRepositoryPrisma from '../../PinnedSchedule/repository/PinnedScheduleRepositoryPrisma';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
 import { approvalData } from '../model/approvalData';
@@ -13,7 +13,7 @@ export default async function approveSeminarInteractor(
 ) {
 	let eventRepo = new EventRepositoryPrisma();
 	let scheduleRepo = new ScheduleRepositoryPrisma();
-	let pinnedEventRepo = new PinnedEventRepositoryPrisma();
+	let pinnedScheduleRepo = new PinnedScheduleRepositoryPrisma();
 
 	let confirmedAssignment = await assignmentRepository.approveAssignment(
 		data.assignmentId
@@ -38,12 +38,14 @@ export default async function approveSeminarInteractor(
 	};
 	let assignmentSchedule = await scheduleRepo.create(schedule);
 
-	let pinnedEvent: PinnedEventEntity = {
+	let pinnedSchedule: PinnedScheduleEntity = {
 		id: '',
 		subjectId: confirmedAssignment.subjectId!,
-		eventId: assignmentEvent.id!,
+		scheduleId: assignmentSchedule.id!,
 	};
-	let assignmentPinnedEvent = pinnedEventRepo.create(pinnedEvent);
+	let assignmentPinnedSchedule = await pinnedScheduleRepo.create(
+		pinnedSchedule
+	);
 
 	return confirmedAssignment;
 }
