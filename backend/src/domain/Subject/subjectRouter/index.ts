@@ -137,11 +137,19 @@ export default t.router({
 		}),
 
 	getEnrolledUsers: publicProcedure
-		.input(z.string())
+		.input(
+			z.object({
+				active: z.boolean().optional(),
+				archived: z.boolean().optional(),
+				subjectId: z.string(),
+			})
+		)
 		.query(async ({ input }) => {
 			let enrolledUsers = await listEnrolledUsersInteractor(
 				enrollmentRepo,
-				input
+				input.active,
+				input.archived,
+				input.subjectId
 			);
 			return enrolledUsers;
 		}),
