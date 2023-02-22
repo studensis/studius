@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client';
+import { EventEntity } from '../../Event/model/EventEntity';
 import { PinnedEventEntity } from '../model/PinnedEventEntity';
 import { updatePinnedEventEntity } from '../model/updatePinnedEventEntity';
 
@@ -20,7 +21,9 @@ export abstract class PinnedEventRepository {
 	async delete(pinnedEventId: string): Promise<PinnedEventEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async getBySubjectId(subjectId: string): Promise<PinnedEventEntity[]> {
+	async getBySubjectId(
+		subjectId: string
+	): Promise<(PinnedEventEntity & { event: EventEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 	async deleteByEventId(eventId: string): Promise<Prisma.BatchPayload> {

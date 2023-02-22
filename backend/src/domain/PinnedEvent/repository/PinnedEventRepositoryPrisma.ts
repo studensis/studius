@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { EventEntity } from '../../Event/model/EventEntity';
 import { PinnedEventEntity } from '../model/PinnedEventEntity';
 import { updatePinnedEventEntity } from '../model/updatePinnedEventEntity';
 import { PinnedEventRepository } from './PinnedEventRepository';
@@ -74,11 +75,14 @@ export default class PinnedEventRepositoryPrisma extends PinnedEventRepository {
 	async getBySubjectId(subjectId: string) {
 		let datas = await prisma.pinnedEvent.findMany({
 			where: { subjectId: subjectId },
+			include: {
+				event: true,
+			},
 		});
-		let pinnedEvents: PinnedEventEntity[] = [];
+		let pinnedEvents: (PinnedEventEntity & { event: EventEntity })[] = [];
 		if (datas) {
-			datas.forEach((data: PinnedEventEntity) => {
-				let pinnedEvent: PinnedEventEntity = data;
+			datas.forEach((data) => {
+				let pinnedEvent = data;
 				pinnedEvents.push(pinnedEvent);
 			});
 			return pinnedEvents;

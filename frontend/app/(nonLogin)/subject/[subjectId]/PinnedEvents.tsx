@@ -9,13 +9,13 @@ import { Stack } from '../../../../components/@studius/PageElements/Stack';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
 export const PinnedEvents = ({ subjectId }: { subjectId: string }) => {
-	const events = trpc.subject.getPinnedSchedules.useQuery(subjectId);
+	const pinnedEvents = trpc.subject.getPinnedEvents.useQuery(subjectId);
 	useEffect(() => {
-		console.log(events.data);
-	}, [events]);
+		console.log(pinnedEvents.data);
+	}, [pinnedEvents]);
 	return (
 		<>
-			{events.data && events.data.length > 0 && (
+			{pinnedEvents.data && pinnedEvents.data.length > 0 && (
 				<>
 					<div>
 						<SectionTop>
@@ -24,12 +24,14 @@ export const PinnedEvents = ({ subjectId }: { subjectId: string }) => {
 							</h3>
 						</SectionTop>
 						<Stack cols={3}>
-							{events.data.map((event) => (
+							{pinnedEvents.data.map((pinnedEvent) => (
 								<>
-									<Link href={`/event/${event.eventId}`}>
+									<Link href={`/event/${pinnedEvent.eventId}`}>
 										<Block className="hover:opacity-60">
-											<p className="title3">{event.event.title}</p>
-											<p className="body3 text-neutral-strong">{event.id}</p>
+											<p className="title3">{pinnedEvent.event.title}</p>
+											<p className="body3 text-neutral-strong">
+												{pinnedEvent.id}
+											</p>
 										</Block>
 									</Link>
 								</>
