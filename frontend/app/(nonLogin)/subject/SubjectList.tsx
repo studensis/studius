@@ -1,17 +1,19 @@
 import { useRouter } from 'next/navigation';
-import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
 import { Table } from '../../../components/@studius/Table/Table';
+import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
-	const { setModal } = useDialog();
-
 	const router = useRouter();
+	const { user } = useLogin();
 
-	const subjectList = trpc.subject.listSubjects.useQuery();
-	const subjectDelete = trpc.subject.deleteSubjectById.useMutation();
+	const subjectList = trpc.user.getEnrolledSubjects
+		.useQuery({ userId: user!.userId, active: true })
+		.data?.map((enrollment) => {
+			return enrollment.subject;
+		});
 
 	return (
 		// <div className="">
@@ -26,7 +28,7 @@ export default function SubjectList() {
 				<Stack cols={3} mobileCols={1}>
 					<Block>
 						<p className="caption text-neutral-strong">Number of Subjects</p>
-						<p className="title2 text-neutral">{subjectList.data?.length}</p>
+						<p className="title2 text-neutral">{subjectList?.length}</p>
 					</Block>
 				</Stack>
 				<Block>
@@ -40,7 +42,7 @@ export default function SubjectList() {
 						onClick={(subject) => {
 							router.push('/subject/' + subject.id);
 						}}
-						objects={subjectList.data || []}
+						objects={subjectList || []}
 					></Table>
 				</Block>
 			</Stack>

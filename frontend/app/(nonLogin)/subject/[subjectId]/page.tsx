@@ -177,6 +177,7 @@ function SubjectPage(props: PageProps) {
 						</div>
 
 						{subject.data?.contentId &&
+							// eslint-disable-next-line react/jsx-key
 							subject.data!.contentId.map((id) => <Content contentId={id} />)}
 					</>
 				)}
