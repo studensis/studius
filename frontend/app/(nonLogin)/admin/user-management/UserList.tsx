@@ -74,7 +74,7 @@ export default function SubjectList() {
 						<div className="m-4  ">
 							<p className="title1 m-2">Filter:</p>
 							<input
-								className="rounded-xl w-full border-accent border-2 p-4 outline-none "
+								className="rounded-xl w-full border-accent border-2 p-4 outline-none bg-neutral-weak "
 								type="text"
 								onChange={(e) => {
 									setFilterBy(e.target.value);

@@ -130,32 +130,38 @@ export const UpdateUserModal = ({
 								}}
 							/>
 							<Protected minRole="SUPERADMIN">
-								<select
-									className="flex items-center outline-none text-neutral rounded-xl bg-neutral-weak p-4 overflow-hidden "
-									onChange={(e) => {
-										setFormData({
-											...formData,
-											userRole: e.target.value as
-												| 'DEFAULT'
-												| 'ADMIN'
-												| 'SUPERADMIN',
-										});
-									}}
-									multiple
-								>
-									<option className="m-2 p-2 text-neutral-400 " value="DEFAULT">
-										DEFAULT
-									</option>
-									<option className="m-2 p-2 text-neutral-400" value="ADMIN">
-										ADMIN
-									</option>
-									<option
-										className="m-2 p-2 text-neutral-400"
-										value="SUPERADMIN"
+								<div className=" outline-none text-neutral rounded-xl bg-neutral-weak p-4 overflow-hidden ">
+									<p className="body1 ">Current role: {user.userRole}</p>
+									<select
+										className="flex items-center outline-none text-neutral rounded-xl bg-neutral-weak p-4 overflow-hidden "
+										onChange={(e) => {
+											setFormData({
+												...formData,
+												userRole: e.target.value as
+													| 'DEFAULT'
+													| 'ADMIN'
+													| 'SUPERADMIN',
+											});
+										}}
+										multiple
 									>
-										SUPERADMIN
-									</option>
-								</select>
+										<option
+											className="m-2 p-2 text-neutral-400 "
+											value="DEFAULT"
+										>
+											DEFAULT
+										</option>
+										<option className="m-2 p-2 text-neutral-400" value="ADMIN">
+											ADMIN
+										</option>
+										<option
+											className="m-2 p-2 text-neutral-400"
+											value="SUPERADMIN"
+										>
+											SUPERADMIN
+										</option>
+									</select>
+								</div>
 							</Protected>
 
 							<div className="sticky bottom-0 left-0">
