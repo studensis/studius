@@ -5,6 +5,7 @@ import { paginationObj } from '../../pagination/paginationObj';
 import createPinnedEventInteractor from '../interactors/createPinnedEventInteractor';
 import deletePinnedEventInteractor from '../interactors/deletePinnedEventInteractor';
 import getPinnedEventInteractor from '../interactors/getPinnedEventInteractor';
+import listPaginatedPinnedEventsInteractor from '../interactors/listPaginatedPinnedEventsInteractor';
 import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
 import updatePinnedEventInteractor from '../interactors/updatePinnedEventInteractor';
 import { PinnedEventEntity } from '../model/PinnedEventEntity';
@@ -43,12 +44,15 @@ export default t.router({
 		return pinnedEvent;
 	}),
 
-	listPinnedEvents: t.procedure
-		.input(paginationObj)
-		.query(async ({ input }) => {
-			let pinnedEvents = await listPinnedEventsInteractor(repo, input);
-			return pinnedEvents as PinnedEventEntity[];
-		}),
+	listPinnedEvents: t.procedure.query(async () => {
+		let pinnedEvents = await listPinnedEventsInteractor(repo);
+		return pinnedEvents as PinnedEventEntity[];
+	}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedPinnedEventsInteractor(repo, input);
+		return response;
+	}),
 
 	updatePinnedEventById: t.procedure
 		.input(

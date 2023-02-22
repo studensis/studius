@@ -161,7 +161,7 @@ enum AssignmentStatus {
 enum LinkedEntity {
   USER
   SUBJECT
-  SEMINAR
+  ASSIGNMENT
   POST
 }
 

@@ -5,6 +5,7 @@ import { paginationObj } from '../../pagination/paginationObj';
 import createPostInteractor from '../interactors/createPostInteractor';
 import deletePostInteractor from '../interactors/deletePostInteractor';
 import getPostInteractor from '../interactors/getPostInteractor';
+import listPaginatedPostsInteractor from '../interactors/listPaginatedPostsInteractor';
 import listPostsInteractor from '../interactors/listPostsInteractor';
 import updatePostInteractor from '../interactors/updatePostInteractor';
 import { PostEntity } from '../model/PostEntity';
@@ -49,9 +50,14 @@ export default t.router({
 		return post;
 	}),
 
-	listPosts: t.procedure.input(paginationObj).query(async ({ input }) => {
-		let posts = await listPostsInteractor(repo, input);
+	listPosts: t.procedure.query(async () => {
+		let posts = await listPostsInteractor(repo);
 		return posts as PostEntity[];
+	}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedPostsInteractor(repo, input);
+		return response;
 	}),
 
 	updatePostById: t.procedure

@@ -9,6 +9,7 @@ import deleteScheduleInteractor from '../../Schedule/interactors/deleteScheduleI
 import deleteUserPresenceByScheduleIDInteractor from '../../Schedule/interactors/deleteUserPresenceByScheduleIdInteractor';
 import getScheduleInteractor from '../../Schedule/interactors/getScheduleInteractor';
 import listAssociatedUserPresencesInteractor from '../../Schedule/interactors/listAssociatedUserPresencesInteractor';
+import listPaginatedSchedulesInteractor from '../../Schedule/interactors/listPaginatedSchedulesInteractor';
 import listSchedulesInteractor from '../../Schedule/interactors/listSchedulesInteractor';
 import updateScheduleInteractor from '../../Schedule/interactors/updateScheduleInteractor';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
@@ -24,6 +25,7 @@ import deleteScheduleByEventIdInteractor from '../interactors/deleteScheduleByEv
 import getEventInteractor from '../interactors/getEventInteractor';
 import listAssociatedSchedulesInteractor from '../interactors/listAssociatedSchedulesInteractor';
 import listEventsInteractor from '../interactors/listEventsInteractor';
+import listPaginatedEventsInteractor from '../interactors/listPaginatedEventsInteractor';
 import updateEventInteractor from '../interactors/updateEventInteractor';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
@@ -73,8 +75,8 @@ export default t.router({
 		return event;
 	}),
 
-	listEvents: t.procedure.input(paginationObj).query(async ({ input }) => {
-		let events = await listEventsInteractor(repo, input);
+	listEvents: t.procedure.query(async () => {
+		let events = await listEventsInteractor(repo);
 		return events as EventEntity[];
 	}),
 
@@ -101,6 +103,11 @@ export default t.router({
 			let a = await archiveEventInteractor(input, repo);
 			return a;
 		}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedEventsInteractor(repo, input);
+		return response;
+	}),
 	//
 	//
 	//
@@ -155,19 +162,24 @@ export default t.router({
 		return schedule;
 	}),
 
-	listAllSchedules: t.procedure
+	listAllSchedules: t.procedure.query(async () => {
+		let schedules = await listSchedulesInteractor(Schedulerepo);
+		return schedules;
+	}),
+	listPaginatedSchedules: t.procedure
 		.input(paginationObj)
 		.query(async ({ input }) => {
-			let schedules = await listSchedulesInteractor(Schedulerepo, input);
-			return schedules;
+			let response = await listPaginatedSchedulesInteractor(
+				Schedulerepo,
+				input
+			);
+			return response;
 		}),
 
-	listSchedules: t.procedure
-		.input(paginationObj.extend({ eventId: z.string() }))
-		.query(async ({ input }) => {
-			let schedule = await listAssociatedSchedulesInteractor(repo, input);
-			return schedule;
-		}),
+	listSchedules: t.procedure.input(z.string()).query(async ({ input }) => {
+		let schedule = await listAssociatedSchedulesInteractor(repo, input);
+		return schedule;
+	}),
 
 	updateSchedule: t.procedure
 		.input(

@@ -19,6 +19,7 @@ import deletePinnedEventBySubjectIdInteractor from '../interactors/deletePinnedE
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
+import listPaginatedSubjectsInteractor from '../interactors/listPaginatedSubjectsInteractor';
 import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
@@ -108,11 +109,16 @@ export default t.router({
 		return subject;
 	}),
 
-	listSubjects: publicProcedure
+	listSubjects: publicProcedure.query(async () => {
+		let subjects = await listSubjectsInteractor(repo);
+		return subjects;
+	}),
+
+	listPaginatedSubjects: publicProcedure
 		.input(paginationObj)
 		.query(async ({ input }) => {
-			let subjects = await listSubjectsInteractor(repo, input);
-			return subjects;
+			let response = await listPaginatedSubjectsInteractor(repo, input);
+			return response;
 		}),
 
 	updateSubjectById: authedProcedure
@@ -140,7 +146,7 @@ export default t.router({
 		}),
 
 	getEnrolledUsers: publicProcedure
-		.input(paginationObj.extend({ subjectId: z.string() }))
+		.input(z.string())
 		.query(async ({ input }) => {
 			let enrolledUsers = await listEnrolledUsersInteractor(
 				enrollmentRepo,
@@ -150,7 +156,7 @@ export default t.router({
 		}),
 
 	getPinnedEvents: publicProcedure
-		.input(paginationObj.extend({ subjectId: z.string() }))
+		.input(z.string())
 		.query(async ({ input }) => {
 			let pinnedEvents = await listPinnedEventsBySubjectIdInteractor(
 				pinnedEventRepo,

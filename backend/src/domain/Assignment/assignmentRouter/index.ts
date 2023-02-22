@@ -7,6 +7,7 @@ import createAssignmentInteractor from '../interactors/createAssignmentInteracto
 import deleteAssignmentInteractor from '../interactors/deleteAssignmentInteractor';
 import getAssignmentInteractor from '../interactors/getAssignmentInteractor';
 import listAssignmentsInteractor from '../interactors/listAssignmentsInteractor';
+import listPaginatedAssignmentsInteractor from '../interactors/listPaginatedAssignmentsInteractor';
 import listUserAssignmentsInteractor from '../interactors/listUserAssignments';
 import updateAssignmentInteractor from '../interactors/updateAssignmentInteractor';
 import { AssignmentEntity } from '../model/AssignmentEntity';
@@ -98,12 +99,10 @@ export default t.router({
 
 	listUserAssignments: t.procedure
 		.input(
-			paginationObj.merge(
-				z.object({
-					id: z.string(),
-					options: z.object({ isStudent: z.boolean(), isMentor: z.boolean() }),
-				})
-			)
+			z.object({
+				id: z.string(),
+				options: z.object({ isStudent: z.boolean(), isMentor: z.boolean() }),
+			})
 		)
 		.query(async ({ input }) => {
 			let response = await listUserAssignmentsInteractor(repo, input);
@@ -114,6 +113,13 @@ export default t.router({
 		let response = await listAssignmentsInteractor(repo);
 		return response;
 	}),
+
+	listAssingmentPaginated: t.procedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedAssignmentsInteractor(repo, input);
+			return response;
+		}),
 
 	approveSeminar: t.procedure
 		.input(

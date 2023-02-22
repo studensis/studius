@@ -1,10 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { SubjectRepository } from '../repository/SubjectRepository';
 
 export default async function listSubjectsInteractor(
-	subjectRepository: SubjectRepository,
-	paginationInfo: paginationType
+	subjectRepository: SubjectRepository
 ) {
-	let subjects = await subjectRepository.getAll(paginationInfo);
+	let subjects = await subjectRepository.getAll();
 	return subjects;
 }

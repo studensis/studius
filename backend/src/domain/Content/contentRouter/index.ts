@@ -9,6 +9,7 @@ import createContentInteractor from '../interactors/createContentInteractor';
 import deleteContentInteractor from '../interactors/deleteContentInteractor';
 import getContentInteractor from '../interactors/getContentInteractor';
 import listContentsInteractor from '../interactors/listContentsInteractor';
+import listPaginatedContentInteractor from '../interactors/listPaginatedContentInteractor';
 import updateContentInteractor from '../interactors/updateContentInteractor';
 import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
@@ -50,12 +51,10 @@ export default t.router({
 		return content;
 	}),
 
-	listContents: publicProcedure
-		.input(paginationObj)
-		.query(async ({ input }) => {
-			let contents = await listContentsInteractor(repo, input);
-			return contents as ContentEntity[];
-		}),
+	listContents: publicProcedure.query(async () => {
+		let contents = await listContentsInteractor(repo);
+		return contents as ContentEntity[];
+	}),
 
 	updateContentById: publicProcedure
 		.input(
@@ -73,4 +72,9 @@ export default t.router({
 			let updatedContent = await updateContentInteractor(repo, content);
 			return updatedContent;
 		}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedContentInteractor(repo, input);
+		return response;
+	}),
 });

@@ -14,6 +14,7 @@ import getUserInteractor from '../interactors/getUserInteractor';
 import isUserEnrolledInteractor from '../interactors/isUserEnrolledInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
 import listMenteesInteractor from '../interactors/listMenteeInteractor';
+import listPaginatedUsersInteractor from '../interactors/listPaginatedUsersInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
@@ -64,10 +65,17 @@ export default t.router({
 		return user;
 	}),
 
-	listUsers: publicProcedure.input(paginationObj).query(async ({ input }) => {
-		let users = await listUsersInteractor(repo, input);
+	listUsers: publicProcedure.query(async () => {
+		let users = await listUsersInteractor(repo);
 		return users as UserEntity[];
 	}),
+
+	listUsersPaginated: publicProcedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedUsersInteractor(repo, input);
+			return response;
+		}),
 
 	updateUserById: publicProcedure
 
@@ -170,7 +178,7 @@ export default t.router({
 		}),
 
 	getEnrolledSubjects: publicProcedure
-		.input(paginationObj.extend({ userId: z.string() }))
+		.input(z.string())
 		.query(async ({ input }) => {
 			let enrollments = await listEnrolledSubjectsInteractor(
 				input,

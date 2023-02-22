@@ -4,7 +4,12 @@ import { PinnedEventEntity } from '../model/PinnedEventEntity';
 import { updatePinnedEventEntity } from '../model/updatePinnedEventEntity';
 
 export abstract class PinnedEventRepository {
-	async getAll(paginationInfo: paginationType): Promise<PinnedEventEntity[]> {
+	async getAll(): Promise<PinnedEventEntity[]> {
+		throw new Error('Method not implemented.');
+	}
+	async listPaginated(
+		paginationInfo: paginationType
+	): Promise<PinnedEventEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<PinnedEventEntity> {
@@ -21,11 +26,7 @@ export abstract class PinnedEventRepository {
 	async delete(pinnedEventId: string): Promise<PinnedEventEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async getBySubjectId(input: {
-		pageNumber: number;
-		objectsPerPage: number;
-		subjectId: string;
-	}): Promise<PinnedEventEntity[]> {
+	async getBySubjectId(subjectId: string): Promise<PinnedEventEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async deleteByEventId(eventId: string): Promise<Prisma.BatchPayload> {

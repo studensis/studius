@@ -3,7 +3,7 @@ import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 
 export abstract class AssignmentRepository {
-	async getAll(paginationInfo: paginationType): Promise<AssignmentEntity[]> {
+	async getAll(): Promise<AssignmentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<AssignmentEntity> {
@@ -20,5 +20,10 @@ export abstract class AssignmentRepository {
 	}
 	async approveAssignment(id: string): Promise<AssignmentEntity> {
 		throw new Error('Method not implemented.');
+	}
+	async listPaginated(
+		paginationInfo: paginationType
+	): Promise<AssignmentEntity[]> {
+		throw new Error('Method not implemented');
 	}
 }
