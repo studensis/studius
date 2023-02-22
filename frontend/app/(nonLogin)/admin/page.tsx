@@ -47,11 +47,7 @@ export default function AdminTools() {
 	const { user, loggedIn } = useLogin();
 	return (
 		<>
-			<Protected
-				subjectId="a476e67a-20c8-41f2-aeda-6c14cf1888c9"
-				minRole={'ADMIN'}
-				displayMessage
-			>
+			<Protected minRole={'ADMIN'} displayMessage>
 				<PageStack>
 					<PageHeader
 						title="Workspace Tools"

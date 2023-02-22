@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import { UserRepository } from './UserRepository';
@@ -6,9 +7,12 @@ import { UserRepository } from './UserRepository';
 const prisma = new PrismaClient();
 
 export default class UserRepositoryPrisma extends UserRepository {
-	async getAll() {
+	async getAll(paginationInfo: paginationType) {
 		// prisma Users
-		let datas = await prisma.user.findMany();
+		let datas = await prisma.user.findMany({
+			skip: paginationInfo.pageNumber * paginationInfo.objectsPerPage,
+			take: paginationInfo.objectsPerPage,
+		});
 
 		// map to UserEntities
 		let users: UserEntity[] = [];
@@ -94,10 +98,16 @@ export default class UserRepositoryPrisma extends UserRepository {
 			return null;
 		}
 	}
-	async listMentees(id: string) {
+	async listMentees(input: {
+		pageNumber: number;
+		objectsPerPage: number;
+		mentorId: string;
+	}) {
 		let query = await prisma.user.findMany({
+			skip: input.pageNumber * input.objectsPerPage,
+			take: input.objectsPerPage,
 			where: {
-				mentorID: id,
+				mentorID: input.mentorId,
 			},
 		});
 		let mentees: UserEntity[] = [];

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
 import archiveScheduleInteractor from '../../Schedule/interactors/archiveScheduleInteractor';
 import createScheduleInteractor from '../../Schedule/interactors/createScheduleInteractor';
@@ -72,8 +73,8 @@ export default t.router({
 		return event;
 	}),
 
-	listEvents: t.procedure.query(async () => {
-		let events = await listEventsInteractor(repo);
+	listEvents: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let events = await listEventsInteractor(repo, input);
 		return events as EventEntity[];
 	}),
 
@@ -154,15 +155,19 @@ export default t.router({
 		return schedule;
 	}),
 
-	listAllSchedules: t.procedure.query(async () => {
-		let schedules = await listSchedulesInteractor(Schedulerepo);
-		return schedules;
-	}),
+	listAllSchedules: t.procedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let schedules = await listSchedulesInteractor(Schedulerepo, input);
+			return schedules;
+		}),
 
-	listSchedules: t.procedure.input(z.string()).query(async ({ input }) => {
-		let schedule = await listAssociatedSchedulesInteractor(repo, input);
-		return schedule;
-	}),
+	listSchedules: t.procedure
+		.input(paginationObj.extend({ eventId: z.string() }))
+		.query(async ({ input }) => {
+			let schedule = await listAssociatedSchedulesInteractor(repo, input);
+			return schedule;
+		}),
 
 	updateSchedule: t.procedure
 		.input(

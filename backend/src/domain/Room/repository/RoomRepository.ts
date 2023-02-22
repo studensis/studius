@@ -1,8 +1,9 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { RoomEntity } from '../model/RoomEntity';
 import { updateRoomEntity } from '../model/updateRoomEntity';
 
 export abstract class RoomRepository {
-	async getAll(): Promise<RoomEntity[]> {
+	async getAll(paginationInfo: paginationType): Promise<RoomEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<RoomEntity> {

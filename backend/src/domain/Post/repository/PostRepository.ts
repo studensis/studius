@@ -1,8 +1,9 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { PostEntity } from '../model/PostEntity';
 import { updatePostEntity } from '../model/updatePostEntity';
 
 export abstract class PostRepository {
-	async getAll(): Promise<PostEntity[]> {
+	async getAll(paginationInfo: paginationType): Promise<PostEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<PostEntity> {

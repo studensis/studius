@@ -9,7 +9,7 @@ import EventList from './EventList';
 const page = () => {
 	return (
 		<>
-			<Protected minRole={'ADMIN'} displayMessage>
+			<Protected minRole="ADMIN" displayMessage>
 				<PageStack>
 					<Link href="/admin">
 						<Button>Back to Workspace tools</Button>

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
 import { ContentRepository } from './ContentRepository';
@@ -6,9 +7,12 @@ import { ContentRepository } from './ContentRepository';
 const prisma = new PrismaClient();
 
 export default class ContentRepositoryPrisma extends ContentRepository {
-	async getAll() {
+	async getAll(paginationInfo: paginationType) {
 		// prisma Contents
-		let datas = await prisma.content.findMany();
+		let datas = await prisma.content.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
 
 		// map to ContentEntities
 		let contents: ContentEntity[] = [];
@@ -62,6 +66,7 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 				linkedEntity: content.linkedEntity,
 				linkedEntityId: content.linkedEntityId,
 				date: content.date,
+				file: Buffer.from('0'),
 			},
 		});
 

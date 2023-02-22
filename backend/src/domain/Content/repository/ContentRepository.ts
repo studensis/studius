@@ -1,8 +1,9 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
 
 export abstract class ContentRepository {
-	async getAll(): Promise<ContentEntity[]> {
+	async getAll(paginationInfo: paginationType): Promise<ContentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<ContentEntity> {
