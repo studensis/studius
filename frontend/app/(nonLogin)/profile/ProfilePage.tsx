@@ -73,6 +73,7 @@ const ProfilePage: FC<props> = ({}) => {
 					<Stack cols={5}>
 						{subjects.data?.map((subject) => (
 							<Link
+								key="w"
 								className="tilte1 text-center rounded-lg border-2 border-accent-medium text-black p-2 m-2 hover:bg-accent-weak"
 								href={'/subject/' + subject.subject.id}
 							>
@@ -87,7 +88,7 @@ const ProfilePage: FC<props> = ({}) => {
 				<h1 className="title1">Change your profile picture</h1>
 				<label htmlFor="url">Input image URL here</label>
 				<input
-					className="rounded-xl border-2 border-accent-medium outline-none p-3 my-3 w-full "
+					className="rounded-xl border-2 border-accent-medium outline-none p-3 my-3 w-full bg-neutral-weak"
 					name="url"
 					type="text"
 					onChange={(e) => {
