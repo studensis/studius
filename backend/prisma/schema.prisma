@@ -18,23 +18,23 @@ model User {
   userRole     Role
   mentorID     String?
   avatar       String?
+  googleUserId String?        @unique
   enrollment   Enrollment[]
-  userPresence UserPresence[]
   mentor       User?          @relation("Mentorstvo", fields: [mentorID], references: [id])
   mentee       User[]         @relation("Mentorstvo")
-  googleUserId String?        @unique
+  userPresence UserPresence[]
 }
 
 model Subject {
-  id          String        @id @default(uuid())
-  title       String        @unique
-  description String
-  ectsBod     String
-  semester    Semester
-  status      Status
-  contentId   String[]
-  Enrollment  Enrollment[]
-  PinnedEvent PinnedEvent[]
+  id             String           @id @default(uuid())
+  title          String           @unique
+  description    String
+  ectsBod        String
+  semester       Semester
+  status         Status
+  contentId      String[]
+  Enrollment     Enrollment[]
+  PinnedSchedule PinnedSchedule[]
 }
 
 model Content {
@@ -75,29 +75,20 @@ model Assignment {
   contentId        String?
   subjectId        String?
   userId           String?
-  deadline         DateTime?
   type             AssignmentType   @default(HOMEWORK)
   assignmentStatus AssignmentStatus @default(DRAFT)
+  deadline         DateTime?
   status           Status           @default(ACTIVE)
 }
 
 model Event {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   title          String
   description    String
   linkedEntity   LinkedEntity
   linkedEntityId String
-  status         Status        @default(ACTIVE)
+  status         Status       @default(ACTIVE)
   Schedule       Schedule[]
-  PinnedEvent    PinnedEvent[]
-}
-
-model PinnedEvent {
-  id        String  @id @default(uuid())
-  subjectId String
-  subject   Subject @relation(fields: [subjectId], references: [id])
-  eventId   String
-  event     Event   @relation(fields: [eventId], references: [id])
 }
 
 model Room {
@@ -108,15 +99,16 @@ model Room {
 }
 
 model Schedule {
-  id           String         @id @default(uuid())
-  dateStart    DateTime
-  dateEnd      DateTime
-  eventId      String
-  roomId       String
-  status       Status         @default(ACTIVE)
-  UserPresence UserPresence[]
-  event        Event          @relation(fields: [eventId], references: [id])
-  room         Room           @relation(fields: [roomId], references: [id])
+  id             String           @id @default(uuid())
+  dateStart      DateTime
+  dateEnd        DateTime
+  eventId        String
+  roomId         String
+  status         Status           @default(ACTIVE)
+  PinnedSchedule PinnedSchedule[]
+  event          Event            @relation(fields: [eventId], references: [id])
+  room           Room             @relation(fields: [roomId], references: [id])
+  UserPresence   UserPresence[]
 }
 
 model UserPresence {
@@ -126,6 +118,14 @@ model UserPresence {
   userId         String
   schedule       Schedule @relation(fields: [scheduleId], references: [id])
   user           User     @relation(fields: [userId], references: [id])
+}
+
+model PinnedSchedule {
+  id         String   @id
+  subjectId  String
+  scheduleId String
+  Schedule   Schedule @relation(fields: [scheduleId], references: [id])
+  Subject    Subject  @relation(fields: [subjectId], references: [id])
 }
 
 enum Role {

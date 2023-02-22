@@ -7,14 +7,17 @@ import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import { paginationObj } from '../../pagination/paginationObj';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
 import getUserInteractor from '../interactors/getUserInteractor';
+import getUserPostsInteractor from '../interactors/getUserPostsInteractor';
 import isUserEnrolledInteractor from '../interactors/isUserEnrolledInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
 import listMenteesInteractor from '../interactors/listMenteeInteractor';
 import listPaginatedUsersInteractor from '../interactors/listPaginatedUsersInteractor';
+import listUserPostsInteractor from '../interactors/listUserPostsInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
@@ -25,6 +28,7 @@ import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 let repo = new UserRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
+let postRepo = new PostRepositoryPrisma();
 
 export default t.router({
 	createUser: adminProcedure
@@ -221,5 +225,15 @@ export default t.router({
 	listMentees: t.procedure.input(z.string()).query(async ({ input }) => {
 		let mentees = await listMenteesInteractor(repo, input);
 		return mentees;
+	}),
+
+	getUserPosts: publicProcedure.input(z.string()).query(async ({ input }) => {
+		let response = await getUserPostsInteractor(postRepo, input);
+		return response;
+	}),
+
+	listUserPosts: publicProcedure.query(async () => {
+		let response = await listUserPostsInteractor(postRepo);
+		return response;
 	}),
 });

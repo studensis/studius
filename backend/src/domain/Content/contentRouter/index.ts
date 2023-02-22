@@ -24,7 +24,7 @@ export default t.router({
 				markdownText: z.string(),
 				plainText: z.string(),
 				date: z.string().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']),
+				linkedEntity: z.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST']),
 				linkedEntityId: z.string(),
 			})
 		)
@@ -63,7 +63,9 @@ export default t.router({
 				markdownText: z.string().optional(),
 				plainText: z.string().optional(),
 				date: z.date().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']).optional(),
+				linkedEntity: z
+					.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST'])
+					.optional(),
 				linkedEntityId: z.string().optional(),
 			})
 		)

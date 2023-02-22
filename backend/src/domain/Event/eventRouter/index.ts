@@ -43,7 +43,7 @@ export default t.router({
 			z.object({
 				title: z.string(),
 				description: z.string(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']),
+				linkedEntity: z.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST']),
 				linkedEntityId: z.string(),
 			})
 		)
@@ -86,7 +86,9 @@ export default t.router({
 				id: z.string(),
 				title: z.string().optional(),
 				description: z.string().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']).optional(),
+				linkedEntity: z
+					.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST'])
+					.optional(),
 				linkedEntityId: z.string().optional(),
 			})
 		)

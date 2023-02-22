@@ -1,87 +1,87 @@
 import { PrismaClient } from '@prisma/client';
 import { paginationType } from '../../pagination/paginationObj';
-import { PinnedEventEntity } from '../model/PinnedEventEntity';
-import { updatePinnedEventEntity } from '../model/updatePinnedEventEntity';
-import { PinnedEventRepository } from './PinnedEventRepository';
+import { pinnedScheduleEntity } from '../model/pinnedScheduleEntity';
+import { updatepinnedScheduleEntity } from '../model/updatepinnedScheduleEntity';
+import { pinnedScheduleRepository } from './pinnedScheduleRepository';
 
 const prisma = new PrismaClient();
 
-export default class PinnedEventRepositoryPrisma extends PinnedEventRepository {
+export default class pinnedScheduleRepositoryPrisma extends pinnedScheduleRepository {
 	async getAll() {
-		// prisma PinnedEvents
-		let datas = await prisma.pinnedEvent.findMany();
+		// prisma pinnedSchedules
+		let datas = await prisma.pinnedSchedule.findMany();
 
-		// map to PinnedEventEntities
-		let pinnedEvents: PinnedEventEntity[] = [];
-		datas.forEach((data: PinnedEventEntity) => {
-			let pinnedEvent: PinnedEventEntity = data;
-			pinnedEvents.push(pinnedEvent);
+		// map to pinnedScheduleEntities
+		let pinnedSchedules: pinnedScheduleEntity[] = [];
+		datas.forEach((data: pinnedScheduleEntity) => {
+			let pinnedSchedule: pinnedScheduleEntity = data;
+			pinnedSchedules.push(pinnedSchedule);
 		});
 
-		return pinnedEvents;
+		return pinnedSchedules;
 	}
 	async listPaginated(paginationInfo: paginationType) {
-		// prisma PinnedEvents
-		let datas = await prisma.pinnedEvent.findMany({
+		// prisma pinnedSchedules
+		let datas = await prisma.pinnedSchedule.findMany({
 			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
 			take: paginationInfo.objectsPerPage,
 		});
 
-		// map to PinnedEventEntities
-		let pinnedEvents: PinnedEventEntity[] = [];
-		datas.forEach((data: PinnedEventEntity) => {
-			let pinnedEvent: PinnedEventEntity = data;
-			pinnedEvents.push(pinnedEvent);
+		// map to pinnedScheduleEntities
+		let pinnedSchedules: pinnedScheduleEntity[] = [];
+		datas.forEach((data: pinnedScheduleEntity) => {
+			let pinnedSchedule: pinnedScheduleEntity = data;
+			pinnedSchedules.push(pinnedSchedule);
 		});
 
-		return pinnedEvents;
+		return pinnedSchedules;
 	}
 
 	async getById(id: string) {
-		let data = await prisma.pinnedEvent.findUnique({
+		let data = await prisma.pinnedSchedule.findUnique({
 			where: { id: id },
 		});
 		if (data) {
-			let pinnedEvent: PinnedEventEntity = data;
-			return pinnedEvent;
+			let pinnedSchedule: pinnedScheduleEntity = data;
+			return pinnedSchedule;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
-	async update(pinnedEventData: updatePinnedEventEntity) {
-		let updatedData = await prisma.pinnedEvent.update({
+	async update(pinnedScheduleData: updatepinnedScheduleEntity) {
+		let updatedData = await prisma.pinnedSchedule.update({
 			where: {
-				id: pinnedEventData.id,
+				id: pinnedScheduleData.id,
 			},
 			data: {
-				eventId: pinnedEventData.eventId,
-				subjectId: pinnedEventData.subjectId,
+				eventId: pinnedScheduleData.eventId,
+				subjectId: pinnedScheduleData.subjectId,
 			},
 		});
-		let rez: PinnedEventEntity = updatedData;
+		let rez: pinnedScheduleEntity = updatedData;
 
 		return rez;
 	}
 
-	async create(pinnedEvent: PinnedEventEntity) {
-		let response = await prisma.pinnedEvent.create({
+	async create(pinnedSchedule: pinnedScheduleEntity) {
+		let response = await prisma.pinnedSchedule.create({
 			data: {
-				eventId: pinnedEvent.eventId,
-				subjectId: pinnedEvent.subjectId,
+				eventId: pinnedSchedule.eventId,
+				subjectId: pinnedSchedule.subjectId,
 			},
 		});
 
 		console.log(response);
 
-		let out: PinnedEventEntity = response;
+		let out: pinnedScheduleEntity = response;
 		return out;
 	}
 
-	async delete(pinnedEventId: string) {
-		let response = await prisma.pinnedEvent.delete({
+	async delete(pinnedScheduleId: string) {
+		let response = await prisma.pinnedSchedule.delete({
 			where: {
-				id: pinnedEventId,
+				id: pinnedScheduleId,
 			},
 		});
 
@@ -89,25 +89,25 @@ export default class PinnedEventRepositoryPrisma extends PinnedEventRepository {
 	}
 
 	async getBySubjectId(subjectId: string) {
-		let datas = await prisma.pinnedEvent.findMany({
+		let datas = await prisma.pinnedSchedule.findMany({
 			where: { subjectId: subjectId },
 		});
-		let pinnedEvents: PinnedEventEntity[] = [];
+		let pinnedSchedules: pinnedScheduleEntity[] = [];
 		if (datas) {
-			datas.forEach((data: PinnedEventEntity) => {
-				let pinnedEvent: PinnedEventEntity = data;
-				pinnedEvents.push(pinnedEvent);
+			datas.forEach((data: pinnedScheduleEntity) => {
+				let pinnedSchedule: pinnedScheduleEntity = data;
+				pinnedSchedules.push(pinnedSchedule);
 			});
-			return pinnedEvents;
+			return pinnedSchedules;
 		} else {
 			throw new Error('no data');
 		}
 	}
 
 	async deleteByEventId(eventId: string) {
-		let response = await prisma.pinnedEvent.deleteMany({
+		let response = await prisma.pinnedSchedule.deleteMany({
 			where: {
-				eventId: eventId,
+				scheduleId: eventId,
 			},
 		});
 
@@ -115,7 +115,7 @@ export default class PinnedEventRepositoryPrisma extends PinnedEventRepository {
 	}
 
 	async deleteBySubjectId(subjectId: string) {
-		let response = await prisma.pinnedEvent.deleteMany({
+		let response = await prisma.pinnedSchedule.deleteMany({
 			where: {
 				subjectId: subjectId,
 			},

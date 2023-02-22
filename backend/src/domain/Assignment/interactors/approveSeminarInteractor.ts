@@ -23,7 +23,7 @@ export default async function approveSeminarInteractor(
 		id: confirmedAssignment.id,
 		title: confirmedAssignment.title,
 		description: confirmedAssignment.description!,
-		linkedEntity: 'SEMINAR',
+		linkedEntity: 'ASSIGNMENT',
 		linkedEntityId: confirmedAssignment.id,
 	};
 	let assignmentEvent = await eventRepo.create(event);

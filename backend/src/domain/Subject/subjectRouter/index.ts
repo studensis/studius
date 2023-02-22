@@ -10,6 +10,7 @@ import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRe
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
 import { paginationObj } from '../../pagination/paginationObj';
 import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
 import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
 import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
@@ -18,9 +19,11 @@ import deleteEnrollmentBySubjectIdInteractor from '../interactors/deleteEnrollme
 import deletePinnedEventBySubjectIdInteractor from '../interactors/deletePinnedEventBySubjectIdInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
+import getSubjectPostsInteractor from '../interactors/getSubjectPostsInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
 import listPaginatedSubjectsInteractor from '../interactors/listPaginatedSubjectsInteractor';
 import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
+import listSubjectPostsInteractor from '../interactors/listSubjectPostsInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -31,6 +34,7 @@ let repo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
 let pinnedEventRepo = new PinnedEventRepositoryPrisma();
 let eventRepo = new EventRepositoryPrisma();
+let postsRepo = new PostRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -164,4 +168,16 @@ export default t.router({
 			);
 			return pinnedEvents;
 		}),
+
+	getSubjectPosts: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let response = await getSubjectPostsInteractor(postsRepo, input);
+			return response;
+		}),
+
+	listSubjectPosts: publicProcedure.query(async () => {
+		let response = await listSubjectPostsInteractor(postsRepo);
+		return response;
+	}),
 });

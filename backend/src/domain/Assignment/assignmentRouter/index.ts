@@ -1,11 +1,15 @@
 import { z } from 'zod';
+import { publicProcedure } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { paginationObj } from '../../pagination/paginationObj';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import approveAssignmentInteractor from '../interactors/approveAssignmentInteractor';
 import approveSeminarInteractor from '../interactors/approveSeminarInteractor';
 import createAssignmentInteractor from '../interactors/createAssignmentInteractor';
 import deleteAssignmentInteractor from '../interactors/deleteAssignmentInteractor';
 import getAssignmentInteractor from '../interactors/getAssignmentInteractor';
+import getAssignmentPostsInteractor from '../interactors/getAssignmentPostsInteractor';
+import listAssignmentPostsInteractor from '../interactors/listAssignmentPostsInteractor';
 import listAssignmentsInteractor from '../interactors/listAssignmentsInteractor';
 import listPaginatedAssignmentsInteractor from '../interactors/listPaginatedAssignmentsInteractor';
 import listUserAssignmentsInteractor from '../interactors/listUserAssignments';
@@ -15,6 +19,7 @@ import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 import AssignmentRepositoryPrisma from '../repository/AssignmentRepositoryPrisma';
 
 let repo = new AssignmentRepositoryPrisma();
+let postRepo = new PostRepositoryPrisma();
 
 export default t.router({
 	createAssignment: t.procedure
@@ -145,5 +150,17 @@ export default t.router({
 		.mutation(async ({ input }) => {
 			let rez = await approveAssignmentInteractor(repo, input);
 			return rez;
+		}),
+
+	listAssignmentPosts: publicProcedure.query(async () => {
+		let response = await listAssignmentPostsInteractor(postRepo);
+		return response;
+	}),
+
+	getAssignmentPosts: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let response = await getAssignmentPostsInteractor(postRepo, input);
+			return response;
 		}),
 });

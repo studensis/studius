@@ -2,19 +2,19 @@ import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { paginationObj } from '../../pagination/paginationObj';
-import createPinnedEventInteractor from '../interactors/createPinnedEventInteractor';
-import deletePinnedEventInteractor from '../interactors/deletePinnedEventInteractor';
-import getPinnedEventInteractor from '../interactors/getPinnedEventInteractor';
-import listPaginatedPinnedEventsInteractor from '../interactors/listPaginatedPinnedEventsInteractor';
-import listPinnedEventsInteractor from '../interactors/listPinnedEventsInteractor';
-import updatePinnedEventInteractor from '../interactors/updatePinnedEventInteractor';
-import { PinnedEventEntity } from '../model/PinnedEventEntity';
-import PinnedEventRepositoryPrisma from '../repository/PinnedEventRepositoryPrisma';
+import createpinnedScheduleInteractor from '../interactors/createpinnedScheduleInteractor';
+import deletepinnedScheduleInteractor from '../interactors/deletepinnedScheduleInteractor';
+import getpinnedScheduleInteractor from '../interactors/getpinnedScheduleInteractor';
+import listPaginatedpinnedSchedulesInteractor from '../interactors/listPaginatedpinnedSchedulesInteractor';
+import listpinnedSchedulesInteractor from '../interactors/listpinnedSchedulesInteractor';
+import updatepinnedScheduleInteractor from '../interactors/updatepinnedScheduleInteractor';
+import { pinnedScheduleEntity } from '../model/pinnedScheduleEntity';
+import pinnedScheduleRepositoryPrisma from '../repository/pinnedScheduleRepositoryPrisma';
 
-let repo = new PinnedEventRepositoryPrisma();
+let repo = new pinnedScheduleRepositoryPrisma();
 
 export default t.router({
-	createPinnedEvent: t.procedure
+	createpinnedSchedule: t.procedure
 		.use(isAdmin)
 		.input(
 			z.object({
@@ -23,38 +23,43 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let pinnedEvent: PinnedEventEntity = {
+			let pinnedSchedule: pinnedScheduleEntity = {
 				...input,
 				id: '',
 			};
-			let newPinnedEvent = await createPinnedEventInteractor(repo, pinnedEvent);
-			return newPinnedEvent;
+			let newpinnedSchedule = await createpinnedScheduleInteractor(
+				repo,
+				pinnedSchedule
+			);
+			return newpinnedSchedule;
 		}),
 
-	deletePinnedEventById: t.procedure
+	deletepinnedScheduleById: t.procedure
 		.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let a = await deletePinnedEventInteractor(input, repo);
+			let a = await deletepinnedScheduleInteractor(input, repo);
 			return a;
 		}),
 
-	getPinnedEventById: t.procedure.input(z.string()).query(async ({ input }) => {
-		let pinnedEvent = await getPinnedEventInteractor(repo, input);
-		return pinnedEvent;
-	}),
+	getpinnedScheduleById: t.procedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let pinnedSchedule = await getpinnedScheduleInteractor(repo, input);
+			return pinnedSchedule;
+		}),
 
-	listPinnedEvents: t.procedure.query(async () => {
-		let pinnedEvents = await listPinnedEventsInteractor(repo);
-		return pinnedEvents as PinnedEventEntity[];
+	listpinnedSchedules: t.procedure.query(async () => {
+		let pinnedSchedules = await listpinnedSchedulesInteractor(repo);
+		return pinnedSchedules as pinnedScheduleEntity[];
 	}),
 
 	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
-		let response = await listPaginatedPinnedEventsInteractor(repo, input);
+		let response = await listPaginatedpinnedSchedulesInteractor(repo, input);
 		return response;
 	}),
 
-	updatePinnedEventById: t.procedure
+	updatepinnedScheduleById: t.procedure
 		.input(
 			z.object({
 				id: z.string(),
@@ -63,11 +68,11 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let pinnedEvent = { ...input };
-			let updatedPinnedEvent = await updatePinnedEventInteractor(
+			let pinnedSchedule = { ...input };
+			let updatedpinnedSchedule = await updatepinnedScheduleInteractor(
 				repo,
-				pinnedEvent
+				pinnedSchedule
 			);
-			return updatedPinnedEvent;
+			return updatedpinnedSchedule;
 		}),
 });

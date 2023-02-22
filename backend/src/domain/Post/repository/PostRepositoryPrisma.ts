@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { LinkedEntity, PrismaClient } from '@prisma/client';
 import { paginationType } from '../../pagination/paginationObj';
 import { PostEntity } from '../model/PostEntity';
 import { updatePostEntity } from '../model/updatePostEntity';
@@ -91,6 +91,35 @@ export default class PostRepositoryPrisma extends PostRepository {
 			where: {
 				id: postId,
 			},
+		});
+
+		return response;
+	}
+
+	async getEntityPosts(entityId: string, entity: LinkedEntity) {
+		let posts = await prisma.post.findMany({
+			where: {
+				linkedEntity: entity,
+				linkedEntityId: entityId,
+			},
+		});
+		let response: PostEntity[] = [];
+		posts.forEach((post) => {
+			response.push(post);
+		});
+
+		return response;
+	}
+
+	async listEntityPosts(entity: LinkedEntity) {
+		let posts = await prisma.post.findMany({
+			where: {
+				linkedEntity: entity,
+			},
+		});
+		let response: PostEntity[] = [];
+		posts.forEach((post) => {
+			response.push(post);
 		});
 
 		return response;

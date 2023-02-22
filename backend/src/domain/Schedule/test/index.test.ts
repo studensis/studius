@@ -39,7 +39,7 @@ let testEvent: EventEntity = {
 		.toString('base64')
 		.substring(5, 15),
 	description: '',
-	linkedEntity: 'SEMINAR',
+	linkedEntity: 'ASSIGNMENT',
 	linkedEntityId: Buffer.from(Math.random().toString())
 		.toString('base64')
 		.substring(5, 15),
