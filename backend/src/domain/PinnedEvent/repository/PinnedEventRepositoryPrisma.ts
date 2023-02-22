@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { paginationType } from '../../pagination/paginationObj';
 import { PinnedEventEntity } from '../model/PinnedEventEntity';
 import { updatePinnedEventEntity } from '../model/updatePinnedEventEntity';
 import { PinnedEventRepository } from './PinnedEventRepository';
@@ -7,12 +6,9 @@ import { PinnedEventRepository } from './PinnedEventRepository';
 const prisma = new PrismaClient();
 
 export default class PinnedEventRepositoryPrisma extends PinnedEventRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma PinnedEvents
-		let datas = await prisma.pinnedEvent.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.pinnedEvent.findMany();
 
 		// map to PinnedEventEntities
 		let pinnedEvents: PinnedEventEntity[] = [];
@@ -75,15 +71,9 @@ export default class PinnedEventRepositoryPrisma extends PinnedEventRepository {
 		return response;
 	}
 
-	async getBySubjectId(input: {
-		pageNumber: number;
-		objectsPerPage: number;
-		subjectId: string;
-	}) {
+	async getBySubjectId(subjectId: string) {
 		let datas = await prisma.pinnedEvent.findMany({
-			skip: input.pageNumber * input.objectsPerPage,
-			take: input.objectsPerPage,
-			where: { subjectId: input.subjectId },
+			where: { subjectId: subjectId },
 		});
 		let pinnedEvents: PinnedEventEntity[] = [];
 		if (datas) {

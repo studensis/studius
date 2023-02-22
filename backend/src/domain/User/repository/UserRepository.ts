@@ -1,9 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 
 export abstract class UserRepository {
-	async getAll(paginationInfo: paginationType): Promise<UserEntity[]> {
+	async getAll(): Promise<UserEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<UserEntity | null> {
@@ -21,11 +20,7 @@ export abstract class UserRepository {
 	async getByEmail(email: string): Promise<UserEntity | null> {
 		throw new Error('Method not implemented.');
 	}
-	async listMentees(input: {
-		pageNumber: number;
-		objectsPerPage: number;
-		mentorId: string;
-	}): Promise<UserEntity[] | null> {
+	async listMentees(id: string): Promise<UserEntity[] | null> {
 		throw new Error('Method not implemented.');
 	}
 	async getByGoogleId(id: string): Promise<UserEntity | null> {

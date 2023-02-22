@@ -1,10 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { EventRepository } from '../repository/EventRepository';
 
 export default async function listEventsInteractor(
-	eventRepository: EventRepository,
-	paginationInfo: paginationType
+	eventRepository: EventRepository
 ) {
-	let events = await eventRepository.getAll(paginationInfo);
+	let events = await eventRepository.getAll();
 	return events;
 }

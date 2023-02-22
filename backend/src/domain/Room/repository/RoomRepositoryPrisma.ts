@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { paginationType } from '../../pagination/paginationObj';
 import { RoomEntity } from '../model/RoomEntity';
 import { updateRoomEntity } from '../model/updateRoomEntity';
 import { RoomRepository } from './RoomRepository';
@@ -7,12 +6,9 @@ import { RoomRepository } from './RoomRepository';
 const prisma = new PrismaClient();
 
 export default class RoomRepositoryPrisma extends RoomRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Rooms
-		let datas = await prisma.room.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.room.findMany();
 
 		// map to RoomEntities
 		let rooms: RoomEntity[] = [];

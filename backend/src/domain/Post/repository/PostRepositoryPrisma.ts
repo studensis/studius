@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { paginationType } from '../../pagination/paginationObj';
 import { PostEntity } from '../model/PostEntity';
 import { updatePostEntity } from '../model/updatePostEntity';
 import { PostRepository } from './PostRepository';
@@ -7,12 +6,9 @@ import { PostRepository } from './PostRepository';
 const prisma = new PrismaClient();
 
 export default class PostRepositoryPrisma extends PostRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Posts
-		let datas = await prisma.post.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.post.findMany();
 
 		// map to PostEntities
 		let posts: PostEntity[] = [];

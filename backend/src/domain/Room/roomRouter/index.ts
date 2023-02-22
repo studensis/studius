@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import { paginationObj } from '../../pagination/paginationObj';
 import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
 import createRoomInteractor from '../interactors/createRoomInteractor';
 import deleteRoomInteractor from '../interactors/deleteRoomInteractor';
@@ -47,8 +46,8 @@ export default t.router({
 		return room;
 	}),
 
-	listRooms: t.procedure.input(paginationObj).query(async ({ input }) => {
-		let rooms = await listRoomsInteractor(repo, input);
+	listRooms: t.procedure.query(async () => {
+		let rooms = await listRoomsInteractor(repo);
 		return rooms as RoomEntity[];
 	}),
 

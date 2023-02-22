@@ -1,10 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { PinnedEventRepository } from '../repository/PinnedEventRepository';
 
 export default async function listPinnedEventsInteractor(
-	pinnedEventRepository: PinnedEventRepository,
-	paginationInfo: paginationType
+	pinnedEventRepository: PinnedEventRepository
 ) {
-	let pinnedEvents = await pinnedEventRepository.getAll(paginationInfo);
+	let pinnedEvents = await pinnedEventRepository.getAll();
 	return pinnedEvents;
 }

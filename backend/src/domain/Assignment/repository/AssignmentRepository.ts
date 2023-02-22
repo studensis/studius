@@ -1,9 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 
 export abstract class AssignmentRepository {
-	async getAll(paginationInfo: paginationType): Promise<AssignmentEntity[]> {
+	async getAll(): Promise<AssignmentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<AssignmentEntity> {

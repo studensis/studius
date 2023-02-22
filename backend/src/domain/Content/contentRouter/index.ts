@@ -4,7 +4,6 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import { paginationObj } from '../../pagination/paginationObj';
 import createContentInteractor from '../interactors/createContentInteractor';
 import deleteContentInteractor from '../interactors/deleteContentInteractor';
 import getContentInteractor from '../interactors/getContentInteractor';
@@ -45,17 +44,17 @@ export default t.router({
 			return a;
 		}),
 
-	getContentById: publicProcedure.input(z.string()).query(async ({ input }) => {
-		let content = await getContentInteractor(repo, input);
-		return content;
-	}),
-
-	listContents: publicProcedure
-		.input(paginationObj)
+	getContentById: publicProcedure
+		.input(z.string())
 		.query(async ({ input }) => {
-			let contents = await listContentsInteractor(repo, input);
-			return contents as ContentEntity[];
+			let content = await getContentInteractor(repo, input);
+			return content;
 		}),
+
+	listContents: publicProcedure.query(async () => {
+		let contents = await listContentsInteractor(repo);
+		return contents as ContentEntity[];
+	}),
 
 	updateContentById: publicProcedure
 		.input(
@@ -64,7 +63,9 @@ export default t.router({
 				markdownText: z.string().optional(),
 				plainText: z.string().optional(),
 				date: z.date().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']).optional(),
+				linkedEntity: z
+					.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST'])
+					.optional(),
 				linkedEntityId: z.string().optional(),
 			})
 		)

@@ -6,7 +6,6 @@ import {
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
-import { paginationObj } from '../../pagination/paginationObj';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
@@ -64,8 +63,8 @@ export default t.router({
 		return user;
 	}),
 
-	listUsers: publicProcedure.input(paginationObj).query(async ({ input }) => {
-		let users = await listUsersInteractor(repo, input);
+	listUsers: publicProcedure.query(async () => {
+		let users = await listUsersInteractor(repo);
 		return users as UserEntity[];
 	}),
 
@@ -170,7 +169,7 @@ export default t.router({
 		}),
 
 	getEnrolledSubjects: publicProcedure
-		.input(paginationObj.extend({ userId: z.string() }))
+		.input(z.string())
 		.query(async ({ input }) => {
 			let enrollments = await listEnrolledSubjectsInteractor(
 				input,
