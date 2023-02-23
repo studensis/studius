@@ -22,7 +22,10 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 	}
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Subjects
-		let datas = await prisma.subject.findMany();
+		let datas = await prisma.subject.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
 
 		// map to SubjectEntities
 		let subjects: SubjectEntity[] = [];

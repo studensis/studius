@@ -27,6 +27,8 @@ export default class ScheduleRepositoryPrisma extends ScheduleRepository {
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Schedules
 		let datas = await prisma.schedule.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
 			include: { event: true },
 		});
 

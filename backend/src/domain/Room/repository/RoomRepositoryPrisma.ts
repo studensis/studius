@@ -23,7 +23,10 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Rooms
-		let datas = await prisma.room.findMany();
+		let datas = await prisma.room.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
 
 		// map to RoomEntities
 		let rooms: RoomEntity[] = [];

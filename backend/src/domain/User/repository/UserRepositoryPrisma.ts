@@ -22,7 +22,10 @@ export default class UserRepositoryPrisma extends UserRepository {
 	}
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Users
-		let datas = await prisma.user.findMany();
+		let datas = await prisma.user.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
 
 		// map to UserEntities
 		let users: UserEntity[] = [];
