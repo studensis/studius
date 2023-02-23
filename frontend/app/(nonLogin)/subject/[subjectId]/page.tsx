@@ -15,6 +15,7 @@ import { UpdateSubjectModal } from '../UpdateSubjectModal';
 import EnrollSection from './EnrollSection';
 import { EnrollUsersModal } from './EnrollUsersModal';
 import { PinnedSchedules } from './PinnedSchedules';
+import { Posts } from './Posts';
 import UserList from './UserList';
 
 type PageProps = {
@@ -140,6 +141,8 @@ function SubjectPage(props: PageProps) {
 						// 		</pre>
 						// 	</Block>
 						// )} */}
+
+						<Posts subjectId={props.params.subjectId} />
 
 						<PinnedSchedules subjectId={props.params.subjectId} />
 

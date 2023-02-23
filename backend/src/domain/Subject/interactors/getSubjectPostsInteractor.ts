@@ -5,4 +5,5 @@ export default async function getSubjectPostsInteractor(
 	subjectId: string
 ) {
 	let response = await postsRepository.getEntityPosts(subjectId, 'SUBJECT');
+	return response;
 }

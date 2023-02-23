@@ -13,7 +13,11 @@ import { trpc } from '../../../../components/hooks/TrpcProvider';
 import { UpdateUserModal } from './UpdateUserModal';
 
 export default function SubjectList() {
-	const users = trpc.user.listUsers.useQuery();
+	const users = trpc.user.listUsersPaginated.useQuery({
+		objectsPerPage: 40,
+		pageNumber: 0,
+	});
+
 	const deleteUser = trpc.user.deleteUserById.useMutation();
 	const updateUser = trpc.user.updateUserById.useMutation();
 	const { setModal } = useDialog();
