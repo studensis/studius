@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { paginationType } from '../../pagination/paginationObj';
+import { RoomEntity } from '../../Room/model/RoomEntity';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { PinnedScheduleEntity } from '../model/PinnedScheduleEntity';
 import { updatePinnedScheduleEntity } from '../model/updatePinnedScheduleEntity';
@@ -94,11 +95,15 @@ export default class PinnedScheduleRepositoryPrisma extends PinnedScheduleReposi
 		let datas = await prisma.pinnedSchedule.findMany({
 			where: { subjectId: subjectId },
 			include: {
-				schedule: true,
+				schedule: {
+					include: {
+						room: true,
+					},
+				},
 			},
 		});
 		let pinnedSchedules: (PinnedScheduleEntity & {
-			schedule: ScheduleEntity;
+			schedule: ScheduleEntity & { room: RoomEntity };
 		})[] = [];
 		if (datas) {
 			datas.forEach((data) => {

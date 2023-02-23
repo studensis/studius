@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { paginationType } from '../../pagination/paginationObj';
+import { RoomEntity } from '../../Room/model/RoomEntity';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { PinnedScheduleEntity } from '../model/PinnedScheduleEntity';
 import { updatePinnedScheduleEntity } from '../model/updatePinnedScheduleEntity';
@@ -29,9 +30,11 @@ export abstract class PinnedScheduleRepository {
 	async delete(pinnedScheduleId: string): Promise<PinnedScheduleEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async getBySubjectId(
-		subjectId: string
-	): Promise<(PinnedScheduleEntity & { schedule: ScheduleEntity })[]> {
+	async getBySubjectId(subjectId: string): Promise<
+		(PinnedScheduleEntity & {
+			schedule: ScheduleEntity & { room: RoomEntity };
+		})[]
+	> {
 		throw new Error('Method not implemented.');
 	}
 	async deleteByScheduleId(scheduleId: string): Promise<Prisma.BatchPayload> {
