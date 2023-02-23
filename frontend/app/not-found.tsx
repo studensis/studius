@@ -1,6 +1,6 @@
 import Header from '../components/Header/Header';
 
-export default function PostNotFound() {
+export default function PageNotFound() {
 	return (
 		<>
 			<Header />

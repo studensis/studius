@@ -1,11 +1,14 @@
 import { Calendar } from '../../../components/@studius/Calendar/Calendar';
 import { SectionTop } from '../../../components/@studius/PageElements/SectionTop';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
-import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import { trpc } from '../../../components/hooks/TrpcProvider';
+import LoadingCalendar from './loadingCalendar';
 
 export const LeftPanel = () => {
-	const events = trpc.event.listAllSchedules.useQuery();
+	const events = trpc.event.listAllSchedules.useQuery({
+		pageNumber: 1,
+		objectsPerPage: 12,
+	});
 
 	return (
 		<>
@@ -31,8 +34,9 @@ export const LeftPanel = () => {
 						)}
 					/>
 				) : (
-					<Spinner />
+					<LoadingCalendar />
 				)}
+				<LoadingCalendar />
 			</Stack>
 		</>
 	);

@@ -23,7 +23,10 @@ const Greeting = () => {
 
 export const RightPanel = () => {
 	///franko vidis li me
-	const posts = trpc.post.listPosts.useQuery().data;
+	const posts = trpc.post.listPosts.useQuery({
+		objectsPerPage: 10,
+		pageNumber: 1,
+	}).data;
 	const { user } = useLogin();
 	return (
 		<>
