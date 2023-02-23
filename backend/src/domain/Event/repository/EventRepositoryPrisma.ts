@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
@@ -24,10 +23,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Events
-		let datas = await prisma.event.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.event.findMany();
 
 		// map to EventEntities
 		let events: EventEntity[] = [];
@@ -109,7 +105,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 		return response;
 	}
 
-	async listAssociatedSchedules(eventId: string) {
+	async listAssociatedSchedules(id: string) {
 		let data = await prisma.event.findUnique({
 			where: { id: eventId },
 			select: {

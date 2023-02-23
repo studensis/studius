@@ -14,7 +14,7 @@ import { trpc } from '../../../../components/hooks/TrpcProvider';
 import { UpdateSubjectModal } from '../UpdateSubjectModal';
 import EnrollSection from './EnrollSection';
 import { EnrollUsersModal } from './EnrollUsersModal';
-import { PinnedEvents } from './PinnedEvents';
+import { PinnedSchedules } from './PinnedSchedules';
 import UserList from './UserList';
 
 type PageProps = {
@@ -141,7 +141,7 @@ function SubjectPage(props: PageProps) {
 						// 	</Block>
 						// )} */}
 
-						<PinnedEvents subjectId={props.params.subjectId} />
+						<PinnedSchedules subjectId={props.params.subjectId} />
 
 						<div>
 							<SectionTop>
@@ -177,6 +177,7 @@ function SubjectPage(props: PageProps) {
 						</div>
 
 						{subject.data?.contentId &&
+							// eslint-disable-next-line react/jsx-key
 							subject.data!.contentId.map((id) => <Content contentId={id} />)}
 					</>
 				)}

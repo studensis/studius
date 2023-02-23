@@ -107,7 +107,7 @@ export default class pinnedScheduleRepositoryPrisma extends pinnedScheduleReposi
 	async deleteByEventId(eventId: string) {
 		let response = await prisma.pinnedSchedule.deleteMany({
 			where: {
-				scheduleId: eventId,
+				even: eventId,
 			},
 		});
 

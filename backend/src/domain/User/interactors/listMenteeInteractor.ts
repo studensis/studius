@@ -5,6 +5,6 @@ export default async function listMenteesInteractor(
 
 	mentorId: string
 ) {
-	let response = await userRepository.listMentees(mentorId);
+	let response = await userRepository.listMentees(input);
 	return response;
 }

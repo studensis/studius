@@ -189,9 +189,9 @@ _[slika 4.1] slika baze podataka_ <a name = "s4.1"> </a>
 | Event_ID    | INT         | Event.event_ID                                                  |
 | Room_ID     | INT         | Room.room_ID                                                    |
 
-### PinnedEvent
+### PinnedSchedule
 
-**PinnedEvent** entitet koji sadržava bitne informacije o seminaru koji nositelji odabiru kao prijedlog za studente svojeg predmeta. Vezom One-to-one vezan je za entitete Seminar I Subject
+**PinnedSchedule** entitet koji sadržava bitne informacije o seminaru koji nositelji odabiru kao prijedlog za studente svojeg predmeta. Vezom One-to-one vezan je za entitete Seminar I Subject
 
 | Naziv polja | Tip podatka | Opis polja                                              |
 | ----------- | ----------- | ------------------------------------------------------- |

@@ -8,14 +8,14 @@ import { SectionTop } from '../../../../components/@studius/PageElements/Section
 import { Stack } from '../../../../components/@studius/PageElements/Stack';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 
-export const PinnedEvents = ({ subjectId }: { subjectId: string }) => {
-	const events = trpc.subject.getPinnedSchedules.useQuery(subjectId);
+export const PinnedSchedules = ({ subjectId }: { subjectId: string }) => {
+	const pinnedSchedules = trpc.subject.getPinnedSchedules.useQuery(subjectId);
 	useEffect(() => {
-		console.log(events.data);
-	}, [events]);
+		console.log(pinnedSchedules.data);
+	}, [pinnedSchedules]);
 	return (
 		<>
-			{events.data && events.data.length > 0 && (
+			{pinnedSchedules.data && pinnedSchedules.data.length > 0 && (
 				<>
 					<div>
 						<SectionTop>
@@ -24,12 +24,14 @@ export const PinnedEvents = ({ subjectId }: { subjectId: string }) => {
 							</h3>
 						</SectionTop>
 						<Stack cols={3}>
-							{events.data.map((event) => (
+							{pinnedSchedules.data.map((pinnedSchedule) => (
 								<>
-									<Link href={`/event/${event.eventId}`}>
+									<Link href={`/event/${pinnedSchedule.eventId}`}>
 										<Block className="hover:opacity-60">
-											<p className="title3">{event.event.title}</p>
-											<p className="body3 text-neutral-strong">{event.id}</p>
+											<p className="title3">{pinnedSchedule.event.title}</p>
+											<p className="body3 text-neutral-strong">
+												{pinnedSchedule.id}
+											</p>
 										</Block>
 									</Link>
 								</>

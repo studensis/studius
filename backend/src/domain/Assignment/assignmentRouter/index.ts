@@ -12,7 +12,6 @@ import getAssignmentPostsInteractor from '../interactors/getAssignmentPostsInter
 import listAssignmentPostsInteractor from '../interactors/listAssignmentPostsInteractor';
 import listAssignmentsInteractor from '../interactors/listAssignmentsInteractor';
 import listPaginatedAssignmentsInteractor from '../interactors/listPaginatedAssignmentsInteractor';
-import listUserAssignmentsInteractor from '../interactors/listUserAssignments';
 import updateAssignmentInteractor from '../interactors/updateAssignmentInteractor';
 import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
@@ -110,7 +109,7 @@ export default t.router({
 			})
 		)
 		.query(async ({ input }) => {
-			let response = await listUserAssignmentsInteractor(repo, input);
+			let response = await listUserAssignments(repo, input);
 			return response;
 		}),
 

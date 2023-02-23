@@ -48,7 +48,7 @@ let newEvent: EventEntity;
 let newRoom: RoomEntity;
 let newUser: UserEntity;
 let eventId: string;
-let ScheduleID: string;
+let scheduleId: string;
 let userId: string;
 let roomId: string;
 //
@@ -116,27 +116,27 @@ test('Event schedule (create Schedule)', async () => {
 	expect(newSchedule).not.toBeNull();
 });
 test('Schedule archive', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	let Schedulearchiving: ScheduleEntity = await archiveScheduleInteractor(
-		ScheduleID,
+		scheduleId,
 		Schedulerepo
 	);
 	expect(Schedulearchiving).not.toBeNull();
 });
 test('Schedule update', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	let updateSchedule: updateScheduleEntity = {
-		id: ScheduleID,
+		id: scheduleId,
 		dateEnd: new Date(Date.parse('04 Apr 2001 00:12:00 GMT')),
 	};
 	newSchedule = await updateScheduleInteractor(Schedulerepo, updateSchedule);
 	expect(newSchedule).not.toBeNull();
 });
 test('Schedule get', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	let Schedule: ScheduleEntity = await getScheduleInteractor(
 		Schedulerepo,
-		ScheduleID
+		scheduleId
 	);
 	expect(Schedule).not.toBeNull();
 });
@@ -147,29 +147,29 @@ test('Schedule get', async () => {
 // kreacija UserPresence-a u svrhu testiranja Schedule-ovog izlistavanja i brisanja povezanih UserPresence-a
 let newEUP: UserPresenceEntity;
 test('UserPresence create', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	userId = newUser.id;
 	newEUP = await createUserPresenceInteractor(EUPrepo, {
 		id: '',
 		presenceStatus: true,
-		scheduleId: ScheduleID,
+		scheduleId: scheduleId,
 		userId: userId,
 	});
 	expect(newEUP).not.toBeNull();
 });
 test('Schedule list associated UserPresences', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	let EUPs: UserPresenceEntity[] = await listAssociatedUserPresencesInteractor(
 		Schedulerepo,
-		ScheduleID
+		scheduleId
 	);
 	expect(EUPs).not.toBeNull();
 });
 // interaktor ispod obicno koristen automatski prije brisanja bilokojeg Schedule-a
 test('delete UserPresences associated to tested Schedule', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	let EUPs: Prisma.BatchPayload =
-		await deleteUserPresenceByScheduleIdInteractor(ScheduleID, EUPrepo);
+		await deleteUserPresenceByScheduleIdInteractor(scheduleId, EUPrepo);
 	expect(EUPs).not.toBeNull();
 });
 //
@@ -177,9 +177,9 @@ test('delete UserPresences associated to tested Schedule', async () => {
 //
 // brisanje
 test('Schedule delete', async () => {
-	ScheduleID = newSchedule.id;
+	scheduleId = newSchedule.id;
 	let deletedSchedule: ScheduleEntity = await deleteScheduleInteractor(
-		ScheduleID,
+		scheduleId,
 		Schedulerepo
 	);
 	expect(deletedSchedule).not.toBeNull();

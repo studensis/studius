@@ -91,6 +91,14 @@ model Event {
   Schedule       Schedule[]
 }
 
+model PinnedSchedule {
+  id         String   @id @default(uuid())
+  subjectId  String
+  subject    Subject  @relation(fields: [subjectId], references: [id])
+  scheduleId String
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+}
+
 model Room {
   id       String     @id @default(uuid())
   title    String     @default("")
@@ -105,10 +113,10 @@ model Schedule {
   eventId        String
   roomId         String
   status         Status           @default(ACTIVE)
+  UserPresence   UserPresence[]
   PinnedSchedule PinnedSchedule[]
   event          Event            @relation(fields: [eventId], references: [id])
   room           Room             @relation(fields: [roomId], references: [id])
-  UserPresence   UserPresence[]
 }
 
 model UserPresence {

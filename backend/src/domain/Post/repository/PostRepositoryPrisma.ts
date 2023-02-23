@@ -22,10 +22,7 @@ export default class PostRepositoryPrisma extends PostRepository {
 	}
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Posts
-		let datas = await prisma.post.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.post.findMany();
 
 		// map to PostEntities
 		let posts: PostEntity[] = [];

@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { paginationType } from '../../pagination/paginationObj';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import { UserRepository } from './UserRepository';
@@ -22,10 +21,7 @@ export default class UserRepositoryPrisma extends UserRepository {
 	}
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Users
-		let datas = await prisma.user.findMany({
-			skip: paginationInfo.pageNumber * paginationInfo.objectsPerPage,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.user.findMany();
 
 		// map to UserEntities
 		let users: UserEntity[] = [];

@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { paginationType } from '../../pagination/paginationObj';
 import { RoomEntity } from '../model/RoomEntity';
 import { updateRoomEntity } from '../model/updateRoomEntity';
 import { RoomRepository } from './RoomRepository';
@@ -23,10 +22,49 @@ export default class RoomRepositoryPrisma extends RoomRepository {
 
 	async listPaginated(paginationInfo: paginationType) {
 		// prisma Rooms
-		let datas = await prisma.room.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
+		let datas = await prisma.room.findMany();
+
+		// map to RoomEntities
+		let rooms: RoomEntity[] = [];
+		datas.forEach((data: RoomEntity) => {
+			let room: RoomEntity = data;
+			rooms.push(room);
 		});
+
+		return rooms;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Rooms
+		let datas = await prisma.room.findMany();
+
+		// map to RoomEntities
+		let rooms: RoomEntity[] = [];
+		datas.forEach((data: RoomEntity) => {
+			let room: RoomEntity = data;
+			rooms.push(room);
+		});
+
+		return rooms;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Rooms
+		let datas = await prisma.room.findMany();
+
+		// map to RoomEntities
+		let rooms: RoomEntity[] = [];
+		datas.forEach((data: RoomEntity) => {
+			let room: RoomEntity = data;
+			rooms.push(room);
+		});
+
+		return rooms;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Rooms
+		let datas = await prisma.room.findMany();
 
 		// map to RoomEntities
 		let rooms: RoomEntity[] = [];

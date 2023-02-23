@@ -1,4 +1,3 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { RoomEntity } from '../model/RoomEntity';
 import { updateRoomEntity } from '../model/updateRoomEntity';
 

@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { isAdmin, publicProcedure } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import { paginationObj } from '../../pagination/paginationObj';
 import createPostInteractor from '../interactors/createPostInteractor';
 import deletePostInteractor from '../interactors/deletePostInteractor';
 import getPostInteractor from '../interactors/getPostInteractor';
