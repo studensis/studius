@@ -9,6 +9,8 @@ import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import PostCard from '../../../components/Cards/PostCard';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
+import LoadingPosts from './loadingPosts';
+import LoadingSubjects from './loadingSubjects';
 import SubjectList from './SubjectList';
 
 const Greeting = () => {
@@ -23,10 +25,7 @@ const Greeting = () => {
 
 export const RightPanel = () => {
 	///franko vidis li me
-	const posts = trpc.post.listPosts.useQuery({
-		objectsPerPage: 10,
-		pageNumber: 1,
-	}).data;
+	const posts = trpc.post.listPosts.useQuery().data;
 	const { user } = useLogin();
 	return (
 		<>
@@ -48,6 +47,7 @@ export const RightPanel = () => {
 						</Link>
 					</SectionTop>
 					<SubjectList />
+					<LoadingSubjects />
 					<br />
 					<div className="flex justify-between">
 						<h1 className="title1">Obavijesti</h1>
@@ -67,6 +67,7 @@ export const RightPanel = () => {
 							);
 						})}
 					</Stack>
+					<LoadingPosts />
 				</div>
 			</PageStack>
 		</>

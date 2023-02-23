@@ -67,7 +67,7 @@ body {
 		background-position: 300px;
 	}
 	100% {
-		background-position: 800px;
+		background-position: 1400px;
 	}
 }
 
@@ -79,7 +79,7 @@ body {
 	animation-timing-function: linear;
 	background-color: #f6f7f8;
 	background: linear-gradient(to right, #e4e5e9 8%, #c0c1c4 18%, #e4e5e9 33%);
-	background-size: 800px 104px;
+	background-size: 1200px 104px;
 	height: 32px;
 	position: relative;
 }

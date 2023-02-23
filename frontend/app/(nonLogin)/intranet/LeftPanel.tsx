@@ -5,10 +5,7 @@ import { trpc } from '../../../components/hooks/TrpcProvider';
 import LoadingCalendar from './loadingCalendar';
 
 export const LeftPanel = () => {
-	const events = trpc.event.listAllSchedules.useQuery({
-		pageNumber: 1,
-		objectsPerPage: 12,
-	});
+	const events = trpc.event.listAllSchedules.useQuery();
 
 	return (
 		<>

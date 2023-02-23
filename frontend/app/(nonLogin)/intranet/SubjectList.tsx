@@ -1,8 +1,8 @@
 import { Stack } from '../../../components/@studius/PageElements/Stack';
-import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import SubjectCard from '../../../components/Cards/SubjectCard';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
+import LoadingSubjects from './loadingSubjects';
 
 export default function SubjectList() {
 	const { user } = useLogin();
@@ -11,7 +11,7 @@ export default function SubjectList() {
 	});
 	return (
 		<Stack cols={2}>
-			{enrolledSubjects.isLoading && <Spinner />}
+			{enrolledSubjects.isLoading && <LoadingSubjects />}
 			{enrolledSubjects.data &&
 				enrolledSubjects.data.map((enrolledSubject) => (
 					<SubjectCard
