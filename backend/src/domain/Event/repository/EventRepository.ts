@@ -1,3 +1,4 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';

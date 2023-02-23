@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
@@ -107,7 +108,7 @@ export default class EventRepositoryPrisma extends EventRepository {
 
 	async listAssociatedSchedules(id: string) {
 		let data = await prisma.event.findUnique({
-			where: { id: eventId },
+			where: { id: id },
 			select: {
 				Schedule: true,
 			},

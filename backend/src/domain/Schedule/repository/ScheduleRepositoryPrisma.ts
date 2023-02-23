@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { EventEntity } from '../../Event/model/EventEntity';
+import { paginationType } from '../../pagination/paginationObj';
 import { UserPresenceEntity } from '../../UserPresence/model/UserPresenceEntity';
 import { ScheduleEntity } from '../model/ScheduleEntity';
 import { updateScheduleEntity } from '../model/updateScheduleEntity';

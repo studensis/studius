@@ -128,13 +128,13 @@ model UserPresence {
   user           User     @relation(fields: [userId], references: [id])
 }
 
-model PinnedSchedule {
-  id         String   @id
-  subjectId  String
-  scheduleId String
-  Schedule   Schedule @relation(fields: [scheduleId], references: [id])
-  Subject    Subject  @relation(fields: [subjectId], references: [id])
-}
+// model PinnedSchedule {
+//   id         String   @id
+//   subjectId  String
+//   scheduleId String
+//   Schedule   Schedule @relation(fields: [scheduleId], references: [id])
+//   Subject    Subject  @relation(fields: [subjectId], references: [id])
+// }
 
 enum Role {
   DEFAULT

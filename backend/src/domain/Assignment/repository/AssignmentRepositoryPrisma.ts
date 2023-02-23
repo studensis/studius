@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 import { AssignmentRepository } from './AssignmentRepository';

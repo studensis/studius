@@ -10,13 +10,11 @@ export default async function listUserAssignments(
 	if (input.options.isMentor) {
 		let assignments = await (
 			await assignmentRepository.getAll()
-			await assignmentRepository.getAll()
 		).filter((assignment) => assignment.mentorId == input.id);
 		return assignments;
 	}
 	if (input.options.isStudent) {
 		let assignments = await (
-			await assignmentRepository.getAll()
 			await assignmentRepository.getAll()
 		).filter((assignment) => assignment.userId == input.id);
 		return assignments;

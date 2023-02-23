@@ -8,6 +8,7 @@ import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
+import { paginationObj } from '../../pagination/paginationObj';
 import PinnedScheduleRepositoryPrisma from '../../PinnedSchedule/repository/PinnedScheduleRepositoryPrisma';
 import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
@@ -173,7 +174,7 @@ export default t.router({
 				pinnedScheduleRepo,
 				input
 			);
-			return pinnedEvents;
+			return pinnedSchedules;
 		}),
 
 	getSubjectPosts: publicProcedure

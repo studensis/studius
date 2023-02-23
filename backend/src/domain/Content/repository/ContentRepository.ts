@@ -1,3 +1,4 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
 

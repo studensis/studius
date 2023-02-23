@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { PinnedScheduleEntity } from '../model/PinnedScheduleEntity';
 import { updatePinnedScheduleEntity } from '../model/updatePinnedScheduleEntity';
@@ -12,6 +13,22 @@ export default class PinnedScheduleRepositoryPrisma extends PinnedScheduleReposi
 		let datas = await prisma.pinnedSchedule.findMany();
 
 		// map to PinnedScheduleEntities
+		let pinnedSchedules: PinnedScheduleEntity[] = [];
+		datas.forEach((data: PinnedScheduleEntity) => {
+			let pinnedSchedule: PinnedScheduleEntity = data;
+			pinnedSchedules.push(pinnedSchedule);
+		});
+
+		return pinnedSchedules;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma pinnedSchedules
+		let datas = await prisma.pinnedSchedule.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
+		// map to pinnedScheduleEntities
 		let pinnedSchedules: PinnedScheduleEntity[] = [];
 		datas.forEach((data: PinnedScheduleEntity) => {
 			let pinnedSchedule: PinnedScheduleEntity = data;
@@ -51,6 +68,7 @@ export default class PinnedScheduleRepositoryPrisma extends PinnedScheduleReposi
 	async create(pinnedSchedule: PinnedScheduleEntity) {
 		let response = await prisma.pinnedSchedule.create({
 			data: {
+				id: '',
 				scheduleId: pinnedSchedule.scheduleId,
 				subjectId: pinnedSchedule.subjectId,
 			},

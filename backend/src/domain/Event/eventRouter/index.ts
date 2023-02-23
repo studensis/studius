@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import PinnedScheduleRepositoryPrisma from '../../PinnedSchedule/repository/PinnedScheduleRepositoryPrisma';
 import archiveScheduleInteractor from '../../Schedule/interactors/archiveScheduleInteractor';
 import createScheduleInteractor from '../../Schedule/interactors/createScheduleInteractor';

@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { SubjectEntity } from '../model/SubjectEntity';
 import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';

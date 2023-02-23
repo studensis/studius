@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import { UserRepository } from './UserRepository';

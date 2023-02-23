@@ -1,9 +1,11 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import createPinnedScheduleInteractor from '../interactors/createPinnedScheduleInteractor';
 import deletePinnedScheduleInteractor from '../interactors/deletePinnedScheduleInteractor';
 import getPinnedScheduleInteractor from '../interactors/getPinnedScheduleInteractor';
+import listPaginatedPinnedSchedulesInteractor from '../interactors/listPaginatedPinnedSchedulesInteractor';
 import listPinnedSchedulesInteractor from '../interactors/listPinnedSchedulesInteractor';
 import updatePinnedScheduleInteractor from '../interactors/updatePinnedScheduleInteractor';
 import { PinnedScheduleEntity } from '../model/PinnedScheduleEntity';
@@ -68,4 +70,9 @@ export default t.router({
 			);
 			return updatedPinnedSchedule;
 		}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedPinnedSchedulesInteractor(repo, input);
+		return response;
+	}),
 });

@@ -4,6 +4,7 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import createContentInteractor from '../interactors/createContentInteractor';
 import deleteContentInteractor from '../interactors/deleteContentInteractor';
 import getContentInteractor from '../interactors/getContentInteractor';
@@ -50,10 +51,6 @@ export default t.router({
 		return content;
 	}),
 
-	listContents: publicProcedure.query(async () => {
-		let contents = await listContentsInteractor(repo);
-		return contents as ContentEntity[];
-	}),
 	listContents: publicProcedure.query(async () => {
 		let contents = await listContentsInteractor(repo);
 		return contents as ContentEntity[];

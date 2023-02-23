@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import ScheduleRepositoryPrisma from '../../Schedule/repository/ScheduleRepositoryPrisma';
 import createRoomInteractor from '../interactors/createRoomInteractor';
 import deleteRoomInteractor from '../interactors/deleteRoomInteractor';
