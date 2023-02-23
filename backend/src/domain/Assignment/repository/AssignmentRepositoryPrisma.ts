@@ -7,12 +7,9 @@ import { AssignmentRepository } from './AssignmentRepository';
 const prisma = new PrismaClient();
 
 export default class AssignmentRepositoryPrisma extends AssignmentRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Assignments
-		let datas = await prisma.assignment.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.assignment.findMany();
 
 		// map to AssignmentEntities
 		let assignments: AssignmentEntity[] = [];
@@ -121,5 +118,22 @@ export default class AssignmentRepositoryPrisma extends AssignmentRepository {
 
 		let rez: AssignmentEntity = change;
 		return rez;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Assignments
+		let datas = await prisma.assignment.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
+
+		// map to AssignmentEntities
+		let assignments: AssignmentEntity[] = [];
+		datas.forEach((data) => {
+			let assignment: AssignmentEntity = data;
+			assignments.push(assignment);
+		});
+
+		return assignments;
 	}
 }

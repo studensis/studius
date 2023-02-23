@@ -1,19 +1,25 @@
 import { z } from 'zod';
+import { publicProcedure } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { paginationObj } from '../../pagination/paginationObj';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import approveAssignmentInteractor from '../interactors/approveAssignmentInteractor';
 import approveSeminarInteractor from '../interactors/approveSeminarInteractor';
 import createAssignmentInteractor from '../interactors/createAssignmentInteractor';
 import deleteAssignmentInteractor from '../interactors/deleteAssignmentInteractor';
 import getAssignmentInteractor from '../interactors/getAssignmentInteractor';
+import getAssignmentPostsInteractor from '../interactors/getAssignmentPostsInteractor';
+import listAssignmentPostsInteractor from '../interactors/listAssignmentPostsInteractor';
 import listAssignmentsInteractor from '../interactors/listAssignmentsInteractor';
-import listUserAssignmentsInteractor from '../interactors/listUserAssignments';
+import listPaginatedAssignmentsInteractor from '../interactors/listPaginatedAssignmentsInteractor';
+import listUserAssignments from '../interactors/listUserAssignments';
 import updateAssignmentInteractor from '../interactors/updateAssignmentInteractor';
 import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 import AssignmentRepositoryPrisma from '../repository/AssignmentRepositoryPrisma';
 
 let repo = new AssignmentRepositoryPrisma();
+let postRepo = new PostRepositoryPrisma();
 
 export default t.router({
 	createAssignment: t.procedure
@@ -98,15 +104,13 @@ export default t.router({
 
 	listUserAssignments: t.procedure
 		.input(
-			paginationObj.merge(
-				z.object({
-					id: z.string(),
-					options: z.object({ isStudent: z.boolean(), isMentor: z.boolean() }),
-				})
-			)
+			z.object({
+				id: z.string(),
+				options: z.object({ isStudent: z.boolean(), isMentor: z.boolean() }),
+			})
 		)
 		.query(async ({ input }) => {
-			let response = await listUserAssignmentsInteractor(repo, input);
+			let response = await listUserAssignments(repo, input);
 			return response;
 		}),
 
@@ -114,6 +118,13 @@ export default t.router({
 		let response = await listAssignmentsInteractor(repo);
 		return response;
 	}),
+
+	listAssingmentPaginated: t.procedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedAssignmentsInteractor(repo, input);
+			return response;
+		}),
 
 	approveSeminar: t.procedure
 		.input(
@@ -139,5 +150,17 @@ export default t.router({
 		.mutation(async ({ input }) => {
 			let rez = await approveAssignmentInteractor(repo, input);
 			return rez;
+		}),
+
+	listAssignmentPosts: publicProcedure.query(async () => {
+		let response = await listAssignmentPostsInteractor(postRepo);
+		return response;
+	}),
+
+	getAssignmentPosts: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let response = await getAssignmentPostsInteractor(postRepo, input);
+			return response;
 		}),
 });

@@ -1,10 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { PostRepository } from '../repository/PostRepository';
 
 export default async function listPostsInteractor(
-	postRepository: PostRepository,
-	paginationInfo: paginationType
+	postRepository: PostRepository
 ) {
-	let posts = await postRepository.getAll(paginationInfo);
+	let posts = await postRepository.getAll();
 	return posts;
 }

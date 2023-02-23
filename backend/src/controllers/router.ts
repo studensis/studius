@@ -1,7 +1,7 @@
 import AssignmentRouter from '../domain/Assignment/assignmentRouter';
 import contentRouter from '../domain/Content/contentRouter';
 import eventRouter from '../domain/Event/eventRouter';
-import pinnedEventRouter from '../domain/PinnedEvent/pinnedEventRouter';
+import pinnedScheduleRouter from '../domain/PinnedSchedule/pinnedScheduleRouter';
 import postRouter from '../domain/Post/postRouter';
 import roomRouter from '../domain/Room/roomRouter';
 import subjectRouter from '../domain/Subject/subjectRouter';
@@ -23,7 +23,7 @@ const appRouter = t.router({
 	event: eventRouter,
 	post: postRouter,
 	assignment: AssignmentRouter,
-	pinnedEvent: pinnedEventRouter,
+	pinnedSchedule: pinnedScheduleRouter,
 	content: contentRouter,
 	// schedule: scheduleRouter,		// kroz eventove -> schedule
 	userPresence: userPresenceRouter,

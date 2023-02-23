@@ -8,12 +8,23 @@ import { EventRepository } from './EventRepository';
 const prisma = new PrismaClient();
 
 export default class EventRepositoryPrisma extends EventRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Events
-		let datas = await prisma.event.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
+		let datas = await prisma.event.findMany();
+
+		// map to EventEntities
+		let events: EventEntity[] = [];
+		datas.forEach((data: EventEntity) => {
+			let event: EventEntity = data;
+			events.push(event);
 		});
+
+		return events;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Events
+		let datas = await prisma.event.findMany();
 
 		// map to EventEntities
 		let events: EventEntity[] = [];
@@ -95,9 +106,9 @@ export default class EventRepositoryPrisma extends EventRepository {
 		return response;
 	}
 
-	async listAssociatedSchedules(eventId: string) {
+	async listAssociatedSchedules(id: string) {
 		let data = await prisma.event.findUnique({
-			where: { id: input.eventId },
+			where: { id: id },
 			select: {
 				Schedule: true,
 			},

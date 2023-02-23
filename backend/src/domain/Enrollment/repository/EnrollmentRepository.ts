@@ -28,14 +28,16 @@ export abstract class EnrollmentRepository {
 	): Promise<EnrollmentEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async getEnrolledSubjects(info: {
-		pageNumber: number;
-		objectsPerPage: number;
-		userId: string;
-	}): Promise<(EnrollmentEntity & { subject: SubjectEntity })[]> {
+	async getEnrolledSubjects(
+		active: boolean | undefined,
+		archived: boolean | undefined,
+		userId: string
+	): Promise<(EnrollmentEntity & { subject: SubjectEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getEnrolledUsers(
+		active: boolean | undefined,
+		archived: boolean | undefined,
 		subjectId: string
 	): Promise<(EnrollmentEntity & { user: UserEntity })[]> {
 		throw new Error('Method not implemented.');

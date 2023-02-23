@@ -70,17 +70,27 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	}
 
 	// gets all enrollments connected to same User
-	async getEnrolledSubjects(info: {
-		pageNumber: number;
-		objectsPerPage: number;
-		userId: string;
-	}) {
+	async getEnrolledSubjects(
+		active: boolean | undefined,
+		archived: boolean | undefined,
+		userId: string
+	) {
+		active === false && archived === undefined
+			? (archived = true)
+			: active === undefined && archived === false
+			? (active = true)
+			: {};
+
+		// samo ako su razliciti onda utjece, inace ispise sve
 		let rez = await prisma.enrollment.findMany({
-			skip: info.objectsPerPage * info.pageNumber,
-			take: info.objectsPerPage,
 			where: {
-				userId: info.userId,
-				status: 'ACTIVE',
+				userId: userId,
+				status:
+					active && !archived
+						? 'ACTIVE'
+						: !active && archived
+						? 'ARCHIVED'
+						: undefined,
 			},
 			include: {
 				subject: true,
@@ -91,23 +101,32 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	}
 
 	// gets all enrollments connected to same Subject
-	async getEnrolledUsers(input: {
-		pageNumber: number;
-		objectsPerPage: number;
-		subjectId: string;
-	}) {
+	async getEnrolledUsers(
+		active: boolean | undefined,
+		archived: boolean | undefined,
+		subjectId: string
+	) {
+		active === false && archived === undefined
+			? (archived = true)
+			: active === undefined && archived === false
+			? (active = true)
+			: {};
+
+		// samo ako su razliciti onda utjece, inace ispise sve
 		let users = await prisma.enrollment.findMany({
-			skip: input.objectsPerPage * input.pageNumber,
-			take: input.objectsPerPage,
 			where: {
-				subjectId: input.subjectId,
-				status: 'ACTIVE',
+				subjectId: subjectId,
+				status:
+					active && !archived
+						? 'ACTIVE'
+						: !active && archived
+						? 'ARCHIVED'
+						: undefined,
 			},
 			include: {
 				user: true,
 			},
 		});
-
 		return users;
 	}
 

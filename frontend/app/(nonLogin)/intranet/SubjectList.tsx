@@ -6,7 +6,9 @@ import { trpc } from '../../../components/hooks/TrpcProvider';
 
 export default function SubjectList() {
 	const { user } = useLogin();
-	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(user!.userId);
+	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery({
+		userId: user!.userId,
+	});
 	return (
 		<Stack cols={2}>
 			{enrolledSubjects.isLoading && <Spinner />}

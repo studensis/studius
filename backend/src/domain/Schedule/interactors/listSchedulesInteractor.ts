@@ -1,10 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleRepository } from '../repository/ScheduleRepository';
 
 export default async function listSchedulesInteractor(
-	scheduleRepository: ScheduleRepository,
-	paginationInfo: paginationType
+	scheduleRepository: ScheduleRepository
 ) {
-	let schedules = await scheduleRepository.getAll(paginationInfo);
+	let schedules = await scheduleRepository.getAll();
 	return schedules;
 }

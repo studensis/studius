@@ -7,13 +7,17 @@ import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import { paginationObj } from '../../pagination/paginationObj';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
 import getUserInteractor from '../interactors/getUserInteractor';
+import getUserPostsInteractor from '../interactors/getUserPostsInteractor';
 import isUserEnrolledInteractor from '../interactors/isUserEnrolledInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
 import listMenteesInteractor from '../interactors/listMenteeInteractor';
+import listPaginatedUsersInteractor from '../interactors/listPaginatedUsersInteractor';
+import listUserPostsInteractor from '../interactors/listUserPostsInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
@@ -24,6 +28,7 @@ import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 let repo = new UserRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
+let postRepo = new PostRepositoryPrisma();
 
 export default t.router({
 	createUser: adminProcedure
@@ -64,10 +69,17 @@ export default t.router({
 		return user;
 	}),
 
-	listUsers: publicProcedure.input(paginationObj).query(async ({ input }) => {
-		let users = await listUsersInteractor(repo, input);
+	listUsers: publicProcedure.query(async () => {
+		let users = await listUsersInteractor(repo);
 		return users as UserEntity[];
 	}),
+
+	listUsersPaginated: publicProcedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedUsersInteractor(repo, input);
+			return response;
+		}),
 
 	updateUserById: publicProcedure
 
@@ -170,11 +182,19 @@ export default t.router({
 		}),
 
 	getEnrolledSubjects: publicProcedure
-		.input(paginationObj.extend({ userId: z.string() }))
+		.input(
+			z.object({
+				active: z.boolean().optional(),
+				archived: z.boolean().optional(),
+				userId: z.string(),
+			})
+		)
 		.query(async ({ input }) => {
 			let enrollments = await listEnrolledSubjectsInteractor(
-				input,
-				enrollmentRepo
+				enrollmentRepo,
+				input.active,
+				input.archived,
+				input.userId
 			);
 			return enrollments;
 		}),
@@ -213,5 +233,15 @@ export default t.router({
 	listMentees: t.procedure.input(z.string()).query(async ({ input }) => {
 		let mentees = await listMenteesInteractor(repo, input);
 		return mentees;
+	}),
+
+	getUserPosts: publicProcedure.input(z.string()).query(async ({ input }) => {
+		let response = await getUserPostsInteractor(postRepo, input);
+		return response;
+	}),
+
+	listUserPosts: publicProcedure.query(async () => {
+		let response = await listUserPostsInteractor(postRepo);
+		return response;
 	}),
 });

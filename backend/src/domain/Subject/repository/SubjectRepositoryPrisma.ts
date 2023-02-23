@@ -7,12 +7,22 @@ import { SubjectRepository } from './SubjectRepository';
 const prisma = new PrismaClient();
 
 export default class SubjectRepositoryPrisma extends SubjectRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Subjects
-		let datas = await prisma.subject.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
+		let datas = await prisma.subject.findMany();
+
+		// map to SubjectEntities
+		let subjects: SubjectEntity[] = [];
+		datas.forEach((data: any) => {
+			let subject: SubjectEntity = data;
+			subjects.push(subject);
 		});
+
+		return subjects;
+	}
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Subjects
+		let datas = await prisma.subject.findMany();
 
 		// map to SubjectEntities
 		let subjects: SubjectEntity[] = [];

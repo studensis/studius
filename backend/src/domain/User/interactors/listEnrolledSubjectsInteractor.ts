@@ -1,9 +1,15 @@
 import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepository';
 
 export default async function listEnrolledSubjectsInteractor(
-	info: { pageNumber: number; objectsPerPage: number; userId: string },
-	enrollmentRepository: EnrollmentRepository
+	enrollmentRepository: EnrollmentRepository,
+	active: boolean | undefined,
+	archived: boolean | undefined,
+	userId: string
 ) {
-	let response = await enrollmentRepository.getEnrolledSubjects(info);
+	let response = await enrollmentRepository.getEnrolledSubjects(
+		active,
+		archived,
+		userId
+	);
 	return response;
 }

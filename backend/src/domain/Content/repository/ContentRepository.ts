@@ -3,7 +3,7 @@ import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
 
 export abstract class ContentRepository {
-	async getAll(paginationInfo: paginationType): Promise<ContentEntity[]> {
+	async getAll(): Promise<ContentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<ContentEntity> {
@@ -16,6 +16,11 @@ export abstract class ContentRepository {
 		throw new Error('Method not implemented.');
 	}
 	async delete(contentId: string): Promise<ContentEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async listPaginated(
+		paginationInfo: paginationType
+	): Promise<ContentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 }

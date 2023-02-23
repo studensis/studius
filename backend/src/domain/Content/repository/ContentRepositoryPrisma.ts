@@ -7,12 +7,9 @@ import { ContentRepository } from './ContentRepository';
 const prisma = new PrismaClient();
 
 export default class ContentRepositoryPrisma extends ContentRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Contents
-		let datas = await prisma.content.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
-		});
+		let datas = await prisma.content.findMany();
 
 		// map to ContentEntities
 		let contents: ContentEntity[] = [];
@@ -66,7 +63,6 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 				linkedEntity: content.linkedEntity,
 				linkedEntityId: content.linkedEntityId,
 				date: content.date,
-				file: Buffer.from('0'),
 			},
 		});
 
@@ -82,5 +78,22 @@ export default class ContentRepositoryPrisma extends ContentRepository {
 		});
 
 		return response;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Contents
+		let datas = await prisma.content.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
+
+		// map to ContentEntities
+		let contents: ContentEntity[] = [];
+		datas.forEach((data: ContentEntity) => {
+			let content: ContentEntity = data;
+			contents.push(content);
+		});
+
+		return contents;
 	}
 }

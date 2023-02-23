@@ -31,9 +31,9 @@ export default function UserPage(props: PageProps) {
 	});
 	const deleteUser = trpc.user.deleteUserById.useMutation();
 	const updateUser = trpc.user.updateUserById.useMutation();
-	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(
-		props.params.userId
-	);
+	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery({
+		userId: props.params.userId,
+	});
 	const { refetch } = useLogin();
 
 	const userWithoutPassword = user.data

@@ -1,10 +1,12 @@
 import { z } from 'zod';
-import { isAdmin } from '../../../controllers/middleware/auth';
+import { isAdmin, publicProcedure } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
 import { paginationObj } from '../../pagination/paginationObj';
 import createPostInteractor from '../interactors/createPostInteractor';
 import deletePostInteractor from '../interactors/deletePostInteractor';
 import getPostInteractor from '../interactors/getPostInteractor';
+import listGlobalPostsInteractor from '../interactors/listGlobalPostsInteractor';
+import listPaginatedPostsInteractor from '../interactors/listPaginatedPostsInteractor';
 import listPostsInteractor from '../interactors/listPostsInteractor';
 import updatePostInteractor from '../interactors/updatePostInteractor';
 import { PostEntity } from '../model/PostEntity';
@@ -20,7 +22,7 @@ export default t.router({
 			z.object({
 				title: z.string(),
 				date: z.string().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']),
+				linkedEntity: z.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST']),
 				linkedEntityId: z.string(),
 				contentId: z.string(),
 				ownerId: z.string(),
@@ -49,9 +51,14 @@ export default t.router({
 		return post;
 	}),
 
-	listPosts: t.procedure.input(paginationObj).query(async ({ input }) => {
-		let posts = await listPostsInteractor(repo, input);
+	listPosts: t.procedure.query(async () => {
+		let posts = await listPostsInteractor(repo);
 		return posts as PostEntity[];
+	}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedPostsInteractor(repo, input);
+		return response;
 	}),
 
 	updatePostById: t.procedure
@@ -60,7 +67,9 @@ export default t.router({
 				id: z.string(),
 				title: z.string().optional(),
 				date: z.string().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']).optional(),
+				linkedEntity: z
+					.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST'])
+					.optional(),
 				linkedEntityId: z.string().optional(),
 				contentId: z.string().optional(),
 				ownerId: z.string().optional(),
@@ -74,4 +83,9 @@ export default t.router({
 			let updatedPost = await updatePostInteractor(repo, post);
 			return updatedPost;
 		}),
+
+	listGlobalPosts: publicProcedure.query(async () => {
+		let response = await listGlobalPostsInteractor(repo);
+		return response;
+	}),
 });

@@ -2,12 +2,14 @@ import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepo
 
 export default async function listEnrolledUsersInteractor(
 	enrollmentRepository: EnrollmentRepository,
-	input: {
-		pageNumber: number;
-		objectsPerPage: number;
-		subjectId: string;
-	}
+	active: boolean | undefined,
+	archived: boolean | undefined,
+	subjectId: string
 ) {
-	let users = await enrollmentRepository.getEnrolledUsers(input);
+	let users = await enrollmentRepository.getEnrolledUsers(
+		active,
+		archived,
+		subjectId
+	);
 	return users;
 }

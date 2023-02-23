@@ -1,10 +1,8 @@
-import { paginationType } from '../../pagination/paginationObj';
 import { ContentRepository } from '../repository/ContentRepository';
 
 export default async function listContentsInteractor(
-	contentRepository: ContentRepository,
-	paginationInfo: paginationType
+	contentRepository: ContentRepository
 ) {
-	let contents = await contentRepository.getAll(paginationInfo);
+	let contents = await contentRepository.getAll();
 	return contents;
 }

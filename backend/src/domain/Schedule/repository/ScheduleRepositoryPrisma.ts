@@ -9,11 +9,24 @@ import { ScheduleRepository } from './ScheduleRepository';
 const prisma = new PrismaClient();
 
 export default class ScheduleRepositoryPrisma extends ScheduleRepository {
-	async getAll(paginationInfo: paginationType) {
+	async getAll() {
 		// prisma Schedules
 		let datas = await prisma.schedule.findMany({
-			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
-			take: paginationInfo.objectsPerPage,
+			include: { event: true },
+		});
+
+		// map to ScheduleEntities
+		let schedules: (ScheduleEntity & { event: EventEntity })[] = [];
+		datas.forEach((data) => {
+			let schedule = data;
+			schedules.push(schedule);
+		});
+
+		return schedules;
+	}
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Schedules
+		let datas = await prisma.schedule.findMany({
 			include: { event: true },
 		});
 

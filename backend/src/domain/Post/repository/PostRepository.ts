@@ -1,9 +1,13 @@
+import { LinkedEntity } from '@prisma/client';
 import { paginationType } from '../../pagination/paginationObj';
 import { PostEntity } from '../model/PostEntity';
 import { updatePostEntity } from '../model/updatePostEntity';
 
 export abstract class PostRepository {
-	async getAll(paginationInfo: paginationType): Promise<PostEntity[]> {
+	async getAll(): Promise<PostEntity[]> {
+		throw new Error('Method not implemented.');
+	}
+	async listPaginated(paginationInfo: paginationType): Promise<PostEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<PostEntity> {
@@ -17,5 +21,14 @@ export abstract class PostRepository {
 	}
 	async delete(postId: string): Promise<PostEntity> {
 		throw new Error('Method not implemented.');
+	}
+	async getEntityPosts(
+		entityId: string,
+		entity: LinkedEntity
+	): Promise<PostEntity[]> {
+		throw new Error('Method not implmented');
+	}
+	async listEntityPosts(entity: LinkedEntity): Promise<PostEntity[]> {
+		throw new Error('Method not implmented');
 	}
 }

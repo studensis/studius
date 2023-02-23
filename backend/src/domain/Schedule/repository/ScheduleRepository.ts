@@ -6,9 +6,7 @@ import { ScheduleEntity } from '../model/ScheduleEntity';
 import { updateScheduleEntity } from '../model/updateScheduleEntity';
 
 export abstract class ScheduleRepository {
-	async getAll(
-		paginationInfo: paginationType
-	): Promise<(ScheduleEntity & { event: EventEntity })[]> {
+	async getAll(): Promise<(ScheduleEntity & { event: EventEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getById(id: string): Promise<ScheduleEntity> {
@@ -36,6 +34,11 @@ export abstract class ScheduleRepository {
 		throw new Error('Method not implemented.');
 	}
 	async deleteByRoomId(roomId: string): Promise<Prisma.BatchPayload> {
+		throw new Error('Method not implemented.');
+	}
+	async listPaginated(
+		paginationInfo: paginationType
+	): Promise<(ScheduleEntity & { event: EventEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 }

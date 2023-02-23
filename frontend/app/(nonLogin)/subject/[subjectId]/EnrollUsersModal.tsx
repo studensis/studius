@@ -20,7 +20,9 @@ export const EnrollUsersModal = (props: PageProps) => {
 	const subject = trpc.subject.getSubjectById.useQuery(props.subjectId);
 
 	const users = trpc.user.listUsers.useQuery();
-	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(props.subjectId);
+	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery({
+		subjectId: props.subjectId,
+	});
 
 	const [success, setSuccess] = useState('');
 	const [ids, setIds] = useState<string[]>([]);

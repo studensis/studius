@@ -7,6 +7,7 @@ import createRoomInteractor from '../interactors/createRoomInteractor';
 import deleteRoomInteractor from '../interactors/deleteRoomInteractor';
 import deleteScheduleByRoomIdInteractor from '../interactors/deleteScheduleByRoomId';
 import getRoomInteractor from '../interactors/getRoomInteractor';
+import listPaginatedRoomsInteractor from '../interactors/listPaginatedRoomsInteractor';
 import listRoomsInteractor from '../interactors/listRoomsInteractor';
 import updateRoomInteractor from '../interactors/updateRoomInteractor';
 import { RoomEntity } from '../model/RoomEntity';
@@ -47,9 +48,14 @@ export default t.router({
 		return room;
 	}),
 
-	listRooms: t.procedure.input(paginationObj).query(async ({ input }) => {
-		let rooms = await listRoomsInteractor(repo, input);
+	listRooms: t.procedure.query(async () => {
+		let rooms = await listRoomsInteractor(repo);
 		return rooms as RoomEntity[];
+	}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedRoomsInteractor(repo, input);
+		return response;
 	}),
 
 	updateRoomById: t.procedure
