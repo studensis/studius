@@ -33,7 +33,6 @@ export const LeftPanel = () => {
 				) : (
 					<LoadingCalendar />
 				)}
-				<LoadingCalendar />
 			</Stack>
 		</>
 	);

@@ -9,8 +9,6 @@ import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import PostCard from '../../../components/Cards/PostCard';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
-import LoadingPosts from './loadingPosts';
-import LoadingSubjects from './loadingSubjects';
 import SubjectList from './SubjectList';
 
 const Greeting = () => {
@@ -47,7 +45,6 @@ export const RightPanel = () => {
 						</Link>
 					</SectionTop>
 					<SubjectList />
-					<LoadingSubjects />
 					<br />
 					<div className="flex justify-between">
 						<h1 className="title1">Obavijesti</h1>
@@ -67,7 +64,6 @@ export const RightPanel = () => {
 							);
 						})}
 					</Stack>
-					<LoadingPosts />
 				</div>
 			</PageStack>
 		</>
