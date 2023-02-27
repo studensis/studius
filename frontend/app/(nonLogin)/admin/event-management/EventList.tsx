@@ -46,7 +46,7 @@ const EventList = () => {
 									);
 								}}
 								onClick={(event) => {
-									router.push('/event/' + event.id);
+									router.push('/admin/event-management/' + event.id);
 								}}
 							></Table>
 						</Block>

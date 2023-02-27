@@ -77,8 +77,13 @@ body {
 	animation-iteration-count: infinite;
 	animation-name: placeHolderShimmer;
 	animation-timing-function: linear;
-	background-color: #f6f7f8;
-	background: linear-gradient(to right, #e4e5e9 8%, #c0c1c4 18%, #e4e5e9 33%);
+	background-color: var(--color-neutral-weak);
+	background: linear-gradient(
+		to right,
+		var(--color-neutral-medium) 8%,
+		var(--color-neutral-strong) 18%,
+		var(--color-neutral-medium) 33%
+	);
 	background-size: 1200px 104px;
 	height: 32px;
 	position: relative;
