@@ -216,21 +216,6 @@ test('User delete', async () => {
 	);
 	expect(deleteUser).not.toBeNull();
 });
-test('Event delete', async () => {
-	let deleteEvent: EventEntity = await deleteEventInteractor(
-		eventId,
-		eventRepo
-	);
-	expect(deleteEvent).not.toBeNull();
-});
-test('Event delete', async () => {
-	eventId = newEvent.id;
-	let deleteEvent: EventEntity = await deleteEventInteractor(
-		eventId,
-		eventRepo
-	);
-	expect(deleteEvent).not.toBeNull();
-});
 test('Room delete', async () => {
 	roomId = newRoom.id;
 	let deleteRoom: RoomEntity = await deleteRoomInteractor(roomId, roomRepo);
@@ -242,4 +227,12 @@ test('Schedule delete', async () => {
 		scheduleRepo
 	);
 	expect(deleteSchedule).not.toBeNull();
+});
+test('Event delete', async () => {
+	eventId = newEvent.id;
+	let deleteEvent: EventEntity = await deleteEventInteractor(
+		eventId,
+		eventRepo
+	);
+	expect(deleteEvent).not.toBeNull();
 });

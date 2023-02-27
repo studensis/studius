@@ -13,7 +13,9 @@ let testAssignment: AssignmentEntity = {
 	title: Buffer.from(Math.random().toString())
 		.toString('base64')
 		.substring(5, 15),
-	description: '',
+	description: Buffer.from(Math.random().toString())
+		.toString('base64')
+		.substring(5, 15),
 	assignmentStatus: 'DRAFT',
 	type: 'SEMINAR',
 	status: 'ACTIVE',
