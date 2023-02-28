@@ -2,10 +2,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { UserEntity } from 'studius-backend/src/domain/User/model/UserEntity';
 import { Button } from '../../../../components/@studius/Button/Button';
+import Dropdown from '../../../../components/@studius/Dropdown/Dropdown';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
-import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import { Table } from '../../../../components/@studius/Table/Table';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
+import LoadingUserList from './LoadingUserList';
 import { UpdateUserModal } from './UpdateUserModal';
 
 const List = ({
@@ -59,7 +60,7 @@ const List = ({
 
 	return (
 		<>
-			{usersBeingDisplayed.isLoading && <Spinner />}
+			{usersBeingDisplayed.isLoading && <LoadingUserList />}
 			{usersBeingDisplayed.data && (
 				<>
 					<div className="m-4  flex content-center gap-2">
@@ -174,6 +175,7 @@ function UserList() {
 				<option value="50">50</option>
 				<option value="100">100</option>
 			</select>
+			<Dropdown options={['asdasd', 'dsadsa']}></Dropdown>
 			<List numberOfUsersBeingDisplayed={numberOfUsersBeingDisplayed} />
 		</>
 	);
