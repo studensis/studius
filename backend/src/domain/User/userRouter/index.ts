@@ -78,7 +78,9 @@ export default t.router({
 		.input(paginationObj)
 		.query(async ({ input }) => {
 			let response = await listPaginatedUsersInteractor(repo, input);
-			return response;
+			//Popraviti ovo
+			let len = (await listUsersInteractor(repo)).length;
+			return { users: response, numberOfUsers: len };
 		}),
 
 	updateUserById: publicProcedure

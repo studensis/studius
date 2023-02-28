@@ -6,7 +6,6 @@ import { PageStack } from '../../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
 import Protected from '../../../../components/@studius/Protected/Protected';
 import AdminToolbar from './AdminToolbar';
-// import AdminToolbar from './AdminToolbar';
 import UserList from './UserList';
 
 export default function Page() {

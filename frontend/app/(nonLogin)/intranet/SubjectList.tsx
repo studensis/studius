@@ -9,6 +9,7 @@ export default function SubjectList() {
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery({
 		userId: user!.userId,
 	});
+
 	return (
 		<Stack cols={2}>
 			{enrolledSubjects.isLoading && <LoadingSubjects />}
