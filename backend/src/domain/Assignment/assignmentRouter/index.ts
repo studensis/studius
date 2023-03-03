@@ -26,15 +26,15 @@ export default t.router({
 		.input(
 			z.object({
 				title: z.string(),
-				description: z.string().optional(),
+				description: z.string(),
 				mentorId: z.string().optional(),
 				contentId: z.string().optional(),
 				subjectId: z.string().optional(),
 				userId: z.string().optional(),
-				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']).optional(),
+				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']),
 				assignmentStatus: z.enum(['DRAFT', 'READY', 'CONFIRMED']).optional(),
-				status: z.enum(['ACTIVE', 'ARCHIVED']).optional(),
-				deadline: z.string().optional(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']).default('ACTIVE'),
+				deadline: z.string(),
 			})
 		)
 		.mutation(async ({ input }) => {
@@ -42,7 +42,7 @@ export default t.router({
 				...input,
 				id: '',
 				title: input.title,
-				description: input.description | undefined,
+				description: input.description,
 				mentorId: input.mentorId,
 				contentId: input.contentId,
 				subjectId: input.subjectId,
@@ -68,7 +68,7 @@ export default t.router({
 		.input(
 			z.object({
 				id: z.string(),
-				title: z.string().optional(),
+				title: z.string(),
 				description: z.string(),
 				mentorId: z.string().optional(),
 				contentId: z.string().optional(),
@@ -76,7 +76,7 @@ export default t.router({
 				userId: z.string().optional(),
 				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']),
 				assignmentStatus: z.enum(['DRAFT', 'CONFIRMED', 'READY']).optional(),
-				status: z.enum(['ACTIVE', 'ARCHIVED']),
+				status: z.enum(['ACTIVE', 'ARCHIVED']).default('ACTIVE'),
 				deadline: z.string(),
 			})
 		)
