@@ -16,13 +16,6 @@ export default function SubjectList() {
 		});
 
 	return (
-		// <div className="">
-		// 	<Stack cols={3} mobileCols={1}>
-		// 		{subjects.isLoading && <Spinner />}
-		// 		{subjects.data &&
-		// 			subjects.data.map((subject) => <SubjectCard subject={subject} />)}
-		// 	</Stack>
-		// </div>
 		<>
 			<Stack cols={1}>
 				<Stack cols={3} mobileCols={1}>

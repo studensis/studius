@@ -1,29 +1,38 @@
-import Link from 'next/link';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Button } from '../../../components/@studius/Button/Button';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
+import { Table } from '../../../components/@studius/Table/Table';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
 type form = {
 	subjectId: string;
+	subjectTitle: string;
 	menteeId: string;
+	menteeName: string;
 	title: string;
+	timeStart: string;
+	timeEnd: string;
+	roomId: string;
 };
 
 const Seminar: FC<{ userId: string }> = ({ userId }) => {
 	//Querys
 	const user = trpc.user.getUserById.useQuery(userId);
-	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(userId);
+	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery({
+		userId: userId,
+		active: true,
+	});
 	const menteeList = trpc.user.listMentees.useQuery(userId);
-	const approveSeminar = trpc.seminar.approveSeminar.useMutation();
-	const seminarList = trpc.seminar.listUserSeminars.useQuery({
+	const approveSeminar = trpc.assignment.approveSeminar.useMutation();
+	const seminarList = trpc.assignment.listUserAssignments.useQuery({
 		id: userId,
 		options: { isMentor: true, isStudent: false },
 	});
+	const rooms = trpc.room.listRooms.useQuery();
 
 	//Mutations
-	const seminar = trpc.seminar.createSeminar.useMutation();
+	const seminar = trpc.assignment.createAssignment.useMutation();
 
 	//useState sekcija
 	const [statusMessage, setStatusMessage] = useState('');
@@ -36,9 +45,12 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 		subjectId: '',
 		menteeId: '',
 		title: '',
+		menteeName: '',
+		subjectTitle: '',
+		roomId: '',
+		timeEnd: '',
+		timeStart: '',
 	});
-
-	useEffect(() => {}, []);
 
 	//Delay za status message
 	function delay(ms: number) {
@@ -62,6 +74,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 			//setStatusMessage(error);
 			setStatusMessage('Error');
 		}
+		seminarList.refetch();
 	}
 
 	async function confirmDraft(id: string) {
@@ -69,9 +82,9 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 		try {
 			approveSeminar.mutate({
 				roomId: '73771d60-4f7d-4dcb-99bb-4f07b55698f4',
-				seminarId: id,
-				dateStart: date + 'T' + startTime + ':00',
-				dateEnd: date + 'T' + endTime + ':00',
+				assignmentId: id,
+				dateStart: form.timeStart,
+				dateEnd: form.timeEnd,
 			});
 			setStatusMessageConfirmation('Seminar confirmed');
 			await delay(1500);
@@ -79,209 +92,229 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 		} catch (error) {
 			setStatusMessageConfirmation('Error');
 		}
+		seminarList.refetch();
 	}
 
 	return (
 		<div>
-			<div className="fixed top-20 left-10 rounded-md p-2 border-2 opacity-40 w-[8%]">
-				<p className="text-sm">
-					<span className="text-accent-strong">Title:</span> {form.title}
-				</p>
-				<p className="text-sm">
-					<span className="text-accent-strong">Subject:</span> {form.subjectId}
-				</p>
-				<p className="text-sm">
-					<span className="text-accent-strong">Mentee:</span> {form.menteeId}
-				</p>
+			<div className="my-4">
+				<label className="title1 m-5" htmlFor="title">
+					Title
+				</label>
+				<input
+					className="m-5 outline-none rounded-2xl border-accent-medium border-[3px] p-4 w-full "
+					type="text"
+					name="title"
+					placeholder="Input seminar title here"
+					onChange={(e) => {
+						setForm({ ...form, title: e.target.value });
+					}}
+				/>
 			</div>
-			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
-				<h1 className="title1 m-4">
-					Choose a subject for a Seminar suggestion
-				</h1>
-				<Stack cols={3}>
-					{enrolledSubjects.data &&
-						enrolledSubjects.data
-							.filter((es) => es.roleTitle === 'OWNER')
-							.map((enrolledSubject) => (
-								<div className=" flex " key={enrolledSubject.subject.id}>
-									<Link href={'/subject/' + enrolledSubject.subject.id} key={3}>
-										<Block>
-											<p className="text-neutral-strong caption">{}</p>
-											<p className="title2">{enrolledSubject.subject.title}</p>
-										</Block>
-									</Link>
-									<Button
-										onClick={() => {
-											setForm({
-												...form,
-												subjectId: enrolledSubject.subject.id,
-											});
-										}}
-									>
-										Select
-									</Button>
-								</div>
-							))}
+			<div className="">
+				<h1 className="title1 m-4">Choose Subject and Mentee:</h1>
+				<Stack cols={2}>
+					{enrolledSubjects.data && (
+						<Block>
+							<Table
+								objects={
+									enrolledSubjects.data
+										.filter((subject) => subject.roleTitle === 'OWNER')
+										.map((subject) => ({
+											subject: subject.subject.title,
+											roleTitle: subject.roleTitle,
+											id: subject.subject.id,
+											title: subject.subject.title,
+										})) || []
+								}
+								titles={{ subject: 'Title' }}
+								actionRow={(subject) => {
+									return (
+										<>
+											<Button
+												outline={form.subjectId === subject.id}
+												onClick={() => {
+													setForm({
+														...form,
+														subjectId: subject.id,
+														subjectTitle: subject.title,
+													});
+												}}
+											>
+												Select
+											</Button>
+										</>
+									);
+								}}
+							/>
+						</Block>
+					)}
+					{menteeList.data && (
+						<Block>
+							<Table
+								objects={
+									menteeList.data.map((mentee) => ({
+										id: mentee.id,
+										firstName: mentee.firstname,
+										lastName: mentee.lastname,
+									})) || []
+								}
+								titles={{ firstName: 'Name', lastName: 'Surname' }}
+								actionRow={(mentee) => {
+									return (
+										<>
+											<Button
+												outline={form.menteeId === mentee.id}
+												onClick={() => {
+													setForm({
+														...form,
+														menteeId: mentee.id,
+														menteeName:
+															mentee.firstName + ' ' + mentee.lastName,
+													});
+												}}
+											>
+												Select
+											</Button>
+										</>
+									);
+								}}
+							/>
+						</Block>
+					)}
 				</Stack>
 			</div>
-			<br />
-			<div className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
-				<h1 className="title1 m-4">Choose your mentee for this Seminar </h1>
-				<Stack cols={3}>
-					{menteeList.data &&
-						menteeList.data.map((mentee) => (
-							<div className=" flex " key={mentee.id}>
-								<Link href={'/subject/' + mentee.id} key={3}>
-									<Block>
-										<p className="text-neutral-strong caption">{}</p>
-										<p className="title2">
-											{mentee.firstname + ' ' + mentee.lastname}
-										</p>
-									</Block>
-								</Link>
-								<Button
-									onClick={() => {
-										setForm({
-											...form,
-											menteeId: mentee.id,
-										});
-									}}
-								>
-									Select
-								</Button>
-							</div>
-						))}
-				</Stack>
-			</div>
-			<br />
-			<Block className="p-8 outline-none border-accent-medium border-[2px] rounded-xl">
-				<h1 className="title1 m-4">Fill this Seminar Form</h1>
-				<form className="p-5 ">
-					<div className="flex items-center">
-						<label className="title1 m-5" htmlFor="title">
-							Title
-						</label>
-						<input
-							className="m-5 outline-none rounded-2xl border-accent-strong border-[3px] p-4 w-full "
-							type="text"
-							name="title"
-							placeholder="Input seminar title here"
-							onChange={(e) => {
-								setForm({ ...form, title: e.target.value });
-							}}
-						/>
-					</div>
-				</form>
-			</Block>
-			<div className="w-full flex justify-between mt-4 px-10">
-				<h1
-					className={
-						statusMessage != ''
-							? 'title px-5 py-2 rounded-xl border-[2px] border-success text-success'
-							: ''
-					}
-				>
-					{statusMessage}
-				</h1>
+			<div className="m-4 flex justify-between text-accent-medium">
+				<div></div>
 				<Button
 					onClick={() => {
 						suggestSeminar(form);
 					}}
 					className=""
+					loading={seminar.isLoading}
 				>
 					Suggest Seminar
 				</Button>
 			</div>
-			<br />
-			<br />
-
 			<div>
-				<h1 className="title1">List of sent Suggestions</h1>
-				<Stack cols={1}>
-					{seminarList.data &&
-						seminarList.data
-							.filter((seminar) => seminar.status === 'DRAFT')
-							.map((seminar) => (
-								<div
-									key={seminar.id}
-									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
-								>
-									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
-										{seminar.title}
-									</div>
-									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
-										{seminar.userId}
-									</div>
-									<div className="">{seminar.description}</div>
-								</div>
-							))}
-				</Stack>
-				<br />
-				<h1 className="title1 mb-2">List of Drafts</h1>
-				<Stack cols={1}>
-					{seminarList.data &&
-						seminarList.data
-							.filter((seminar) => seminar.status === 'READY')
-							.map((seminar) => (
-								<div
-									key={seminar.id}
-									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
-								>
-									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
-										{seminar.title}
-									</div>
-									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
-										{seminar.userId}
-									</div>
-									<div className="">{seminar.description}</div>
-									<Button
-										onClick={() => {
-											confirmDraft(seminar.id);
-										}}
-									>
-										Confirm Draft
-									</Button>
-									<input
-										type="date"
-										onChange={(e) => {
-											setDate(e.target.value);
-										}}
-									/>
-									<input
-										type="time"
-										onChange={(e) => {
-											setStartTime(e.target.value);
-										}}
-									/>
-									<input
-										type="time"
-										onChange={(e) => {
-											setEndTime(e.target.value);
-										}}
-									/>
-								</div>
-							))}
-				</Stack>
-				<h1 className="title1">List of confirmed Seminars</h1>
-				<Stack cols={1}>
-					{seminarList.data &&
-						seminarList.data
-							.filter((seminar) => seminar.status === 'CONFIRMED')
-							.map((seminar) => (
-								<div
-									key={seminar.id}
-									className="flex w-full rounded-md shadow-md p-5 m-2 mt-5 gap-5 border-accent-medium border-[2px] "
-								>
-									<div className="w-[25%] border-r-2 border-accent-medium p-2 px-4 ">
-										{seminar.title}
-									</div>
-									<div className="text-sm border-r-2 border-accent-medium p-2 px-4 ">
-										{seminar.userId}
-									</div>
-									<div className="">{seminar.description}</div>
-								</div>
-							))}
-				</Stack>
+				<Block>
+					<Block className="rounded-xl border-accent-medium border-2 mb-4 ">
+						<h1 className="title1 mb-5">List of Drafts</h1>
+						{seminarList.data && seminarList.data.length >= 1 ? (
+							<Table
+								objects={
+									seminarList.data?.filter(
+										(seminar) => seminar.assignmentStatus === 'DRAFT'
+									) || []
+								}
+								titles={{
+									title: 'Title',
+									id: 'User ID:',
+									description: 'Description',
+								}}
+								actionRow={(seminar) => {
+									return <></>;
+								}}
+							/>
+						) : (
+							<p>You have no seminars.</p>
+						)}
+					</Block>
+					<Block className="rounded-xl border-accent-medium border-2 mb-4 ">
+						<h1 className="title1 mb-5">List of sent Suggestions</h1>
+						<Table
+							objects={
+								seminarList.data?.filter(
+									(seminar) => seminar.assignmentStatus === 'READY'
+								) || []
+							}
+							titles={{
+								title: 'Title',
+								id: 'User ID:',
+								description: 'Description',
+							}}
+							actionRow={(seminar) => {
+								return (
+									<>
+										<div className="grid grid-cols-1">
+											<label htmlFor="room">Room:</label>
+											<select
+												name="room"
+												onChange={(e) => {
+													setForm({ ...form, roomId: e.target.value });
+												}}
+												className="rounded-xl p-2 px-4 border-accent-medium border-2"
+											>
+												{rooms.data?.map((room) => {
+													return (
+														<>
+															<option value={room.id}>{room.title}</option>
+														</>
+													);
+												})}
+											</select>
+										</div>
+										<div className="grid grid-cols-1">
+											<label htmlFor="TimeStart">Start Time:</label>
+											<input
+												onChange={(e) => {
+													setForm({ ...form, timeStart: e.target.value });
+												}}
+												name="TimeStart"
+												className="rounded-xl p-2 px-4 border-accent-medium border-2"
+												type="datetime-local"
+											/>
+										</div>
+										<div className="grid grid-cols-1">
+											<label htmlFor="TimeEnd">End Time:</label>
+											<input
+												onChange={(e) => {
+													setForm({ ...form, timeEnd: e.target.value });
+												}}
+												name="TimeEnd"
+												className="rounded-xl p-2 px-4 border-accent-medium border-2"
+												type="datetime-local"
+											/>
+										</div>
+
+										<Button
+											onClick={() => {
+												confirmDraft(seminar.id);
+											}}
+											loading={approveSeminar.isLoading}
+										>
+											Confirm Draft
+										</Button>
+									</>
+								);
+							}}
+						/>
+					</Block>
+
+					<Block className="rounded-xl border-accent-medium border-2 mb-4 ">
+						<h1 className="title1 mb-5">List of confirmed Seminars</h1>
+						<Table
+							objects={
+								seminarList.data?.filter(
+									(seminar) => seminar.assignmentStatus === 'CONFIRMED'
+								) || []
+							}
+							titles={{
+								title: 'Title',
+								id: 'User ID:',
+								description: 'Description',
+							}}
+							actionRow={(seminar) => {
+								return (
+									<>
+										<h1 className="title1 text-accent-medium"></h1>
+									</>
+								);
+							}}
+						/>
+					</Block>
+				</Block>
+
 				<div className="mt-10">
 					<h1
 						className={

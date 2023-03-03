@@ -129,19 +129,6 @@ function SubjectPage(props: PageProps) {
 							/>
 						)}
 
-						{/* // {deleteSubject.isSuccess && (
-						// 	<Block>
-						// 		<pre>{JSON.stringify(deleteSubject.data)}</pre>
-						// 	</Block>
-						// )}
-						// {deleteSubject.error && (
-						// 	<Block>
-						// 		<pre>
-						// 			{JSON.stringify(deleteSubject.error.shape?.message, null, 2)}
-						// 		</pre>
-						// 	</Block>
-						// )} */}
-
 						<Posts subjectId={props.params.subjectId} />
 
 						<PinnedSchedules subjectId={props.params.subjectId} />
@@ -180,7 +167,6 @@ function SubjectPage(props: PageProps) {
 						</div>
 
 						{subject.data?.contentId &&
-							// eslint-disable-next-line react/jsx-key
 							subject.data!.contentId.map((id) => <Content contentId={id} />)}
 					</>
 				)}
@@ -190,15 +176,3 @@ function SubjectPage(props: PageProps) {
 }
 
 export default SubjectPage;
-
-// export async function generateStaticParams() {
-// 	const res = await fetch('https://jsonplaceholder.typicode.com/subjects/');
-// 	let subjects: Todo[] = await res.json();
-
-// 	// rate limiting prevention, will prerender first 10 items only.
-// 	subjects = subjects.splice(10);
-
-// 	return subjects.map((subject) => {
-// 		return { subjectId: subject.id.toString() };
-// 	});
-// }

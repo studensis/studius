@@ -11,17 +11,7 @@ export default function SubjectList() {
 	const posts = trpc.post.listPosts.useQuery();
 	const deletePost = trpc.post.deletePostById.useMutation();
 
-	// useEffect(() => {
-	// 	if (updateUser.isSuccess) {
-	// 		rooms.refetch();
-	// 	}
-	// }, [updateUser]);
 
-	// useEffect(() => {
-	// 	if (deleteRoom.isSuccess) {
-	// 		router.refresh();
-	// 	}
-	// }, [deleteRoom]);
 
 	const { setModal } = useDialog();
 

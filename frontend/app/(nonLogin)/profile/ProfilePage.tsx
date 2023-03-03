@@ -20,7 +20,10 @@ const ProfilePage: FC<props> = ({}) => {
 	const [box, setBox] = useState(false);
 	const [imageUrl, setImageUrl] = useState('');
 	const router = useRouter();
-	const subjects = trpc.user.getEnrolledSubjects.useQuery(user!.userId);
+	const subjects = trpc.user.getEnrolledSubjects.useQuery({
+		active: true,
+		userId: user!.userId,
+	});
 
 	function updatePP() {
 		updateUser.mutate({ id: localUser!.id, avatar: imageUrl });
