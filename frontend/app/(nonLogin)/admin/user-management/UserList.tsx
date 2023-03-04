@@ -19,6 +19,10 @@ const List = ({
 
 	const [pageNumber, setPageNumber] = useState(1);
 
+	const [numberOfFilteredUsers, setNumberOfFilteredUsers] = useState<number>(0);
+
+	const [refilterUsers, setRefilterUsers] = useState(false);
+
 	const usersBeingDisplayed = trpc.user.listUsersPaginated.useQuery({
 		objectsPerPage: numberOfUsersBeingDisplayed,
 		pageNumber: pageNumber - 1,
@@ -27,6 +31,7 @@ const List = ({
 	useEffect(() => {
 		setFilteredUsers(
 			usersBeingDisplayed.data?.users.filter((user) => {
+				setNumberOfFilteredUsers(numberOfFilteredUsers + 1);
 				if (filterBy == '') {
 					return true;
 				}
@@ -40,7 +45,7 @@ const List = ({
 				}
 			})
 		);
-	}, [filterBy]);
+	});
 
 	const { setModal } = useDialog();
 	const router = useRouter();
@@ -55,7 +60,6 @@ const List = ({
 
 	useEffect(() => {
 		setPageNumber(1);
-		console.log('AA');
 	}, [numberOfUsersBeingDisplayed]);
 
 	return (
@@ -77,16 +81,18 @@ const List = ({
 								leftIcon={'chevronLeft'}
 								outline
 								onClick={() => {
+									setRefilterUsers(!refilterUsers);
 									if (pageNumber > 1) {
 										setPageNumber(pageNumber - 1);
 									}
 								}}
 							/>
-							<p className="text-center text-justify">{pageNumber}</p>
+							<p className="text-center">{pageNumber}</p>
 							<Button
 								leftIcon={'chevronRight'}
 								outline
 								onClick={() => {
+									setRefilterUsers(!refilterUsers);
 									if (
 										Math.ceil(
 											usersBeingDisplayed.data?.numberOfUsers /
@@ -155,28 +161,25 @@ const List = ({
 		</>
 	);
 };
+
 function UserList() {
 	const [numberOfUsersBeingDisplayed, setNumberOfUsersBeingDisplayed] =
 		useState<number>(5);
 
+	const [option, setOption] = useState(5);
+
+	const changeOption = (changedOption: number) => {
+		setOption(changedOption);
+	};
+
 	return (
 		<>
-			<label htmlFor="selectedUsersPerPage">Number of Users Per Page:</label>
-			<select
-				id="cars"
-				name="cars"
-				onChange={(e) => {
-					setNumberOfUsersBeingDisplayed(parseInt(e.target.value));
-				}}
-			>
-				<option value="5">5</option>
-				<option value="10">10</option>
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-			</select>
-			<Dropdown options={['asdasd', 'dsadsa']}></Dropdown>
-			<List numberOfUsersBeingDisplayed={numberOfUsersBeingDisplayed} />
+			<Dropdown
+				options={[5, 10, 30, 50, 100]}
+				changeOption={changeOption}
+				option={option}
+			></Dropdown>
+			<List numberOfUsersBeingDisplayed={option} />
 		</>
 	);
 }

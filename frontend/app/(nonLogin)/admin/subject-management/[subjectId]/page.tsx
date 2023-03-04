@@ -1,20 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '../../../../components/@studius/Button/Button';
-import useDialog from '../../../../components/@studius/Modal/DialogProvider';
-import { Block } from '../../../../components/@studius/PageElements/Block';
-import { SectionTop } from '../../../../components/@studius/PageElements/SectionTop';
-import { PageStack } from '../../../../components/@studius/PageElements/Stack';
-import PageHeader from '../../../../components/@studius/PageHeader/PageHeader';
-import Protected from '../../../../components/@studius/Protected/Protected';
-import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
-import useLogin from '../../../../components/hooks/LoginContext';
-import { trpc } from '../../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../../components/@studius/Button/Button';
+import useDialog from '../../../../../components/@studius/Modal/DialogProvider';
+import { Block } from '../../../../../components/@studius/PageElements/Block';
+import { SectionTop } from '../../../../../components/@studius/PageElements/SectionTop';
+import { PageStack } from '../../../../../components/@studius/PageElements/Stack';
+import PageHeader from '../../../../../components/@studius/PageHeader/PageHeader';
+import Protected from '../../../../../components/@studius/Protected/Protected';
+import { Spinner } from '../../../../../components/@studius/Spinner/Spinner';
+import useLogin from '../../../../../components/hooks/LoginContext';
+import { trpc } from '../../../../../components/hooks/TrpcProvider';
 import { UpdateSubjectModal } from '../UpdateSubjectModal';
 import EnrollSection from './EnrollSection';
 import { EnrollUsersModal } from './EnrollUsersModal';
-import { PinnedSchedules } from './PinnedSchedules';
+import { PinnedSchedules } from './PinnedEvents';
 import UserList from './UserList';
 
 type PageProps = {

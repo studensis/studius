@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button } from '../../../../components/@studius/Button/Button';
-import Icon from '../../../../components/@studius/Icon/Icon';
-import useDialog from '../../../../components/@studius/Modal/DialogProvider';
-import { Table } from '../../../../components/@studius/Table/Table';
-import { trpc } from '../../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../../components/@studius/Button/Button';
+import Icon from '../../../../../components/@studius/Icon/Icon';
+import useDialog from '../../../../../components/@studius/Modal/DialogProvider';
+import { Table } from '../../../../../components/@studius/Table/Table';
+import { trpc } from '../../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
 	subjectId: string;
@@ -20,7 +20,9 @@ export const EnrollUsersModal = (props: PageProps) => {
 	const subject = trpc.subject.getSubjectById.useQuery(props.subjectId);
 
 	const users = trpc.user.listUsers.useQuery();
-	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(props.subjectId);
+	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery({
+		subjectId: props.subjectId,
+	});
 
 	const [success, setSuccess] = useState('');
 	const [ids, setIds] = useState<string[]>([]);
@@ -63,7 +65,7 @@ export const EnrollUsersModal = (props: PageProps) => {
 
 	return (
 		<>
-			<div className="flex flex-col justify-center bg-gray-200 rounded-xl p-10 w-[120%]">
+			<div className="flex flex-col justify-center bg-background rounded-xl p-10">
 				<h1 className="title1 text-center mb-10">
 					Enroll Students to {subject.data?.title}
 				</h1>
