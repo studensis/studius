@@ -68,21 +68,21 @@ export default t.router({
 		.input(
 			z.object({
 				id: z.string(),
-				title: z.string(),
-				description: z.string(),
+				title: z.string().optional(),
+				description: z.string().optional(),
 				mentorId: z.string().optional(),
 				contentId: z.string().optional(),
 				subjectId: z.string().optional(),
 				userId: z.string().optional(),
-				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']),
+				type: z.enum(['SEMINAR', 'HOMEWORK', 'PRACTICAL']).optional(),
 				assignmentStatus: z.enum(['DRAFT', 'CONFIRMED', 'READY']).optional(),
-				status: z.enum(['ACTIVE', 'ARCHIVED']).default('ACTIVE'),
-				deadline: z.string(),
+				status: z.enum(['ACTIVE', 'ARCHIVED']).default('ACTIVE').optional(),
+				deadline: z.string().optional(),
 			})
 		)
 		.mutation(async ({ input }) => {
 			let updatedAssignment: updateAssignmentEntity = {
-				...input,
+				// ...input,
 				id: input.id,
 				title: input.title,
 				description: input.description,
@@ -91,7 +91,6 @@ export default t.router({
 				subjectId: input.subjectId,
 				userId: input.userId,
 				status: input.status,
-				deadline: new Date(input.deadline),
 			};
 			let response = await updateAssignmentInteractor(repo, updatedAssignment);
 			return response;

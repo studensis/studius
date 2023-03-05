@@ -49,7 +49,7 @@ function LoginProvider({ children }: { children: React.ReactNode }) {
 	const logout = trpc.auth.logout.useMutation();
 
 	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(
-		user ? user.userId : '',
+		{ userId: user ? user.userId : '' },
 		{ enabled: !!(user && user.userId) }
 	);
 

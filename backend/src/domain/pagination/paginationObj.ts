@@ -5,5 +5,5 @@ const paginationObj = z.object({
 	objectsPerPage: z.number(),
 });
 
-type paginationType = z.infer<typeof paginationObj>;
-export { paginationType, paginationObj };
+export type paginationType = z.infer<typeof paginationObj>;
+export { paginationObj };
