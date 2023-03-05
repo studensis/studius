@@ -23,7 +23,7 @@ app.use(
 		origin: [
 			customConfig.origin,
 			'http://localhost:3000',
-			'https://studius-eta.vercel.app',
+			'https://studius-frontend.vercel.app',
 			'*.vercel.app',
 		],
 		credentials: true,
