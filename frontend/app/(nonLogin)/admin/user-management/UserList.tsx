@@ -70,59 +70,59 @@ const List = ({
 
 	return (
 		<>
+			<Block>
+				<div className="m-4  flex justify-between gap-2">
+					<div className="flex">
+						<p className="title1 m-2">Filter:</p>
+						<input
+							className="rounded-xl w-full border-accent border-2 p-2 outline-none bg-neutral-weak max-w-[500px]"
+							type="text"
+							onChange={(e) => {
+								setFilterBy(e.target.value);
+							}}
+						/>
+					</div>
+
+					<div className="flex">
+						<Dropdown
+							options={options}
+							changeOption={changeOption}
+							option={numberOfUsersBeingDisplayed}
+						></Dropdown>
+						<Button
+							leftIcon={'chevronLeft'}
+							outline
+							onClick={() => {
+								setRefilterUsers(!refilterUsers);
+								if (pageNumber > 1) {
+									setPageNumber(pageNumber - 1);
+								}
+							}}
+							className="ml-[16px]"
+						/>
+						<p className="text-center body3 px-2 pt-3">{pageNumber}</p>
+						<Button
+							leftIcon={'chevronRight'}
+							outline
+							onClick={() => {
+								setRefilterUsers(!refilterUsers);
+								if (
+									usersBeingDisplayed.data &&
+									Math.ceil(
+										usersBeingDisplayed.data?.numberOfUsers /
+											numberOfUsersBeingDisplayed
+									) > pageNumber
+								) {
+									setPageNumber(pageNumber + 1);
+								}
+							}}
+						/>
+					</div>
+				</div>
+			</Block>
 			{usersBeingDisplayed.isLoading && <Spinner />}
 			{usersBeingDisplayed.data && (
 				<>
-					<Block>
-						<div className="m-4  flex justify-between gap-2">
-							<div className="flex">
-								<p className="title1 m-2">Filter:</p>
-								<input
-									className="rounded-xl w-full border-accent border-2 p-2 outline-none bg-neutral-weak max-w-[500px]"
-									type="text"
-									onChange={(e) => {
-										setFilterBy(e.target.value);
-									}}
-								/>
-							</div>
-
-							<div className="flex">
-								<Dropdown
-									options={options}
-									changeOption={changeOption}
-									option={numberOfUsersBeingDisplayed}
-								></Dropdown>
-								<Button
-									leftIcon={'chevronLeft'}
-									outline
-									onClick={() => {
-										setRefilterUsers(!refilterUsers);
-										if (pageNumber > 1) {
-											setPageNumber(pageNumber - 1);
-										}
-									}}
-									className="ml-[16px]"
-								/>
-								<p className="text-center body3 px-2 pt-3">{pageNumber}</p>
-								<Button
-									leftIcon={'chevronRight'}
-									outline
-									onClick={() => {
-										setRefilterUsers(!refilterUsers);
-										if (
-											Math.ceil(
-												usersBeingDisplayed.data?.numberOfUsers /
-													numberOfUsersBeingDisplayed
-											) > pageNumber
-										) {
-											setPageNumber(pageNumber + 1);
-										}
-									}}
-								/>
-							</div>
-						</div>
-					</Block>
-
 					<Table
 						titles={{
 							id: 'ID',
