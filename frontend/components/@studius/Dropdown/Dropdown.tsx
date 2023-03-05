@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import Icon from '../Icon/Icon';
 
 function Dropdown({
@@ -9,8 +10,10 @@ function Dropdown({
 	changeOption: Function;
 	option: number;
 }) {
+	const parentRef = useRef<HTMLDivElement>(null);
 	return (
 		<div
+			ref={parentRef}
 			className={
 				'bg-section w-[240px] border group border-neutral-medium focus:border-accent-medium ' +
 				'focus:rounded-b-[0px] rounded-[8px]'
@@ -30,6 +33,7 @@ function Dropdown({
 							<div
 								onClick={() => {
 									changeOption(option);
+									parentRef.current?.blur();
 								}}
 								className={
 									'relative min-w-[240px] bg-section duration-300 hover:bg-neutral-weak active:bg-accent-weak border-accent-medium text-neutral-strong px-[16px] py-[8px] ' +
