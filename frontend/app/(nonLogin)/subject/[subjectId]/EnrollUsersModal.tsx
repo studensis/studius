@@ -20,7 +20,9 @@ export const EnrollUsersModal = (props: PageProps) => {
 	const subject = trpc.subject.getSubjectById.useQuery(props.subjectId);
 
 	const users = trpc.user.listUsers.useQuery();
-	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(props.subjectId);
+	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery({
+		subjectId: props.subjectId,
+	});
 
 	const [success, setSuccess] = useState('');
 	const [ids, setIds] = useState<string[]>([]);
@@ -59,11 +61,12 @@ export const EnrollUsersModal = (props: PageProps) => {
 		setSuccess('Updated');
 		await delay(1500);
 		setSuccess('');
+		enrolledUsers.refetch();
 	}
 
 	return (
 		<>
-			<div className="flex flex-col justify-center bg-gray-200 rounded-xl p-10 w-[120%]">
+			<div className="flex flex-col justify-center bg-background rounded-xl p-10 w-[120%]">
 				<h1 className="title1 text-center mb-10">
 					Enroll Students to {subject.data?.title}
 				</h1>
@@ -74,11 +77,13 @@ export const EnrollUsersModal = (props: PageProps) => {
 							userRole: 'Role',
 						}}
 						objects={
-							users.data?.map((user) => ({
-								name: user.firstname + ' ' + user.lastname,
-								userRole: user.userRole,
-								id: user.id,
-							})) || []
+							users.data
+								?.filter((user) => !ids.includes(user.id))
+								.map((user) => ({
+									name: user.firstname + ' ' + user.lastname,
+									userRole: user.userRole,
+									id: user.id,
+								})) || []
 						}
 						actionRow={(user) => {
 							return (

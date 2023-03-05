@@ -1,15 +1,18 @@
 import { Stack } from '../../../components/@studius/PageElements/Stack';
-import { Spinner } from '../../../components/@studius/Spinner/Spinner';
 import SubjectCard from '../../../components/Cards/SubjectCard';
 import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
+import LoadingSubjects from './loadingSubjects';
 
 export default function SubjectList() {
 	const { user } = useLogin();
-	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery(user!.userId);
+	const enrolledSubjects = trpc.user.getEnrolledSubjects.useQuery({
+		userId: user!.userId,
+	});
+
 	return (
 		<Stack cols={2}>
-			{enrolledSubjects.isLoading && <Spinner />}
+			{enrolledSubjects.isLoading && <LoadingSubjects />}
 			{enrolledSubjects.data &&
 				enrolledSubjects.data.map((enrolledSubject) => (
 					<SubjectCard

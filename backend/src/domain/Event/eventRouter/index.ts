@@ -1,13 +1,16 @@
 import { z } from 'zod';
 import { isAdmin } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
-import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
+import { paginationObj } from '../../pagination/paginationObj';
+import PinnedScheduleRepositoryPrisma from '../../PinnedSchedule/repository/PinnedScheduleRepositoryPrisma';
 import archiveScheduleInteractor from '../../Schedule/interactors/archiveScheduleInteractor';
 import createScheduleInteractor from '../../Schedule/interactors/createScheduleInteractor';
+import deletePinnedScheduleByScheduleIdInteractor from '../../Schedule/interactors/deletePinnedScheduleByScheduleIdInteractor';
 import deleteScheduleInteractor from '../../Schedule/interactors/deleteScheduleInteractor';
-import deleteUserPresenceByScheduleIDInteractor from '../../Schedule/interactors/deleteUserPresenceByScheduleIdInteractor';
+import deleteUserPresenceByScheduleIdInteractor from '../../Schedule/interactors/deleteUserPresenceByScheduleIdInteractor';
 import getScheduleInteractor from '../../Schedule/interactors/getScheduleInteractor';
 import listAssociatedUserPresencesInteractor from '../../Schedule/interactors/listAssociatedUserPresencesInteractor';
+import listPaginatedSchedulesInteractor from '../../Schedule/interactors/listPaginatedSchedulesInteractor';
 import listSchedulesInteractor from '../../Schedule/interactors/listSchedulesInteractor';
 import updateScheduleInteractor from '../../Schedule/interactors/updateScheduleInteractor';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
@@ -18,11 +21,12 @@ import archiveEventInteractor from '../interactors/archiveEventInteractor';
 import archiveScheduleByEventIdInteractor from '../interactors/archiveScheduleByEventIdInteractor';
 import createEventInteractor from '../interactors/createEventInteractor';
 import deleteEventInteractor from '../interactors/deleteEventInteractor';
-import deletePinnedEventByEventIdInteractor from '../interactors/deletePinnedEventByEventIdInteractor';
+
 import deleteScheduleByEventIdInteractor from '../interactors/deleteScheduleByEventIdInteractor';
 import getEventInteractor from '../interactors/getEventInteractor';
 import listAssociatedSchedulesInteractor from '../interactors/listAssociatedSchedulesInteractor';
 import listEventsInteractor from '../interactors/listEventsInteractor';
+import listPaginatedEventsInteractor from '../interactors/listPaginatedEventsInteractor';
 import updateEventInteractor from '../interactors/updateEventInteractor';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
@@ -31,7 +35,7 @@ import EventRepositoryPrisma from '../repository/EventRepositoryPrisma';
 let repo = new EventRepositoryPrisma();
 let Schedulerepo = new ScheduleRepositoryPrisma();
 let EUPrepo = new UserPresenceRepositoryPrisma();
-let pinnedEventRepo = new PinnedEventRepositoryPrisma();
+let pinnedScheduleRepo = new PinnedScheduleRepositoryPrisma();
 
 export default t.router({
 	createEvent: t.procedure
@@ -40,7 +44,7 @@ export default t.router({
 			z.object({
 				title: z.string(),
 				description: z.string(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']),
+				linkedEntity: z.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST']),
 				linkedEntityId: z.string(),
 			})
 		)
@@ -59,10 +63,11 @@ export default t.router({
 		.input(z.string())
 		.mutation(async ({ input }) => {
 			let b = await deleteScheduleByEventIdInteractor(input, Schedulerepo);
-			let c = await deletePinnedEventByEventIdInteractor(
-				input,
-				pinnedEventRepo
-			);
+			// vise ne postoji jer je sad PinnedSchedule linkan za Schedule, ne Event
+			// let c = await deletePinnedScheduleByEventIdInteractor(
+			// 	input,
+			// 	pinnedScheduleRepo
+			// );
 			let a = await deleteEventInteractor(input, repo);
 			return a;
 		}),
@@ -83,7 +88,9 @@ export default t.router({
 				id: z.string(),
 				title: z.string().optional(),
 				description: z.string().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']).optional(),
+				linkedEntity: z
+					.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST'])
+					.optional(),
 				linkedEntityId: z.string().optional(),
 			})
 		)
@@ -100,6 +107,11 @@ export default t.router({
 			let a = await archiveEventInteractor(input, repo);
 			return a;
 		}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedEventsInteractor(repo, input);
+		return response;
+	}),
 	//
 	//
 	//
@@ -136,7 +148,11 @@ export default t.router({
 		//.use(isAdmin)
 		.input(z.string())
 		.mutation(async ({ input }) => {
-			let b = await deleteUserPresenceByScheduleIDInteractor(input, EUPrepo);
+			let c = await deletePinnedScheduleByScheduleIdInteractor(
+				input,
+				pinnedScheduleRepo
+			);
+			let b = await deleteUserPresenceByScheduleIdInteractor(input, EUPrepo);
 			let a = await deleteScheduleInteractor(input, Schedulerepo);
 			return a;
 		}),
@@ -158,6 +174,15 @@ export default t.router({
 		let schedules = await listSchedulesInteractor(Schedulerepo);
 		return schedules;
 	}),
+	listPaginatedSchedules: t.procedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedSchedulesInteractor(
+				Schedulerepo,
+				input
+			);
+			return response;
+		}),
 
 	listSchedules: t.procedure.input(z.string()).query(async ({ input }) => {
 		let schedule = await listAssociatedSchedulesInteractor(repo, input);

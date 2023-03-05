@@ -4,10 +4,12 @@ import {
 	publicProcedure,
 } from '../../../controllers/middleware/auth';
 import { t } from '../../../controllers/trpc';
+import { paginationObj } from '../../pagination/paginationObj';
 import createContentInteractor from '../interactors/createContentInteractor';
 import deleteContentInteractor from '../interactors/deleteContentInteractor';
 import getContentInteractor from '../interactors/getContentInteractor';
 import listContentsInteractor from '../interactors/listContentsInteractor';
+import listPaginatedContentInteractor from '../interactors/listPaginatedContentInteractor';
 import updateContentInteractor from '../interactors/updateContentInteractor';
 import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
@@ -22,7 +24,7 @@ export default t.router({
 				markdownText: z.string(),
 				plainText: z.string(),
 				date: z.string().optional(),
-				linkedEntity: z.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST']),
+				linkedEntity: z.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST']),
 				linkedEntityId: z.string(),
 			})
 		)
@@ -44,12 +46,10 @@ export default t.router({
 			return a;
 		}),
 
-	getContentById: publicProcedure
-		.input(z.string())
-		.query(async ({ input }) => {
-			let content = await getContentInteractor(repo, input);
-			return content;
-		}),
+	getContentById: publicProcedure.input(z.string()).query(async ({ input }) => {
+		let content = await getContentInteractor(repo, input);
+		return content;
+	}),
 
 	listContents: publicProcedure.query(async () => {
 		let contents = await listContentsInteractor(repo);
@@ -64,7 +64,7 @@ export default t.router({
 				plainText: z.string().optional(),
 				date: z.date().optional(),
 				linkedEntity: z
-					.enum(['USER', 'SUBJECT', 'SEMINAR', 'POST'])
+					.enum(['USER', 'SUBJECT', 'ASSIGNMENT', 'POST'])
 					.optional(),
 				linkedEntityId: z.string().optional(),
 			})
@@ -74,4 +74,9 @@ export default t.router({
 			let updatedContent = await updateContentInteractor(repo, content);
 			return updatedContent;
 		}),
+
+	listPaginated: t.procedure.input(paginationObj).query(async ({ input }) => {
+		let response = await listPaginatedContentInteractor(repo, input);
+		return response;
+	}),
 });

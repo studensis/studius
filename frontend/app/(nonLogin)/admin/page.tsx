@@ -15,24 +15,28 @@ const Sections = () => {
 			<Stack cols={3} mobileCols={2}>
 				<SectionButton
 					icon={'users'}
-					href={'/user'}
+					href={'/admin/user-management'}
 					title={'User Management'}
 				/>
 				<SectionButton
 					icon={'subjects'}
-					href={'/subject'}
+					href={'/admin/subject-management'}
 					title={'Subject Management'}
 				/>
 				<SectionButton
-					href="/event"
+					href="/admin/event-management"
 					icon={'calendar'}
 					title={'Event Management'}
 				/>
-				<SectionButton icon={'room'} title={'Room Management'} href={'/room'} />
+				<SectionButton
+					icon={'room'}
+					title={'Room Management'}
+					href={'/admin/room-management'}
+				/>
 				<SectionButton
 					icon={'posts'}
 					title={'Post Management'}
-					href={'/post'}
+					href={'/admin/post-management'}
 				/>
 				{/* <SectionButton icon={'lessons'} title={'Seminar Management'} disabled /> */}
 			</Stack>
@@ -43,11 +47,7 @@ export default function AdminTools() {
 	const { user, loggedIn } = useLogin();
 	return (
 		<>
-			<Protected
-				subjectId="a476e67a-20c8-41f2-aeda-6c14cf1888c9"
-				minRole={'ADMIN'}
-				displayMessage
-			>
+			<Protected minRole={'ADMIN'} displayMessage>
 				<PageStack>
 					<PageHeader
 						title="Workspace Tools"

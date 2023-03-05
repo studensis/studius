@@ -10,34 +10,26 @@ enum roleEnum {
 }
 
 enum subjectRoleEnum {
+	UNDEFINED,
 	STUDENT,
 	DEMONSTRATOR,
 	ASSISSTANT,
 	PROFESSOR,
 	OWNER,
-	UNDEFINED,
 }
 
-type props =
-	| {
-			displayMessage?: boolean;
-			minRole: string;
-			minSubjectRole?: undefined;
-			subjectId?: string;
-			children: React.ReactNode;
-	  }
-	| {
-			displayMessage?: boolean;
-			minRole?: undefined;
-			minSubjectRole:
-				| 'STUDENT'
-				| 'OWNER'
-				| 'PROFESSOR'
-				| 'DEMONSTRATOR'
-				| 'ASSISTANT';
-			subjectId?: string;
-			children: React.ReactNode;
-	  };
+type props = {
+	displayMessage?: boolean;
+	minRole?: 'DEFAULT' | 'ADMIN' | 'SUPERADMIN';
+	minSubjectRole?:
+		| 'STUDENT'
+		| 'OWNER'
+		| 'PROFESSOR'
+		| 'DEMONSTRATOR'
+		| 'ASSISTANT';
+	subjectId?: string;
+	children: React.ReactNode;
+};
 
 const Protected = ({
 	minRole,
@@ -82,23 +74,24 @@ const Protected = ({
 	if (minSubjectRole == 'OWNER') inputSubjectRole = subjectRoleEnum.OWNER;
 	if (minSubjectRole == 'PROFESSOR')
 		inputSubjectRole = subjectRoleEnum.PROFESSOR;
-	if (minSubjectRole == 'STUDENT') userSubjectRole = subjectRoleEnum.STUDENT;
+	if (minSubjectRole == 'STUDENT') inputSubjectRole = subjectRoleEnum.STUDENT;
 
 	return (
 		<>
 			{/* Ako se gleda globalna rola */}
-			{minRole ? (
+			{!loggedIn && displayMessage ? <AccessDenied /> : <></>}
+			{loggedIn && (minRole || minSubjectRole) ? (
 				<>
 					{loggedIn ? (
 						<>
-							{userRole !== roleEnum.UNDEFINED ? (
+							{userRole !== roleEnum.UNDEFINED ||
+							userSubjectRole !== subjectRoleEnum.UNDEFINED ? (
 								<>
-									{userRole > inputRole ? (
+									{(minRole && userRole >= inputRole) ||
+									(minSubjectRole && userSubjectRole >= inputSubjectRole) ? (
 										<>{children}</>
 									) : (
-										<>
-											<AccessDenied />
-										</>
+										<>{displayMessage ? <AccessDenied /> : <></>}</>
 									)}
 								</>
 							) : (
@@ -109,19 +102,6 @@ const Protected = ({
 						</>
 					) : (
 						<>{displayMessage ? <AccessDenied /> : <></>}</>
-					)}
-				</>
-			) : /* Ako se gleda rola na predmetu */
-			minSubjectRole ? (
-				<>
-					{loggedIn ? (
-						userSubjectRole >= inputSubjectRole ? (
-							<>{children}</>
-						) : (
-							<></>
-						)
-					) : (
-						<></>
 					)}
 				</>
 			) : (

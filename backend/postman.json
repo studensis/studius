@@ -969,7 +969,7 @@
 			]
 		},
 		{
-			"name": "PinnedEvent",
+			"name": "PinnedSchedule",
 			"item": [
 				{
 					"name": "all",
@@ -977,10 +977,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/pinnedEvent.listPinnedEvents",
+							"raw": "localhost:4000/pinnedSchedule.listPinnedSchedules",
 							"host": ["localhost"],
 							"port": "4000",
-							"path": ["pinnedEvent.listPinnedEvents"]
+							"path": ["pinnedSchedule.listPinnedSchedules"]
 						}
 					},
 					"response": []
@@ -991,10 +991,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/pinnedEvent.getPinnedEventById?input=\"1\"",
+							"raw": "localhost:4000/pinnedSchedule.getPinnedScheduleById?input=\"1\"",
 							"host": ["localhost"],
 							"port": "4000",
-							"path": ["pinnedEvent.getPinnedEventById"],
+							"path": ["pinnedSchedule.getPinnedScheduleById"],
 							"query": [
 								{
 									"key": "input",
@@ -1020,10 +1020,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/pinnedEvent.createPinnedEvent",
+							"raw": "localhost:4000/pinnedSchedule.createPinnedSchedule",
 							"host": ["localhost"],
 							"port": "4000",
-							"path": ["pinnedEvent.createPinnedEvent"]
+							"path": ["pinnedSchedule.createPinnedSchedule"]
 						}
 					},
 					"response": []
@@ -1043,10 +1043,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/pinnedEvent.updatePinnedEventById",
+							"raw": "localhost:4000/pinnedSchedule.updatePinnedScheduleById",
 							"host": ["localhost"],
 							"port": "4000",
-							"path": ["pinnedEvent.updatePinnedEventById"]
+							"path": ["pinnedSchedule.updatePinnedScheduleById"]
 						}
 					},
 					"response": []
@@ -1066,10 +1066,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/pinnedEvent.deletePinnedEventById",
+							"raw": "localhost:4000/pinnedSchedule.deletePinnedScheduleById",
 							"host": ["localhost"],
 							"port": "4000",
-							"path": ["pinnedEvent.deletePinnedEventById"]
+							"path": ["pinnedSchedule.deletePinnedScheduleById"]
 						}
 					},
 					"response": []

@@ -126,7 +126,12 @@ let enrollmentList: (EnrollmentEntity & { subject: SubjectEntity })[];
 
 test('User enrollment list', async () => {
 	userId = newUser.id;
-	enrollmentList = await listEnrolledSubjectsInteractor(userId, enrollmentRepo);
+	enrollmentList = await listEnrolledSubjectsInteractor(
+		enrollmentRepo,
+		undefined,
+		undefined,
+		userId
+	);
 	expect(enrollmentList).not.toBeNull();
 });
 

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { EventEntity } from '../../Event/model/EventEntity';
+import { paginationType } from '../../pagination/paginationObj';
 import { UserPresenceEntity } from '../../UserPresence/model/UserPresenceEntity';
 import { ScheduleEntity } from '../model/ScheduleEntity';
 import { updateScheduleEntity } from '../model/updateScheduleEntity';
@@ -11,6 +12,23 @@ export default class ScheduleRepositoryPrisma extends ScheduleRepository {
 	async getAll() {
 		// prisma Schedules
 		let datas = await prisma.schedule.findMany({
+			include: { event: true },
+		});
+
+		// map to ScheduleEntities
+		let schedules: (ScheduleEntity & { event: EventEntity })[] = [];
+		datas.forEach((data) => {
+			let schedule = data;
+			schedules.push(schedule);
+		});
+
+		return schedules;
+	}
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Schedules
+		let datas = await prisma.schedule.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
 			include: { event: true },
 		});
 

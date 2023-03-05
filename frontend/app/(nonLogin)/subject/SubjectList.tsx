@@ -1,34 +1,27 @@
 import { useRouter } from 'next/navigation';
-import { Button } from '../../../components/@studius/Button/Button';
-import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
 import { Table } from '../../../components/@studius/Table/Table';
+import useLogin from '../../../components/hooks/LoginContext';
 import { trpc } from '../../../components/hooks/TrpcProvider';
-import { UpdateSubjectModal } from './UpdateSubjectModal';
 
 export default function SubjectList() {
-	const { setModal } = useDialog();
-
 	const router = useRouter();
+	const { user } = useLogin();
 
-	const subjectList = trpc.subject.listSubjects.useQuery();
-	const subjectDelete = trpc.subject.deleteSubjectById.useMutation();
+	const subjectList = trpc.user.getEnrolledSubjects
+		.useQuery({ userId: user!.userId, active: true })
+		.data?.map((enrollment) => {
+			return enrollment.subject;
+		});
 
 	return (
-		// <div className="">
-		// 	<Stack cols={3} mobileCols={1}>
-		// 		{subjects.isLoading && <Spinner />}
-		// 		{subjects.data &&
-		// 			subjects.data.map((subject) => <SubjectCard subject={subject} />)}
-		// 	</Stack>
-		// </div>
 		<>
 			<Stack cols={1}>
 				<Stack cols={3} mobileCols={1}>
 					<Block>
 						<p className="caption text-neutral-strong">Number of Subjects</p>
-						<p className="title2 text-neutral">{subjectList.data?.length}</p>
+						<p className="title2 text-neutral">{subjectList?.length}</p>
 					</Block>
 				</Stack>
 				<Block>
@@ -42,43 +35,7 @@ export default function SubjectList() {
 						onClick={(subject) => {
 							router.push('/subject/' + subject.id);
 						}}
-						objects={subjectList.data || []}
-						actionRow={(subject) => {
-							return (
-								<>
-									<div className="flex gap-2 flex-row-reverse">
-										<Button
-											leftIcon="delete"
-											onClick={() => {
-												subjectDelete.mutate(subject.id);
-											}}
-										></Button>
-										<Button
-											leftIcon="edit"
-											onClick={() => {
-												setModal(
-													<UpdateSubjectModal
-														subject={{
-															id: subject.id,
-															title: subject.title,
-															description: subject.description,
-															ECTS: subject.ectsBod,
-															semester: subject.semester,
-															status: subject.status,
-														}}
-													/>
-												);
-												// updateUser.mutate({
-												// 	id: user.id,
-												// 	firstname: 'Josip',
-												// });
-												subjectList.refetch();
-											}}
-										></Button>
-									</div>
-								</>
-							);
-						}}
+						objects={subjectList || []}
 					></Table>
 				</Block>
 			</Stack>

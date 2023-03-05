@@ -13,7 +13,7 @@ let testContent: ContentEntity = {
 	markdownText: 'markdownText',
 	plainText: 'plainText',
 	date: new Date(Date.parse('04 Dec 1995 00:12:00 GMT')),
-	linkedEntity: 'SEMINAR',
+	linkedEntity: 'ASSIGNMENT',
 	linkedEntityId: Buffer.from(Math.random().toString())
 		.toString('base64')
 		.substring(5, 15),

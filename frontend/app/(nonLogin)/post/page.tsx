@@ -1,27 +1,36 @@
 'use client';
 
-import Link from 'next/link';
-import { Button } from '../../../components/@studius/Button/Button';
-import { PageStack } from '../../../components/@studius/PageElements/Stack';
+import {
+	PageStack,
+	Stack,
+} from '../../../components/@studius/PageElements/Stack';
 import PageHeader from '../../../components/@studius/PageHeader/PageHeader';
-import AdminToolbar from './AdminToolbar';
+import Protected from '../../../components/@studius/Protected/Protected';
+import PostCard from '../../../components/Cards/PostCard';
+import { trpc } from '../../../components/hooks/TrpcProvider';
 // import AdminToolbar from './AdminToolbar';
-import RoomList from './RoomList';
 
 export default function Page() {
+	const posts = trpc.post.listPosts.useQuery().data;
+
 	return (
 		<>
-			<PageStack>
-				<Link href="/admin">
-					<Button>Back to Workspace tools</Button>
-				</Link>
-				<PageHeader
-					title={'Post Management'}
-					subtitle={'Workspace Tools'}
-					actionRow={<AdminToolbar />}
-				/>
-				<RoomList />
-			</PageStack>
+			<Protected minRole={'DEFAULT'} displayMessage>
+				<PageStack>
+					<PageHeader title={'All Posts'} />
+					<Stack cols={3}>
+						{posts?.map((post) => {
+							return (
+								<PostCard
+									title={post.title}
+									id={post.id}
+									key={post.id}
+								></PostCard>
+							);
+						})}
+					</Stack>
+				</PageStack>
+			</Protected>
 		</>
 	);
 }

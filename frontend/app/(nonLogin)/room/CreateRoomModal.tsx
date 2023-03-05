@@ -1,11 +1,11 @@
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../../../components/@studius/Button/Button';
 import { TextInput } from '../../../components/@studius/Input/TextInput';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import {
 	PageStack,
-	Stack,
+	Stack
 } from '../../../components/@studius/PageElements/Stack';
 import { trpc } from '../../../components/hooks/TrpcProvider';
 
@@ -24,12 +24,7 @@ export const CreateRoomModal = () => {
 
 	const router = useRouter();
 
-	useEffect(() => {
-		// if (createRoom.status === 'success') {
-		// 	router.push('/user');
-		// }
-		console.log(createRoom.status);
-	}, [createRoom]);
+	
 
 	return (
 		<>

@@ -6,21 +6,29 @@ import {
 import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
+import { paginationObj } from '../../pagination/paginationObj';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import createUserInteractor from '../interactors/createUserInteractor';
 import deleteUserInteractor from '../interactors/deleteUserInteractor';
 import enrollUserInteractor from '../interactors/enrollUserIneractor';
 import getUserInteractor from '../interactors/getUserInteractor';
+import getUserPostsInteractor from '../interactors/getUserPostsInteractor';
+import isUserEnrolledInteractor from '../interactors/isUserEnrolledInteractor';
 import listEnrolledSubjectsInteractor from '../interactors/listEnrolledSubjectsInteractor';
 import listMenteesInteractor from '../interactors/listMenteeInteractor';
+import listPaginatedUsersInteractor from '../interactors/listPaginatedUsersInteractor';
+import listUserPostsInteractor from '../interactors/listUserPostsInteractor';
 import listUsersInteractor from '../interactors/listUsersInteractor';
 import updateEnrollmentInteractor from '../interactors/updateEnrollmentInteractor';
 import updateUserInteractor from '../interactors/updateUserInteractor';
+import wasUserEnrolledInteractor from '../interactors/wasUserEnrolledInteractor';
 import { updateUserEntity } from '../model/updateUserEntity';
 import { UserEntity } from '../model/UserEntity';
 import UserRepositoryPrisma from '../repository/UserRepositoryPrisma';
 
 let repo = new UserRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
+let postRepo = new PostRepositoryPrisma();
 
 export default t.router({
 	createUser: adminProcedure
@@ -66,6 +74,15 @@ export default t.router({
 		return users as UserEntity[];
 	}),
 
+	listUsersPaginated: publicProcedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedUsersInteractor(repo, input);
+			//Popraviti ovo
+			let len = (await listUsersInteractor(repo)).length;
+			return { users: response, numberOfUsers: len };
+		}),
+
 	updateUserById: publicProcedure
 
 		.input(
@@ -106,29 +123,80 @@ export default t.router({
 			})
 		)
 		.mutation(async ({ input }) => {
-			let enrollment: EnrollmentEntity = {
-				...input,
-				id: undefined,
-				userId: input.userId,
-				subjectId: input.subjectId,
-				enrollmentDate: input.enrollmentDate || null,
-				roleTitle: input.roleTitle,
-				status: input.status,
-			};
-			let newEnrollment = await enrollUserInteractor(
-				enrollment,
-				enrollmentRepo
+			let enrollmentExists: boolean = await isUserEnrolledInteractor(
+				enrollmentRepo,
+				input.userId,
+				input.subjectId
 			);
-			return newEnrollment;
+
+			if (enrollmentExists)
+				throw new Error(
+					'This User already has an ACTIVE Enrollment with this Subject'
+				);
+			else {
+				let enrollment: EnrollmentEntity = {
+					...input,
+					id: undefined,
+					userId: input.userId,
+					subjectId: input.subjectId,
+					enrollmentDate: input.enrollmentDate || null,
+					roleTitle: input.roleTitle,
+					status: input.status,
+				};
+				let newEnrollment = await enrollUserInteractor(
+					enrollment,
+					enrollmentRepo
+				);
+				return newEnrollment;
+			}
+		}),
+
+	isUserEnrolled: publicProcedure
+		.input(
+			z.object({
+				userId: z.string(),
+				subjectId: z.string(),
+			})
+		)
+		.query(async ({ input }) => {
+			let isEnrolled = await isUserEnrolledInteractor(
+				enrollmentRepo,
+				input.userId,
+				input.subjectId
+			);
+			return isEnrolled;
+		}),
+
+	wasUserEnrolled: publicProcedure
+		.input(
+			z.object({
+				userId: z.string(),
+				subjectId: z.string(),
+			})
+		)
+		.query(async ({ input }) => {
+			let wasEnrolled = await wasUserEnrolledInteractor(
+				enrollmentRepo,
+				input.userId,
+				input.subjectId
+			);
+			return wasEnrolled;
 		}),
 
 	getEnrolledSubjects: publicProcedure
-
-		.input(z.string())
+		.input(
+			z.object({
+				active: z.boolean().optional(),
+				archived: z.boolean().optional(),
+				userId: z.string(),
+			})
+		)
 		.query(async ({ input }) => {
 			let enrollments = await listEnrolledSubjectsInteractor(
-				input,
-				enrollmentRepo
+				enrollmentRepo,
+				input.active,
+				input.archived,
+				input.userId
 			);
 			return enrollments;
 		}),
@@ -167,5 +235,15 @@ export default t.router({
 	listMentees: t.procedure.input(z.string()).query(async ({ input }) => {
 		let mentees = await listMenteesInteractor(repo, input);
 		return mentees;
+	}),
+
+	getUserPosts: publicProcedure.input(z.string()).query(async ({ input }) => {
+		let response = await getUserPostsInteractor(postRepo, input);
+		return response;
+	}),
+
+	listUserPosts: publicProcedure.query(async () => {
+		let response = await listUserPostsInteractor(postRepo);
+		return response;
 	}),
 });

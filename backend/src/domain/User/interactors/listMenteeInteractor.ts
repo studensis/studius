@@ -2,8 +2,8 @@ import { UserRepository } from '../repository/UserRepository';
 
 export default async function listMenteesInteractor(
 	userRepository: UserRepository,
-	id: string
+	mentorId: string
 ) {
-	let response = await userRepository.listMentees(id);
+	let response = await userRepository.listMentees(mentorId);
 	return response;
 }

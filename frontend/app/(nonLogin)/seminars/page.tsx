@@ -5,7 +5,11 @@ import SeminarPage from './SeminarPage';
 const seminars = () => {
 	const { user } = useLogin();
 
-	return <div>{user?.userId && <SeminarPage userId={user.userId} />}</div>;
+	return (
+		<>
+			<div>{user?.userId && <SeminarPage userId={user.userId} />}</div>
+		</>
+	);
 };
 
 export default seminars;

@@ -25,9 +25,9 @@ export const CreatePostModal = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		// if (createRoom.status === 'success') {
-		// 	router.push('/user');
-		// }
+		if (createRoom.status === 'success') {
+			router.push('/user');
+		}
 		console.log(createRoom.status);
 	}, [createRoom]);
 

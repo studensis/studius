@@ -2,8 +2,14 @@ import { EnrollmentRepository } from '../../Enrollment/repository/EnrollmentRepo
 
 export default async function listEnrolledUsersInteractor(
 	enrollmentRepository: EnrollmentRepository,
+	active: boolean | undefined,
+	archived: boolean | undefined,
 	subjectId: string
 ) {
-	let users = await enrollmentRepository.getEnrolledUsers(subjectId);
+	let users = await enrollmentRepository.getEnrolledUsers(
+		active,
+		archived,
+		subjectId
+	);
 	return users;
 }

@@ -1,3 +1,4 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { ContentEntity } from '../model/ContentEntity';
 import { updateContentEntity } from '../model/updateContentEntity';
 
@@ -15,6 +16,11 @@ export abstract class ContentRepository {
 		throw new Error('Method not implemented.');
 	}
 	async delete(contentId: string): Promise<ContentEntity> {
+		throw new Error('Method not implemented.');
+	}
+	async listPaginated(
+		paginationInfo: paginationType
+	): Promise<ContentEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 }

@@ -72,10 +72,10 @@ export default class UserPresenceRepositoryPrisma extends UserPresenceRepository
 		return response;
 	}
 
-	async deleteByScheduleID(ScheduleID: string) {
+	async deleteByScheduleId(scheduleID: string) {
 		let response = await prisma.userPresence.deleteMany({
 			where: {
-				scheduleId: ScheduleID,
+				scheduleId: scheduleID,
 			},
 		});
 

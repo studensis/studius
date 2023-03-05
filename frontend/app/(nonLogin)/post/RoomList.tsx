@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '../../../components/@studius/Button/Button';
 import useDialog from '../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../components/@studius/PageElements/Stack';
@@ -12,17 +11,7 @@ export default function SubjectList() {
 	const posts = trpc.post.listPosts.useQuery();
 	const deletePost = trpc.post.deletePostById.useMutation();
 
-	// useEffect(() => {
-	// 	if (updateUser.isSuccess) {
-	// 		rooms.refetch();
-	// 	}
-	// }, [updateUser]);
 
-	// useEffect(() => {
-	// 	if (deleteRoom.isSuccess) {
-	// 		router.refresh();
-	// 	}
-	// }, [deleteRoom]);
 
 	const { setModal } = useDialog();
 
@@ -38,56 +27,10 @@ export default function SubjectList() {
 						</Block>
 					</Stack>
 					<Block>
-						<Button
-							onClick={() => {
-								posts.refetch();
-							}}
-							loading={posts.isLoading}
-						>
-							Refetch
-						</Button>
 						<Table
 							objects={posts.data || []}
 							titles={{
 								title: 'Title',
-								ownerId: 'Owner ID',
-							}}
-							actionRow={(post) => {
-								return (
-									<>
-										<div className="flex gap-2 flex-row-reverse">
-											<Button
-												small
-												leftIcon="burgerMenu"
-												onClick={() => {
-													navigator.clipboard.writeText(post.id);
-												}}
-											></Button>
-											<Button
-												small
-												leftIcon="delete"
-												onClick={() => {
-													deletePost.mutate(post.id);
-												}}
-											></Button>
-											{/* <Button
-												small
-												leftIcon="edit"
-												onClick={() => {
-													setModal(
-														<UpdatePostModal
-															room={{
-																id: post.id,
-																capacity: post.capacity,
-																title: post.title,
-															}}
-														/>
-													);
-												}}
-											></Button> */}
-										</div>
-									</>
-								);
 							}}
 							onClick={(user) => {
 								console.log(user);

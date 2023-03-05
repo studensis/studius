@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { AssignmentEntity } from '../model/AssignmentEntity';
 import { updateAssignmentEntity } from '../model/updateAssignmentEntity';
 import { AssignmentRepository } from './AssignmentRepository';
@@ -117,5 +118,22 @@ export default class AssignmentRepositoryPrisma extends AssignmentRepository {
 
 		let rez: AssignmentEntity = change;
 		return rez;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Assignments
+		let datas = await prisma.assignment.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
+
+		// map to AssignmentEntities
+		let assignments: AssignmentEntity[] = [];
+		datas.forEach((data) => {
+			let assignment: AssignmentEntity = data;
+			assignments.push(assignment);
+		});
+
+		return assignments;
 	}
 }

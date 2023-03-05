@@ -13,7 +13,7 @@ let testPost: PostEntity = {
 	title: Buffer.from(Math.random().toString())
 		.toString('base64')
 		.substring(5, 15),
-	linkedEntity: 'SEMINAR',
+	linkedEntity: 'ASSIGNMENT',
 	linkedEntityId: Buffer.from(Math.random().toString())
 		.toString('base64')
 		.substring(5, 15),

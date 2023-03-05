@@ -14,7 +14,8 @@ import { trpc } from '../../../../components/hooks/TrpcProvider';
 import { UpdateSubjectModal } from '../UpdateSubjectModal';
 import EnrollSection from './EnrollSection';
 import { EnrollUsersModal } from './EnrollUsersModal';
-import { PinnedEvents } from './PinnedEvents';
+import { PinnedSchedules } from './PinnedSchedules';
+import { Posts } from './Posts';
 import UserList from './UserList';
 
 type PageProps = {
@@ -100,7 +101,7 @@ function SubjectPage(props: PageProps) {
 										</>
 									)}
 
-									{user?.role !== 'DEFAULT' && (
+									{(user?.role == 'ADMIN' || user?.role == 'SUPERADMIN') && (
 										<Button
 											onClick={() => {
 												setModal(
@@ -128,20 +129,9 @@ function SubjectPage(props: PageProps) {
 							/>
 						)}
 
-						{/* {deleteSubject.isSuccess && (
-							<Block>
-								<pre>{JSON.stringify(deleteSubject.data)}</pre>
-							</Block>
-						)}
-						{deleteSubject.error && (
-							<Block>
-								<pre>
-									{JSON.stringify(deleteSubject.error.shape?.message, null, 2)}
-								</pre>
-							</Block>
-						)} */}
+						<Posts subjectId={props.params.subjectId} />
 
-						<PinnedEvents subjectId={props.params.subjectId} />
+						<PinnedSchedules subjectId={props.params.subjectId} />
 
 						<div>
 							<SectionTop>
@@ -151,12 +141,16 @@ function SubjectPage(props: PageProps) {
 								roleTitle="PROFESSOR"
 								subjectId={props.params.subjectId}
 							/>
-							{user?.role !== 'DEFAULT' && (
+							<Protected
+								minSubjectRole="DEMONSTRATOR"
+								minRole="ADMIN"
+								subjectId={props.params.subjectId}
+							>
 								<UserList
 									roleTitle="STUDENT"
 									subjectId={props.params.subjectId}
 								/>
-							)}
+							</Protected>
 							<UserList
 								roleTitle="ASSISTANT"
 								subjectId={props.params.subjectId}
@@ -182,15 +176,3 @@ function SubjectPage(props: PageProps) {
 }
 
 export default SubjectPage;
-
-// export async function generateStaticParams() {
-// 	const res = await fetch('https://jsonplaceholder.typicode.com/subjects/');
-// 	let subjects: Todo[] = await res.json();
-
-// 	// rate limiting prevention, will prerender first 10 items only.
-// 	subjects = subjects.splice(10);
-
-// 	return subjects.map((subject) => {
-// 		return { subjectId: subject.id.toString() };
-// 	});
-// }

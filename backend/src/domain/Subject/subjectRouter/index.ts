@@ -8,17 +8,22 @@ import { t } from '../../../controllers/trpc';
 import { EnrollmentEntity } from '../../Enrollment/model/EnrollmentEntity';
 import EnrollmentRepositoryPrisma from '../../Enrollment/repository/EnrollmentRepositoryPrisma';
 import EventRepositoryPrisma from '../../Event/repository/EventRepositoryPrisma';
-import PinnedEventRepositoryPrisma from '../../PinnedEvent/repository/PinnedEventRepositoryPrisma';
+import { paginationObj } from '../../pagination/paginationObj';
+import PinnedScheduleRepositoryPrisma from '../../PinnedSchedule/repository/PinnedScheduleRepositoryPrisma';
+import PostRepositoryPrisma from '../../Post/repository/PostRepositoryPrisma';
 import enrollUserInteractor from '../../User/interactors/enrollUserIneractor';
 import archiveEnrollmentBySubjectIdInteractor from '../interactors/archiveEnrollmentBySubjectIdInteractor';
 import archiveSubjectInteractor from '../interactors/archiveSubjectInteractor';
 import createSubjectInteractor from '../interactors/createSubjectInteractor';
 import deleteEnrollmentBySubjectIdInteractor from '../interactors/deleteEnrollmentBySubjectIdInteractor';
-import deletePinnedEventBySubjectIdInteractor from '../interactors/deletePinnedEventBySubjectIdInteractor';
+import deletePinnedScheduleBySubjectIdInteractor from '../interactors/deletePinnedScheduleBySubjectIdInteractor';
 import deleteSubjectInteractor from '../interactors/deleteSubjectInteractor';
 import getSubjectInteractor from '../interactors/getSubjectInteractor';
+import getSubjectPostsInteractor from '../interactors/getSubjectPostsInteractor';
 import listEnrolledUsersInteractor from '../interactors/listEnrolledUsersInteractor';
-import listPinnedEventsBySubjectIdInteractor from '../interactors/listPinnedEventsBySubjectIdInteractor';
+import listPaginatedSubjectsInteractor from '../interactors/listPaginatedSubjectsInteractor';
+import listPinnedSchedulesBySubjectIdInteractor from '../interactors/listPinnedSchedulesBySubjectIdInteractor';
+import listSubjectPostsInteractor from '../interactors/listSubjectPostsInteractor';
 import listSubjectsInteractor from '../interactors/listSubjectsInteractor';
 import updateSubjectInteractor from '../interactors/updateSubjectInteractor';
 import { SubjectEntity } from '../model/SubjectEntity';
@@ -27,8 +32,9 @@ import SubjectRepositoryPrisma from '../repository/SubjectRepositoryPrisma';
 
 let repo = new SubjectRepositoryPrisma();
 let enrollmentRepo = new EnrollmentRepositoryPrisma();
-let pinnedEventRepo = new PinnedEventRepositoryPrisma();
+let pinnedScheduleRepo = new PinnedScheduleRepositoryPrisma();
 let eventRepo = new EventRepositoryPrisma();
+let postsRepo = new PostRepositoryPrisma();
 
 const isEditor = t.middleware(({ next, ctx }) => {
 	ctx.user;
@@ -83,9 +89,9 @@ export default t.router({
 				input,
 				enrollmentRepo
 			);
-			let c = await deletePinnedEventBySubjectIdInteractor(
+			let c = await deletePinnedScheduleBySubjectIdInteractor(
 				input,
-				pinnedEventRepo
+				pinnedScheduleRepo
 			);
 			let a = await deleteSubjectInteractor(input, repo);
 			return a;
@@ -112,6 +118,13 @@ export default t.router({
 		return subjects;
 	}),
 
+	listPaginatedSubjects: publicProcedure
+		.input(paginationObj)
+		.query(async ({ input }) => {
+			let response = await listPaginatedSubjectsInteractor(repo, input);
+			return response;
+		}),
+
 	updateSubjectById: authedProcedure
 		.input(
 			z.object({
@@ -137,22 +150,42 @@ export default t.router({
 		}),
 
 	getEnrolledUsers: publicProcedure
-		.input(z.string())
+		.input(
+			z.object({
+				active: z.boolean().optional(),
+				archived: z.boolean().optional(),
+				subjectId: z.string(),
+			})
+		)
 		.query(async ({ input }) => {
 			let enrolledUsers = await listEnrolledUsersInteractor(
 				enrollmentRepo,
-				input
+				input.active,
+				input.archived,
+				input.subjectId
 			);
 			return enrolledUsers;
 		}),
 
-	getPinnedEvents: publicProcedure
+	getPinnedSchedules: publicProcedure
 		.input(z.string())
 		.query(async ({ input }) => {
-			let pinnedEvents = await listPinnedEventsBySubjectIdInteractor(
-				pinnedEventRepo,
+			let pinnedSchedules = await listPinnedSchedulesBySubjectIdInteractor(
+				pinnedScheduleRepo,
 				input
 			);
-			return pinnedEvents;
+			return pinnedSchedules;
 		}),
+
+	getSubjectPosts: publicProcedure
+		.input(z.string())
+		.query(async ({ input }) => {
+			let response = await getSubjectPostsInteractor(postsRepo, input);
+			return response;
+		}),
+
+	listSubjectPosts: publicProcedure.query(async () => {
+		let response = await listSubjectPostsInteractor(postsRepo);
+		return response;
+	}),
 });

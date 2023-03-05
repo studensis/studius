@@ -21,7 +21,7 @@ export abstract class UserPresenceRepository {
 	async delete(userPresenceId: string): Promise<UserPresenceEntity> {
 		throw new Error('Method not implemented.');
 	}
-	async deleteByScheduleID(ScheduleID: string): Promise<Prisma.BatchPayload> {
+	async deleteByScheduleId(ScheduleID: string): Promise<Prisma.BatchPayload> {
 		throw new Error('Method not implemented.');
 	}
 	async getAssociatedSchedule(id: string): Promise<ScheduleEntity> {

@@ -70,11 +70,27 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	}
 
 	// gets all enrollments connected to same User
-	async getEnrolledSubjects(userId: string) {
+	async getEnrolledSubjects(
+		active: boolean | undefined,
+		archived: boolean | undefined,
+		userId: string
+	) {
+		active === false && archived === undefined
+			? (archived = true)
+			: active === undefined && archived === false
+			? (active = true)
+			: {};
+
+		// samo ako su razliciti onda utjece, inace ispise sve
 		let rez = await prisma.enrollment.findMany({
 			where: {
 				userId: userId,
-				status: 'ACTIVE',
+				status:
+					active && !archived
+						? 'ACTIVE'
+						: !active && archived
+						? 'ARCHIVED'
+						: undefined,
 			},
 			include: {
 				subject: true,
@@ -85,17 +101,32 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 	}
 
 	// gets all enrollments connected to same Subject
-	async getEnrolledUsers(subjectId: string) {
+	async getEnrolledUsers(
+		active: boolean | undefined,
+		archived: boolean | undefined,
+		subjectId: string
+	) {
+		active === false && archived === undefined
+			? (archived = true)
+			: active === undefined && archived === false
+			? (active = true)
+			: {};
+
+		// samo ako su razliciti onda utjece, inace ispise sve
 		let users = await prisma.enrollment.findMany({
 			where: {
 				subjectId: subjectId,
-				status: 'ACTIVE',
+				status:
+					active && !archived
+						? 'ACTIVE'
+						: !active && archived
+						? 'ARCHIVED'
+						: undefined,
 			},
 			include: {
 				user: true,
 			},
 		});
-
 		return users;
 	}
 
@@ -170,5 +201,33 @@ export default class EnrollmentRepositoryPrisma extends EnrollmentRepository {
 		});
 
 		return deletedEnrollments;
+	}
+
+	async isUserEnrolled(userId: string, subjectId: string) {
+		let enrollments = await prisma.enrollment.findMany({
+			where: {
+				subjectId: subjectId,
+				userId: userId,
+				status: 'ACTIVE',
+			},
+		});
+
+		let enrollmentsData: EnrollmentEntity[] = enrollments;
+
+		return enrollmentsData.length > 0;
+	}
+
+	async wasUserEnrolled(userId: string, subjectId: string) {
+		let enrollments = await prisma.enrollment.findMany({
+			where: {
+				subjectId: subjectId,
+				userId: userId,
+				status: 'ARCHIVED',
+			},
+		});
+
+		let enrollmentsData: EnrollmentEntity[] = enrollments;
+
+		return enrollmentsData.length > 0;
 	}
 }

@@ -1,3 +1,4 @@
+import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
@@ -22,6 +23,10 @@ export abstract class EventRepository {
 		throw new Error('Method not implemented.');
 	}
 	async listAssociatedSchedules(id: string): Promise<ScheduleEntity[]> {
+		throw new Error('Method not implemented.');
+	}
+
+	async listPaginated(paginationInfo: paginationType): Promise<EventEntity[]> {
 		throw new Error('Method not implemented.');
 	}
 }

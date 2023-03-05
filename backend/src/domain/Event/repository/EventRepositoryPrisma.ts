@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { ScheduleEntity } from '../../Schedule/model/ScheduleEntity';
 import { EventEntity } from '../model/EventEntity';
 import { updateEventEntity } from '../model/updateEventEntity';
@@ -8,6 +9,20 @@ const prisma = new PrismaClient();
 
 export default class EventRepositoryPrisma extends EventRepository {
 	async getAll() {
+		// prisma Events
+		let datas = await prisma.event.findMany();
+
+		// map to EventEntities
+		let events: EventEntity[] = [];
+		datas.forEach((data: EventEntity) => {
+			let event: EventEntity = data;
+			events.push(event);
+		});
+
+		return events;
+	}
+
+	async listPaginated(paginationInfo: paginationType) {
 		// prisma Events
 		let datas = await prisma.event.findMany();
 

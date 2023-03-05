@@ -29,11 +29,15 @@ export abstract class EnrollmentRepository {
 		throw new Error('Method not implemented.');
 	}
 	async getEnrolledSubjects(
+		active: boolean | undefined,
+		archived: boolean | undefined,
 		userId: string
 	): Promise<(EnrollmentEntity & { subject: SubjectEntity })[]> {
 		throw new Error('Method not implemented.');
 	}
 	async getEnrolledUsers(
+		active: boolean | undefined,
+		archived: boolean | undefined,
 		subjectId: string
 	): Promise<(EnrollmentEntity & { user: UserEntity })[]> {
 		throw new Error('Method not implemented.');
@@ -50,5 +54,11 @@ export abstract class EnrollmentRepository {
 		subjectId: string
 	): Promise<Prisma.BatchPayload> {
 		throw new Error('Method not implemented');
+	}
+	async isUserEnrolled(userId: string, subjectId: string): Promise<boolean> {
+		throw new Error('Method not implemented.');
+	}
+	async wasUserEnrolled(userId: string, subjectId: string): Promise<boolean> {
+		throw new Error('Method not implemented.');
 	}
 }

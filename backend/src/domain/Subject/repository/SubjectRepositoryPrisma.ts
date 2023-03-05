@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { paginationType } from '../../pagination/paginationObj';
 import { SubjectEntity } from '../model/SubjectEntity';
 import { updateSubjectEntity } from '../model/updateSubjectEntity';
 import { SubjectRepository } from './SubjectRepository';
@@ -9,6 +10,22 @@ export default class SubjectRepositoryPrisma extends SubjectRepository {
 	async getAll() {
 		// prisma Subjects
 		let datas = await prisma.subject.findMany();
+
+		// map to SubjectEntities
+		let subjects: SubjectEntity[] = [];
+		datas.forEach((data: any) => {
+			let subject: SubjectEntity = data;
+			subjects.push(subject);
+		});
+
+		return subjects;
+	}
+	async listPaginated(paginationInfo: paginationType) {
+		// prisma Subjects
+		let datas = await prisma.subject.findMany({
+			skip: paginationInfo.objectsPerPage * paginationInfo.pageNumber,
+			take: paginationInfo.objectsPerPage,
+		});
 
 		// map to SubjectEntities
 		let subjects: SubjectEntity[] = [];

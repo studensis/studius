@@ -22,7 +22,6 @@ const Greeting = () => {
 };
 
 export const RightPanel = () => {
-	///franko vidis li me
 	const posts = trpc.post.listPosts.useQuery().data;
 	const { user } = useLogin();
 	return (
@@ -46,7 +45,13 @@ export const RightPanel = () => {
 					</SectionTop>
 					<SubjectList />
 					<br />
-					<h1 className="title1">Obavijesti</h1>
+					<div className="flex justify-between">
+						<h1 className="title1">Obavijesti</h1>
+						<Link href="/post">
+							<p className="text-accent button-small">View all</p>
+						</Link>
+					</div>
+
 					<Stack cols={3}>
 						{posts?.map((post) => {
 							return (
