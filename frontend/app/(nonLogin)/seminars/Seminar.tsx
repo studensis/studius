@@ -66,6 +66,9 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 				mentorId: user.data?.id,
 				subjectId: form.subjectId,
 				userId: form.menteeId,
+				type: 'SEMINAR',
+				description: '',
+				deadline: '',
 			});
 			setStatusMessage('Seminar submitted');
 			await delay(1500);
@@ -225,7 +228,7 @@ const Seminar: FC<{ userId: string }> = ({ userId }) => {
 						<Table
 							objects={
 								seminarList.data?.filter(
-									(seminar) => seminar.assignmentStatus === 'READY'
+									(seminar) => seminar.status === 'ACTIVE'
 								) || []
 							}
 							titles={{

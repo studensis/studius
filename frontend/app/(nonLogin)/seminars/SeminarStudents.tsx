@@ -10,8 +10,8 @@ type form = {
 };
 
 const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
-	const updateSeminar = trpc.seminar.updateSeminar.useMutation();
-	const seminarList = trpc.seminar.listUserSeminars.useQuery({
+	const updateSeminar = trpc.assignment.updateAssignment.useMutation();
+	const seminarList = trpc.assignment.listUserAssignments.useQuery({
 		id: userId,
 		options: { isMentor: false, isStudent: true },
 	});
@@ -19,7 +19,10 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 	const [content, setContent] = useState('');
 
 	function confirmSeminarDraft(id: string, description: string) {
-		updateSeminar.mutate({ id: id, status: 'READY', description });
+		updateSeminar.mutate({
+			id: id,
+			description,
+		});
 	}
 
 	return (
@@ -48,7 +51,7 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 								</div>
 								{}
 								<Button
-									disabled={seminar.status === 'CONFIRMED' ? true : false}
+									disabled={seminar.status === 'ARCHIVED' ? true : false}
 									onClick={() => {
 										confirmSeminarDraft(seminar.id, content);
 									}}
@@ -60,7 +63,7 @@ const SeminarStudents: FC<{ userId: string }> = ({ userId }) => {
 								<div className="flex items-center text-accent-medium">
 									<h1
 										className={
-											seminar.status === 'CONFIRMED' ? 'title3' : 'hidden'
+											seminar.status === 'ARCHIVED' ? 'title3' : 'hidden'
 										}
 									>
 										CONFIRMED
