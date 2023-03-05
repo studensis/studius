@@ -24,7 +24,7 @@ function TrpcProvider({ children }: { children: React.ReactNode }) {
 
 	const endpoint =
 		process.env.NODE_ENV === 'production'
-			? 'https://studius-backend-production.up.railway.app'
+			? 'https://studius-production.up.railway.app'
 			: 'http://localhost:4000';
 
 	const [trpcClient] = useState(() =>
