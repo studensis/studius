@@ -46,9 +46,9 @@ function SubjectPage(props: PageProps) {
 		refetchInterval: 10000,
 	});
 	const [enrollmentPage, setEnrollmentPage] = useState(false);
-	const { user } = useLogin();
 
 	const { setModal } = useDialog();
+	const { user } = useLogin();
 
 	return (
 		<>
