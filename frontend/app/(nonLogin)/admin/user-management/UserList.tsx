@@ -4,16 +4,21 @@ import { UserEntity } from 'studius-backend/src/domain/User/model/UserEntity';
 import { Button } from '../../../../components/@studius/Button/Button';
 import Dropdown from '../../../../components/@studius/Dropdown/Dropdown';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
+import { Block } from '../../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../../components/@studius/PageElements/Stack';
+import { Spinner } from '../../../../components/@studius/Spinner/Spinner';
 import { Table } from '../../../../components/@studius/Table/Table';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
-import LoadingUserList from './LoadingUserList';
 import { UpdateUserModal } from './UpdateUserModal';
 
 const List = ({
 	numberOfUsersBeingDisplayed,
+	changeOption,
+	options,
 }: {
 	numberOfUsersBeingDisplayed: number;
+	changeOption: Function;
+	options: number[];
 }) => {
 	const [filteredUsers, setFilteredUsers] = useState<UserEntity[]>();
 	const [filterBy, setFilterBy] = useState<String>('');
@@ -65,47 +70,59 @@ const List = ({
 
 	return (
 		<>
-			{usersBeingDisplayed.isLoading && <LoadingUserList />}
+			{usersBeingDisplayed.isLoading && <Spinner />}
 			{usersBeingDisplayed.data && (
 				<>
-					<div className="m-4  flex content-center gap-2">
-						<p className="title1 m-2">Filter:</p>
-						<input
-							className="rounded-xl w-full border-accent border-2 p-2 outline-none bg-neutral-weak max-w-[500px]"
-							type="text"
-							onChange={(e) => {
-								setFilterBy(e.target.value);
-							}}
-						/>
-						<div className="flex w-full">
-							<Button
-								leftIcon={'chevronLeft'}
-								outline
-								onClick={() => {
-									setRefilterUsers(!refilterUsers);
-									if (pageNumber > 1) {
-										setPageNumber(pageNumber - 1);
-									}
-								}}
-							/>
-							<p className="text-center">{pageNumber}</p>
-							<Button
-								leftIcon={'chevronRight'}
-								outline
-								onClick={() => {
-									setRefilterUsers(!refilterUsers);
-									if (
-										Math.ceil(
-											usersBeingDisplayed.data?.numberOfUsers /
-												numberOfUsersBeingDisplayed
-										) > pageNumber
-									) {
-										setPageNumber(pageNumber + 1);
-									}
-								}}
-							/>
+					<Block>
+						<div className="m-4  flex justify-between gap-2">
+							<div className="flex">
+								<p className="title1 m-2">Filter:</p>
+								<input
+									className="rounded-xl w-full border-accent border-2 p-2 outline-none bg-neutral-weak max-w-[500px]"
+									type="text"
+									onChange={(e) => {
+										setFilterBy(e.target.value);
+									}}
+								/>
+							</div>
+
+							<div className="flex">
+								<Dropdown
+									options={options}
+									changeOption={changeOption}
+									option={numberOfUsersBeingDisplayed}
+								></Dropdown>
+								<Button
+									leftIcon={'chevronLeft'}
+									outline
+									onClick={() => {
+										setRefilterUsers(!refilterUsers);
+										if (pageNumber > 1) {
+											setPageNumber(pageNumber - 1);
+										}
+									}}
+									className="ml-[16px]"
+								/>
+								<p className="text-center body3 px-2 pt-3">{pageNumber}</p>
+								<Button
+									leftIcon={'chevronRight'}
+									outline
+									onClick={() => {
+										setRefilterUsers(!refilterUsers);
+										if (
+											Math.ceil(
+												usersBeingDisplayed.data?.numberOfUsers /
+													numberOfUsersBeingDisplayed
+											) > pageNumber
+										) {
+											setPageNumber(pageNumber + 1);
+										}
+									}}
+								/>
+							</div>
 						</div>
-					</div>
+					</Block>
+
 					<Table
 						titles={{
 							id: 'ID',
@@ -176,12 +193,11 @@ function UserList() {
 	return (
 		<>
 			<Stack>
-				<Dropdown
+				<List
+					numberOfUsersBeingDisplayed={option}
 					options={[5, 10, 30, 50, 100]}
 					changeOption={changeOption}
-					option={option}
-				></Dropdown>
-				<List numberOfUsersBeingDisplayed={option} />
+				/>
 			</Stack>
 		</>
 	);

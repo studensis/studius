@@ -15,7 +15,7 @@ function Dropdown({
 	return (
 		<div
 			className={
-				'bg-section w-[240px] border-[1px] border-accent-medium ' +
+				'bg-section w-[240px] border-[2px] border-accent-medium ' +
 				(isDroppedDown ? 'rounded-t-[8px]' : 'rounded-[8px]')
 			}
 		>
@@ -32,7 +32,7 @@ function Dropdown({
 					<Icon icon={'dropdownArrow'} />
 				</div>
 			</div>
-			<div className="absolute flex flex-col -ml-[1px]">
+			<div className="absolute flex flex-col -ml-[2px]">
 				{isDroppedDown &&
 					options.map((option, i) => {
 						return (
@@ -44,10 +44,10 @@ function Dropdown({
 									}}
 									className={
 										'relative min-w-[240px] bg-section duration-300 hover:bg-neutral-weak active:bg-accent-weak border-accent-medium text-neutral-strong px-[16px] py-[8px] ' +
-										(i === 0 ? 'border-t-[1px] ' : '') +
+										(i === 0 ? 'border-t-[2px] ' : '') +
 										(i + 1 === options.length
-											? 'border-b-[1px] border-x-[1px] rounded-b-[8px] '
-											: 'border-x-[1px] ')
+											? 'border-b-[2px] border-x-[2px] rounded-b-[8px] '
+											: 'border-x-[2px] ')
 									}
 								>
 									{option}
