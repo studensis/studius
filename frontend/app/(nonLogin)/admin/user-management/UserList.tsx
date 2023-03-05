@@ -4,6 +4,7 @@ import { UserEntity } from 'studius-backend/src/domain/User/model/UserEntity';
 import { Button } from '../../../../components/@studius/Button/Button';
 import Dropdown from '../../../../components/@studius/Dropdown/Dropdown';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
+import { Stack } from '../../../../components/@studius/PageElements/Stack';
 import { Table } from '../../../../components/@studius/Table/Table';
 import { trpc } from '../../../../components/hooks/TrpcProvider';
 import LoadingUserList from './LoadingUserList';
@@ -174,12 +175,14 @@ function UserList() {
 
 	return (
 		<>
-			<Dropdown
-				options={[5, 10, 30, 50, 100]}
-				changeOption={changeOption}
-				option={option}
-			></Dropdown>
-			<List numberOfUsersBeingDisplayed={option} />
+			<Stack>
+				<Dropdown
+					options={[5, 10, 30, 50, 100]}
+					changeOption={changeOption}
+					option={option}
+				></Dropdown>
+				<List numberOfUsersBeingDisplayed={option} />
+			</Stack>
 		</>
 	);
 }
