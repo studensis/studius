@@ -66,7 +66,7 @@ export const EnrollUsersModal = (props: PageProps) => {
 
 	return (
 		<>
-			<div className="flex flex-col justify-center bg-gray-200 rounded-xl p-10 w-[120%]">
+			<div className="flex flex-col justify-center bg-background rounded-xl p-10 w-[120%]">
 				<h1 className="title1 text-center mb-10">
 					Enroll Students to {subject.data?.title}
 				</h1>
