@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { UserEntity } from 'studius-backend/src/domain/User/model/UserEntity';
 import { Button } from '../../../../components/@studius/Button/Button';
 import Dropdown from '../../../../components/@studius/Dropdown/Dropdown';
+import { TextInput } from '../../../../components/@studius/Input/TextInput';
 import useDialog from '../../../../components/@studius/Modal/DialogProvider';
 import { Block } from '../../../../components/@studius/PageElements/Block';
 import { Stack } from '../../../../components/@studius/PageElements/Stack';
@@ -73,10 +74,10 @@ const List = ({
 			<Block>
 				<div className="m-4  flex justify-between gap-2">
 					<div className="flex">
-						<p className="title1 m-2">Filter:</p>
-						<input
-							className="rounded-xl w-full border-accent border-2 p-2 outline-none bg-neutral-weak max-w-[500px]"
+						<TextInput
+							// className="rounded-xl w-full border-neutral-medium focus:border-accent focus:shadow-sm-bottom border- p-2 outline-none duration-100 bg-section max-w-[500px]"
 							type="text"
+							placeholder="Filter by"
 							onChange={(e) => {
 								setFilterBy(e.target.value);
 							}}
@@ -119,63 +120,63 @@ const List = ({
 						/>
 					</div>
 				</div>
+				{usersBeingDisplayed.isLoading && <Spinner />}
+				{usersBeingDisplayed.data && (
+					<>
+						<Table
+							titles={{
+								id: 'ID',
+								firstname: 'First name',
+								lastname: 'Last name',
+								userRole: 'Role',
+							}}
+							objects={
+								filteredUsers
+									? filteredUsers
+									: usersBeingDisplayed.data.users || []
+							}
+							actionRow={(user) => {
+								return (
+									<>
+										<div className="flex gap-2 flex-row-reverse">
+											<Button
+												leftIcon="delete"
+												onClick={() => {
+													deleteUser.mutate(user.id);
+												}}
+											></Button>
+											<Button
+												leftIcon="edit"
+												onClick={() => {
+													setModal(
+														<UpdateUserModal
+															user={{
+																id: user.id,
+																password: user.password,
+																firstname: user.firstname,
+																lastname: user.lastname,
+																jmbag: user.jmbag,
+																email: user.email,
+																mentorID: user.mentorID,
+																userRole: user.userRole,
+															}}
+														/>
+													);
+													usersBeingDisplayed.refetch();
+												}}
+											></Button>
+										</div>
+									</>
+								);
+							}}
+							onClick={(user) => {
+								router.push('/user/' + user.id);
+								console.log(user);
+							}}
+						/>
+					</>
+				)}
 			</Block>
-			{usersBeingDisplayed.isLoading && <Spinner />}
-			{usersBeingDisplayed.data && (
-				<>
-					<Table
-						titles={{
-							id: 'ID',
-							firstname: 'First name',
-							lastname: 'Last name',
-							userRole: 'Role',
-						}}
-						objects={
-							filteredUsers
-								? filteredUsers
-								: usersBeingDisplayed.data.users || []
-						}
-						actionRow={(user) => {
-							return (
-								<>
-									<div className="flex gap-2 flex-row-reverse">
-										<Button
-											leftIcon="delete"
-											onClick={() => {
-												deleteUser.mutate(user.id);
-											}}
-										></Button>
-										<Button
-											leftIcon="edit"
-											onClick={() => {
-												setModal(
-													<UpdateUserModal
-														user={{
-															id: user.id,
-															password: user.password,
-															firstname: user.firstname,
-															lastname: user.lastname,
-															jmbag: user.jmbag,
-															email: user.email,
-															mentorID: user.mentorID,
-															userRole: user.userRole,
-														}}
-													/>
-												);
-												usersBeingDisplayed.refetch();
-											}}
-										></Button>
-									</div>
-								</>
-							);
-						}}
-						onClick={(user) => {
-							router.push('/user/' + user.id);
-							console.log(user);
-						}}
-					/>
-				</>
-			)}
 		</>
 	);
 };
