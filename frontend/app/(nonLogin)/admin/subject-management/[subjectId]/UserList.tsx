@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Button } from '../../../../components/@studius/Button/Button';
-import { Stack } from '../../../../components/@studius/PageElements/Stack';
-import UserCard from '../../../../components/Cards/UserCard';
-import useLogin from '../../../../components/hooks/LoginContext';
-import { trpc } from '../../../../components/hooks/TrpcProvider';
+import { Button } from '../../../../../components/@studius/Button/Button';
+import { Stack } from '../../../../../components/@studius/PageElements/Stack';
+import UserCard from '../../../../../components/Cards/UserCard';
+import useLogin from '../../../../../components/hooks/LoginContext';
+import { trpc } from '../../../../../components/hooks/TrpcProvider';
 
 type PageProps = {
 	subjectId: string;
@@ -11,7 +11,9 @@ type PageProps = {
 };
 
 const UserList: FC<PageProps> = ({ subjectId, roleTitle }) => {
-	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery(subjectId);
+	const enrolledUsers = trpc.subject.getEnrolledUsers.useQuery({
+		subjectId: subjectId,
+	});
 
 	const enroll = trpc.user.updateEnrollment.useMutation();
 
