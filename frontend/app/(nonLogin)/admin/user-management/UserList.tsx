@@ -52,7 +52,7 @@ const List = ({
 				}
 			})
 		);
-	});
+	}, []);
 
 	const { setModal } = useDialog();
 	const router = useRouter();
